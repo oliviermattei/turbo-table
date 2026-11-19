@@ -119,8 +119,8 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
               </button>
             )}
             <div className="btnrow">
-              <button className="big" onClick={() => go(opts)}>🔁 Rejouer</button>
               <Link className="big alt" href={opts.mode === 'practice' ? '/' : '/partie'}>← Retour</Link>
+              <button className="big" onClick={() => go(opts)}>🔁 Rejouer</button>
             </div>
             <Link className="big alt" href="/">🏠 Accueil</Link>
           </>
