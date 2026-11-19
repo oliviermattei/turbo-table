@@ -3,7 +3,7 @@ import type { GameRecord } from '../game/types';
 import { cleanPet } from './clean';
 import {
   applyGames, buy, coinsOfGame, decay, dropsEgg, grantEggs, hatch, hatchProgress, moodOf, newPet, openChest,
-  readySpecies, sleep, stageOf, useItem,
+  markShown, readySpecies, sleep, stageOf, useItem,
 } from './rules';
 
 const H = 36e5;
@@ -71,6 +71,15 @@ describe('pet', () => {
     expect(p.creatures[0].xp).toBe(30); // already processed + sad after 79 h
     expect(stageOf(150)).toBe(1);
     expect(stageOf(1499)).toBe(2);
+  });
+
+  it('evolves one stage per scene', () => {
+    let p = withCompanion();
+    p = { ...p, creatures: [{ ...p.creatures[0], xp: 2000 }] };
+    p = markShown(p, p.creatures[0].id);
+    expect(p.creatures[0].shown).toBe(1);
+    p = markShown(markShown(markShown(p, p.creatures[0].id), p.creatures[0].id), p.creatures[0].id);
+    expect(p.creatures[0].shown).toBe(3);
   });
 
   it('buys and gives items', () => {

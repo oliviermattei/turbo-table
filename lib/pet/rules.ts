@@ -251,8 +251,9 @@ export function setActive(p: PetState, id: string, now: number): PetState {
 export const rename = (p: PetState, id: string, name: string): PetState =>
   ({ ...p, creatures: p.creatures.map(c => (c.id === id ? { ...c, name: name.trim().slice(0, 20) || SPECIES_BY_ID[c.species]?.name || c.name } : c)) });
 
+/** One evolution scene = one stage: a creature that grew several stages at once evolves several times in a row */
 export const markShown = (p: PetState, id: string): PetState =>
-  ({ ...p, creatures: p.creatures.map(c => (c.id === id ? { ...c, shown: stageOf(c.xp) } : c)) });
+  ({ ...p, creatures: p.creatures.map(c => (c.id === id ? { ...c, shown: Math.min(stageOf(c.xp), c.shown + 1) } : c)) });
 
 /** A brand-new pet: the first chest is a gift, badges already won do not give eggs. */
 export function newPet(now: number, badges: Set<string>, lastGameTs: number): PetState {
