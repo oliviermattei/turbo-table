@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Coins, ItemIcon } from '@/components/pet';
+import { Coins, DebugCoins, ItemIcon } from '@/components/pet';
 import { useEnsurePet } from '@/components/pet-ensure';
 import { BackHeader } from '@/components/ui';
 import { buy, ITEMS, type Item } from '@/lib/pet/rules';
@@ -21,6 +21,7 @@ export default function BoutiquePage() {
     <section className="screen">
       <BackHeader title="Boutique" />
       <div className="petbar"><Coins n={coins} /></div>
+      <DebugCoins />
       <div className="row tabs">
         {TABS.map(([k, l]) => <button key={k} className={'chip' + (tab === k ? ' on' : '')} onClick={() => setTab(k)}>{l}</button>)}
       </div>

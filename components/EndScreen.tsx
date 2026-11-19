@@ -4,7 +4,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { playHref, type PlayOpts, type RunResult } from '@/lib/game/engine';
 import { MENTIONS, type Badge, type LevelInfo, type NextBadge } from '@/lib/game/rules';
-import type { hatchProgress } from '@/lib/pet/rules';
+import { practiceBonus, type hatchProgress } from '@/lib/pet/rules';
 import { ensureAudio } from '@/lib/sound';
 import Certificate from './Certificate';
 import { BadgeLine, Stars, Stat } from './ui';
@@ -79,6 +79,9 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
             <Link href="/nid" className="pinfo">{r.pet.egg.ready ? '🥚 Ton œuf va éclore !' : `🥚 Œuf : ${r.pet.egg.done} / ${r.pet.egg.need}`}</Link>
           ) : <Link href="/compagnon" className="pinfo">Dépense tes pièces pour ton compagnon !</Link>}
         </div>
+        {practiceBonus({ ...rec, id: '' }) > 0 && (
+          <p className="bonus-line">🔧 Bonus entraînement : +{practiceBonus({ ...rec, id: '' })} 🪙{rec.correct === rec.total ? ' (sans faute !)' : ''}</p>
+        )}
         {r.pet.comp && r.pet.egg && (
           <Link href="/nid" className="egg-line">
             <span>🥚</span><div className="xpbar"><div style={{ width: r.pet.egg.pct + '%' }} /></div>
@@ -93,14 +96,6 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
           <>{r.newBadges.slice(0, 6).map(b => <BadgeLine key={b.id} b={b} />)}
             {n > 6 && <p className="bnum">… et {n - 6} autres !</p>}</>
         ) : r.next ? <BadgeLine b={r.next.b} pr={r.next} /> : <p>Tu as tout gagné ! 🎉</p>}
-      </div>
-
-      <div className="panel">
-        <h2>À revoir</h2>
-        <div className="errs">
-          {r.errs.length ? r.errs.map(e => <span key={e.a + 'x' + e.b} className="err">{e.a} × {e.b} = {e.a * e.b}</span>)
-            : <span className="noerr">Aucune erreur, bravo ! 🎉</span>}
-        </div>
       </div>
 
       <div className="spacer" />

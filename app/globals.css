@@ -373,3 +373,24 @@ button.bestc{cursor:pointer}
 .debugbox{display:flex;align-items:center;gap:8px;justify-content:center;font-size:14px;opacity:.85;margin-top:10px;cursor:pointer}
 .debugbox input{width:20px;height:20px}
 .debugbar{text-align:center;background:#ef4444;border-radius:12px;padding:6px;font-size:14px;margin:0 0 6px}
+.debugcoins{border:2px dashed #ef4444;margin:8px 0}
+
+/* Home */
+.home-body{flex:1;display:flex;flex-direction:column;justify-content:center}
+.screen.home h1{margin:6px 0 10px}
+.top .coins{flex-shrink:0}
+.h2-gap{margin-top:14px}
+.hero{display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;margin-bottom:12px;padding:8px 14px 8px 4px;border-radius:24px;background:linear-gradient(135deg,rgba(250,204,21,.18),rgba(168,85,247,.18));box-shadow:inset 0 0 0 2px rgba(255,255,255,.12)}
+.hero-art{flex-shrink:0;width:150px;display:flex;justify-content:center}
+.hero-egg{height:130px}
+.hero-art .chestimg{height:110px}
+.hero-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
+.hero-name{font-size:20px}
+.hero .need small{display:none}
+.hero .need{grid-template-columns:22px 1fr}
+.bubble-say{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:8px 12px;font-weight:600;font-size:15px;line-height:1.25}
+.bubble-say::before{content:"";position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.nav.four .navb .lb{font-size:13px}
+@media (min-width:700px){.app{max-width:600px}.hero-art{width:190px}}
+.bonus-line{margin-top:8px;color:var(--yellow);font-weight:600;font-size:15px}
+.hero .crea-fx.bubble{display:none}

@@ -14,9 +14,12 @@ export const stageOf = (xp: number) => STAGE_XP.reduce((s, need, i) => (xp >= ne
 /* ---------- Coins ---------- */
 const BADGE_COINS: Record<Rarity, number> = { commun: 5, 'peu-commun': 10, rare: 15, epique: 40, legendaire: 100 };
 export const LEVEL_COINS = 20;
+/** Training on mistakes earns a bonus: 15 for a session of 3+ questions, 15 more without any mistake */
+export const practiceBonus = (g: GameRecord) =>
+  g.mode !== 'practice' || g.total < 3 ? 0 : 15 + (g.correct === g.total ? 15 : 0);
 export function coinsOfGame(g: GameRecord) {
   if (g.mode === 'exam') return g.passed ? 10 + 10 * (g.mention ?? 0) : Math.min(g.correct, 20);
-  if (g.mode === 'practice') return g.correct;
+  if (g.mode === 'practice') return g.correct + practiceBonus(g);
   return g.correct + 5 * g.stars;
 }
 export const badgeCoins = (ids: Iterable<string>) => [...ids].reduce((s, id) => s + (BADGE_COINS[BADGE_BY_ID[id]?.r] ?? 0), 0);

@@ -109,22 +109,44 @@ export const ChestImg = ({ open = false }: { open?: boolean }) =>
 
 export const Coins = ({ n }: { n: number }) => <span className="coins">🪙 {n}</span>;
 
-const MOOD_TXT = { content: 'est content', bof: 'a besoin de toi', triste: 'est triste' } as const;
+/** What the companion says on the home screen */
+function speech(c: Creature) {
+  const mood = moodOf(c.needs);
+  if (mood === 'triste') return 'Je suis triste… Occupe-toi de moi !';
+  const need = lowestNeed(c.needs);
+  if (need === 'faim') return 'J’ai un petit creux ! 🍖';
+  if (need === 'joie') return 'On joue ensemble ? 🎾';
+  if (need === 'energie') return 'Je suis un peu fatigué… 💤';
+  return 'Allez, on joue ! Je grandis à chaque bonne réponse ⭐';
+}
 
-/** Home screen card: the companion, or where the egg is at */
-export function CompanionCard() {
-  const { pet, companion: c, coins, correct } = usePet();
+/** Home screen hero: the companion (or the egg) big, talking */
+export function CompanionHero() {
+  const { pet, companion: c, correct } = usePet();
   const inc = pet && hatchProgress(pet, correct);
   const chests = pet?.eggs.filter(e => !e.opened).length ?? 0;
   return (
-    <Link href="/compagnon" className="pcard">
-      {c ? <CreatureView c={c} size={84} /> : inc ? <EggImg e={inc.egg} className="eggimg mini" /> : <span className="pcard-ic">🥚</span>}
-      <div className="pcard-txt">
-        {c ? <><b>{c.name} {MOOD_TXT[moodOf(c.needs)]}</b><NeedBars n={c.needs} /></>
-          : inc ? <><b>{inc.ready ? 'Ton œuf va éclore !' : 'Ton œuf couve…'}</b><div className="xpbar"><div style={{ width: inc.pct + '%' }} /></div><small>{inc.done} / {inc.need} bonnes réponses</small></>
-          : <><b>{pet ? (chests ? 'Un coffre t’attend !' : 'Ton nid t’attend') : 'Un compagnon t’attend !'}</b><small>Touche ici pour le découvrir</small></>}
+    <Link href="/compagnon" className="hero">
+      <div className="hero-art">
+        {c ? <CreatureView c={c} size={150} /> : inc ? <EggImg e={inc.egg} className="eggimg hero-egg" /> : <ChestImg />}
       </div>
-      {pet && <Coins n={coins} />}
+      <div className="hero-txt">
+        {c ? (
+          <><div className="bubble-say">{speech(c)}</div><b className="hero-name">{c.name}</b><NeedBars n={c.needs} /></>
+        ) : inc ? (
+          <><div className="bubble-say">{inc.ready ? 'Ton œuf va éclore ! Viens vite !' : `Encore ${inc.need - inc.done} bonnes réponses et ton œuf éclot !`}</div>
+            <div className="xpbar"><div style={{ width: inc.pct + '%' }} /></div></>
+        ) : (
+          <div className="bubble-say">{chests ? 'Un coffre t’attend ! Touche ici pour l’ouvrir 🎁' : 'Un compagnon t’attend ! Touche ici 🥚'}</div>
+        )}
+      </div>
     </Link>
   );
+}
+
+/** Test mode only: free coins (stored as bonus, like duplicates; the sandbox never reaches the server) */
+export function DebugCoins() {
+  const { debug, pet, updatePet } = useData();
+  if (!debug || !pet) return null;
+  return <button className="ghost debugcoins" onClick={() => updatePet(p => p && { ...p, bonus: p.bonus + 1000 })}>🐞 +1000 🪙 (test)</button>;
 }

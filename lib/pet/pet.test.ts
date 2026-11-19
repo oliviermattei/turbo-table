@@ -26,7 +26,9 @@ describe('pet', () => {
 
   it('pays coins per game', () => {
     expect(coinsOfGame(game({ correct: 20, stars: 3 }))).toBe(35);
-    expect(coinsOfGame(game({ mode: 'practice', correct: 8 }))).toBe(8);
+    expect(coinsOfGame(game({ mode: 'practice', correct: 8, total: 10 }))).toBe(8 + 15);
+    expect(coinsOfGame(game({ mode: 'practice', correct: 8, total: 8 }))).toBe(8 + 30);
+    expect(coinsOfGame(game({ mode: 'practice', correct: 2, total: 2 }))).toBe(2);
     expect(coinsOfGame(game({ mode: 'exam', passed: true, mention: 3 }))).toBe(40);
   });
 
