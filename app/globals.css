@@ -409,3 +409,6 @@ button.bestc{cursor:pointer}
 .crea{isolation:isolate}
 .shop-tabs{position:sticky;bottom:8px}
 .navb.on{background:var(--yellow);color:var(--ink)}
+.chestimg.tint-epique{filter:hue-rotate(230deg) saturate(1.4) drop-shadow(0 0 10px #a855f7)}
+.chestimg.tint-legendaire{filter:saturate(1.6) brightness(1.1) drop-shadow(0 0 12px #f59e0b)}
+.shopi .chestimg{height:72px}

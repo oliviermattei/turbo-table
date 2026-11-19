@@ -1189,6 +1189,22 @@ Bottom row, left to right:
 8. Empty cell.
 ```
 
+#### Coffres spéciaux (épique et légendaire)
+Enregistrer sous `assets-src/planches/coffres.png`.
+
+```
+Sheet: special chests. Background #1E1B4B. Use the attached grid template.
+Same style and same size as the normal wooden chest of the game (about 45% of the cell height), standing on the cell's dot.
+The chests look precious and heavy, never toy-like.
+Top row, left to right:
+1. Epic chest, closed: dark violet lacquered wood with silver metal fittings, an amethyst set in the lock, a faint purple glow hugging it.
+2. The same epic chest open, lid raised, inside glowing with purple light, nothing inside.
+3. Legendary chest, closed: gold and ivory chest with ornate engraved gold fittings, a big orange gem in the lock, a soft golden glow hugging it.
+4. The same legendary chest open, lid raised, inside glowing with warm golden light, nothing inside.
+Bottom row: all four cells stay empty.
+No loose sparkles or particles, nothing crosses into another cell.
+```
+
 #### Objets
 Enregistrer sous `assets-src/planches/objets.png`.
 

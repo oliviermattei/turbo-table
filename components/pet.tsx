@@ -6,7 +6,7 @@ import { computeStats, RARITY, unlocked } from '@/lib/game/rules';
 import assets from '@/lib/pet/assets.json';
 import { active, balance, decay, hatchProgress, lowestNeed, moodOf, stageOf, STAGES, STAGE_XP, totalCorrect, ITEM_BY_ID } from '@/lib/pet/rules';
 import { SPECIES_BY_ID } from '@/lib/pet/species';
-import type { Creature, Egg, Needs } from '@/lib/pet/types';
+import type { Box, Creature, Egg, Needs } from '@/lib/pet/types';
 
 /** Re-renders every `ms` so needs keep decaying on screen */
 export function useNow(ms = 30000) {
@@ -105,9 +105,13 @@ export function EggImg({ e, className = 'eggimg' }: { e: Pick<Egg, 'q' | 'specie
   return <img className={className} src={eggSrc(e)} alt="Œuf" style={{ '--rc': RARITY[e.q].c } as CSSProperties} />;
 }
 
-export const ChestImg = ({ open = false }: { open?: boolean }) =>
+/** A chest; epic and legendary chests use their own drawing, or a tinted normal chest until it exists */
+export function ChestImg({ open = false, box }: { open?: boolean; box?: Box }) {
+  const state = open ? 'ouvert' : 'ferme';
+  const own = box && ITEM_FILES.includes(`coffre-${box}-${state}`);
   // eslint-disable-next-line @next/next/no-img-element -- static sprites
-  <img className="chestimg" src={`/items/coffre-${open ? 'ouvert' : 'ferme'}.webp`} alt="Coffre" />;
+  return <img className={'chestimg' + (box && !own ? ' tint-' + box : '')} src={`/items/coffre-${own ? box + '-' : ''}${state}.webp`} alt="Coffre" />;
+}
 
 export const Coins = ({ n }: { n: number }) => <span className="coins">🪙 {n}</span>;
 

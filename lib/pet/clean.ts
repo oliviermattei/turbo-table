@@ -15,6 +15,7 @@ const needs = (n: any): Needs => ({ faim: num(n?.faim, 100), joie: num(n?.joie, 
 function egg(e: any): Egg {
   const o: Egg = { id: str(e?.id, 40), q: quality(e?.q), source: SOURCES.includes(e?.source) ? e.source : 'drop', at: num(e?.at), opened: !!e?.opened };
   if (SPECIES_BY_ID[e?.species]) o.species = e.species;
+  if (e?.box === 'epique' || e?.box === 'legendaire') o.box = e.box;
   return o;
 }
 const creature = (c: any): Creature => ({

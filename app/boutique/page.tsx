@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { Coins, DebugCoins, ItemIcon } from '@/components/pet';
+import { ChestImg, Coins, DebugCoins, ItemIcon } from '@/components/pet';
 import { useEnsurePet } from '@/components/pet-ensure';
 import { BackHeader } from '@/components/ui';
 import { buy, ITEMS, type Item } from '@/lib/pet/rules';
@@ -25,9 +25,9 @@ export default function BoutiquePage() {
       <div className="shop">
         {ITEMS.filter(i => i.kind === tab).map(it => (
           <div key={it.id} className="shopi">
-            <ItemIcon id={it.id} />
+            {it.kind === 'chest' ? <ChestImg box={it.box} /> : <ItemIcon id={it.id} />}
             <b>{it.n}</b>
-            <small>{it.gain ? Object.entries(it.gain).map(([k, v]) => `${k === 'faim' ? 'Faim' : k === 'joie' ? 'Joie' : 'Énergie'} +${v}`).join(', ') : 'Un œuf surprise !'}</small>
+            <small>{it.gain ? Object.entries(it.gain).map(([k, v]) => `${k === 'faim' ? 'Faim' : k === 'joie' ? 'Joie' : 'Énergie'} +${v}`).join(', ') : (it.min === 'epique' ? 'Un œuf Épique ou Légendaire !' : it.min === 'rare' ? 'Un œuf Rare ou mieux !' : 'Un œuf surprise !')}</small>
             {it.kind !== 'chest' && pet.inventory[it.id] ? <small className="own">Dans ton sac : {pet.inventory[it.id]}</small> : null}
             <button className="chip on" disabled={coins < it.price} onClick={() => doBuy(it)}>🪙 {it.price}</button>
           </div>

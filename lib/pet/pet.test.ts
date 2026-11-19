@@ -95,6 +95,10 @@ describe('pet', () => {
     expect(p.careCount).toBe(2);
     p = buy(p, 'coffre', 800, T0);
     expect(p.eggs.at(-1)?.opened).toBe(false);
+    expect(p.eggs.at(-1)?.box).toBeUndefined();
+    p = buy(p, 'coffre-legendaire', 6000, T0 + 1);
+    expect(p.eggs.at(-1)?.box).toBe('legendaire');
+    expect(['epique', 'legendaire']).toContain(p.eggs.at(-1)?.q);
   });
 
   it('grants chests for lucky games and epic badges once', () => {
@@ -103,6 +107,8 @@ describe('pet', () => {
     for (let i = 0; !lucky; i++) { const g = game({ id: 'g' + i, ts: T0 + H }); if (dropsEgg(g)) lucky = g; }
     let q = grantEggs(p, [lucky], new Set(['total:0', 'total:4']), T0 + H);
     expect(q.eggs).toHaveLength(3); // start + drop + epic badge
+    expect(q.eggs[2].box).toBe('epique');
+    expect(['rare', 'epique', 'legendaire']).toContain(q.eggs[2].q);
     q = grantEggs(q, [lucky], new Set(['total:0', 'total:4']), T0 + 2 * H);
     expect(q.eggs).toHaveLength(3);
   });

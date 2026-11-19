@@ -34,7 +34,7 @@ export function ChestScene({ egg, onOpen, onClose }: { egg: Egg; onOpen(): void;
   return (
     <Scene onClose={onClose} done={step === 'open'}>
       <div className={'chest-stage ' + step} style={{ '--rc': RARITY[egg.q].c } as CSSProperties} onClick={start}>
-        <ChestImg open={step === 'open'} />
+        <ChestImg open={step === 'open'} box={egg.box} />
         {step === 'open' && <EggImg e={egg} className="eggimg pop-egg" />}
       </div>
       <p className="scene-txt">{step === 'open' ? QUALITY_TEXT(egg) : step === 'idle' ? 'Touche le coffre pour l’ouvrir !' : '…'}</p>

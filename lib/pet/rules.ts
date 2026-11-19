@@ -2,7 +2,7 @@ import type { GameRecord, Rarity } from '../game/types';
 import { BADGE_BY_ID, levelInfo, RARITY_ORDER, totalXp } from '../game/rules';
 import assets from './assets.json';
 import { SPECIES, SPECIES_BY_ID, type Species } from './species';
-import type { Creature, Egg, EggSource, Needs, PetState } from './types';
+import type { Box, Creature, Egg, EggSource, Needs, PetState } from './types';
 
 /* ---------- Stages ---------- */
 export const STAGES = ['bebe', 'petit', 'grand', 'super'] as const;
@@ -67,12 +67,17 @@ export function rollQuality(r: number, min: Rarity = 'commun'): Rarity {
 export function makeEgg(key: string, source: EggSource, at: number, min?: Rarity): Egg {
   const q = rollQuality(hash01(key + ':q'), min);
   const egg: Egg = { id: 'e' + Math.floor(hash01(key + ':id') * 1e9).toString(36) + at.toString(36), q, source, at, opened: false };
+  const box = BOX_OF[min ?? 'commun'];
+  if (box) egg.box = box;
   if (q === 'legendaire') {
     const pool = readySpecies('legendaire');
     egg.species = pool[Math.floor(hash01(key + ':sp') * pool.length)]?.id;
   }
   return egg;
 }
+
+/** The chest an egg comes in follows the lowest quality it guarantees */
+const BOX_OF: Partial<Record<Rarity, Box>> = { rare: 'epique', epique: 'legendaire' };
 
 /** Chance that a normal game drops a chest */
 export const dropChance = (g: GameRecord) => (g.stars >= 3 ? 0.08 : 0.04);
@@ -201,7 +206,7 @@ export function applyGames(p: PetState, h: GameRecord[]): PetState {
 }
 
 /* ---------- Shop and care ---------- */
-export interface Item { id: string; e: string; n: string; price: number; kind: 'food' | 'toy' | 'chest'; gain?: Partial<Needs> }
+export interface Item { id: string; e: string; n: string; price: number; kind: 'food' | 'toy' | 'chest'; gain?: Partial<Needs>; min?: Rarity; box?: Box }
 export const ITEMS: Item[] = [
   { id: 'pomme', e: '🍎', n: 'Pomme', price: 10, kind: 'food', gain: { faim: 20 } },
   { id: 'sandwich', e: '🥪', n: 'Sandwich', price: 25, kind: 'food', gain: { faim: 50 } },
@@ -210,6 +215,8 @@ export const ITEMS: Item[] = [
   { id: 'peluche', e: '🧸', n: 'Peluche', price: 80, kind: 'toy', gain: { joie: 70 } },
   { id: 'console', e: '🎮', n: 'Console', price: 200, kind: 'toy', gain: { joie: 100 } },
   { id: 'coffre', e: '🎁', n: 'Coffre', price: 800, kind: 'chest' },
+  { id: 'coffre-epique', e: '🎁', n: 'Coffre épique', price: 2500, kind: 'chest', min: 'rare', box: 'epique' },
+  { id: 'coffre-legendaire', e: '🎁', n: 'Coffre légendaire', price: 6000, kind: 'chest', min: 'epique', box: 'legendaire' },
 ];
 export const ITEM_BY_ID: Record<string, Item> = Object.fromEntries(ITEMS.map(i => [i.id, i]));
 
@@ -218,7 +225,7 @@ export function buy(p: PetState, itemId: string, coins: number, now: number): Pe
   const it = ITEM_BY_ID[itemId];
   if (!it || coins < it.price) return p;
   const paid = { ...p, spent: p.spent + it.price, updatedAt: now };
-  if (it.kind === 'chest') return { ...paid, eggs: [...p.eggs, makeEgg('shop:' + now + ':' + p.spent, 'shop', now)], lastEggAt: now };
+  if (it.kind === 'chest') return { ...paid, eggs: [...p.eggs, makeEgg('shop:' + now + ':' + p.spent, 'shop', now, it.min)], lastEggAt: now };
   return { ...paid, inventory: { ...p.inventory, [it.id]: (p.inventory[it.id] ?? 0) + 1 } };
 }
 
