@@ -54,6 +54,8 @@ export function CreatureView({ c, size = 200, action, onClick }: { c: Creature; 
         <img src={creatureSrc(c.species, stage, mood === 'triste')} alt={c.name} draggable={false} />
       </div></div>
       {mood === 'triste' && <span className="crea-fx tear">💧</span>}
+      {/* eslint-disable-next-line @next/next/no-img-element -- static sprites */}
+      {sleeping && ITEM_FILES.includes('lit') && <img className="crea-bed" src="/items/lit.webp" alt="" />}
       {sleeping && <span key={action.key} className="crea-fx zzz">Z</span>}
       {!action && need && mood !== 'triste' && <span className="crea-fx bubble">{NEED_ICON[need]}</span>}
       {action?.item && <span key={action.key} className={'crea-item ' + action.kind}><ItemIcon id={action.item} /></span>}

@@ -40,7 +40,47 @@
       "grand-triste",
       "super-triste"
     ],
+    "licorne-aurore": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "ours-glacier": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "rainette-fleurie": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "slime": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "toucan": [
       "bebe",
       "petit",
       "grand",
@@ -61,6 +101,13 @@
   ],
   "items": [
     "coffre-ferme",
-    "coffre-ouvert"
+    "coffre-ouvert",
+    "pomme",
+    "sandwich",
+    "gateau",
+    "balle",
+    "peluche",
+    "console",
+    "lit"
   ]
 }
