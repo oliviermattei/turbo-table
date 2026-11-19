@@ -403,3 +403,5 @@ button.bestc{cursor:pointer}
 .coins-link{display:flex;align-items:center;gap:4px;text-decoration:none;color:inherit;background:rgba(255,255,255,.12);border-radius:999px;padding-right:10px;flex-shrink:0}
 .coins-link .coins{background:none}
 .coins-shop{font-size:20px}
+.eggb{position:relative}
+.stackct{position:absolute;top:6px;right:6px;background:var(--yellow);color:var(--ink);font-weight:700;font-size:14px;border-radius:999px;padding:2px 8px}

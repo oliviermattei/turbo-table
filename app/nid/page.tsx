@@ -4,6 +4,7 @@ import { ChestImg, EggImg } from '@/components/pet';
 import { useEnsurePet } from '@/components/pet-ensure';
 import { ChestScene, HatchScene } from '@/components/pet-scenes';
 import { BackHeader, Progress, RarLabel } from '@/components/ui';
+import { RARITY_ORDER } from '@/lib/game/rules';
 import { hatch, hatchProgress, incubate, openChest, type Hatched } from '@/lib/pet/rules';
 import type { Egg } from '@/lib/pet/types';
 
@@ -15,6 +16,11 @@ export default function NidPage() {
 
   const chests = pet.eggs.filter(e => !e.opened);
   const waiting = pet.eggs.filter(e => e.opened);
+  // Same-looking eggs are stacked: one tile per quality (a legendary egg per species)
+  const groups = new Map<string, Egg[]>(); // not Map.groupBy: older tablets lack it
+  waiting.forEach(e => { const k = e.q + ':' + (e.species ?? ''); groups.set(k, [...(groups.get(k) ?? []), e]); });
+  const stacks = [...groups.values()]
+    .sort((a, b) => RARITY_ORDER.indexOf(a[0].q) - RARITY_ORDER.indexOf(b[0].q));
   const inc = hatchProgress(pet, correct);
   const doHatch = (): Hatched | null => {
     // The random draw happens once, here; the result is stored in the pet
@@ -45,7 +51,10 @@ export default function NidPage() {
         <div className="panel">
           <h2>Coffres à ouvrir</h2>
           <div className="eggrow">
-            {chests.map(e => <button key={e.id} className="eggb" onClick={() => setChest(e)}><ChestImg /></button>)}
+            <button className="eggb" onClick={() => setChest(chests[0])}>
+              <ChestImg />
+              {chests.length > 1 && <span className="stackct">×{chests.length}</span>}
+            </button>
           </div>
         </div>
       )}
@@ -54,11 +63,12 @@ export default function NidPage() {
         <div className="panel">
           <h2>Œufs qui attendent</h2>
           <div className="eggrow">
-            {waiting.map(e => (
-              <div key={e.id} className="eggb">
-                <EggImg e={e} />
-                <RarLabel r={e.q} />
-                {!inc && <button className="chip on small" onClick={() => updatePet(p => p && incubate(p, e.id, correct))}>Couver</button>}
+            {stacks.map(s => (
+              <div key={s[0].id} className="eggb">
+                <EggImg e={s[0]} />
+                {s.length > 1 && <span className="stackct">×{s.length}</span>}
+                <RarLabel r={s[0].q} />
+                {!inc && <button className="chip on small" onClick={() => updatePet(p => p && incubate(p, s[0].id, correct))}>Couver</button>}
               </div>
             ))}
           </div>

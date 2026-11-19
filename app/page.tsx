@@ -31,12 +31,16 @@ export default function Home() {
         <Link className="big play" href="/partie" onClick={() => ensureAudio()}>▶ Jouer</Link>
         <DebugCoins />
       </div>
-      <div className="nav four">
+      <div className="nav six">
         {n > 0 ? (
-          <Link className="navb" href="/nid"><span className="ic">🥚</span><span className="lb">Nid</span><span className="ct">{chests ? `${chests} 🎁` : ''}</span></Link>
-        ) : (
-          <span className="navb disabled" aria-disabled="true"><span className="ic">🥚</span><span className="lb">Nid</span><span className="ct">🔒</span></span>
-        )}
+          <>
+            <Link className="navb" href="/nid"><span className="ic">🥚</span><span className="lb">Nid</span><span className="ct">{chests ? `${chests} 🎁` : ''}</span></Link>
+            <Link className="navb" href="/bestiaire"><span className="ic">📖</span><span className="lb">Bestiaire</span></Link>
+            <Link className="navb" href="/boutique"><span className="ic">🛒</span><span className="lb">Boutique</span></Link>
+          </>
+        ) : ['🥚 Nid', '📖 Bestiaire', '🛒 Boutique'].map(x => (
+          <span key={x} className="navb disabled" aria-disabled="true"><span className="ic">{x.split(' ')[0]}</span><span className="lb">{x.split(' ')[1]}</span><span className="ct">🔒</span></span>
+        ))}
         <Link className="navb" href="/badges"><span className="ic">🏅</span><span className="lb">Badges</span><span className="ct">{unlocked(st).size}/{ALL_BADGES.length}</span></Link>
         <Link className="navb" href="/diplomes"><span className="ic">🎓</span><span className="lb">Diplômes</span><span className="ct">{st.dipCount}/10</span></Link>
         <Link className="navb" href="/historique"><span className="ic">📜</span><span className="lb">Historique</span><span className="ct">{n ? `${n} partie${n > 1 ? 's' : ''}` : ''}</span></Link>
