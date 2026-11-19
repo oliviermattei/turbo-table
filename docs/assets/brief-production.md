@@ -38,7 +38,7 @@ La planche étalon se crée une seule fois : on génère la première espèce, o
 - **Aucun texte**, aucune étiquette, aucun cadre en plus des traits du gabarit.
 - Lumière venant d'**en haut à gauche** sur toutes les planches.
 - **Silhouette** : chaque créature, et surtout chaque Bébé, a une forme bien à elle (ailleurs, oreilles, queue, posture…), car le bestiaire montre les créatures pas encore trouvées en ombre noire.
-- **Angle** : comme sur la référence, la créature est **tournée d'environ 30° vers la gauche ou vers la droite** (léger trois quarts avant) : on voit les deux yeux, le poitrail et les pattes avant. Le regard peut aller ailleurs, mais jamais plus tournée que 30° : ni profil, ni dos.
+- **Angle** : comme sur la référence, la créature est **tournée d'environ 22° vers la gauche ou vers la droite** (léger trois quarts avant) : on voit les deux yeux, le poitrail et les pattes avant. Le regard peut aller ailleurs, mais jamais plus tournée que 22° : ni profil, ni dos.
 
 ## 4. Prompt d'ouverture (début de chaque conversation)
 
@@ -57,9 +57,9 @@ STYLE (copy the first attached image, the style reference)
 - Light comes from the top left. Friendly and reassuring, never scary.
 - Silhouette: every creature, and above all every Baby, has its own recognisable shape (it is shown
   as a black silhouette in the bestiary before it is found). Exaggerate its signature feature.
-- Camera: every creature is turned about 30 degrees to the left or to the right (light front
+- Camera: every creature is turned about 22 degrees to the left or to the right (light front
   three-quarter view), both eyes and the chest visible. It may look anywhere, but never more turned
-  than 30 degrees: no side profile, never seen from behind.
+  than 22 degrees: no side profile, never seen from behind.
 - Original designs only: nothing that resembles an existing franchise character.
 
 LAYOUT (draw ON the attached grid template)
@@ -150,7 +150,7 @@ Refaire la planche (« Regenerate the whole sheet, fixing: … ») si un seul po
 - [ ] Aucun texte ni cadre.
 - [ ] Planche d'espèce : on reconnaît la même créature aux 4 stades, et les poses sont différentes.
 - [ ] Les 4 stades ont des silhouettes différentes, et celle du Bébé ne ressemble à aucun autre bébé du jeu (le bestiaire l'affiche en ombre noire).
-- [ ] Chaque créature est tournée d'environ 30° (gauche ou droite), on voit ses deux yeux et son poitrail, aucune n'est de profil.
+- [ ] Chaque créature est tournée d'environ 22° (gauche ou droite), on voit ses deux yeux et son poitrail, aucune n'est de profil.
 - [ ] Planche d'espèce : la rangée du bas a les mêmes poses que celle du haut, avec un air triste.
 - [ ] Rien d'effrayant, rien qui ressemble à un personnage connu.
 
@@ -220,9 +220,9 @@ Top row, left to right, happy expression:
 3. Grown: slender kitten, clear stripes, long whiskers. About 72% of the cell height. Pose: walking, tail in a question mark.
 4. Super: big proud cat, plume-like bushy tail, large shiny golden bell. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, huge plume tail raised behind it.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -250,9 +250,9 @@ Top row, left to right, happy expression:
 3. Grown: slender young dog, ears flying in the wind. About 72% of the cell height. Pose: standing, one front paw raised, tail wagging.
 4. Super: big proud dog, red scarf tied like a small cape. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, red scarf blowing like a cape.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -280,9 +280,9 @@ Top row, left to right, happy expression:
 3. Grown: very long ears, big hind feet. About 72% of the cell height. Pose: standing on its hind legs like a meerkat, very long ears.
 4. Super: huge ears, a fluffy tuft of fur on the head. About 82% of the cell height, most impressive form, still cute. Pose: sitting upright, giant ears forming a crown above its head.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -310,9 +310,9 @@ Top row, left to right, happy expression:
 3. Grown: chubby pig, mud spot on the cheek. About 72% of the cell height. Pose: sitting on its bottom, laughing.
 4. Super: big laughing pig wearing a straw hat. About 82% of the cell height, most impressive form, still cute. Pose: standing proudly, straw hat on its head.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -340,9 +340,9 @@ Top row, left to right, happy expression:
 3. Grown: clear spots, a small bell. About 72% of the cell height. Pose: lying down, legs folded, bell visible.
 4. Super: big cow, golden bell, crown of flowers. About 82% of the cell height, most impressive form, still cute. Pose: standing proudly, flower crown and golden bell.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -372,9 +372,9 @@ Top row, left to right, happy expression:
 3. Grown: white feathers growing in among the yellow fluff. About 72% of the cell height. Pose: flapping its wings.
 4. Super: big white duck wearing a sailor beanie. About 82% of the cell height, most impressive form, still cute. Pose: standing proudly in a sailor beanie.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -403,9 +403,9 @@ Top row, left to right, happy expression:
 3. Grown: fins as long as ribbons. About 72% of the cell height. Pose: twirling, long ribbon fins.
 4. Super: veil-like fins, a small crown of bubbles on its head. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, veil fins spread, bubble crown.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -434,9 +434,9 @@ Top row, left to right, happy expression:
 3. Grown: brush-like mane. About 72% of the cell height. Pose: sitting, stubborn face.
 4. Super: big donkey carrying saddlebags full of carrots. About 82% of the cell height, most impressive form, still cute. Pose: proud stance with carrot saddlebags.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -464,9 +464,9 @@ Top row, left to right, happy expression:
 3. Grown: domed shell, longer neck. About 72% of the cell height. Pose: standing tall, neck stretched up.
 4. Super: big shell with golden edges, a lettuce leaf in its mouth. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, lettuce leaf in its mouth.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -494,9 +494,9 @@ Top row, left to right, happy expression:
 3. Grown: long blue tail. About 72% of the cell height. Pose: flying, wings spread.
 4. Super: fan-shaped head feathers, very long tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fan of head feathers, very long tail.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -526,9 +526,9 @@ Top row, left to right, happy expression:
 3. Grown: fan-shaped spines. About 72% of the cell height. Pose: standing on its hind legs, spines fanned out.
 4. Super: big hedgehog with an apple stuck on its back. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, apple stuck on its back.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -556,9 +556,9 @@ Top row, left to right, happy expression:
 3. Grown: thin legs, huge ears. About 72% of the cell height. Pose: standing, ears turned like radars.
 4. Super: big fennec fox wearing a traveller's scarf. About 82% of the cell height, most impressive form, still cute. Pose: proud stance with a traveller scarf.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -586,9 +586,9 @@ Top row, left to right, happy expression:
 3. Grown: slender, dark brown legs. About 72% of the cell height. Pose: walking along, tail held high.
 4. Super: huge tail it wraps itself in. About 82% of the cell height, most impressive form, still cute. Pose: curled in its enormous tail like a scarf.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -616,9 +616,9 @@ Top row, left to right, happy expression:
 3. Grown: longer body, bigger gills. About 72% of the cell height. Pose: twirling.
 4. Super: gills like a fuchsia crown. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, gills like a fuchsia crown.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -647,9 +647,9 @@ Top row, left to right, happy expression:
 3. Grown: long flat tail. About 72% of the cell height. Pose: standing on its hind legs, long flat tail.
 4. Super: floating on its back, holding a seashell tight on its belly. About 82% of the cell height, most impressive form, still cute. Pose: floating on its back hugging a seashell.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -680,9 +680,9 @@ Top row, left to right, happy expression:
 3. Grown: striped wings. About 72% of the cell height. Pose: flying, striped wings spread.
 4. Super: large open wings, feathery ear tufts. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, wings fully open.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -710,9 +710,9 @@ Top row, left to right, happy expression:
 3. Grown: big black nose, soft claws. About 72% of the cell height. Pose: climbing pose.
 4. Super: chubby koala hugging a eucalyptus leaf. About 82% of the cell height, most impressive form, still cute. Pose: chubby koala hugging a big eucalyptus branch.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -740,9 +740,9 @@ Top row, left to right, happy expression:
 3. Grown: coral back crest. About 72% of the cell height. Pose: twirling.
 4. Super: fan-shaped crest, spiral tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fan crest spread.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -771,9 +771,9 @@ Top row, left to right, happy expression:
 3. Grown: yellow-orange-green beak. About 72% of the cell height. Pose: flying.
 4. Super: huge shiny beak, red tail feathers. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, huge shiny beak, red tail feathers.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -801,9 +801,9 @@ Top row, left to right, happy expression:
 3. Grown: a taller jelly creature standing on two stubby jelly legs, with small pointed jelly ears, a splash-shaped crest on its head and tiny glowing fish and stars suspended inside its translucent belly. About 72% of the cell height. Pose: bouncy pose, leaning to one side.
 4. Super: a majestic jelly guardian shaped like a living fountain: layered translucent body, a crown of frozen golden water splashes, a glowing gem core in its chest and a cape of flowing jelly drips behind it. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, standing tall.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -833,9 +833,9 @@ Top row, left to right, happy expression:
 3. Grown: wider cap with a leaf on top. About 72% of the cell height. Pose: dancing, one foot up.
 4. Super: big cap with glowing dots. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, giant glowing cap.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -863,9 +863,9 @@ Top row, left to right, happy expression:
 3. Grown: cloud body, pink cheeks. About 72% of the cell height. Pose: stretching like a cat in the air.
 4. Super: big cloud cat with a mini rainbow on its back. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose, mini rainbow on its back.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -894,9 +894,9 @@ Top row, left to right, happy expression:
 3. Grown: half-open flower. About 72% of the cell height. Pose: sitting, half-open flower.
 4. Super: fully bloomed water lily worn like a hat. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, water lily hat in full bloom.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -924,9 +924,9 @@ Top row, left to right, happy expression:
 3. Grown: taller, soft spines. About 72% of the cell height. Pose: arms wide open.
 4. Super: big yellow flower on its head. About 82% of the cell height, most impressive form, still cute. Pose: standing tall, big yellow flower on top.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -954,9 +954,9 @@ Top row, left to right, happy expression:
 3. Grown: wavy glowing tentacles. About 72% of the cell height. Pose: twirling, wavy tentacles.
 4. Super: a dress of glowing tentacles. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, dress of glowing tentacles.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -987,9 +987,9 @@ Top row, left to right, happy expression:
 3. Grown: mossy shell. About 72% of the cell height. Pose: standing tall, mossy shell.
 4. Super: shell bristling with violet crystals. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, crystal spikes on its shell.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1017,9 +1017,9 @@ Top row, left to right, happy expression:
 3. Grown: ice shoulder pads, crystal claws. About 72% of the cell height. Pose: standing on its hind legs, ice shoulder pads.
 4. Super: full ice armour, crown of frozen spikes. About 82% of the cell height, most impressive form, still cute. Pose: proud stance in full ice armour.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1047,9 +1047,9 @@ Top row, left to right, happy expression:
 3. Grown: faceted antlers reflecting the light. About 72% of the cell height. Pose: standing, head turned.
 4. Super: huge prismatic antlers, crystal hooves. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, huge prismatic antlers.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1077,9 +1077,9 @@ Top row, left to right, happy expression:
 3. Grown: glowing spiral horn, pearly chest plate. About 72% of the cell height. Pose: rearing up.
 4. Super: immense aurora mane, crystal horn, pearly armour. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose, immense aurora mane.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1108,9 +1108,9 @@ Top row, left to right, happy expression:
 3. Grown: long fire tail. About 72% of the cell height. Pose: flying, fire tail.
 4. Super: sun wings spread wide, crown of flames, fan-shaped tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, sun wings spread.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1140,9 +1140,9 @@ Top row, left to right, happy expression:
 3. Grown: six tails, golden marks on the forehead. About 72% of the cell height. Pose: standing, six tails fanned.
 4. Super: nine tails fanned out like cold flames, golden marks. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, nine tails in a fan.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1214,9 +1214,9 @@ Top row, left to right, happy expression:
 3. Grown: neat tuxedo, orange patch on the neck. About 72% of the cell height. Pose: sliding on its belly.
 4. Super: big penguin wearing a red scarf. About 82% of the cell height, most impressive form, still cute. Pose: standing tall with a red scarf.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1244,9 +1244,9 @@ Top row, left to right, happy expression:
 3. Grown: glowing lantern tail. About 72% of the cell height. Pose: flying.
 4. Super: dazzling lantern, glittering wings. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, glittering wings spread.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1274,9 +1274,9 @@ Top row, left to right, happy expression:
 3. Grown: blazing mane, lava cracks on the legs. About 72% of the cell height. Pose: roaring, blazing mane.
 4. Super: huge fire mane, black rock chest plate. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance, huge fire mane.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1304,9 +1304,9 @@ Top row, left to right, happy expression:
 3. Grown: constellation wings. About 72% of the cell height. Pose: wings half open.
 4. Super: large wings covered in constellations, star-shaped ear tufts. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose, constellation wings spread.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
@@ -1335,9 +1335,9 @@ Top row, left to right, happy expression:
 3. Grown: long fur, midnight blue mane. About 72% of the cell height. Pose: standing, long fur.
 4. Super: golden full moon on the forehead, glowing mane. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, glowing full moon on its forehead.
 
-Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
+Camera: like the style reference, every creature is turned about 22 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
-It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+It may look anywhere, but never more turned than 22 degrees: no side profile, never seen from behind.
 
 Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
 of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
