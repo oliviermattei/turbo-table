@@ -5,7 +5,7 @@ import { useEnsurePet } from '@/components/pet-ensure';
 import { BackHeader } from '@/components/ui';
 import { buy, ITEMS, type Item } from '@/lib/pet/rules';
 
-const TABS: [Item['kind'], string][] = [['food', '🍎 Nourriture'], ['toy', '⚽ Jouets'], ['chest', '🎁 Coffres']];
+const TABS: [Item['kind'], string, string][] = [['food', '🍎', 'Nourriture'], ['toy', '⚽', 'Jouets'], ['chest', '🎁', 'Coffres']];
 
 export default function BoutiquePage() {
   const { pet, updatePet, coins } = useEnsurePet();
@@ -22,9 +22,6 @@ export default function BoutiquePage() {
       <BackHeader title="Boutique" />
       <div className="petbar"><Coins n={coins} /></div>
       <DebugCoins />
-      <div className="row tabs">
-        {TABS.map(([k, l]) => <button key={k} className={'chip' + (tab === k ? ' on' : '')} onClick={() => setTab(k)}>{l}</button>)}
-      </div>
       <div className="shop">
         {ITEMS.filter(i => i.kind === tab).map(it => (
           <div key={it.id} className="shopi">
@@ -36,7 +33,15 @@ export default function BoutiquePage() {
           </div>
         ))}
       </div>
-      {bought && <p key={bought} className="note pop-note">Acheté ! {tab === 'chest' ? 'Ton coffre t’attend au nid.' : 'C’est dans ton sac.'}</p>}
+      {bought > 0 && <p key={bought} className="note pop-note">Acheté ! {tab === 'chest' ? 'Ton coffre t’attend au nid.' : 'C’est dans ton sac.'}</p>}
+      <div className="spacer" />
+      <div className="nav shop-tabs">
+        {TABS.map(([k, e, l]) => (
+          <button key={k} className={'navb' + (tab === k ? ' on' : '')} onClick={() => setTab(k)}>
+            <span className="ic">{e}</span><span className="lb">{l}</span>
+          </button>
+        ))}
+      </div>
     </section>
   );
 }

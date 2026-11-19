@@ -31,7 +31,7 @@ export const SPECIES: Species[] = [
     ['loup-de-lune', 'Loup de Lune', 'sautille'],
   ]),
   ...S('legendaire', [
-    ['licorne-aurore', 'Licorne Aurore', 'flotte'], ['phenix-solaire', 'Phénix Solaire', 'voltige'],
+    ['licorne-aurore', 'Licorne Arc-en-ciel', 'flotte'], ['phenix-solaire', 'Phénix Solaire', 'voltige'],
     ['renard-celeste', 'Renard Céleste', 'sautille'],
   ]),
 ];

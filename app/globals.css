@@ -407,3 +407,5 @@ button.bestc{cursor:pointer}
 .stackct{position:absolute;top:6px;right:6px;background:var(--yellow);color:var(--ink);font-weight:700;font-size:14px;border-radius:999px;padding:2px 8px}
 .crea-bed{position:absolute;bottom:0;left:50%;width:85%;transform:translateX(-50%);z-index:-1;animation:pet-drop .4s ease-out both}
 .crea{isolation:isolate}
+.shop-tabs{position:sticky;bottom:8px}
+.navb.on{background:var(--yellow);color:var(--ink)}
