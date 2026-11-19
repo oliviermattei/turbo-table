@@ -37,6 +37,7 @@ La planche étalon se crée une seule fois : on génère la première espèce, o
   Exception : une créature très sombre (noire, bleu nuit, violet foncé) se fait sur fond **`#FFFFFF`**.
 - **Aucun texte**, aucune étiquette, aucun cadre en plus des traits du gabarit.
 - Lumière venant d'**en haut à gauche** sur toutes les planches.
+- **Silhouette** : chaque créature, et surtout chaque Bébé, a une forme bien à elle (ailleurs, oreilles, queue, posture…), car le bestiaire montre les créatures pas encore trouvées en ombre noire.
 - **Angle** : comme sur la référence, la créature est **tournée d'environ 30° vers la gauche ou vers la droite** (léger trois quarts avant) : on voit les deux yeux, le poitrail et les pattes avant. Le regard peut aller ailleurs, mais jamais plus tournée que 30° : ni profil, ni dos.
 
 ## 4. Prompt d'ouverture (début de chaque conversation)
@@ -54,6 +55,8 @@ STYLE (copy the first attached image, the style reference)
 - Exactly the same level of detail as the reference: not flatter or more cartoonish,
   not more realistic or more detailed.
 - Light comes from the top left. Friendly and reassuring, never scary.
+- Silhouette: every creature, and above all every Baby, has its own recognisable shape (it is shown
+  as a black silhouette in the bestiary before it is found). Exaggerate its signature feature.
 - Camera: every creature is turned about 30 degrees to the left or to the right (light front
   three-quarter view), both eyes and the chest visible. It may look anywhere, but never more turned
   than 30 degrees: no side profile, never seen from behind.
@@ -146,6 +149,7 @@ Refaire la planche (« Regenerate the whole sheet, fixing: … ») si un seul po
 - [ ] Fond parfaitement uni, de la bonne couleur, sans fumée ni étincelles.
 - [ ] Aucun texte ni cadre.
 - [ ] Planche d'espèce : on reconnaît la même créature aux 4 stades, et les poses sont différentes.
+- [ ] Les 4 stades ont des silhouettes différentes, et celle du Bébé ne ressemble à aucun autre bébé du jeu (le bestiaire l'affiche en ombre noire).
 - [ ] Chaque créature est tournée d'environ 30° (gauche ou droite), on voit ses deux yeux et son poitrail, aucune n'est de profil.
 - [ ] Planche d'espèce : la rangée du bas a les mêmes poses que celle du haut, avec un air triste.
 - [ ] Rien d'effrayant, rien qui ressemble à un personnage connu.
@@ -196,6 +200,8 @@ Chaque conversation commence de la même façon :
 3. coller le **prompt d'ouverture** (section 4) et attendre « OK » ;
 4. coller les planches une par une, en vérifiant chacune avec la check-list (section 7).
 
+Déjà faites (à refaire seulement si tu veux la nouvelle silhouette) : Chiot, Chaton, Lapin, Axolotl, Slime.
+
 La première planche (Chaton) sert à créer l'**étalon** : la refaire jusqu'à ce qu'elle soit parfaite, puis la copier aussi sous `docs/assets/reference/etalon.png`.
 
 ### Conversation 1 : fond bleu nuit (joindre `gabarit.png`)
@@ -209,14 +215,18 @@ Creature: a little ginger tabby kitten with a golden bell. Main colours: ginger,
 Distinctive features kept at every stage: ginger tabby stripes, cream muzzle, golden bell on a collar.
 
 Top row, left to right, happy expression:
-1. Baby: a ginger fluff ball, half-closed sleepy eyes, tiny ears. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: question-mark tail, small golden bell. About 60% of the cell height. Pose: mid-hop.
-3. Grown: slender kitten, clear stripes, long whiskers. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: big proud cat, plume-like bushy tail, large shiny golden bell. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a tiny ginger kitten standing up on its hind legs, batting at its golden bell, tail pointing straight up like an antenna. Tiny, about 45% of the cell height. Pose: standing on hind legs.
+2. Young: question-mark tail, small golden bell. About 60% of the cell height. Pose: crouched, ready to pounce, tail curved.
+3. Grown: slender kitten, clear stripes, long whiskers. About 72% of the cell height. Pose: walking, tail in a question mark.
+4. Super: big proud cat, plume-like bushy tail, large shiny golden bell. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, huge plume tail raised behind it.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -235,14 +245,18 @@ Creature: a playful puppy with floppy ears. Main colours: beige, chocolate brown
 Distinctive features kept at every stage: floppy ears, brown patch around one eye, red scarf.
 
 Top row, left to right, happy expression:
-1. Baby: a beige ball with ears hanging down to its paws. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: clumsy puppy, brown patch over one eye, red scarf. About 60% of the cell height. Pose: mid-hop.
-3. Grown: slender young dog, ears flying in the wind. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: big proud dog, red scarf tied like a small cape. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a beige puppy lying flat on its belly with its huge floppy ears spread wide on the floor like a mat, front paws stretched forward: a wide, low shape. Tiny, about 45% of the cell height. Pose: lying on its belly.
+2. Young: clumsy puppy, brown patch over one eye, red scarf. About 60% of the cell height. Pose: running, ears flying.
+3. Grown: slender young dog, ears flying in the wind. About 72% of the cell height. Pose: standing, one front paw raised, tail wagging.
+4. Super: big proud dog, red scarf tied like a small cape. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, red scarf blowing like a cape.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -261,14 +275,18 @@ Creature: a soft white bunny with a pink nose. Main colours: white, pearl grey, 
 Distinctive features kept at every stage: pink nose, pompom tail, pearl grey ear tips.
 
 Top row, left to right, happy expression:
-1. Baby: a white pompom with short ears. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: ears standing up, pompom tail. About 60% of the cell height. Pose: mid-hop.
-3. Grown: very long ears, big hind feet. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: huge ears, a fluffy tuft of fur on the head. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a tall, narrow bunny sitting very upright like a little bottle, one ear straight up and the other folded down. Tiny, about 45% of the cell height. Pose: sitting very upright.
+2. Young: ears standing up, pompom tail. About 60% of the cell height. Pose: mid-hop, both ears straight up.
+3. Grown: very long ears, big hind feet. About 72% of the cell height. Pose: standing on its hind legs like a meerkat, very long ears.
+4. Super: huge ears, a fluffy tuft of fur on the head. About 82% of the cell height, most impressive form, still cute. Pose: sitting upright, giant ears forming a crown above its head.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -287,14 +305,18 @@ Creature: a little pink piglet who loves mud. Main colours: pink, deep pink, bro
 Distinctive features kept at every stage: curly tail, round snout, mud spot on the cheek.
 
 Top row, left to right, happy expression:
-1. Baby: a pink candy-like ball, tiny snout. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: corkscrew tail. About 60% of the cell height. Pose: walking.
-3. Grown: chubby pig, mud spot on the cheek. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: big laughing pig wearing a straw hat. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a very wide oval pink piglet seen trotting, tiny legs under a big round body, round snout and corkscrew tail. Tiny, about 45% of the cell height. Pose: trotting.
+2. Young: corkscrew tail. About 60% of the cell height. Pose: rolling happily on its side.
+3. Grown: chubby pig, mud spot on the cheek. About 72% of the cell height. Pose: sitting on its bottom, laughing.
+4. Super: big laughing pig wearing a straw hat. About 82% of the cell height, most impressive form, still cute. Pose: standing proudly, straw hat on its head.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -313,14 +335,18 @@ Creature: a spotted calf with a little bell. Main colours: white, black, pink.
 Distinctive features kept at every stage: black spots on white, pink muzzle, small bell.
 
 Top row, left to right, happy expression:
-1. Baby: a white ball with a single black spot. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
+1. Baby: a calf on very long, wobbly legs with knees pointing together, body small on top of tall thin legs. Tiny, about 45% of the cell height. Pose: standing on wobbly legs.
 2. Young: wobbly legs, tiny horns. About 60% of the cell height. Pose: walking.
-3. Grown: clear spots, a small bell. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: big cow, golden bell, crown of flowers. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+3. Grown: clear spots, a small bell. About 72% of the cell height. Pose: lying down, legs folded, bell visible.
+4. Super: big cow, golden bell, crown of flowers. About 82% of the cell height, most impressive form, still cute. Pose: standing proudly, flower crown and golden bell.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -341,14 +367,18 @@ Creature: a duckling splashing around. Main colours: yellow, orange, white.
 Distinctive features kept at every stage: orange bill, webbed orange feet.
 
 Top row, left to right, happy expression:
-1. Baby: yellow fluff, orange bill. Tiny and round, about 45% of the cell height. Pose: floating upright.
-2. Young: clearly visible webbed feet. About 60% of the cell height. Pose: swimming.
-3. Grown: white feathers growing in among the yellow fluff. About 72% of the cell height. Pose: playful twirl.
-4. Super: big white duck wearing a sailor beanie. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fins or limbs spread.
+1. Baby: a duckling waddling with its tiny wings spread out sideways like an airplane. Tiny, about 45% of the cell height. Pose: waddling, wings out.
+2. Young: clearly visible webbed feet. About 60% of the cell height. Pose: floating, webbed feet visible.
+3. Grown: white feathers growing in among the yellow fluff. About 72% of the cell height. Pose: flapping its wings.
+4. Super: big white duck wearing a sailor beanie. About 82% of the cell height, most impressive form, still cute. Pose: standing proudly in a sailor beanie.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -368,14 +398,18 @@ Creature: a bowl goldfish with veil-like fins. Main colours: orange, white, bubb
 Distinctive features kept at every stage: orange body, white fin tips, little bubbles.
 
 Top row, left to right, happy expression:
-1. Baby: an orange droplet with two big eyes. Tiny and round, about 45% of the cell height. Pose: floating upright.
+1. Baby: a tiny droplet-shaped goldfish with a fan tail almost as big as its body. Tiny, about 45% of the cell height. Pose: floating upright.
 2. Young: round fish, fan-shaped tail. About 60% of the cell height. Pose: swimming.
-3. Grown: fins as long as ribbons. About 72% of the cell height. Pose: playful twirl.
-4. Super: veil-like fins, a small crown of bubbles on its head. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fins or limbs spread.
+3. Grown: fins as long as ribbons. About 72% of the cell height. Pose: twirling, long ribbon fins.
+4. Super: veil-like fins, a small crown of bubbles on its head. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, veil fins spread, bubble crown.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -395,14 +429,18 @@ Creature: a stubborn donkey foal with very big ears. Main colours: mouse grey, w
 Distinctive features kept at every stage: very long ears, white muzzle, blue halter.
 
 Top row, left to right, happy expression:
-1. Baby: a grey ball with two long ears. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: white muzzle, blue halter. About 60% of the cell height. Pose: walking.
-3. Grown: brush-like mane. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: big donkey carrying saddlebags full of carrots. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a donkey foal on four thin legs with two enormous upright ears taller than its head. Tiny, about 45% of the cell height. Pose: standing.
+2. Young: white muzzle, blue halter. About 60% of the cell height. Pose: trotting.
+3. Grown: brush-like mane. About 72% of the cell height. Pose: sitting, stubborn face.
+4. Super: big donkey carrying saddlebags full of carrots. About 82% of the cell height, most impressive form, still cute. Pose: proud stance with carrot saddlebags.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -421,14 +459,18 @@ Creature: a garden tortoise who loves lettuce. Main colours: green, brown, yello
 Distinctive features kept at every stage: hexagon pattern on the shell, green skin.
 
 Top row, left to right, happy expression:
-1. Baby: round shell, head barely peeking out. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: hexagon pattern on the shell. About 60% of the cell height. Pose: walking.
-3. Grown: domed shell, longer neck. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: big shell with golden edges, a lettuce leaf in its mouth. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a baby tortoise tucked inside a high dome shell, only its eyes and the tips of its feet peeking out. Tiny, about 45% of the cell height. Pose: tucked in its shell.
+2. Young: hexagon pattern on the shell. About 60% of the cell height. Pose: walking slowly, head out.
+3. Grown: domed shell, longer neck. About 72% of the cell height. Pose: standing tall, neck stretched up.
+4. Super: big shell with golden edges, a lettuce leaf in its mouth. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, lettuce leaf in its mouth.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -447,14 +489,18 @@ Creature: a chatty budgie. Main colours: apple green, yellow, blue.
 Distinctive features kept at every stage: yellow face, blue tail, small curved beak.
 
 Top row, left to right, happy expression:
-1. Baby: a green ball with a tiny beak. Tiny and round, about 45% of the cell height. Pose: sitting, wings folded.
-2. Young: yellow head, little wings. About 60% of the cell height. Pose: hopping with wings half open.
-3. Grown: long blue tail. About 72% of the cell height. Pose: hovering, wings spread.
-4. Super: fan-shaped head feathers, very long tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, wings fully spread.
+1. Baby: a round green fluff ball with a big curved beak and one single long tail feather pointing straight up. Tiny, about 45% of the cell height. Pose: sitting.
+2. Young: yellow head, little wings. About 60% of the cell height. Pose: hopping, wings half open.
+3. Grown: long blue tail. About 72% of the cell height. Pose: flying, wings spread.
+4. Super: fan-shaped head feathers, very long tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fan of head feathers, very long tail.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -475,14 +521,18 @@ Creature: a hedgehog who rolls into a ball. Main colours: brown, cream, pink.
 Distinctive features kept at every stage: soft brown spines, cream face, pink nose.
 
 Top row, left to right, happy expression:
-1. Baby: a ball of very soft spines. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: short spines, pink snout. About 60% of the cell height. Pose: wiggling.
-3. Grown: fan-shaped spines. About 72% of the cell height. Pose: bouncy pose, leaning to one side.
-4. Super: big hedgehog with an apple stuck on its back. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, standing tall.
+1. Baby: a hedgehog rolled into a spiky ball with only its pink nose and eyes peeking out. Tiny, about 45% of the cell height. Pose: rolled into a ball.
+2. Young: short spines, pink snout. About 60% of the cell height. Pose: trotting, spines bouncing.
+3. Grown: fan-shaped spines. About 72% of the cell height. Pose: standing on its hind legs, spines fanned out.
+4. Super: big hedgehog with an apple stuck on its back. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, apple stuck on its back.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -501,14 +551,18 @@ Creature: a desert fox with giant ears. Main colours: sand, cream, pink.
 Distinctive features kept at every stage: enormous ears with pink insides, sandy fur.
 
 Top row, left to right, happy expression:
-1. Baby: a sandy ball with two ears bigger than itself. Tiny and round, about 45% of the cell height. Pose: sitting.
+1. Baby: a tiny sandy fox whose two ears are each taller than its whole body, forming a big V above it. Tiny, about 45% of the cell height. Pose: sitting.
 2. Young: pointy muzzle, bushy tail. About 60% of the cell height. Pose: mid-hop.
-3. Grown: thin legs, huge ears. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: big fennec fox wearing a traveller's scarf. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+3. Grown: thin legs, huge ears. About 72% of the cell height. Pose: standing, ears turned like radars.
+4. Super: big fennec fox wearing a traveller's scarf. About 82% of the cell height, most impressive form, still cute. Pose: proud stance with a traveller scarf.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -527,14 +581,18 @@ Creature: a little red panda with a ringed tail. Main colours: russet red, white
 Distinctive features kept at every stage: white face mask, ringed tail, dark brown legs.
 
 Top row, left to right, happy expression:
-1. Baby: a russet ball, white face mask. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: ringed tail. About 60% of the cell height. Pose: mid-hop.
-3. Grown: slender, dark brown legs. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: huge tail it wraps itself in. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a red panda cub sitting under its huge ringed tail curled over its head like an umbrella. Tiny, about 45% of the cell height. Pose: sitting under its tail.
+2. Young: ringed tail. About 60% of the cell height. Pose: climbing pose, front paws up.
+3. Grown: slender, dark brown legs. About 72% of the cell height. Pose: walking along, tail held high.
+4. Super: huge tail it wraps itself in. About 82% of the cell height, most impressive form, still cute. Pose: curled in its enormous tail like a scarf.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -553,14 +611,18 @@ Creature: a pink salamander who is always smiling. Main colours: pink, fuchsia, 
 Distinctive features kept at every stage: permanent smile, feathery gills on each side of the head.
 
 Top row, left to right, happy expression:
-1. Baby: a small smiling pink tadpole. Tiny and round, about 45% of the cell height. Pose: floating upright.
+1. Baby: an axolotl baby shaped like a tadpole with feathery gills spread wide around its head like a lion mane. Tiny, about 45% of the cell height. Pose: floating.
 2. Young: feathery gills on the sides. About 60% of the cell height. Pose: swimming.
-3. Grown: longer body, bigger gills. About 72% of the cell height. Pose: playful twirl.
-4. Super: gills like a fuchsia crown. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fins or limbs spread.
+3. Grown: longer body, bigger gills. About 72% of the cell height. Pose: twirling.
+4. Super: gills like a fuchsia crown. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, gills like a fuchsia crown.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -580,14 +642,18 @@ Creature: a sea otter floating on its back. Main colours: chocolate brown, cream
 Distinctive features kept at every stage: cream face, whiskers, flat tail.
 
 Top row, left to right, happy expression:
-1. Baby: a sleeping brown ball. Tiny and round, about 45% of the cell height. Pose: floating upright.
-2. Young: whiskers, holding a pebble in its paws. About 60% of the cell height. Pose: swimming.
-3. Grown: long flat tail. About 72% of the cell height. Pose: playful twirl.
-4. Super: floating on its back, holding a seashell tight on its belly. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fins or limbs spread.
+1. Baby: an otter pup floating flat on its back, belly up, holding a pebble on its chest: a long horizontal shape. Tiny, about 45% of the cell height. Pose: floating on its back.
+2. Young: whiskers, holding a pebble in its paws. About 60% of the cell height. Pose: swimming upright, whiskers out.
+3. Grown: long flat tail. About 72% of the cell height. Pose: standing on its hind legs, long flat tail.
+4. Super: floating on its back, holding a seashell tight on its belly. About 82% of the cell height, most impressive form, still cute. Pose: floating on its back hugging a seashell.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -609,14 +675,18 @@ Creature: a little scops owl of the night. Main colours: blue grey, cream, gold.
 Distinctive features kept at every stage: huge golden eyes, ear tufts.
 
 Top row, left to right, happy expression:
-1. Baby: a ball of feathers with enormous eyes. Tiny and round, about 45% of the cell height. Pose: sitting, wings folded.
-2. Young: ear tufts on the head. About 60% of the cell height. Pose: hopping with wings half open.
-3. Grown: striped wings. About 72% of the cell height. Pose: hovering, wings spread.
-4. Super: large open wings, feathery ear tufts. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, wings fully spread.
+1. Baby: a round owlet shaped like an egg with two pointed ear tufts and enormous eyes. Tiny, about 45% of the cell height. Pose: perched upright.
+2. Young: ear tufts on the head. About 60% of the cell height. Pose: hopping, wings half open.
+3. Grown: striped wings. About 72% of the cell height. Pose: flying, striped wings spread.
+4. Super: large open wings, feathery ear tufts. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, wings fully open.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -635,14 +705,18 @@ Creature: a sleepy koala. Main colours: grey, white, black.
 Distinctive features kept at every stage: big fluffy ears, big black nose.
 
 Top row, left to right, happy expression:
-1. Baby: a grey ball hugging a leaf. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: big fluffy ears. About 60% of the cell height. Pose: walking.
-3. Grown: big black nose, soft claws. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: chubby koala hugging a eucalyptus leaf. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a koala joey hugging a vertical eucalyptus stick with its arms and legs, big fluffy ears. Tiny, about 45% of the cell height. Pose: hugging a stick.
+2. Young: big fluffy ears. About 60% of the cell height. Pose: sitting, big ears.
+3. Grown: big black nose, soft claws. About 72% of the cell height. Pose: climbing pose.
+4. Super: chubby koala hugging a eucalyptus leaf. About 82% of the cell height, most impressive form, still cute. Pose: chubby koala hugging a big eucalyptus branch.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -661,14 +735,18 @@ Creature: a little seahorse. Main colours: pale yellow, coral, turquoise.
 Distinctive features kept at every stage: curled tail, coral back crest.
 
 Top row, left to right, happy expression:
-1. Baby: a yellow comma-shaped baby with round eyes. Tiny and round, about 45% of the cell height. Pose: floating upright.
+1. Baby: a tiny seahorse shaped like a comma, tail curled into a tight spiral. Tiny, about 45% of the cell height. Pose: floating upright.
 2. Young: curled tail. About 60% of the cell height. Pose: swimming.
-3. Grown: coral back crest. About 72% of the cell height. Pose: playful twirl.
-4. Super: fan-shaped crest, spiral tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fins or limbs spread.
+3. Grown: coral back crest. About 72% of the cell height. Pose: twirling.
+4. Super: fan-shaped crest, spiral tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fan crest spread.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -688,14 +766,18 @@ Creature: a jungle bird with a rainbow beak. Main colours: black, orange, yellow
 Distinctive features kept at every stage: huge colourful beak, black body.
 
 Top row, left to right, happy expression:
-1. Baby: a black ball with a tiny beak. Tiny and round, about 45% of the cell height. Pose: sitting, wings folded.
-2. Young: growing orange beak. About 60% of the cell height. Pose: hopping with wings half open.
-3. Grown: yellow-orange-green beak. About 72% of the cell height. Pose: hovering, wings spread.
-4. Super: huge shiny beak, red tail feathers. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, wings fully spread.
+1. Baby: a small black ball dominated by a huge orange beak, bigger than its head. Tiny, about 45% of the cell height. Pose: sitting.
+2. Young: growing orange beak. About 60% of the cell height. Pose: hopping.
+3. Grown: yellow-orange-green beak. About 72% of the cell height. Pose: flying.
+4. Super: huge shiny beak, red tail feathers. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, huge shiny beak, red tail feathers.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -714,7 +796,7 @@ Creature: a magical blue jelly creature that transforms a lot as it grows, from 
 Distinctive features kept at every stage: translucent glossy blue jelly with white highlights, the same big round shiny eyes, a little bubble motif; every detail stays attached to the body (nothing floating free).
 
 Top row, left to right, happy expression:
-1. Baby: a tiny blue jelly droplet with big eyes and a single bubble stuck on top of its head like a hat. Tiny and round, about 45% of the cell height. Pose: sitting.
+1. Baby: a tiny blue jelly droplet with big eyes and a single bubble stuck on top of its head like a hat. Tiny, about 45% of the cell height. Pose: sitting.
 2. Young: a round jelly ball that has grown two little nub arms and a curly jelly antenna ending in a glowing bubble. About 60% of the cell height. Pose: wiggling.
 3. Grown: a taller jelly creature standing on two stubby jelly legs, with small pointed jelly ears, a splash-shaped crest on its head and tiny glowing fish and stars suspended inside its translucent belly. About 72% of the cell height. Pose: bouncy pose, leaning to one side.
 4. Super: a majestic jelly guardian shaped like a living fountain: layered translucent body, a crown of frozen golden water splashes, a glowing gem core in its chest and a cape of flowing jelly drips behind it. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, standing tall.
@@ -723,6 +805,10 @@ Camera: like the style reference, every creature is turned about 30 degrees to t
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
 
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
+
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
 No falling tears, no extra props.
@@ -730,6 +816,9 @@ No falling tears, no extra props.
 The four stages must clearly be the same creature growing up. Keep the worn details (bell, scarf, hat…)
 drawn on the creature itself.
 ```
+
+### Conversation 5 : fond bleu nuit (joindre `gabarit.png`)
+
 #### Champignouf (Rare, sautille)
 Enregistrer sous `assets-src/planches/champignouf.png`.
 
@@ -739,14 +828,18 @@ Creature: a little mushroom creature from the forest. Main colours: raspberry, c
 Distinctive features kept at every stage: raspberry cap with cream dots, cream stem body.
 
 Top row, left to right, happy expression:
-1. Baby: a mushroom button with two eyes. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: dotted cap, little feet. About 60% of the cell height. Pose: mid-hop.
-3. Grown: wider cap with a leaf on top. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: big cap with glowing dots. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a mushroom button: a wide domed cap on a tiny stem, two eyes peeking from under the cap. Tiny, about 45% of the cell height. Pose: standing.
+2. Young: dotted cap, little feet. About 60% of the cell height. Pose: hopping.
+3. Grown: wider cap with a leaf on top. About 72% of the cell height. Pose: dancing, one foot up.
+4. Super: big cap with glowing dots. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, giant glowing cap.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -765,14 +858,18 @@ Creature: a cat made of cloud. Main colours: white, sky blue, pink.
 Distinctive features kept at every stage: cloud body, pink cheeks, swirl-shaped tail.
 
 Top row, left to right, happy expression:
-1. Baby: a little cloud with cat ears. Tiny and round, about 45% of the cell height. Pose: floating.
-2. Young: swirl-shaped tail. About 60% of the cell height. Pose: floating, slightly tilted.
-3. Grown: cloud body, pink cheeks. About 72% of the cell height. Pose: floating, curled up playfully.
-4. Super: big cloud cat with a mini rainbow on its back. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose.
+1. Baby: a little cloud puff with two cat ears on top and a curly wisp tail. Tiny, about 45% of the cell height. Pose: floating.
+2. Young: swirl-shaped tail. About 60% of the cell height. Pose: floating, tilted.
+3. Grown: cloud body, pink cheeks. About 72% of the cell height. Pose: stretching like a cat in the air.
+4. Super: big cloud cat with a mini rainbow on its back. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose, mini rainbow on its back.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -792,14 +889,18 @@ Creature: a frog with a water lily on its head. Main colours: green, pink, white
 Distinctive features kept at every stage: pink water lily on the head, green skin.
 
 Top row, left to right, happy expression:
-1. Baby: a tadpole with a flower bud. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: frog with a closed flower. About 60% of the cell height. Pose: mid-hop.
-3. Grown: half-open flower. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: fully bloomed water lily worn like a hat. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a tadpole with a long wiggly tail and a closed flower bud on its head. Tiny, about 45% of the cell height. Pose: floating.
+2. Young: frog with a closed flower. About 60% of the cell height. Pose: jumping, legs stretched.
+3. Grown: half-open flower. About 72% of the cell height. Pose: sitting, half-open flower.
+4. Super: fully bloomed water lily worn like a hat. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, water lily hat in full bloom.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -818,14 +919,18 @@ Creature: a little living desert cactus. Main colours: sage green, yellow, sand.
 Distinctive features kept at every stage: soft spines, sandy clay pot.
 
 Top row, left to right, happy expression:
-1. Baby: a small round cactus in a pot. Tiny and round, about 45% of the cell height. Pose: sitting.
+1. Baby: a small round cactus in a clay pot with two tiny stubby arms raised up. Tiny, about 45% of the cell height. Pose: standing in its pot.
 2. Young: growing arms. About 60% of the cell height. Pose: wiggling.
-3. Grown: taller, soft spines. About 72% of the cell height. Pose: bouncy pose, leaning to one side.
-4. Super: big yellow flower on its head. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, standing tall.
+3. Grown: taller, soft spines. About 72% of the cell height. Pose: arms wide open.
+4. Super: big yellow flower on its head. About 82% of the cell height, most impressive form, still cute. Pose: standing tall, big yellow flower on top.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -844,14 +949,18 @@ Creature: a glowing jellyfish of the night sea. Main colours: lilac, pink, pearl
 Distinctive features kept at every stage: lilac bell, glowing tentacles.
 
 Top row, left to right, happy expression:
-1. Baby: a small lilac bell. Tiny and round, about 45% of the cell height. Pose: floating upright.
-2. Young: three little tentacles. About 60% of the cell height. Pose: swimming.
-3. Grown: wavy glowing tentacles. About 72% of the cell height. Pose: playful twirl.
-4. Super: a dress of glowing tentacles. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, fins or limbs spread.
+1. Baby: a small lilac bell with three short tentacles hanging below, like a little lamp. Tiny, about 45% of the cell height. Pose: floating.
+2. Young: three little tentacles. About 60% of the cell height. Pose: swimming upward.
+3. Grown: wavy glowing tentacles. About 72% of the cell height. Pose: twirling, wavy tentacles.
+4. Super: a dress of glowing tentacles. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, dress of glowing tentacles.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -873,14 +982,18 @@ Creature: a turtle whose shell is a crystal rock. Main colours: grey, moss green
 Distinctive features kept at every stage: rock shell with moss, violet crystals.
 
 Top row, left to right, happy expression:
-1. Baby: a pebble with two eyes. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: head and legs poking out. About 60% of the cell height. Pose: walking.
-3. Grown: mossy shell. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: shell bristling with violet crystals. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a flat pebble with only two eyes and four tiny feet peeking out underneath. Tiny, about 45% of the cell height. Pose: resting.
+2. Young: head and legs poking out. About 60% of the cell height. Pose: walking, head out.
+3. Grown: mossy shell. About 72% of the cell height. Pose: standing tall, mossy shell.
+4. Super: shell bristling with violet crystals. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, crystal spikes on its shell.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -899,14 +1012,18 @@ Creature: a polar bear in ice armour. Main colours: white, glacier blue, silver.
 Distinctive features kept at every stage: ice crystal on the forehead, ice armour plates.
 
 Top row, left to right, happy expression:
-1. Baby: a white cub with a crystal on its forehead. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: frost plates on the shoulders. About 60% of the cell height. Pose: walking.
-3. Grown: ice shoulder pads, crystal claws. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: full ice armour, crown of frozen spikes. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a round white bear cub with a pointed ice crystal standing up on its forehead. Tiny, about 45% of the cell height. Pose: sitting.
+2. Young: frost plates on the shoulders. About 60% of the cell height. Pose: walking on all fours.
+3. Grown: ice shoulder pads, crystal claws. About 72% of the cell height. Pose: standing on its hind legs, ice shoulder pads.
+4. Super: full ice armour, crown of frozen spikes. About 82% of the cell height, most impressive form, still cute. Pose: proud stance in full ice armour.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -925,14 +1042,18 @@ Creature: a deer with faceted crystal antlers. Main colours: pink, crystal blue,
 Distinctive features kept at every stage: faceted crystal antlers, white coat.
 
 Top row, left to right, happy expression:
-1. Baby: a white fawn with two small crystal points. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: two-branch crystal antlers. About 60% of the cell height. Pose: mid-hop.
-3. Grown: faceted antlers reflecting the light. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: huge prismatic antlers, crystal hooves. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a fawn on long thin legs with two small crystal points, standing alert, big ears. Tiny, about 45% of the cell height. Pose: standing.
+2. Young: two-branch crystal antlers. About 60% of the cell height. Pose: leaping.
+3. Grown: faceted antlers reflecting the light. About 72% of the cell height. Pose: standing, head turned.
+4. Super: huge prismatic antlers, crystal hooves. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, huge prismatic antlers.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -951,14 +1072,18 @@ Creature: a unicorn in pearly armour with aurora colours. Main colours: mint gre
 Distinctive features kept at every stage: aurora gradient mane, spiral horn, pearly armour.
 
 Top row, left to right, happy expression:
-1. Baby: a round filly with a mini horn. Tiny and round, about 45% of the cell height. Pose: floating.
-2. Young: wavy gradient mane. About 60% of the cell height. Pose: floating, slightly tilted.
-3. Grown: glowing spiral horn, pearly chest plate. About 72% of the cell height. Pose: floating, curled up playfully.
-4. Super: immense aurora mane, crystal horn, pearly armour. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose.
+1. Baby: a chubby filly floating with its legs tucked under it, a mini spiral horn and a short wavy aurora mane. Tiny, about 45% of the cell height. Pose: floating, legs tucked.
+2. Young: wavy gradient mane. About 60% of the cell height. Pose: floating, galloping in the air.
+3. Grown: glowing spiral horn, pearly chest plate. About 72% of the cell height. Pose: rearing up.
+4. Super: immense aurora mane, crystal horn, pearly armour. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose, immense aurora mane.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -978,14 +1103,18 @@ Creature: a fire bird reborn from the sun. Main colours: gold, orange, red.
 Distinctive features kept at every stage: flame feathers, crown of flames.
 
 Top row, left to right, happy expression:
-1. Baby: a golden chick with a small flame on its head. Tiny and round, about 45% of the cell height. Pose: sitting, wings folded.
-2. Young: flame feathers. About 60% of the cell height. Pose: hopping with wings half open.
-3. Grown: long fire tail. About 72% of the cell height. Pose: hovering, wings spread.
-4. Super: sun wings spread wide, crown of flames, fan-shaped tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, wings fully spread.
+1. Baby: a golden chick with a big torch-like flame crest on its head and stubby wings. Tiny, about 45% of the cell height. Pose: sitting.
+2. Young: flame feathers. About 60% of the cell height. Pose: hopping, wings half open.
+3. Grown: long fire tail. About 72% of the cell height. Pose: flying, fire tail.
+4. Super: sun wings spread wide, crown of flames, fan-shaped tail. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, sun wings spread.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -1006,14 +1135,18 @@ Creature: a fox with nine tails of cold flames. Main colours: pearly white, turq
 Distinctive features kept at every stage: turquoise flame tail tips, golden forehead marks.
 
 Top row, left to right, happy expression:
-1. Baby: a white fox cub with a single tail. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: three tails with turquoise tips. About 60% of the cell height. Pose: mid-hop.
-3. Grown: six tails, golden marks on the forehead. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: nine tails fanned out like cold flames, golden marks. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a white fox cub curled around its single huge fluffy tail with a turquoise tip. Tiny, about 45% of the cell height. Pose: curled around its tail.
+2. Young: three tails with turquoise tips. About 60% of the cell height. Pose: mid-hop, three tails.
+3. Grown: six tails, golden marks on the forehead. About 72% of the cell height. Pose: standing, six tails fanned.
+4. Super: nine tails fanned out like cold flames, golden marks. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, nine tails in a fan.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -1076,14 +1209,18 @@ Creature: an ice-floe penguin in a tuxedo. Main colours: black, white, orange.
 Distinctive features kept at every stage: tuxedo pattern, orange bill, orange patch on the neck.
 
 Top row, left to right, happy expression:
-1. Baby: a round grey fluff ball. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: orange bill, white belly. About 60% of the cell height. Pose: walking.
-3. Grown: neat tuxedo, orange patch on the neck. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: big penguin wearing a red scarf. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a grey fluffy penguin chick shaped like a tall bowling pin with tiny flippers held out. Tiny, about 45% of the cell height. Pose: standing.
+2. Young: orange bill, white belly. About 60% of the cell height. Pose: waddling.
+3. Grown: neat tuxedo, orange patch on the neck. About 72% of the cell height. Pose: sliding on its belly.
+4. Super: big penguin wearing a red scarf. About 82% of the cell height, most impressive form, still cute. Pose: standing tall with a red scarf.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -1102,14 +1239,18 @@ Creature: a round firefly with a lantern tail. Main colours: light yellow, midni
 Distinctive features kept at every stage: glowing lantern tail, transparent wings.
 
 Top row, left to right, happy expression:
-1. Baby: a small ball with a single glowing dot. Tiny and round, about 45% of the cell height. Pose: sitting, wings folded.
-2. Young: transparent wings. About 60% of the cell height. Pose: hopping with wings half open.
-3. Grown: glowing lantern tail. About 72% of the cell height. Pose: hovering, wings spread.
-4. Super: dazzling lantern, glittering wings. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, wings fully spread.
+1. Baby: a tiny round firefly with a glowing bulb tail bigger than its head and two thin curly antennae. Tiny, about 45% of the cell height. Pose: sitting.
+2. Young: transparent wings. About 60% of the cell height. Pose: hovering.
+3. Grown: glowing lantern tail. About 72% of the cell height. Pose: flying.
+4. Super: dazzling lantern, glittering wings. About 82% of the cell height, most impressive form, still cute. Pose: majestic pose, glittering wings spread.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -1128,14 +1269,18 @@ Creature: a lion whose mane is made of embers. Main colours: red, orange, charco
 Distinctive features kept at every stage: ember mane, glowing paw tips, charcoal fur.
 
 Top row, left to right, happy expression:
-1. Baby: a charcoal cub with one ember lock on its head. Tiny and round, about 45% of the cell height. Pose: sitting on its bottom.
-2. Young: mane of small flames, glowing paw tips. About 60% of the cell height. Pose: walking.
-3. Grown: blazing mane, lava cracks on the legs. About 72% of the cell height. Pose: standing, one front paw raised.
-4. Super: huge fire mane, black rock chest plate. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance.
+1. Baby: a charcoal lion cub with one tall ember flame on top of its head like a candle. Tiny, about 45% of the cell height. Pose: sitting.
+2. Young: mane of small flames, glowing paw tips. About 60% of the cell height. Pose: walking, small flame mane.
+3. Grown: blazing mane, lava cracks on the legs. About 72% of the cell height. Pose: roaring, blazing mane.
+4. Super: huge fire mane, black rock chest plate. About 82% of the cell height, most impressive form, still cute. Pose: proud powerful stance, huge fire mane.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -1154,14 +1299,18 @@ Creature: an owl whose feathers draw constellations. Main colours: violet, gold,
 Distinctive features kept at every stage: golden stars linked by thin golden lines.
 
 Top row, left to right, happy expression:
-1. Baby: a violet ball dotted with three golden stars. Tiny and round, about 45% of the cell height. Pose: floating.
-2. Young: stars linked by golden lines on the belly. About 60% of the cell height. Pose: floating, slightly tilted.
-3. Grown: constellation wings. About 72% of the cell height. Pose: floating, curled up playfully.
-4. Super: large wings covered in constellations, star-shaped ear tufts. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose.
+1. Baby: a violet ball with a crescent-moon shaped tuft on its head and three golden stars on its belly. Tiny, about 45% of the cell height. Pose: floating.
+2. Young: stars linked by golden lines on the belly. About 60% of the cell height. Pose: floating, tilted.
+3. Grown: constellation wings. About 72% of the cell height. Pose: wings half open.
+4. Super: large wings covered in constellations, star-shaped ear tufts. About 82% of the cell height, most impressive form, still cute. Pose: majestic floating pose, constellation wings spread.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.
@@ -1181,14 +1330,18 @@ Creature: a silver wolf carrying the moon on its forehead. Main colours: silver 
 Distinctive features kept at every stage: golden crescent moon on the forehead, midnight blue mane.
 
 Top row, left to right, happy expression:
-1. Baby: a round wolf cub with a thin golden crescent. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: clearer crescent, silver fur. About 60% of the cell height. Pose: mid-hop.
-3. Grown: long fur, midnight blue mane. About 72% of the cell height. Pose: standing on all fours, head slightly raised.
-4. Super: golden full moon on the forehead, glowing mane. About 82% of the cell height, most impressive form, still cute. Pose: proud standing pose, chest out.
+1. Baby: a wolf cub sitting and howling with its head raised to the sky, thin golden crescent on its forehead. Tiny, about 45% of the cell height. Pose: sitting, howling.
+2. Young: clearer crescent, silver fur. About 60% of the cell height. Pose: running.
+3. Grown: long fur, midnight blue mane. About 72% of the cell height. Pose: standing, long fur.
+4. Super: golden full moon on the forehead, glowing mane. About 82% of the cell height, most impressive form, still cute. Pose: proud stance, glowing full moon on its forehead.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
 It may look anywhere, but never more turned than 30 degrees: no side profile, never seen from behind.
+
+Silhouette: each of the 4 stages has a clearly different shape, and the Baby has a silhouette that no other creature
+of the game shares (exaggerate its signature feature). If the creature was filled in solid black, it should still be
+easy to recognise.
 
 Bottom row: exactly the same 4 creatures, same order, same size, same pose and same position as the
 cell above, but sad: ears and shoulders drooping, teary glossy eyes, small pouting mouth.

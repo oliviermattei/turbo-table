@@ -39,6 +39,16 @@
       "petit-triste",
       "grand-triste",
       "super-triste"
+    ],
+    "slime": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
     ]
   },
   "legendaryEggs": [],
