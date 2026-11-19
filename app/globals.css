@@ -358,3 +358,15 @@ button.bestc{cursor:pointer}
 @media (prefers-reduced-motion:reduce){.crea-mover,.crea-breath{animation:none!important}}
 .sub .rar{display:inline;margin-left:2px}
 .nav.four{grid-template-columns:repeat(4,1fr)}
+
+/* Badges: one tile per badge, coloured by quality */
+.bgrid2{display:grid;grid-template-columns:repeat(auto-fill,minmax(100px,1fr));gap:8px;margin-bottom:8px}
+.badge2{border-radius:18px;padding:10px 6px;text-align:center;display:flex;flex-direction:column;align-items:center;gap:2px;background:rgba(255,255,255,.06);border:2px solid transparent}
+.badge2 .e{font-size:34px;line-height:1.1}
+.badge2 b{font-size:14px}
+.badge2 small{font-size:11px;opacity:.8;line-height:1.2}
+.badge2 .bprog{width:100%;margin-top:4px}
+.badge2.on{background:linear-gradient(160deg,color-mix(in srgb,var(--rc) 55%,transparent),color-mix(in srgb,var(--rc) 20%,transparent));border-color:var(--rc)}
+.badge2.off .e{filter:grayscale(1);opacity:.35}
+.badge2.off b{opacity:.6}
+.badge2.r-legendaire{animation:glow 2.4s ease-in-out infinite}

@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import type { CSSProperties, ReactNode } from 'react';
-import { famProgress, levelInfo, RARITY, rarityFor, ROMAN, type Badge, type Family, type Stats } from '@/lib/game/rules';
+import { levelInfo, RARITY, type Badge } from '@/lib/game/rules';
 import type { Rarity } from '@/lib/game/types';
 
 /** Rarity colour as the --rc CSS variable */
@@ -60,34 +60,6 @@ export function BadgeLine({ b, pr }: { b: Badge; pr?: { pct: number; v: number; 
         <small>{b.d}</small>
         {pr && <><Progress pct={pr.pct} /><span className="bnum">{pr.v} / {pr.goal}</span></>}
       </div>
-    </div>
-  );
-}
-
-export function FamCard({ f, st, got }: { f: Family; st: Stats; got: Set<string> }) {
-  const pr = famProgress(f, st);
-  const r = pr.tier >= 0 ? rarityFor(pr.tier, f.goals.length) : null;
-  return (
-    <div className={'fcard ' + (r ? 'r-' + r : 'none')} style={rc(r ? RARITY[r].c : 'transparent')}>
-      <div className="fhead">
-        <span className="fe">{f.table ? <span className="tnum">{f.table}</span> : f.e}</span>
-        <div>
-          <b>{r ? `${f.n}${f.table ? ' · ' : ' '}${ROMAN[pr.tier]}` : f.n}</b>
-          {r ? <RarLabel r={r} /> : <span className="rar" style={{ opacity: 0.6 }}>Pas encore</span>}
-        </div>
-      </div>
-      <div className="dots">
-        {f.goals.map((_, i) => (
-          <i key={i} className="dot" style={got.has(f.id + ':' + i) ? { background: RARITY[rarityFor(i, f.goals.length)].c } : undefined} />
-        ))}
-      </div>
-      {pr.done ? <small className="fnext">Tout gagné ! 🎉</small> : (
-        <>
-          <small className="fnext">Prochain : {f.d(pr.goal)} <RarLabel r={rarityFor(pr.i, f.goals.length)} /></small>
-          <Progress pct={pr.pct} />
-          <span className="bnum">{pr.v} / {pr.goal}</span>
-        </>
-      )}
     </div>
   );
 }

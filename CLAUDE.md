@@ -19,7 +19,7 @@ Le père de l'enfant (développeur) pilote le projet. Il valide les choix de con
 - **Clavier sur ordinateur.** Les touches 1 à 4 choisissent une réponse.
 - **Textes.** Français simple, adapté à un enfant de 8 ans, phrases courtes, tutoiement.
 - **Format.** Application Next.js + serveur, hébergée sur Coolify. Elle n'est pas encore une PWA.
-- **Stack.** Next.js + React pour tous les écrans (menus, boutique, bestiaire…). Pas de moteur de jeu pour l'interface. Pour animer les créatures et les œufs, on ajoutera une scène ciblée (Rive ou PixiJS, à choisir à l'étape compagnon).
+- **Stack.** Next.js + React pour tous les écrans (menus, boutique, bestiaire…). Pas de moteur de jeu pour l'interface. Les créatures et les œufs sont des images fixes animées en CSS seul (ni Rive ni PixiJS).
 - **Visuels.** Une image par espèce × stade. L'humeur, le halo légendaire, l'effet shiny et les accessoires sont des calques ou des animations par-dessus, pas des images séparées.
 
 ## 2. Ce qui existe aujourd'hui
@@ -45,7 +45,7 @@ Le père de l'enfant (développeur) pilote le projet. Il valide les choix de con
   - Entraînement : 2 × bonnes réponses.
   - Examen réussi : 20 + 10 × mention.
   - Examen raté : nombre de bonnes réponses, plafonné à 20.
-- **149 badges avec 4 qualités.** Les qualités sont Normal (gris `#cbd5e1`), Rare (bleu `#3b82f6`), Épique (violet `#a855f7`) et Légendaire (orange `#f59e0b`). Les badges se répartissent ainsi :
+- **149 badges avec 5 qualités**, les mêmes que les créatures : Commun (gris `#cbd5e1`), Peu commun (vert `#22c55e`), Rare (bleu `#3b82f6`), Épique (violet `#a855f7`) et Légendaire (orange `#f59e0b`). La page Badges montre une vignette par badge, regroupées par qualité, au fond de la couleur de la qualité. Les badges se répartissent ainsi :
   - 14 familles de défis à paliers (`FAMILIES`), numérotés en chiffres romains I à VII ;
   - 10 familles « Table de N », selon les bonnes réponses dans cette table (25, 100, 250, 500, 1000) ;
   - 10 badges secrets (`SECRETS`), affichés en « ❓ » avec seulement leur qualité.
@@ -91,178 +91,30 @@ Le CSS est celui de l'artifact, dans `app/globals.css`. Avec `cacheComponents`, 
 
 ---
 
-## 4. PROCHAINE ÉTAPE : œuf et bestiaire (type Tamagotchi)
+## 4. Compagnon, œufs et bestiaire (construit)
 
-Le but est de garder l'enfant motivé pendant des semaines ou des mois. Ses parties lui font gagner des pièces. Avec ces pièces, il s'occupe d'une créature sortie d'un œuf, et il collectionne tout un bestiaire.
+Les parties rapportent des pièces. Avec ces pièces, l'enfant s'occupe d'une créature sortie d'un œuf et collectionne un bestiaire.
+Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.md`. Bestiaire choisi : `docs/Bestiaire.md`.
 
-> **Mis à jour le 2026-11-19 :** les décisions de `docs/assets/inventaire.md` (5 qualités, coffre, 4 stades, besoins Faim/Joie/Énergie, pas de créature en partie ni d'accessoires, animations en CSS seul au lieu de Rive/PixiJS) **remplacent cette section là où elles diffèrent**. Vocabulaire : `GLOSSARY.md`.
+### Règles (`lib/pet/rules.ts`, fonctions pures testées dans `pet.test.ts`)
+- **Pièces** : recalculées depuis l'historique (partie : bonnes réponses + 5 × étoiles ; examen réussi : 10 + 10 × mention ; badge selon sa qualité ; 20 par niveau) + doublons. Seul le dépensé est stocké.
+- **Coffres** : tout nouvel œuf arrive dans un coffre (premier coffre offert, 4 % des parties normales ou 8 % avec 3 étoiles, tirage déduit de `game.id` ; badge Épique → œuf ≥ Rare ; Légendaire → ≥ Épique ; boutique 800 🪙 ; filet de sécurité après 10 jours de jeu sans œuf).
+- **Œufs** : un œuf par qualité de Commun à Épique, un œuf propre à chaque Légendaire. Éclosion après 50 / 100 / 150 / 250 / 400 bonnes réponses. Une espèce n'éclot que si ses images existent (`lib/pet/assets.json`). Doublon → pièces.
+- **Besoins** Faim / Joie / Énergie, baisse calculée à l'ouverture. Humeur = moyenne (≥ 60 content, < 30 triste). Triste = image triste et **évolution bloquée**. Jamais perdu.
+- **Évolution** : 1 XP par bonne réponse si actif et pas triste. Stades Bébé / Petit / Grand / Super à 0 / 150 / 600 / 1500. Scène d'évolution de 5 s au toucher.
+- **Boutique** : nourriture, jouets, coffre. Dormir est gratuit.
 
-### 4.1 Questions encore ouvertes (à poser au père avant de construire)
+### Écrans
+`/compagnon`, `/nid`, `/boutique`, `/bestiaire`, `/refuge`, carte Compagnon sur l'accueil, pièces / coffre / œuf en fin de partie. Composants : `components/pet.tsx` (créature animée en CSS), `components/pet-scenes.tsx` (coffre, éclosion, évolution).
+La créature n'apparaît jamais pendant une partie.
 
-1. **Absence de plusieurs jours.**
-   - **Par défaut conseillé :** la créature devient triste mais n'est jamais perdue.
-   - Autres options : elle peut s'enfuir, ou rien ne baisse.
-2. **Style des créatures.**
-   - **Par défaut conseillé :** animaux emoji.
-   - Autre option : créatures inventées et dessinées en SVG.
-3. **Fréquence des nouveaux œufs.**
-   - **Par défaut conseillé :** environ 1 par semaine en jouant tous les jours.
-   - Autres options : 1 tous les 2-3 jours, ou 1 par mois.
+### Stockage
+Document `pet` (`lib/pet/types.ts`) : table `docs` côté serveur (validé par `cleanPet`), `tt_pet` en local. Le plus récent (`updatedAt`) gagne à la synchro.
 
-Le reste du plan ci-dessous suit les choix par défaut.
-
-### 4.2 Pièces 🪙
-
-Gains :
-- **Partie :** 1 pièce par bonne réponse, plus 5 par étoile.
-- **Examen réussi :** 20, 30 ou 40 selon la mention.
-- **Nouveau badge, selon sa qualité :** Normal 5, Rare 15, Épique 40, Légendaire 100.
-- **Passage de niveau :** 20.
-
-Repère : 4 parties de 60 s par jour rapportent environ **100 pièces par jour**.
-
-**Le solde se calcule ainsi : `gagné − dépensé`.**
-- Le « gagné » se recalcule à partir de l'historique et des badges, comme l'XP.
-- Seul le total dépensé est stocké, dans l'état du compagnon.
-
-### 4.3 Œufs 🥚
-
-- **Premier œuf** offert dès l'ouverture de l'écran Compagnon.
-- **Un seul œuf couve à la fois.** Il éclot après un nombre de bonnes réponses qui dépend de sa qualité (barre d'éclosion visible sur l'accueil et en fin de partie) :
-
-  | Qualité de l'œuf | Bonnes réponses pour éclore |
-  |---|---|
-  | Normal | 50 |
-  | Rare | 100 |
-  | Épique | 200 |
-  | Légendaire | 400 |
-
-- **Le nid.** Les autres œufs attendent leur tour. L'enfant choisit lequel mettre à couver.
-- **Comment on obtient un nouvel œuf :**
-  - **En fin de partie normale :** 4 % de chance, ou 8 % avec 3 étoiles. Cela fait environ 1 œuf par semaine avec 4 parties par jour.
-  - **Avec un badge Épique :** un œuf au moins Rare.
-  - **Avec un badge Légendaire :** un œuf au moins Épique.
-  - **En boutique :** 800 🪙.
-  - **Filet de sécurité :** un œuf garanti s'il n'en a reçu aucun depuis 10 jours de jeu.
-- **Qualité d'un œuf tiré au hasard :** Normal 60 %, Rare 28 %, Épique 10 %, Légendaire 2 %.
-- **Créature qui sort de l'œuf :** une espèce de la qualité de l'œuf. On choisit en priorité une espèce pas encore possédée, dans 80 % des cas.
-- **Astuce pour les chances en fin de partie :** le tirage peut se déduire de l'identifiant de la partie (par exemple un hachage de `game.id` comparé au pourcentage). Ce tirage peut se recalculer et ne se triche pas en rechargeant la page. Il faut quand même enregistrer les œufs reçus dans l'état (voir 4.8).
-- **Mises en scène :**
-  - œuf qui arrive : il tombe et rebondit ;
-  - éclosion : l'œuf se secoue, se fissure, puis la créature apparaît avec la couleur de sa qualité et des confettis.
-
-### 4.4 Bestiaire 📖 (34 espèces, emoji)
-
-| Qualité | Espèces |
-|---|---|
-| Normal (12) | 🐶 Chiot, 🐱 Chaton, 🐹 Hamster, 🐰 Lapinou, 🐥 Poussin, 🐸 Grenouille, 🐢 Tortue, 🐟 Poisson, 🐌 Escargot, 🐞 Coccinelle, 🐷 Cochon, 🐮 Veau |
-| Rare (10) | 🦊 Renard, 🐼 Panda, 🐨 Koala, 🦉 Hibou, 🐧 Pingouin, 🦔 Hérisson, 🐬 Dauphin, 🦜 Perroquet, 🦦 Loutre, 🐙 Pieuvre |
-| Épique (7) | 🦁 Lion, 🐯 Tigre, 🐺 Loup, 🦅 Aigle, 🦈 Requin, 🦖 T-Rex, 🐊 Crocodile |
-| Légendaire (5) | 🐉 Dragon, 🦄 Licorne, 🐲 Dragon de jade, 🦚 Paon royal, 🐋 Baleine céleste |
-
-- **Page Bestiaire :** une grille par qualité. Les espèces pas encore trouvées apparaissent en silhouette grise avec « ❓ ». Un compteur indique le total trouvé (par exemple « 12 / 34 »).
-- **Nom :** l'enfant peut renommer chaque créature.
-- **Doublons :** une espèce déjà possédée peut ressortir. Le double se transforme en pièces (25, 60, 150 ou 400 selon la qualité) ou en un accessoire.
-
-### 4.5 Compagnon et besoins 🍎💧😊
-
-- **Un seul compagnon actif à la fois.** Les autres créatures se reposent au « Refuge ». Leurs besoins sont figés : pas de corvée multipliée.
-- **Trois jauges de 0 à 100 :**
-
-  | Jauge | Baisse |
-  |---|---|
-  | Faim | −1 toutes les 30 min (environ 2 jours de 100 à 0) |
-  | Soif | −1 toutes les 25 min |
-  | Joie | −1 toutes les 40 min, +5 à chaque partie jouée |
-
-- **Pas de minuterie en arrière-plan.** La baisse se calcule à l'ouverture de la page, à partir de `lastTick`.
-- **Humeur, d'après la moyenne des jauges :**
-
-  | Moyenne | Humeur |
-  |---|---|
-  | ≥ 60 | 😄 content : il saute de joie à chaque bonne réponse |
-  | 30 à 60 | 😐 bof |
-  | < 30 | 😢 triste : il ne grandit plus |
-
-  Il n'est **jamais perdu**. Il retrouve sa forme dès qu'on s'en occupe.
-- **Pendant la partie,** le compagnon apparaît en petit dans un coin. Il saute sur une bonne réponse et fait une petite moue sur une erreur.
-- **Sur l'accueil,** une carte Compagnon montre la créature animée, les 3 jauges et un bouton « S'occuper de lui ».
-
-### 4.6 Évolution 🌱
-
-- **XP du compagnon :** chaque bonne réponse lui donne 1 XP, seulement s'il est actif et pas triste.
-- **Les trois stades :**
-
-  | Stade | XP nécessaire | Affichage |
-  |---|---|---|
-  | Bébé | 0 | petit, avec 🍼 |
-  | Jeune | 300 | taille moyenne |
-  | Adulte | 1 000 | grande taille, halo de la couleur de sa qualité |
-
-- **Badges à prévoir :** des familles « Soigneur » (nombre de soins donnés), « Collectionneur » (espèces trouvées) et « Éleveur » (créatures adultes).
-
-### 4.7 Boutique 🛒
-
-| Onglet | Objet | Prix | Effet |
-|---|---|---|---|
-| Nourriture | 🍎 Pomme | 10 | Faim +20 |
-| | 🥪 Sandwich | 25 | Faim +50 |
-| | 🎂 Gâteau | 60 | Faim +100, Joie +10 |
-| Boissons | 💧 Eau | 8 | Soif +25 |
-| | 🧃 Jus | 20 | Soif +60 |
-| | 🥤 Smoothie | 45 | Soif +100, Joie +10 |
-| Jouets | ⚽ Balle | 30 | Joie +30 |
-| | 🧸 Peluche | 80 | Joie +70 |
-| | 🎮 Console | 200 | Joie +100 |
-| Accessoires (permanents) | 🧢 Casquette | 120 | — |
-| | 🕶️ Lunettes | 150 | — |
-| | 🎀 Nœud | 150 | — |
-| | 🎩 Chapeau | 250 | — |
-| | 👑 Couronne | 500 | — |
-| Œufs | 🥚 Œuf mystère | 800 | — |
-
-- **Inventaire :** les objets achetés y vont. On les donne au compagnon en les touchant.
-- **Accessoires :** ils s'affichent au-dessus de l'emoji, et chaque créature peut porter les siens.
-
-### 4.8 État à stocker (document `pet`)
-
-```
-{
-  spent: 0,                        // pièces dépensées (le gain se recalcule)
-  inventory: { pomme: 2, eau: 1 },
-  accessoriesOwned: ['casquette'],
-  eggs: [ { id, rarity, source: 'start'|'drop'|'badge'|'shop'|'pity', gotAt, incubating: false, startCorrect } ],
-  grantedBadgeEggs: ['serie:4'],   // pour ne donner qu'une seule fois l'œuf d'un badge
-  lastEggAt: ts,                   // pour le filet de sécurité de 10 jours
-  creatures: [ { id, species, name, rarity, bornAt, petXp, stage, needs: { faim, soif, joie }, lastTick, wearing: [] } ],
-  activeId,
-  careCount: 0
-}
-```
-
-- **Serveur :** document `pet` dans la table `docs` (ajouter son validateur dans `DOCS`, `app/api/docs/[name]/route.ts`) et le renvoyer dans `GET /api/state`.
-- **Appareil :** clé `tt_pet` dans `localStorage`.
-- **Écritures :** une seule à la fois sur ce document (attendre chaque `set`). On écrit seulement après une vraie action : soin, achat, éclosion, fin de partie.
-
-### 4.9 Écrans à ajouter
-
-1. **Carte Compagnon sur l'accueil.** Elle remplace ou complète la carte joueur.
-2. **Écran Compagnon.** Créature en grand, jauges, inventaire, et boutons Boutique, Nid, Refuge et Bestiaire.
-3. **Boutique.** Avec des onglets.
-4. **Nid.** Les œufs en attente et l'œuf qui couve, avec sa progression.
-5. **Bestiaire.**
-6. **Fin de partie.** Ajouter « +X 🪙 », la progression de l'œuf, et les animations d'œuf trouvé ou d'éclosion.
-
-### 4.10 Ordre de construction conseillé
-
-1. Pièces : calcul du gain, état `pet`, affichage du solde.
-2. Premier œuf, couvaison, éclosion, compagnon actif.
-3. Jauges, baisse avec le temps, boutique (nourriture, boissons, jouets), inventaire.
-4. Bestiaire et nouveaux œufs (fin de partie, badges, boutique, filet de sécurité).
-5. Évolution, accessoires et refuge.
-6. Nouveaux badges liés aux créatures.
-
----
+### Ajouter une espèce
+1. Générer sa planche avec le prompt de `docs/assets/brief-production.md` (section 10).
+2. La déposer en `assets-src/planches/<slug>.png` (slug = id dans `lib/pet/species.ts`).
+3. `pnpm assets` : découpe en `public/creatures/<slug>/` et met à jour `lib/pet/assets.json`. L'espèce peut alors éclore.
 
 ## 5. Autres idées pour le garder motivé sur la durée
 
@@ -286,4 +138,4 @@ Repère : 4 parties de 60 s par jour rapportent environ **100 pièces par jour**
   - jouer avec le clavier (touches 1 à 4) ou en lisant `.q` pour répondre juste ;
   - charger un faux historique avec `localStorage.setItem('tt_history', …)` ;
   - viser les éléments visibles (`.screen:visible`), à cause de `<Activity>`.
-- **Déploiement Coolify :** build pack Dockerfile, port 3000, volume persistant monté sur `/app/data`, variable `FAMILY_CODE`.
+- **Déploiement Coolify :** https://turbotable.olm.re (projet « Turbo Tables », dépôt `oliviermattei/turbo-table`, branche `main`). Build pack Dockerfile, port 3000, volume persistant monté sur `/app/data`, variable `FAMILY_CODE`.
