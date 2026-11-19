@@ -376,20 +376,23 @@ button.bestc{cursor:pointer}
 .debugcoins{border:2px dashed #ef4444;margin:8px 0}
 
 /* Home */
-.home-body{flex:1;display:flex;flex-direction:column;justify-content:center}
+.home-body{flex:1;display:flex;flex-direction:column;justify-content:center;padding:8px 0}
 .screen.home h1{margin:6px 0 10px}
 .top .coins{flex-shrink:0}
 .h2-gap{margin-top:14px}
-.hero{display:flex;align-items:center;gap:8px;text-decoration:none;color:inherit;margin-bottom:12px;padding:8px 14px 8px 4px;border-radius:24px;background:linear-gradient(135deg,rgba(250,204,21,.18),rgba(168,85,247,.18));box-shadow:inset 0 0 0 2px rgba(255,255,255,.12)}
-.hero-art{flex-shrink:0;width:150px;display:flex;justify-content:center}
-.hero-egg{height:130px}
-.hero-art .chestimg{height:110px}
-.hero-txt{flex:1;min-width:0;display:flex;flex-direction:column;gap:6px}
-.hero-name{font-size:20px}
+.hero{display:flex;flex-direction:column;align-items:center;gap:8px;text-decoration:none;color:inherit;margin-bottom:16px;padding:14px 16px 16px;border-radius:28px;background:radial-gradient(circle at 50% 55%,rgba(250,204,21,.22),rgba(168,85,247,.12) 60%,transparent 80%)}
+.hero-art{display:flex;justify-content:center}
+.hero-egg{height:180px}
+.hero-art .chestimg{height:150px}
+.hero-name{font-size:24px}
+.hero .needs{width:min(320px,90%)}
 .hero .need small{display:none}
 .hero .need{grid-template-columns:22px 1fr}
-.bubble-say{position:relative;background:#fff;color:var(--ink);border-radius:16px;padding:8px 12px;font-weight:600;font-size:15px;line-height:1.25}
-.bubble-say::before{content:"";position:absolute;left:-8px;top:50%;margin-top:-8px;border:8px solid transparent;border-left:0;border-right-color:#fff}
+.hero-bar{width:min(320px,90%)}
+.bubble-say{position:relative;background:#fff;color:var(--ink);border-radius:18px;padding:10px 16px;font-weight:600;font-size:17px;line-height:1.25;text-align:center;max-width:340px}
+.bubble-say::after{content:"";position:absolute;left:50%;bottom:-9px;margin-left:-9px;border:9px solid transparent;border-bottom:0;border-top-color:#fff}
+.big.play{font-size:34px;padding:18px}
+.navb.disabled{opacity:.4;cursor:default}
 .nav.four .navb .lb{font-size:13px}
 @media (min-width:700px){.app{max-width:600px}.hero-art{width:190px}}
 .bonus-line{margin-top:8px;color:var(--yellow);font-weight:600;font-size:15px}

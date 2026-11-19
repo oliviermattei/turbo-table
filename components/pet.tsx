@@ -126,20 +126,17 @@ export function CompanionHero() {
   const inc = pet && hatchProgress(pet, correct);
   const chests = pet?.eggs.filter(e => !e.opened).length ?? 0;
   return (
-    <Link href="/compagnon" className="hero">
+    <Link href={c ? '/compagnon' : '/nid'} className="hero">
+      <div className="bubble-say">
+        {c ? speech(c)
+          : inc ? (inc.ready ? 'Ton œuf va éclore ! Viens vite !' : `Encore ${inc.need - inc.done} bonnes réponses et ton œuf éclot !`)
+          : chests ? 'Un coffre t’attend ! Touche-le pour l’ouvrir 🎁' : 'Un compagnon t’attend ! 🥚'}
+      </div>
       <div className="hero-art">
-        {c ? <CreatureView c={c} size={150} /> : inc ? <EggImg e={inc.egg} className="eggimg hero-egg" /> : <ChestImg />}
+        {c ? <CreatureView c={c} size={190} /> : inc ? <EggImg e={inc.egg} className="eggimg hero-egg" /> : <ChestImg />}
       </div>
-      <div className="hero-txt">
-        {c ? (
-          <><div className="bubble-say">{speech(c)}</div><b className="hero-name">{c.name}</b><NeedBars n={c.needs} /></>
-        ) : inc ? (
-          <><div className="bubble-say">{inc.ready ? 'Ton œuf va éclore ! Viens vite !' : `Encore ${inc.need - inc.done} bonnes réponses et ton œuf éclot !`}</div>
-            <div className="xpbar"><div style={{ width: inc.pct + '%' }} /></div></>
-        ) : (
-          <div className="bubble-say">{chests ? 'Un coffre t’attend ! Touche ici pour l’ouvrir 🎁' : 'Un compagnon t’attend ! Touche ici 🥚'}</div>
-        )}
-      </div>
+      {c ? <><b className="hero-name">{c.name}</b><NeedBars n={c.needs} /></>
+        : inc ? <div className="xpbar hero-bar"><div style={{ width: inc.pct + '%' }} /></div> : null}
     </Link>
   );
 }

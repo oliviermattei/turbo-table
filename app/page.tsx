@@ -1,26 +1,18 @@
 'use client';
 import Link from 'next/link';
-import { useRouter } from 'next/navigation';
-import { useMemo, useState } from 'react';
+import { useMemo } from 'react';
 import { CompanionHero, Coins, DebugCoins, usePet } from '@/components/pet';
 import { PlayerCard } from '@/components/ui';
 import { useData } from '@/lib/data';
-import { playHref } from '@/lib/game/engine';
-import { ALL_BADGES, bestFor, computeStats, totalXp, unlocked } from '@/lib/game/rules';
+import { ALL_BADGES, computeStats, totalXp, unlocked } from '@/lib/game/rules';
 import { ensureAudio } from '@/lib/sound';
-
-const DURATIONS = [30, 60, 90, 120, 150, 180];
-const ALL = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10];
 
 export default function Home() {
   const d = useData();
   const { coins } = usePet();
-  const router = useRouter();
   const st = useMemo(() => computeStats(d.history), [d.history]);
-  const best = bestFor(d.history, d.duration);
   const n = d.history.length;
-  const [fake, setFake] = useState(false);
-  const toggle = (t: number) => d.setTables(d.tables.includes(t) ? d.tables.filter(x => x !== t) : [...d.tables, t]);
+  const chests = d.pet?.eggs.filter(e => !e.opened).length ?? 0;
 
   return (
     <section className="screen home">
@@ -30,47 +22,24 @@ export default function Home() {
       </div>
       {d.debug && <p className="debugbar">🐞 Mode test : rien n’est envoyé au serveur</p>}
       <div className="home-body">
-        <h1>Turbo <span>Tables</span></h1>
-        {n > 0 ? <CompanionHero /> : <p className="sub">Combien de bonnes réponses avant la fin du chrono ?</p>}
-
-        <div className="panel">
-          <h2>Quelles tables ?
-            <span className="links">
-              <button onClick={() => d.setTables(ALL)}>Toutes</button>
-              <button onClick={() => d.setTables([])}>Aucune</button>
-            </span>
-          </h2>
-          <div className="chips">
-            {ALL.map(t => (
-              <button key={t} className={'chip' + (d.tables.includes(t) ? ' on' : '')} onClick={() => toggle(t)}>
-                {t}{st.dips[t] && <span className="cap">🎓</span>}
-              </button>
-            ))}
-          </div>
-          <h2 className="h2-gap">Durée</h2>
-          <div className="row">
-            {DURATIONS.map(s => (
-              <button key={s} className={'chip' + (s === d.duration ? ' on' : '')} onClick={() => d.setDuration(s)}>{s} s</button>
-            ))}
-          </div>
-        </div>
-
-        <button className="big" disabled={!d.tables.length} onClick={() => { ensureAudio(); router.push(playHref({ mode: 'normal' }) + (fake ? '&fake=1' : '')); }}>
-          {"C'est parti !"}
-        </button>
-        {d.debug && (
-          <label className="debugbox">
-            <input type="checkbox" checked={fake} onChange={e => setFake(e.target.checked)} /> 🐞 Gagner tout de suite (super score, sans jouer)
-          </label>
+        {n > 0 ? <CompanionHero /> : (
+          <>
+            <h1>Turbo <span>Tables</span></h1>
+            <p className="sub">Joue ta première partie pour découvrir ton compagnon !</p>
+          </>
         )}
+        <Link className="big play" href="/partie" onClick={() => ensureAudio()}>▶ Jouer</Link>
         <DebugCoins />
-        <p className="best">{best ? `Record en ${d.duration} s : ${best} points` : ''}</p>
-        <div className={'nav' + (d.pet ? ' four' : '')}>
-          {d.pet && <Link className="navb" href="/compagnon"><span className="ic">🐣</span><span className="lb">Compagnon</span></Link>}
-          <Link className="navb" href="/badges"><span className="ic">🏅</span><span className="lb">Badges</span><span className="ct">{unlocked(st).size}/{ALL_BADGES.length}</span></Link>
-          <Link className="navb" href="/diplomes"><span className="ic">🎓</span><span className="lb">Diplômes</span><span className="ct">{st.dipCount}/10</span></Link>
-          <Link className="navb" href="/historique"><span className="ic">📜</span><span className="lb">Historique</span><span className="ct">{n ? `${n} partie${n > 1 ? 's' : ''}` : ''}</span></Link>
-        </div>
+      </div>
+      <div className="nav four">
+        {n > 0 ? (
+          <Link className="navb" href="/nid"><span className="ic">🥚</span><span className="lb">Nid</span><span className="ct">{chests ? `${chests} 🎁` : ''}</span></Link>
+        ) : (
+          <span className="navb disabled" aria-disabled="true"><span className="ic">🥚</span><span className="lb">Nid</span><span className="ct">🔒</span></span>
+        )}
+        <Link className="navb" href="/badges"><span className="ic">🏅</span><span className="lb">Badges</span><span className="ct">{unlocked(st).size}/{ALL_BADGES.length}</span></Link>
+        <Link className="navb" href="/diplomes"><span className="ic">🎓</span><span className="lb">Diplômes</span><span className="ct">{st.dipCount}/10</span></Link>
+        <Link className="navb" href="/historique"><span className="ic">📜</span><span className="lb">Historique</span><span className="ct">{n ? `${n} partie${n > 1 ? 's' : ''}` : ''}</span></Link>
       </div>
     </section>
   );

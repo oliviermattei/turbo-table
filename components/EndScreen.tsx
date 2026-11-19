@@ -116,7 +116,7 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
               </button>
             )}
             <button className="big" onClick={() => go(opts)}>Rejouer</button>
-            <Link className="link" href="/">Changer les tables</Link>
+            <Link className="link" href="/partie">Changer les tables</Link>
           </>
         )}
       </div>
