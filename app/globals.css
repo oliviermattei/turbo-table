@@ -400,3 +400,6 @@ button.bestc{cursor:pointer}
 .btnrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
 .btnrow .big{font-size:22px;padding:14px 8px}
 .btns > a.big.alt{font-size:22px;padding:14px}
+.coins-link{display:flex;align-items:center;gap:4px;text-decoration:none;color:inherit;background:rgba(255,255,255,.12);border-radius:999px;padding-right:10px;flex-shrink:0}
+.coins-link .coins{background:none}
+.coins-shop{font-size:20px}

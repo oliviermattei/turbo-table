@@ -18,7 +18,7 @@ export default function Home() {
     <section className="screen home">
       <div className="top">
         <PlayerCard xp={totalXp(d.history)} name={d.profile.name} />
-        {d.pet && <Coins n={coins} />}
+        {d.pet && <Link href="/boutique" className="coins-link" aria-label="Boutique"><Coins n={coins} /><span className="coins-shop">🛒</span></Link>}
       </div>
       {d.debug && <p className="debugbar">🐞 Mode test : rien n’est envoyé au serveur</p>}
       <div className="home-body">
