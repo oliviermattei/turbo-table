@@ -17,7 +17,7 @@ const ITEMS = ["coffre-ferme", "coffre-ouvert", "pomme", "sandwich", "gateau", "
 // Cell order of the legendary egg sheets (brief, section 10)
 const LEGENDARY_EGGS = {
   "oeufs-legendaires-1": ["licorne-aurore", "phenix-solaire", "renard-celeste", "dragon-ombre", "dragon-jade", "griffon-tempete", "kraken-abysses", "baleine-celeste"],
-  "oeufs-legendaires-2": ["tortue-monde"],
+  "oeufs-legendaires-2": ["tortue-monde", "licorne-arc-en-ciel"],
 };
 
 // Output path (relative to public/) of each of the 8 cells, null = cell ignored.

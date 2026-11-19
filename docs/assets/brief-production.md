@@ -1223,22 +1223,20 @@ Cells from left to right, top row then bottom row (the names are only for me, do
 8. (Baleine Céleste) a translucent indigo egg, like dark glass, with a tiny soft galaxy of pink and white specks floating inside.
 ```
 
-#### Œufs légendaires 2/2 (Tortue-Monde)
-Enregistrer sous `assets-src/planches/oeufs-legendaires-2.png`.
+#### Œufs légendaires 2/2 (Tortue-Monde, Licorne Arc-en-ciel)
+Enregistrer sous `assets-src/planches/oeufs-legendaires-2.png`. Ordre des cases = ordre de la liste.
 
 ```
 Sheet: legendary eggs. Background #1E1B4B. Use the attached grid template.
 Every egg has exactly the same size (about 60% of the cell height), standing on the cell's dot, centred.
-EGG STYLE: precious artifact eggs, never toy-like or childish. Each egg looks heavy and valuable, like a
-carved gemstone, a polished stone or a relic: realistic material (stone, crystal, jade, metal), engraved relief
-patterns, fine gold or silver inlays, subtle inner glow, crisp reflections. No cartoon spots, no cute faces.
-These eggs belong to legendary creatures: the most precious of all, true treasures, with a soft orange-gold
+These eggs belong to legendary creatures: each one must look precious and special, with a soft orange-gold
 legendary glow hugging the shell (the glow stays inside the cell, no loose sparkles or particles).
 IMPORTANT: the link with the creature must stay SUBTLE. Suggest it only through colours, material and texture.
 Never draw a body part or an obvious symbol of the creature on the egg (no horn, no wing, no tail, no flame,
 no tentacle, no face). No text on the image.
 Cells from left to right, top row then bottom row (the names are only for me, do not write them):
 1. (Tortue-Monde) an earthy egg patterned like a tiny old map: soft green and sand-coloured patches separated by thin turquoise lines.
+2. (Licorne Arc-en-ciel) a clear crystal egg cut like a prism, with fine silver filigree; light passing through it splits into a very faint rainbow inside the crystal.
 All other cells stay empty.
 ```
 
