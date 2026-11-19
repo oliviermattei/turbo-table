@@ -60,6 +60,16 @@
       "grand-triste",
       "super-triste"
     ],
+    "phenix-solaire": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "rainette-fleurie": [
       "bebe",
       "petit",
@@ -91,7 +101,16 @@
       "super-triste"
     ]
   },
-  "legendaryEggs": [],
+  "legendaryEggs": [
+    "baleine-celeste",
+    "dragon-jade",
+    "dragon-ombre",
+    "griffon-tempete",
+    "kraken-abysses",
+    "licorne-aurore",
+    "phenix-solaire",
+    "renard-celeste"
+  ],
   "eggs": [
     "commun",
     "peu-commun",

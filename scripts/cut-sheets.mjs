@@ -58,7 +58,7 @@ function findLine(px, w, h, axis, guess) {
 }
 
 // Cuts one cell out of the sheet and removes its background. Returns RGBA pixels or null when empty.
-function cutCell(px, sw, x0, y0, w, h) {
+function cutCell(px, sw, x0, y0, w, h, solid = false) {
   const n = w * h;
   const rgb = new Float32Array(n * 3);
   for (let y = 0; y < h; y++)
@@ -113,6 +113,32 @@ function cutCell(px, sw, x0, y0, w, h) {
     if (x < w - 1) push(i + 1);
     if (i >= w) push(i - w);
     if (i < n - w) push(i + w);
+  }
+
+  // Solid subjects (eggs): everything between the left and right edges of the main shape, row by row, is
+  // subject. A dark egg close to the bg colour would otherwise turn half transparent.
+  if (solid) {
+    const lab = new Int32Array(n).fill(-1);
+    let best = -1, bestSize = 0;
+    for (let s = 0; s < n; s++) {
+      if (isBg[s] || lab[s] >= 0) continue;
+      let size = 0;
+      const st = [s];
+      lab[s] = s;
+      while (st.length) {
+        const i = st.pop();
+        size++;
+        const x = i % w;
+        for (const j of [x > 0 ? i - 1 : -1, x < w - 1 ? i + 1 : -1, i - w, i + w])
+          if (j >= 0 && j < n && !isBg[j] && lab[j] < 0) { lab[j] = s; st.push(j); }
+      }
+      if (size > bestSize) [best, bestSize] = [s, size];
+    }
+    for (let y = 0; y < h; y++) {
+      let lo = -1, hi = -1;
+      for (let x = 0; x < w; x++) if (lab[y * w + x] === best) { if (lo < 0) lo = x; hi = x; }
+      for (let x = lo; lo >= 0 && x <= hi; x++) isBg[y * w + x] = 0;
+    }
   }
 
   const alpha = new Float32Array(n);
@@ -196,7 +222,8 @@ async function cutSheet(file, kind) {
     if (!target) continue;
     const col = cell % 4, row = cell >> 2;
     const x0 = xs[col] + INSET, y0 = ys[row] + INSET;
-    const res = cutCell(px, sw, x0, y0, xs[col + 1] - INSET - x0, ys[row + 1] - INSET - y0);
+    const solid = /\.webp$/.test(target) && (target.startsWith("eggs/") ? !target.includes("coquille") : target.endsWith("/oeuf.webp"));
+    const res = cutCell(px, sw, x0, y0, xs[col + 1] - INSET - x0, ys[row + 1] - INSET - y0, solid);
     if (!res) {
       console.warn(`  warning: ${kind} cell ${cell + 1} is empty, ${target} not written`);
       continue;
