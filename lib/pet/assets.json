@@ -10,6 +10,26 @@
       "grand-triste",
       "super-triste"
     ],
+    "cerf-de-cristal": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "champignouf": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "chaton": [
       "bebe",
       "petit",
@@ -41,6 +61,16 @@
       "super-triste"
     ],
     "licorne-aurore": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "nuagichat": [
       "bebe",
       "petit",
       "grand",
