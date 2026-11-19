@@ -11,11 +11,12 @@ export default function PlayPage() {
 }
 
 function Play() {
-  const key = useSearchParams().toString();
+  const sp = useSearchParams();
+  const key = sp.toString();
   const opts = useMemo(() => parseOpts(new URLSearchParams(key)), [key]);
-  const { tables } = useData();
+  const { tables, debug } = useData();
   if (!opts || (opts.mode === 'normal' && !tables.length)) {
     return <p className="empty">Cette partie ne peut pas démarrer.<br /><Link className="link" href="/">{"Retour à l'accueil"}</Link></p>;
   }
-  return <GameSession key={key} opts={opts} />;
+  return <GameSession key={key} opts={opts} fake={debug && sp.get('fake') === '1'} />;
 }

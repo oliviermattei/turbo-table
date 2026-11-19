@@ -46,9 +46,11 @@ describe('pet', () => {
 
   it('turns a duplicate into coins', () => {
     let p = withCompanion();
-    p = { ...p, eggs: [{ id: 'x', q: 'commun', source: 'shop', at: T0, opened: true }] };
-    p = { ...p, incubating: { ...p.eggs[0], start: 0 }, eggs: [] };
-    const r = hatch(p, 50, T0, 0.1)!; // only the dog is ready: a duplicate
+    // Own every ready common species, so the next common egg is a duplicate
+    const c0 = p.creatures[0];
+    p = { ...p, creatures: readySpecies('commun').map((s, i) => ({ ...c0, id: 'c' + i, species: s.id })) };
+    p = { ...p, incubating: { id: 'x', q: 'commun', source: 'shop', at: T0, opened: true, start: 0 } };
+    const r = hatch(p, 50, T0, 0.1)!;
     expect(r.out).toMatchObject({ dup: true, coins: 25 });
     expect(r.p.bonus).toBe(25);
   });

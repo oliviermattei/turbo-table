@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
-import { useMemo } from 'react';
+import { useMemo, useState } from 'react';
 import { CompanionCard } from '@/components/pet';
 import { PlayerCard } from '@/components/ui';
 import { useData } from '@/lib/data';
@@ -18,17 +18,18 @@ export default function Home() {
   const st = useMemo(() => computeStats(d.history), [d.history]);
   const best = bestFor(d.history, d.duration);
   const n = d.history.length;
+  const [fake, setFake] = useState(false);
   const toggle = (t: number) => d.setTables(d.tables.includes(t) ? d.tables.filter(x => x !== t) : [...d.tables, t]);
 
   return (
     <section className="screen">
       <div className="top">
         <PlayerCard xp={totalXp(d.history)} name={d.profile.name} />
-        <button className="icon-btn" aria-label="Son" onClick={() => { ensureAudio(); d.setSound(!d.sound); }}>{d.sound ? '🔊' : '🔇'}</button>
       </div>
+      {d.debug && <p className="debugbar">🐞 Mode test : rien n’est envoyé au serveur</p>}
       <h1>Turbo <span>Tables</span></h1>
       <p className="sub">Combien de bonnes réponses avant la fin du chrono ?</p>
-      <CompanionCard />
+      {n > 0 && <CompanionCard />}
 
       <div className="panel">
         <h2>Quelles tables ?
@@ -56,9 +57,14 @@ export default function Home() {
       </div>
 
       <div className="spacer" />
-      <button className="big" disabled={!d.tables.length} onClick={() => { ensureAudio(); router.push(playHref({ mode: 'normal' })); }}>
+      <button className="big" disabled={!d.tables.length} onClick={() => { ensureAudio(); router.push(playHref({ mode: 'normal' }) + (fake ? '&fake=1' : '')); }}>
         {"C'est parti !"}
       </button>
+      {d.debug && (
+        <label className="debugbox">
+          <input type="checkbox" checked={fake} onChange={e => setFake(e.target.checked)} /> 🐞 Gagner tout de suite (super score, sans jouer)
+        </label>
+      )}
       <p className="best">{best ? `Record en ${d.duration} s : ${best} points` : ''}</p>
       <div className="nav">
         <Link className="navb" href="/badges"><span className="ic">🏅</span><span className="lb">Badges</span><span className="ct">{unlocked(st).size}/{ALL_BADGES.length}</span></Link>

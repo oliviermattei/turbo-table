@@ -28,6 +28,23 @@ export function parseOpts(sp: { get(k: string): string | null }): PlayOpts | nul
   return mode === 'normal' ? { mode } : null;
 }
 
+/** Test mode: a normal game won with a super score, without playing (25 right answers a minute, no mistake). */
+export function fakeRun(tables: number[], duration: number): RunResult {
+  const pool = buildPool(tables), correct = Math.round(25 * duration / 60);
+  const seen: Record<string, [number, number]> = {};
+  let score = 0;
+  for (let i = 0; i < correct; i++) {
+    const q = pool[i % pool.length], k = keyOf(q);
+    seen[k] = [(seen[k]?.[0] ?? 0) + 1, 0];
+    score += pointsFor(i);
+  }
+  const rec: Omit<GameRecord, 'id'> = {
+    ts: Date.now(), mode: 'normal', duration, tables: [...tables].sort((x, y) => x - y),
+    score, correct, total: correct, bestStreak: correct, stars: starsFor(correct, duration), errors: [], seen,
+  };
+  return { rec, table: 0, passed: false, mention: 0, examErrors: 0, errs: [] };
+}
+
 export interface Current extends Q { ans: number; choices: number[] }
 export interface Feedback { picked: number; good: boolean; pts: number }
 /** What the play screen draws. Republished on every change and every 100 ms. */

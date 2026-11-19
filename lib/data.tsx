@@ -12,11 +12,14 @@ type LocalGame = GameRecord & { synced?: boolean };
 /** local: server unreachable · cloud: synced with the server · locked: server needs the family code */
 export type SyncState = 'local' | 'cloud' | 'locked';
 
+/** Test mode: a sandbox with its own device storage and no server sync, so fake games never reach the real history. */
+const isDebug = () => { try { return localStorage.getItem('tt_debug') === '1'; } catch { return false; } };
+const pre = () => (isDebug() ? 'ttdbg_' : 'tt_');
 const store = (k: string, v: unknown) => {
-  try { localStorage.setItem('tt_' + k, JSON.stringify(v)); } catch { /* storage full or disabled */ }
+  try { localStorage.setItem(pre() + k, JSON.stringify(v)); } catch { /* storage full or disabled */ }
 };
 const read = <T,>(k: string, d: T): T => {
-  try { const v = localStorage.getItem('tt_' + k); return v ? (JSON.parse(v) as T) : d; } catch { return d; }
+  try { const v = localStorage.getItem(pre() + k); return v ? (JSON.parse(v) as T) : d; } catch { return d; }
 };
 // shortcut: the device cache keeps the last 1000 games; the server keeps them all.
 const saveLocal = (h: LocalGame[]) => store('history', h.slice(0, 1000));
@@ -35,6 +38,7 @@ function loadLocal() {
     duration: read('duration', 60),
     sound: read('sound', true),
     pet: cleanPet(read('pet', null)),
+    debug: isDebug(),
   };
 }
 
@@ -55,6 +59,9 @@ interface DataCtx {
   pet: PetState | null;
   /** Changes the pet; the new state is saved on the device and on the server. */
   updatePet(f: (p: PetState | null) => PetState | null): void;
+  /** Test mode (sandbox, see isDebug) */
+  debug: boolean;
+  setDebug(b: boolean): void;
   /** Sends the family code; on success this device syncs with the server. */
   unlock(code: string): Promise<boolean>;
 }
@@ -113,6 +120,7 @@ function Store({ children }: { children: ReactNode }) {
 
   const syncCloud = useCallback(async () => {
     reconcilePet(hist.current);
+    if (init.debug) return; // the sandbox never talks to the server
     try {
       const unsynced = hist.current.filter(g => !g.synced);
       if (unsynced.length) {
@@ -137,7 +145,7 @@ function Store({ children }: { children: ReactNode }) {
       setSync('cloud');
       if (petRef.current && petRef.current !== rpet) pushPet();
     } catch { /* offline: keep playing on this device, unsynced games are pushed next time */ }
-  }, [commit, commitPet, reconcilePet]);
+  }, [commit, commitPet, reconcilePet, init.debug]);
 
 
   // Deferred so the first paint never waits on the network (and StrictMode does not sync twice)
@@ -145,7 +153,11 @@ function Store({ children }: { children: ReactNode }) {
   useEffect(() => setSoundOn(sound), [sound]);
 
   const value: DataCtx = {
-    history, profile, tables, duration, sound, sync, pet,
+    history, profile, tables, duration, sound, sync, pet, debug: init.debug,
+    setDebug(b) {
+      try { localStorage.setItem('tt_debug', b ? '1' : '0'); } catch { /* storage disabled */ }
+      location.reload(); // every value is read again from the other storage
+    },
     updatePet(f) {
       const next = f(petRef.current);
       if (next === petRef.current) return;

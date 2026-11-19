@@ -3,7 +3,7 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { confetti } from '@/lib/confetti';
 import { useData } from '@/lib/data';
-import { createEngine, type PlayOpts, type RunResult, type View } from '@/lib/game/engine';
+import { createEngine, fakeRun, type PlayOpts, type RunResult, type View } from '@/lib/game/engine';
 import { BADGE_BY_ID, bestFor, computeStats, levelInfo, nextBadge, RARITY_ORDER, totalXp, unlocked } from '@/lib/game/rules';
 import { active, coinsEarned, decay, dropsEgg, hatchProgress, moodOf, totalCorrect } from '@/lib/pet/rules';
 import { ensureAudio, sEnd, sFanfare, sGo, sTick } from '@/lib/sound';
@@ -13,7 +13,7 @@ type Engine = ReturnType<typeof createEngine>;
 const COUNT = ['3', '2', '1', 'Go !'];
 
 /** One game, from the countdown to the end screen. Mounted with a new key for every start. */
-export default function GameSession({ opts }: { opts: PlayOpts }) {
+export default function GameSession({ opts, fake = false }: { opts: PlayOpts; fake?: boolean }) {
   const data = useData();
   const router = useRouter();
   const engine = useRef<Engine | null>(null);
@@ -55,6 +55,10 @@ export default function GameSession({ opts }: { opts: PlayOpts }) {
   useEffect(() => {
     if (result) return; // coming back to a finished game: keep its end screen
     const { tables, duration } = settings();
+    if (fake) { // test mode: straight to the end screen of a won game
+      const t = setTimeout(() => onFinish(fakeRun(tables, duration)));
+      return () => clearTimeout(t);
+    }
     const e = createEngine(opts, tables, duration, { view: setView, finish: r => onFinish(r) });
     engine.current = e;
     e.publish();
@@ -73,7 +77,7 @@ export default function GameSession({ opts }: { opts: PlayOpts }) {
     };
     step();
     return () => { clearTimeout(t); e.stop(); };
-  }, [opts, result]);
+  }, [opts, result, fake]);
 
   // Keys 1 to 4 pick an answer on a computer
   useEffect(() => {
