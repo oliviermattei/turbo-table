@@ -126,7 +126,8 @@ Top row: 1. shiny red apple  2. sandwich  3. small birthday cake with one candle
 Bottom row: 5. teddy bear plush  6. round colourful handheld game console  7. cosy little bed made of large green leaves  8. empty cell.
 ```
 
-### Œufs légendaires (jusqu'à 8 par planche)
+### Œufs légendaires (jusqu'à 8 par planche ; les prompts remplis sont en section 10)
+Règle : le lien avec la créature reste **discret** (couleurs, matière, texture), jamais une partie du corps ni un symbole évident (pas de corne, d'aile, de flamme…).
 ```
 Sheet: legendary eggs. Background #1E1B4B. Each egg about 60% of the cell height,
 much more spectacular than ordinary eggs, with an orange-gold legendary glow hugging the shell
@@ -1182,17 +1183,41 @@ Top row: 1. shiny red apple  2. sandwich  3. small birthday cake with one candle
 Bottom row: 5. teddy bear plush  6. round colourful handheld game console  7. cosy little bed made of large green leaves  8. empty cell.
 ```
 
-#### Œufs légendaires
-Enregistrer sous `assets-src/planches/oeufs-legendaires-1.png`.
+#### Œufs légendaires 1/2 (Licorne Aurore, Phénix Solaire, Renard Céleste, Dragon d'Ombre, Dragon de Jade, Griffon Tempête, Kraken des Abysses, Baleine Céleste)
+Enregistrer sous `assets-src/planches/oeufs-legendaires-1.png`. Ordre des cases = ordre de la liste (le script s'en sert pour savoir quel œuf va à quelle créature).
 
 ```
-Sheet: legendary eggs. Background #1E1B4B. Each egg about 60% of the cell height,
-much more spectacular than ordinary eggs, with an orange-gold legendary glow hugging the shell
-(the glow stays inside the cell). Each egg hints at the creature that will hatch from it.
-Top row, left to right:
-1. Licorne Aurore egg: pearly egg with waving mint, violet and pink aurora veils; a small spiral horn pierces the top.
-2. Phénix Solaire egg: golden egg circled by a ring of soft flames, engraved fire feathers, little embers escaping.
-3. Renard Céleste egg: pearly white egg with nine turquoise flamelets dancing on top like tails, and a golden fox pattern.
+Sheet: legendary eggs. Background #1E1B4B. Use the attached grid template.
+Every egg has exactly the same size (about 60% of the cell height), standing on the cell's dot, centred.
+These eggs belong to legendary creatures: each one must look precious and special, with a soft orange-gold
+legendary glow hugging the shell (the glow stays inside the cell, no loose sparkles or particles).
+IMPORTANT: the link with the creature must stay SUBTLE. Suggest it only through colours, material and texture.
+Never draw a body part or an obvious symbol of the creature on the egg (no horn, no wing, no tail, no flame,
+no tentacle, no face). No text on the image.
+Cells from left to right, top row then bottom row (the names are only for me, do not write them):
+1. (Licorne Aurore) a smooth pearly white egg whose shell shimmers with very soft mint, violet and pink reflections that slowly shift like a faint aurora; a fine spiral-shaped crack pattern barely visible at the top.
+2. (Phénix Solaire) a warm golden-orange egg that looks hot, like a stone taken out of a fire: thin glowing red-orange veins under the shell and a soft heat shimmer around the top.
+3. (Renard Céleste) a soft ivory egg with a delicate pale turquoise swirl pattern, like wisps of cold smoke painted on porcelain, and a few tiny golden dots.
+4. (Dragon d'Ombre) a deep violet-black egg with a velvety matte surface, a barely visible scale texture and a few tiny golden specks like distant stars.
+5. (Dragon de Jade) a polished green jade stone egg with softly carved swirling cloud motifs and a thin gold band around its middle.
+6. (Griffon Tempête) a steel-blue egg marbled with fine silver veins like frozen lightning, slightly cloudy, with a cool white highlight.
+7. (Kraken des Abysses) a dark ocean-blue egg with a rough, shell-like texture and small round spots that glow softly turquoise like deep-sea light.
+8. (Baleine Céleste) a translucent indigo egg, like dark glass, with a tiny soft galaxy of pink and white specks floating inside.
+```
+
+#### Œufs légendaires 2/2 (Tortue-Monde)
+Enregistrer sous `assets-src/planches/oeufs-legendaires-2.png`.
+
+```
+Sheet: legendary eggs. Background #1E1B4B. Use the attached grid template.
+Every egg has exactly the same size (about 60% of the cell height), standing on the cell's dot, centred.
+These eggs belong to legendary creatures: each one must look precious and special, with a soft orange-gold
+legendary glow hugging the shell (the glow stays inside the cell, no loose sparkles or particles).
+IMPORTANT: the link with the creature must stay SUBTLE. Suggest it only through colours, material and texture.
+Never draw a body part or an obvious symbol of the creature on the egg (no horn, no wing, no tail, no flame,
+no tentacle, no face). No text on the image.
+Cells from left to right, top row then bottom row (the names are only for me, do not write them):
+1. (Tortue-Monde) an earthy egg patterned like a tiny old map: soft green and sand-coloured patches separated by thin turquoise lines.
 All other cells stay empty.
 ```
 

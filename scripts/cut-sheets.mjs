@@ -14,15 +14,19 @@ const STAGES = ["bebe", "petit", "grand", "super"];
 const MOODS = [...STAGES, ...STAGES.map((s) => `${s}-triste`)];
 const EGGS = ["commun", "peu-commun", "rare", "epique", "coquille"];
 const ITEMS = ["coffre-ferme", "coffre-ouvert", "pomme", "sandwich", "gateau", "balle", "peluche", "console", "lit"];
-const LEGENDARY_EGGS = ["licorne-aurore", "phenix-solaire", "renard-celeste"];
+// Cell order of the legendary egg sheets (brief, section 10)
+const LEGENDARY_EGGS = {
+  "oeufs-legendaires-1": ["licorne-aurore", "phenix-solaire", "renard-celeste", "dragon-ombre", "dragon-jade", "griffon-tempete", "kraken-abysses", "baleine-celeste"],
+  "oeufs-legendaires-2": ["tortue-monde"],
+};
 
 // Output path (relative to public/) of each of the 8 cells, null = cell ignored.
 function cellTargets(kind) {
   if (kind === "oeufs")
     return [...EGGS.map((e) => `eggs/${e}.webp`), "items/coffre-ferme.webp", "items/coffre-ouvert.webp", null];
   if (kind === "objets") return [...ITEMS.slice(2).map((i) => `items/${i}.webp`), null];
-  if (kind === "oeufs-legendaires-1")
-    return [...LEGENDARY_EGGS.map((s) => `creatures/${s}/oeuf.webp`), null, null, null, null, null];
+  if (LEGENDARY_EGGS[kind])
+    return Array.from({ length: 8 }, (_, i) => (LEGENDARY_EGGS[kind][i] ? `creatures/${LEGENDARY_EGGS[kind][i]}/oeuf.webp` : null));
   return MOODS.map((m) => `creatures/${kind}/${m}.webp`);
 }
 
