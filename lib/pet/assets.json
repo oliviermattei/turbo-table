@@ -1,0 +1,26 @@
+{
+  "creatures": {
+    "chiot": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ]
+  },
+  "legendaryEggs": [],
+  "eggs": [
+    "commun",
+    "peu-commun",
+    "rare",
+    "epique",
+    "coquille"
+  ],
+  "items": [
+    "coffre-ferme",
+    "coffre-ouvert"
+  ]
+}

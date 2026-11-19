@@ -1,0 +1,1165 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1, user-scalable=no">
+<title>Turbo Tables</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Fredoka:wght@400;500;600;700&display=swap" rel="stylesheet">
+<style>
+:root{--ink:#1e1b4b;--accent:#f97316;--accent-d:#c2410c;--good:#22c55e;--bad:#ef4444;--yellow:#facc15;--gold:#facc15;--silver:#cbd5e1;--bronze:#f59e0b}
+*{box-sizing:border-box;margin:0;padding:0;-webkit-tap-highlight-color:transparent}
+html,body{min-height:100%}
+html{background:#1e1b4b}
+body{font-family:'Fredoka',system-ui,sans-serif;background:radial-gradient(circle at 20% 0%,#4f46e5,#1e1b4b 65%) fixed;color:#fff;display:flex;justify-content:center;user-select:none;-webkit-user-select:none;touch-action:manipulation}
+.app{width:100%;max-width:500px;padding:14px 16px 24px;display:flex;flex-direction:column;min-height:100vh}
+.screen{display:none;flex-direction:column;flex:1}
+.screen.active{display:flex}
+button{font:inherit}
+
+/* Carte joueur */
+.top{display:flex;gap:10px;align-items:center;margin-bottom:6px}
+.player{flex:1;display:flex;align-items:center;gap:12px;background:rgba(255,255,255,.1);border-radius:20px;padding:8px 14px 8px 8px;min-width:0}
+.avatar{width:54px;height:54px;border-radius:50%;background:linear-gradient(135deg,#fde68a,#f97316);display:flex;align-items:center;justify-content:center;font-size:32px;flex-shrink:0;box-shadow:0 3px 0 rgba(0,0,0,.2)}
+.pinfo{flex:1;min-width:0}
+.plvl{font-size:13px;opacity:.8;font-weight:500}
+.pname{font-size:18px;font-weight:700;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.xpbar{height:10px;background:rgba(255,255,255,.18);border-radius:999px;overflow:hidden;margin-top:4px}
+.xpbar div{height:100%;background:linear-gradient(90deg,#38bdf8,#a78bfa);border-radius:999px;transition:width 1s ease-out}
+.xptxt{font-size:12px;opacity:.75;margin-top:2px}
+.icon-btn{background:rgba(255,255,255,.12);border:none;color:#fff;font-size:22px;width:44px;height:44px;border-radius:50%;cursor:pointer;flex-shrink:0}
+
+/* Accueil */
+h1{font-size:40px;text-align:center;line-height:1;margin:10px 0 4px;font-weight:700}
+h1 span{color:var(--yellow)}
+.sub{text-align:center;opacity:.85;margin-bottom:14px;font-size:17px}
+.panel{background:rgba(255,255,255,.08);border-radius:20px;padding:14px;margin-bottom:12px}
+.panel h2{font-size:17px;font-weight:600;margin-bottom:10px;opacity:.9;display:flex;justify-content:space-between;align-items:center}
+.panel h2 .links{display:flex;gap:12px}
+.panel h2 .links button{background:none;border:none;color:#c7d2fe;font-size:15px;font-weight:500;text-decoration:underline;cursor:pointer}
+.chips{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
+.chip{border:none;font-size:24px;font-weight:600;padding:11px 0;border-radius:14px;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;transition:transform .08s,background .15s;position:relative}
+.chip.on{background:var(--yellow);color:var(--ink)}
+.chip:active{transform:scale(.93)}
+.chip .cap{position:absolute;top:-6px;right:-4px;font-size:14px}
+.row{display:flex;gap:6px}
+.row .chip{flex:1;font-size:17px;min-width:0;padding:11px 0;white-space:nowrap}
+.big{border:none;font-size:28px;font-weight:700;padding:16px;border-radius:20px;background:var(--accent);color:#fff;cursor:pointer;box-shadow:0 6px 0 var(--accent-d);width:100%}
+.big:active{transform:translateY(4px);box-shadow:0 2px 0 var(--accent-d)}
+.big:disabled{opacity:.4;transform:none;box-shadow:0 6px 0 var(--accent-d)}
+.big.alt{background:#6366f1;box-shadow:0 6px 0 #4338ca;font-size:21px}
+.big.alt:active{box-shadow:0 2px 0 #4338ca}
+.big.green{background:var(--good);box-shadow:0 6px 0 #15803d;font-size:22px}
+.big.green:active{box-shadow:0 2px 0 #15803d}
+.spacer{flex:1;min-height:8px}
+.best{text-align:center;margin-top:10px;opacity:.8;font-size:16px;min-height:20px}
+.nav{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:12px}
+.navb{border:none;background:rgba(255,255,255,.12);color:#fff;border-radius:16px;padding:10px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
+.navb:active{background:rgba(255,255,255,.22)}
+.navb .ic{font-size:28px;line-height:1}
+.navb .lb{font-size:15px;font-weight:600}
+.navb .ct{font-size:12px;opacity:.75}
+.ghost{border:none;font-size:18px;font-weight:600;padding:12px;border-radius:16px;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;width:100%;margin-top:10px}
+.ghost:active{background:rgba(255,255,255,.22)}
+.link{background:none;border:none;color:#c7d2fe;font-size:15px;margin-top:12px;text-decoration:underline;cursor:pointer;align-self:center}
+
+/* En-tête des pages */
+.hhead{display:flex;align-items:center;justify-content:space-between;margin-bottom:12px}
+.htitle{font-size:30px;font-weight:700}
+
+/* Jeu */
+.hud{display:flex;justify-content:space-between;align-items:center;font-size:22px;font-weight:600;margin-bottom:8px}
+.hud .pill{background:rgba(255,255,255,.12);padding:6px 14px;border-radius:999px;min-width:84px;text-align:center}
+.streak{opacity:0;transition:opacity .2s}
+.streak.show{opacity:1}
+.exam-tag{text-align:center;font-weight:600;font-size:16px;color:var(--yellow);margin-bottom:6px;display:none}
+.bar{height:12px;background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden;margin-bottom:14px}
+.bar div{height:100%;width:100%;background:linear-gradient(90deg,var(--good),var(--yellow));border-radius:999px;transition:width .1s linear}
+.bar div.low{background:var(--bad)}
+.card{background:#fff;color:var(--ink);border-radius:26px;padding:22px 12px;text-align:center;box-shadow:0 10px 30px rgba(0,0,0,.25);transition:background .15s,transform .15s;position:relative}
+.card .q{font-size:64px;font-weight:700;line-height:1.1}
+.card .a{font-size:56px;font-weight:700;min-height:70px;color:#4f46e5;line-height:1.25}
+.card .a .ph{color:#c7d2fe}
+.card .a s{color:#f87171;font-size:40px;margin-right:12px}
+.card.good{background:#dcfce7;transform:scale(1.03)}
+.card.bad{background:#fee2e2;animation:shake .35s}
+.card.bad .a{color:var(--bad)}
+@keyframes shake{0%,100%{transform:translateX(0)}25%{transform:translateX(-10px)}75%{transform:translateX(10px)}}
+.plus{position:absolute;top:10px;right:18px;font-size:24px;font-weight:700;color:var(--good);opacity:0}
+.plus.pop{animation:pop .6s ease-out}
+@keyframes pop{0%{opacity:1;transform:translateY(0)}100%{opacity:0;transform:translateY(-30px)}}
+.choices{display:grid;grid-template-columns:1fr 1fr;gap:14px;margin-top:20px}
+.choice{border:none;font-size:46px;font-weight:700;padding:22px 0;border-radius:22px;min-width:0;background:#fde68a;color:var(--ink);cursor:pointer;box-shadow:0 6px 0 #d97706;transition:background .15s}
+.choice:active{transform:translateY(4px);box-shadow:0 2px 0 #d97706}
+.choice.right{background:var(--good);color:#fff;box-shadow:0 6px 0 #15803d}
+.choice.wrong{background:var(--bad);color:#fff;box-shadow:0 6px 0 #b91c1c}
+.choice.dim{opacity:.35}
+
+/* Compte à rebours */
+.count{position:fixed;inset:0;display:none;align-items:center;justify-content:center;background:rgba(30,27,75,.9);font-size:140px;font-weight:700;color:var(--yellow);z-index:5}
+.count.show{display:flex}
+.count span{animation:zoom .8s ease-out}
+@keyframes zoom{0%{transform:scale(2);opacity:0}30%{opacity:1}100%{transform:scale(1)}}
+
+/* Fin */
+.stars{text-align:center;font-size:58px;letter-spacing:6px;margin-top:6px}
+.stars .off{filter:grayscale(1);opacity:.3}
+.bigemo{text-align:center;font-size:80px;line-height:1;margin-top:6px}
+.msg{text-align:center;font-size:26px;font-weight:600;margin:6px 0 12px}
+.banner{text-align:center;background:var(--yellow);color:var(--ink);font-weight:700;font-size:20px;border-radius:14px;padding:8px;margin-bottom:10px;display:none}
+.banner.lvl{background:linear-gradient(90deg,#38bdf8,#a78bfa);color:#fff}
+.stats{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-bottom:12px}
+.stat{background:rgba(255,255,255,.08);border-radius:16px;padding:10px 4px;text-align:center}
+.stat b{display:block;font-size:28px}
+.stat small{opacity:.8;font-size:14px}
+.xpgain{display:flex;align-items:center;gap:12px}
+.xpgain .gain{font-size:26px;font-weight:700;color:#7dd3fc;white-space:nowrap}
+.xpgain .pinfo{flex:1}
+.nb{display:flex;align-items:center;gap:12px;padding:6px 0}
+.nb .e{font-size:38px;animation:bounce 1s ease-in-out infinite alternate}
+.nb b{display:block;font-size:18px}
+.nb small{opacity:.8}
+@keyframes bounce{to{transform:scale(1.15) rotate(-6deg)}}
+.errs{display:flex;flex-wrap:wrap;gap:8px}
+.err{background:#fee2e2;color:#991b1b;border-radius:12px;padding:6px 12px;font-size:20px;font-weight:600}
+.err small{font-size:13px;font-weight:500;opacity:.75;margin-left:4px}
+.noerr{opacity:.85}
+.btns{display:flex;flex-direction:column;gap:14px;margin-top:6px}
+
+/* Badges */
+.bgrid{display:block}
+.badge{background:rgba(255,255,255,.1);border-radius:18px;padding:12px 6px;text-align:center}
+.badge .e{font-size:40px;line-height:1.1}
+.badge b{display:block;font-size:15px;margin-top:4px}
+.badge small{display:block;font-size:12px;opacity:.75;margin-top:2px;line-height:1.25}
+.badge.off .e{filter:grayscale(1);opacity:.35}
+.badge.off b{opacity:.6}
+.bprog{height:7px;background:rgba(255,255,255,.15);border-radius:999px;overflow:hidden;margin:6px 8px 0}
+.bprog div{height:100%;background:var(--yellow);border-radius:999px}
+.bnum{display:block;font-size:12px;opacity:.8;margin-top:2px}
+.nb .bprog{margin:6px 0 0}
+.nb .e.next{filter:grayscale(.6);animation:none}
+.badge.on{background:linear-gradient(160deg,rgba(250,204,21,.35),rgba(249,115,22,.25));box-shadow:inset 0 0 0 2px rgba(250,204,21,.6)}
+
+/* Diplômes */
+.field{width:100%;border:none;border-radius:14px;padding:12px 14px;font:inherit;font-size:20px;color:var(--ink);background:#fff;margin-top:4px;user-select:text;-webkit-user-select:text}
+.rules{font-size:15px;opacity:.85;margin:0 4px 12px;text-align:center}
+.dipgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.dip{border:none;border-radius:18px;padding:14px 8px;cursor:pointer;background:rgba(255,255,255,.1);color:#fff;text-align:center}
+.dip:active{transform:scale(.97)}
+.dip .dt{display:block;font-size:20px;font-weight:700}
+.dip .dm{display:block;font-size:15px;margin-top:2px;opacity:.85}
+.dip.m3{background:linear-gradient(160deg,#fde047,#f59e0b);color:var(--ink)}
+.dip.m2{background:linear-gradient(160deg,#f1f5f9,#94a3b8);color:var(--ink)}
+.dip.m1{background:linear-gradient(160deg,#fdba74,#c2410c);color:#fff}
+.grand{margin-top:12px;border:none;width:100%;border-radius:20px;padding:16px;background:rgba(255,255,255,.08);color:#fff;text-align:center;cursor:pointer}
+.grand.on{background:linear-gradient(135deg,#a78bfa,#ec4899);}
+.grand b{display:block;font-size:20px}
+.grand small{opacity:.85}
+
+/* Fenêtres */
+.modal{position:fixed;inset:0;background:rgba(15,13,40,.75);display:none;align-items:center;justify-content:center;padding:16px;z-index:10}
+.modal.show{display:flex}
+.sheet{background:#312e81;border-radius:24px;padding:20px;width:100%;max-width:420px;text-align:center;max-height:100%;overflow:auto}
+.sheet h3{font-size:28px;margin-bottom:6px}
+.sheet p{opacity:.9;margin-bottom:14px;font-size:17px}
+.sheet .btns{gap:12px}
+.cert{background:#fffbeb;color:#422006;border-radius:10px;padding:10px;box-shadow:0 10px 40px rgba(0,0,0,.4)}
+.cert-in{border:4px double #b45309;border-radius:6px;padding:20px 12px;text-align:center;position:relative}
+.cert .ct{font-size:44px}
+.cert .ch{font-size:34px;font-weight:700;letter-spacing:4px;color:#b45309}
+.cert .cs{font-size:22px;font-weight:600;margin-bottom:12px}
+.cert .cx{font-size:15px;opacity:.8}
+.cert .cn{font-size:32px;font-weight:700;color:#4f46e5;margin:4px 0 10px;word-break:break-word}
+.cert .cm{font-size:28px;font-weight:700;margin:4px 0 10px}
+.cert .cd{font-size:14px;opacity:.75}
+.cert .seal{position:absolute;bottom:8px;right:10px;font-size:40px;transform:rotate(-12deg)}
+
+/* Confettis */
+.confetti{position:fixed;inset:0;pointer-events:none;overflow:hidden;z-index:30}
+.confetti i{position:absolute;top:-20px;width:9px;height:14px;border-radius:2px;animation:fall linear forwards}
+@keyframes fall{to{transform:translateY(110vh) rotate(720deg)}}
+
+/* Historique */
+.hrow{display:flex;justify-content:space-between;align-items:center;background:rgba(255,255,255,.08);border-radius:16px;padding:12px 14px;margin-bottom:8px;gap:10px}
+.hrow .d{font-size:17px;font-weight:600}
+.hrow .t{font-size:14px;opacity:.75;margin-top:2px}
+.hrow .r{text-align:right;flex-shrink:0}
+.hrow .sc{font-size:26px;font-weight:700;line-height:1}
+.hrow .mini{font-size:13px;opacity:.8}
+.hrow .mini .off{filter:grayscale(1);opacity:.35}
+.note{text-align:center;font-size:14px;opacity:.7;margin:12px 0 4px}
+.empty{text-align:center;opacity:.8;padding:30px 0;font-size:18px}
+.fgrid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.sect{font-size:20px;margin:16px 0 8px}
+.legend{display:flex;flex-wrap:wrap;gap:6px 14px;justify-content:center;font-size:13px;opacity:.9}
+.legend span{display:flex;align-items:center;gap:4px}
+.fcard{background:rgba(255,255,255,.08);border-radius:18px;padding:12px 10px;border:2px solid var(--rc);position:relative}
+.fcard.none .fe{filter:grayscale(1);opacity:.4}
+.fcard.r-epique{box-shadow:0 0 14px rgba(168,85,247,.45)}
+.fcard.r-legendaire{box-shadow:0 0 18px rgba(245,158,11,.6);animation:glow 2s ease-in-out infinite alternate}
+@keyframes glow{to{box-shadow:0 0 28px rgba(245,158,11,.9)}}
+.fhead{display:flex;gap:8px;align-items:center}
+.fhead b{display:block;font-size:15px;line-height:1.15}
+.fe{font-size:32px;line-height:1;flex-shrink:0}
+.rar{display:block;font-size:12px;font-weight:700;text-transform:uppercase;letter-spacing:.5px}
+.dots{margin:8px 0 4px;display:flex;gap:4px;flex-wrap:wrap}
+.dot{display:inline-block;width:10px;height:10px;border-radius:50%;background:rgba(255,255,255,.15)}
+.fnext{display:block;font-size:12px;opacity:.85;line-height:1.25}
+.fnext .rar{display:inline;font-size:11px}
+.fcard .bprog{margin:6px 0 0}
+.tnum{display:inline-flex;width:34px;height:34px;border-radius:50%;background:var(--yellow);color:var(--ink);font-size:20px;font-weight:700;align-items:center;justify-content:center}
+.nb{border-left:4px solid var(--rc);padding-left:10px;margin-bottom:8px}
+.nb .rar{display:inline;margin-left:4px}
+.nb small{display:block}
+.nb.r-legendaire{background:linear-gradient(90deg,rgba(245,158,11,.25),transparent);border-radius:8px}
+</style>
+</head>
+<body>
+<div class="app">
+
+  <!-- ACCUEIL -->
+  <section class="screen active" id="home">
+    <div class="top">
+      <div class="player" id="homePlayer"></div>
+      <button class="icon-btn" id="soundBtn" aria-label="Son">🔊</button>
+    </div>
+    <h1>Turbo <span>Tables</span></h1>
+    <p class="sub">Combien de bonnes réponses avant la fin du chrono ?</p>
+
+    <div class="panel">
+      <h2>Quelles tables ?
+        <span class="links"><button id="allBtn">Toutes</button><button id="noneBtn">Aucune</button></span>
+      </h2>
+      <div class="chips" id="tableChips"></div>
+    </div>
+
+    <div class="panel">
+      <h2>Durée</h2>
+      <div class="row" id="durChips"></div>
+    </div>
+
+    <div class="spacer"></div>
+    <button class="big" id="startBtn">C'est parti !</button>
+    <p class="best" id="bestTxt"></p>
+    <div class="nav">
+      <button class="navb" id="goBadges"><span class="ic">🏅</span><span class="lb">Badges</span><span class="ct" id="cBadges"></span></button>
+      <button class="navb" id="goDips"><span class="ic">🎓</span><span class="lb">Diplômes</span><span class="ct" id="cDips"></span></button>
+      <button class="navb" id="goHist"><span class="ic">📜</span><span class="lb">Historique</span><span class="ct" id="cHist"></span></button>
+    </div>
+  </section>
+
+  <!-- JEU -->
+  <section class="screen" id="game">
+    <div class="exam-tag" id="examTag"></div>
+    <div class="hud">
+      <span class="pill" id="scoreTxt">0</span>
+      <span class="streak" id="streakTxt">🔥 0</span>
+      <span class="pill" id="timeTxt">60</span>
+    </div>
+    <div class="bar"><div id="barFill"></div></div>
+    <div class="card" id="card">
+      <div class="plus" id="plus">+10</div>
+      <div class="q" id="qTxt">…</div>
+      <div class="a" id="aTxt"><span class="ph">?</span></div>
+    </div>
+    <div class="choices" id="choices"></div>
+    <button class="link" id="quitBtn">Arrêter la partie</button>
+  </section>
+
+  <!-- FIN -->
+  <section class="screen" id="end">
+    <div id="endHead"></div>
+    <div class="banner" id="recordTxt">🏆 Nouveau record !</div>
+    <div class="banner lvl" id="lvlTxt"></div>
+    <div class="stats" id="endStats"></div>
+    <div class="panel">
+      <div class="xpgain">
+        <span class="gain" id="xpGain">+0 XP</span>
+        <div class="pinfo" id="endLevel"></div>
+      </div>
+    </div>
+    <div class="panel" id="newBadgesPanel">
+      <h2>Nouveau badge !</h2>
+      <div id="newBadges"></div>
+    </div>
+    <div class="panel" id="errPanel">
+      <h2>À revoir</h2>
+      <div class="errs" id="errList"></div>
+    </div>
+    <div class="spacer"></div>
+    <div class="btns" id="endBtns"></div>
+  </section>
+
+  <!-- BADGES -->
+  <section class="screen" id="badges">
+    <div class="hhead">
+      <button class="icon-btn back" aria-label="Retour">←</button>
+      <span class="htitle">Badges</span>
+      <span style="width:44px"></span>
+    </div>
+    <p class="sub" id="badgeCount"></p>
+    <div class="bgrid" id="bGrid"></div>
+  </section>
+
+  <!-- DIPLÔMES -->
+  <section class="screen" id="dips">
+    <div class="hhead">
+      <button class="icon-btn back" aria-label="Retour">←</button>
+      <span class="htitle">Diplômes</span>
+      <span style="width:44px"></span>
+    </div>
+    <div class="panel">
+      <h2>Prénom écrit sur les diplômes</h2>
+      <input class="field" id="nameInput" placeholder="Ton prénom" maxlength="20" autocomplete="off">
+    </div>
+    <p class="rules">Pour gagner le diplôme d'une table, réussis son examen : <b>20 calculs en 60 secondes</b>, avec <b>2 erreurs au maximum</b>.<br>0 erreur = 🥇 Très Bien · 1 erreur = 🥈 Bien · 2 erreurs = 🥉 Assez Bien</p>
+    <div class="dipgrid" id="dipGrid"></div>
+    <button class="grand" id="grandCard"></button>
+  </section>
+
+  <!-- HISTORIQUE -->
+  <section class="screen" id="hist">
+    <div class="hhead">
+      <button class="icon-btn back" aria-label="Retour">←</button>
+      <span class="htitle">Historique</span>
+      <span style="width:44px"></span>
+    </div>
+    <div class="stats" id="hStats"></div>
+    <div class="panel" id="hMissPanel">
+      <h2>Calculs les plus ratés</h2>
+      <div class="errs" id="hMiss"></div>
+      <button class="ghost" id="hMissBtn">S'entraîner sur ces calculs</button>
+    </div>
+    <div id="hList"></div>
+    <p class="note" id="hNote"></p>
+  </section>
+</div>
+
+<div class="count" id="count"></div>
+<div class="modal" id="modal"><div class="sheet" id="sheet"></div></div>
+
+<script>
+const $ = s => document.querySelector(s);
+const store = (k, v) => { try { localStorage.setItem('tt_' + k, JSON.stringify(v)); } catch (e) {} };
+const read = (k, d) => { try { const v = localStorage.getItem('tt_' + k); return v ? JSON.parse(v) : d; } catch (e) { return d; } };
+const shuffle = arr => { for (let i = arr.length - 1; i > 0; i--) { const j = Math.floor(Math.random() * (i + 1)); [arr[i], arr[j]] = [arr[j], arr[i]]; } return arr; };
+
+/* =========================================================
+   GAMIFICATION : niveaux infinis, badges à qualités, diplômes
+   ========================================================= */
+const MENTIONS = { 3: { name: 'Très Bien', medal: '🥇' }, 2: { name: 'Bien', medal: '🥈' }, 1: { name: 'Assez Bien', medal: '🥉' } };
+
+/* ---- Niveaux infinis : chaque niveau demande un peu plus d'XP que le précédent ---- */
+const RANKS = [
+  [1, '🐣', 'Apprenti'], [5, '🐭', 'Petit malin'], [10, '🐰', 'Compteur rapide'], [15, '🦊', 'Calculateur'],
+  [20, '🐺', 'As du calcul'], [25, '🦅', 'Expert des tables'], [30, '🐯', 'Maître du calcul'], [35, '🦁', 'Champion'],
+  [40, '🐉', 'Légende'], [45, '🦄', 'Génie des maths'], [50, '🚀', 'Astronaute'], [60, '🪐', 'Explorateur des planètes'],
+  [70, '☄️', 'Chasseur de comètes'], [80, '🌌', 'Gardien de la galaxie'], [100, '👑', 'Empereur des nombres'],
+];
+const xpStep = n => 50 + 25 * (n - 1);           // XP pour passer du niveau n au niveau n + 1
+const rankOf = n => { let r = RANKS[0]; RANKS.forEach(x => { if (n >= x[0]) r = x; }); return { emoji: r[1], name: r[2] }; };
+function levelInfo(xp) {
+  let n = 1, base = 0;
+  while (xp >= base + xpStep(n)) { base += xpStep(n); n++; }
+  const need = xpStep(n);
+  return { num: n, cur: rankOf(n), into: xp - base, need, pct: (xp - base) / need * 100, xp };
+}
+
+const modeOf = g => g.mode || (g.practice ? 'practice' : 'normal');
+function xpOf(g) {
+  const m = modeOf(g);
+  if (m === 'exam') return g.passed ? 20 + g.mention * 10 : Math.min(g.correct, 20);
+  if (m === 'practice') return g.correct * 2;
+  return g.correct * 2 + g.stars * 5;
+}
+const totalXp = h => h.reduce((s, g) => s + xpOf(g), 0);
+
+/* ---- Qualités des badges (comme dans les jeux en ligne) ---- */
+const RARITY = {
+  normal:     { n: 'Normal',     c: '#cbd5e1' },
+  rare:       { n: 'Rare',       c: '#3b82f6' },
+  epique:     { n: 'Épique',     c: '#a855f7' },
+  legendaire: { n: 'Légendaire', c: '#f59e0b' },
+};
+const RARITY_ORDER = ['normal', 'rare', 'epique', 'legendaire'];
+const ROMAN = ['I', 'II', 'III', 'IV', 'V', 'VI', 'VII', 'VIII'];
+// La qualité dépend de la difficulté du palier dans sa famille
+const rarityFor = (i, len) => { const p = len > 1 ? i / (len - 1) : 1; return p < .3 ? 'normal' : p < .6 ? 'rare' : p < .99 ? 'epique' : 'legendaire'; };
+const pl = (n, w) => `${n} ${w}${n > 1 ? 's' : ''}`;
+
+/* ---- Familles de badges à paliers ---- */
+const FAMILIES = [
+  { id: 'total',      e: '✅', n: 'Bonnes réponses', d: g => `${g} bonnes réponses en tout`,              v: s => s.totalCorrect, goals: [50, 200, 500, 1000, 2500, 5000, 10000] },
+  { id: 'parties',    e: '🎮', n: 'Joueur',          d: g => `Joue ${pl(g, 'partie')}`,                  v: s => s.games,        goals: [5, 20, 50, 100, 250, 500, 1000] },
+  { id: 'serie',      e: '🔥', n: 'Série',           d: g => `${g} bonnes réponses à la suite`,          v: s => s.maxStreak,    goals: [10, 20, 30, 50, 75, 100, 150] },
+  { id: 'vitesse',    e: '⚡', n: 'Vitesse',         d: g => `${g} bonnes réponses en 1 minute`,         v: s => s.bestRate,     goals: [15, 20, 25, 30, 35, 40, 45] },
+  { id: 'sansfaute',  e: '🎯', n: 'Sans faute',      d: g => `${pl(g, 'partie')} sans erreur (10 réponses ou plus)`, v: s => s.perfectCount, goals: [1, 5, 15, 30, 60, 100, 200] },
+  { id: 'etoiles',    e: '⭐', n: 'Étoiles',         d: g => `Gagne ${g} étoiles en tout`,               v: s => s.totalStars,   goals: [10, 50, 150, 300, 600, 1000, 2000] },
+  { id: 'flamme',     e: '📅', n: 'Flamme',          d: g => `Joue ${g} jours de suite`,                 v: s => s.days,         goals: [2, 3, 5, 7, 14, 21, 30] },
+  { id: 'fidele',     e: '🗓️', n: 'Fidèle',          d: g => `Joue ${g} jours différents`,               v: s => s.daysTotal,    goals: [3, 7, 15, 30, 60, 100, 200] },
+  { id: 'niveau',     e: '🆙', n: 'Niveau',          d: g => `Atteins le niveau ${g}`,                   v: s => s.level,        goals: [5, 10, 20, 30, 50, 75, 100] },
+  { id: 'arcenciel',  e: '🌈', n: 'Arc-en-ciel',     d: g => `${pl(g, 'partie')} avec toutes les tables et 2 étoiles`, v: s => s.rainbow, goals: [1, 5, 15, 30, 60, 100] },
+  { id: 'endurance',  e: '🏔️', n: 'Endurance',       d: g => `${pl(g, 'partie')} de 3 minutes avec 2 étoiles`, v: s => s.endurance, goals: [1, 5, 15, 30, 60] },
+  { id: 'reparateur', e: '🔧', n: 'Réparateur',      d: g => `Répare tes erreurs sans faute ${g} fois`,  v: s => s.fixedCount,   goals: [1, 5, 15, 30, 60] },
+  { id: 'diplomes',   e: '🎓', n: 'Diplômes',        d: g => `Gagne ${pl(g, 'diplôme')}`,                v: s => s.dipCount,     goals: [1, 3, 5, 8, 10] },
+  { id: 'tresbien',   e: '🏅', n: 'Très Bien',       d: g => `${pl(g, 'diplôme')} « Très Bien »`,        v: s => s.tbCount,      goals: [1, 3, 5, 8, 10] },
+];
+// Une famille par table : bonnes réponses dans cette table
+for (let t = 1; t <= 10; t++) FAMILIES.push({
+  id: 't' + t, table: t, e: String(t), n: `Table de ${t}`, d: g => `${g} bonnes réponses dans la table de ${t}`,
+  v: s => s.tableCorrect[t], goals: [25, 100, 250, 500, 1000],
+});
+
+/* ---- Badges secrets ---- */
+const SECRETS = [
+  { id: 's_matin',   e: '🐓', n: 'Lève-tôt',          r: 'rare',       d: 'Joue avant 8 h du matin',                      t: s => s.early },
+  { id: 's_weekend', e: '🎉', n: 'Week-end studieux', r: 'rare',       d: 'Joue le samedi et le dimanche',                t: s => s.weekend },
+  { id: 's_100',     e: '🎰', n: 'Pile-poil',         r: 'rare',       d: 'Finis une partie avec exactement 100 points',  t: s => s.norm.some(g => g.score === 100) },
+  { id: 's_retour',  e: '🔁', n: 'Le grand retour',   r: 'rare',       d: 'Reviens jouer après 7 jours d\'absence',       t: s => s.comeback },
+  { id: 's_dix',     e: '🦾', n: 'Increvable',        r: 'epique',     d: 'Joue 10 parties dans la même journée',         t: s => s.maxPerDay >= 10 },
+  { id: 's_record',  e: '📈', n: 'Toujours mieux',    r: 'epique',     d: 'Bats ton record 10 fois',                      t: s => s.records >= 10 },
+  { id: 's_tous',    e: '🧮', n: 'Collectionneur',    r: 'epique',     d: 'Réussis tous les calculs des tables de 1 à 10', t: s => s.pairsDone >= 55 },
+  { id: 's_froid',   e: '🧊', n: 'Sang-froid',        r: 'epique',     d: '3 étoiles dans une partie de 3 minutes',       t: s => s.norm.some(g => g.duration >= 180 && g.stars >= 3) },
+  { id: 's_perfect', e: '💎', n: 'Perfection',        r: 'legendaire', d: '30 bonnes réponses sans aucune erreur',        t: s => s.norm.some(g => g.correct >= 30 && g.correct === g.total) },
+  { id: 's_tb10',    e: '👑', n: 'Maître absolu',     r: 'legendaire', d: 'Les 10 diplômes avec la mention Très Bien',    t: s => s.tbCount >= 10 },
+];
+
+/* ---- Liste à plat de tous les badges ---- */
+const ALL_BADGES = [];
+FAMILIES.forEach(f => f.goals.forEach((goal, i) => ALL_BADGES.push({
+  id: f.id + ':' + i, fam: f, tier: i, goal, r: rarityFor(i, f.goals.length),
+  e: f.e, n: `${f.n}${f.table ? ' · ' : ' '}${ROMAN[i]}`, d: f.d(goal),
+})));
+SECRETS.forEach(x => ALL_BADGES.push({ id: x.id, secret: true, r: x.r, e: x.e, n: x.n, d: x.d, t: x.t }));
+const BADGE_BY_ID = Object.fromEntries(ALL_BADGES.map(b => [b.id, b]));
+function unlocked(s) {
+  const got = new Set();
+  FAMILIES.forEach(f => { const v = f.v(s); f.goals.forEach((g, i) => { if (v >= g) got.add(f.id + ':' + i); }); });
+  SECRETS.forEach(x => { if (x.t(s)) got.add(x.id); });
+  return got;
+}
+
+/* ---- Statistiques calculées à partir de l'historique ---- */
+const dayKey = ts => { const d = new Date(ts); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); };
+const dayTime = k => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
+function diplomas(h) {
+  const d = Array(11).fill(null);
+  h.forEach(g => {
+    if (modeOf(g) !== 'exam' || !g.passed) return;
+    const t = g.examTable, cur = d[t];
+    if (!cur || g.mention > cur.mention || (g.mention === cur.mention && g.ts < cur.ts)) d[t] = { mention: g.mention, ts: g.ts };
+  });
+  return d;
+}
+function computeStats(h) {
+  const dips = diplomas(h), got = dips.filter(Boolean);
+  const norm = h.filter(g => modeOf(g) === 'normal');
+  const chrono = [...h].sort((a, b) => a.ts - b.ts);
+
+  // Jours joués
+  const perDay = {};
+  h.forEach(g => { const k = dayKey(g.ts); perDay[k] = (perDay[k] || 0) + 1; });
+  const days = Object.keys(perDay).map(dayTime).sort((a, b) => a - b);
+  let streak = days.length ? 1 : 0, run = 1, comeback = false;
+  for (let i = 1; i < days.length; i++) {
+    const gap = Math.round((days[i] - days[i - 1]) / 864e5);
+    run = gap === 1 ? run + 1 : 1;
+    streak = Math.max(streak, run);
+    if (gap >= 8) comeback = true;
+  }
+  const daySet = new Set(days);
+  const weekend = days.some(t => new Date(t).getDay() === 6 && daySet.has(new Date(t).setDate(new Date(t).getDate() + 1)));
+
+  // Records battus (parties normales, par durée)
+  const bests = {}; let records = 0;
+  chrono.filter(g => modeOf(g) === 'normal').forEach(g => {
+    const b = bests[g.duration] || 0;
+    if (b > 0 && g.score > b) records++;
+    if (g.score > b) bests[g.duration] = g.score;
+  });
+
+  // Bonnes réponses par table et calculs réussis
+  const tableCorrect = Array(11).fill(0), pairs = new Set();
+  h.forEach(g => Object.entries(g.seen || {}).forEach(([k, v]) => {
+    const [a, b] = k.split('x').map(Number);
+    if (v[0] > 0 && a >= 1 && b <= 10) pairs.add(k);
+    if (a >= 1 && a <= 10) tableCorrect[a] += v[0];
+    if (b !== a && b >= 1 && b <= 10) tableCorrect[b] += v[0];
+  }));
+
+  const st = {
+    h, norm, dips,
+    games: h.length,
+    totalCorrect: h.reduce((s, g) => s + g.correct, 0),
+    maxStreak: h.reduce((m, g) => Math.max(m, g.bestStreak), 0),
+    bestRate: norm.filter(g => g.duration >= 60).reduce((m, g) => Math.max(m, Math.floor(g.correct * 60 / g.duration)), 0),
+    perfectCount: norm.filter(g => g.total >= 10 && g.correct === g.total).length,
+    totalStars: norm.reduce((s, g) => s + g.stars, 0),
+    days: streak, daysTotal: days.length,
+    rainbow: norm.filter(g => g.tables.length >= 10 && g.stars >= 2).length,
+    endurance: norm.filter(g => g.duration >= 180 && g.stars >= 2).length,
+    fixedCount: h.filter(g => modeOf(g) === 'practice' && g.total >= 5 && g.correct === g.total).length,
+    dipCount: got.length, tbCount: got.filter(x => x.mention === 3).length,
+    level: levelInfo(totalXp(h)).num,
+    tableCorrect, pairsDone: pairs.size,
+    early: h.some(g => new Date(g.ts).getHours() < 8),
+    weekend, comeback, records,
+    maxPerDay: Math.max(0, ...Object.values(perDay)),
+  };
+  return st;
+}
+
+/* ---- Carte joueur ---- */
+function playerHtml(lv) {
+  return `<div class="avatar">${lv.cur.emoji}</div>
+    <div class="pinfo"><div class="plvl">Niveau ${lv.num} · ${lv.cur.name}</div>
+    <div class="pname"></div>
+    <div class="xpbar"><div style="width:${lv.pct}%"></div></div><div class="xptxt">${lv.into} / ${lv.need} XP</div></div>`;
+}
+function fillPlayer(el, lv) {
+  el.innerHTML = playerHtml(lv);
+  const n = el.querySelector('.pname');
+  if (profile.name) n.textContent = profile.name; else n.remove();
+}
+
+/* =========================================================
+   RÉGLAGES
+   ========================================================= */
+let tables = new Set(read('tables', [2, 3, 4, 5]));
+let duration = read('duration', 60);
+let sound = read('sound', true);
+let profile = read('profile', { name: '' });
+const DURATIONS = [30, 60, 90, 120, 150, 180];
+
+function renderHome() {
+  const s = computeStats(history);
+  fillPlayer($('#homePlayer'), levelInfo(totalXp(history)));
+  const tc = $('#tableChips'); tc.innerHTML = '';
+  for (let t = 1; t <= 10; t++) {
+    const b = document.createElement('button');
+    b.className = 'chip' + (tables.has(t) ? ' on' : '');
+    b.innerHTML = t + (s.dips[t] ? `<span class="cap">🎓</span>` : '');
+    b.onclick = () => { tables.has(t) ? tables.delete(t) : tables.add(t); saveHome(); };
+    tc.appendChild(b);
+  }
+  const dc = $('#durChips'); dc.innerHTML = '';
+  DURATIONS.forEach(d => {
+    const b = document.createElement('button');
+    b.className = 'chip' + (d === duration ? ' on' : '');
+    b.textContent = d + ' s';
+    b.onclick = () => { duration = d; saveHome(); };
+    dc.appendChild(b);
+  });
+  $('#startBtn').disabled = tables.size === 0;
+  const best = bestFor(duration);
+  $('#bestTxt').textContent = best ? `Record en ${duration} s : ${best} points` : '';
+  $('#soundBtn').textContent = sound ? '🔊' : '🔇';
+  $('#cBadges').textContent = `${unlocked(s).size}/${ALL_BADGES.length}`;
+  $('#cDips').textContent = `${s.dipCount}/10`;
+  $('#cHist').textContent = history.length ? `${history.length} partie${history.length > 1 ? 's' : ''}` : '';
+}
+function saveHome() { store('tables', [...tables]); store('duration', duration); renderHome(); }
+$('#allBtn').onclick = () => { tables = new Set([1,2,3,4,5,6,7,8,9,10]); saveHome(); };
+$('#noneBtn').onclick = () => { tables = new Set(); saveHome(); };
+$('#soundBtn').onclick = () => { sound = !sound; store('sound', sound); ensureAudio(); renderHome(); };
+
+/* =========================================================
+   SAUVEGARDE (compte Claude si possible, sinon cet appareil)
+   ========================================================= */
+let history = read('history', []);
+let cloudCol = null;
+const num = v => Number(v) || 0;
+const clean = g => {
+  const o = {
+    id: String(g.id), ts: num(g.ts), mode: modeOf(g), duration: num(g.duration),
+    tables: Array.isArray(g.tables) ? g.tables.map(num) : [],
+    score: num(g.score), correct: num(g.correct), total: num(g.total),
+    bestStreak: num(g.bestStreak), stars: num(g.stars),
+    errors: Array.isArray(g.errors) ? g.errors.map(e => ({ a: num(e.a), b: num(e.b), n: num(e.n) })) : []
+  };
+  o.seen = {};
+  if (g.seen && typeof g.seen === 'object') Object.entries(g.seen).forEach(([k, v]) => {
+    if (/^\d{1,2}x\d{1,2}$/.test(k) && Array.isArray(v)) o.seen[k] = [num(v[0]), num(v[1])];
+  });
+  if (o.mode === 'exam') { o.examTable = num(g.examTable); o.passed = !!g.passed; o.mention = num(g.mention); }
+  return o;
+};
+history = history.map(g => ({ ...clean(g), synced: !!g.synced }));
+const saveLocal = () => store('history', history.slice(0, 1000));
+const withTimeout = (p, ms) => Promise.race([p, new Promise((_, rej) => setTimeout(() => rej({ code: 'timeout' }), ms))]);
+
+async function initCloud() {
+  try {
+    if (!window.claude || !window.claude.use) return;
+    const [db, user] = await Promise.all([claude.use('db'), claude.use('user')]);
+    if (!db || !user) return;
+    const uid = await user.id();
+    if (!uid) return;
+    const col = db.collection('data/users/' + uid);
+    for (const g of history.filter(g => !g.synced)) { await col.doc(g.id).set(clean(g)); g.synced = true; }
+    const snap = await withTimeout(col.orderBy('ts', 'desc').limit(1000).get(), 10000);
+    const remote = snap.docs.filter(d => d.exists && d.id !== 'profile').map(d => ({ ...clean({ ...d.data(), id: d.id }), synced: true }));
+    const ids = new Set(remote.map(g => g.id));
+    history = [...remote, ...history.filter(g => !g.synced && !ids.has(g.id))].sort((a, b) => b.ts - a.ts);
+    cloudCol = col;
+    saveLocal();
+    try {
+      const p = await col.doc('profile').get();
+      const remoteName = p.exists ? String((p.data() || {}).name || '').slice(0, 20) : '';
+      if (remoteName) { profile.name = remoteName; store('profile', profile); }
+      else if (profile.name) await col.doc('profile').set({ name: profile.name });
+    } catch (e) {}
+    refreshViews();
+  } catch (e) { /* on reste sur l'appareil */ }
+}
+function saveGame(rec) {
+  rec.id = 'g' + Date.now() + Math.random().toString(36).slice(2, 6);
+  rec.synced = false;
+  history.unshift(rec);
+  saveLocal();
+  if (cloudCol) cloudCol.doc(rec.id).set(clean(rec)).then(() => { rec.synced = true; saveLocal(); }).catch(() => {});
+}
+let profileSaving = Promise.resolve();
+function saveProfile() {
+  store('profile', profile);
+  if (cloudCol) profileSaving = profileSaving.then(() => cloudCol.doc('profile').set({ name: profile.name })).catch(() => {});
+}
+function bestFor(d) {
+  return Math.max(read('best_' + d, 0), 0, ...history.filter(g => modeOf(g) === 'normal' && g.duration === d).map(g => g.score));
+}
+function refreshViews() {
+  const a = document.querySelector('.screen.active');
+  if (a && a.id !== 'game' && a.id !== 'end') show(a.id);
+}
+
+/* =========================================================
+   SONS + CONFETTIS
+   ========================================================= */
+let ac = null;
+function ensureAudio() {
+  try { if (!ac) ac = new (window.AudioContext || window.webkitAudioContext)(); if (ac.state === 'suspended') ac.resume(); } catch (e) { ac = null; }
+}
+function tone(freq, start, dur, type = 'sine', vol = 0.15) {
+  if (!sound || !ac) return;
+  try {
+    const o = ac.createOscillator(), g = ac.createGain();
+    o.type = type; o.frequency.value = freq;
+    const t = ac.currentTime + start;
+    g.gain.setValueAtTime(vol, t);
+    g.gain.exponentialRampToValueAtTime(0.001, t + dur);
+    o.connect(g).connect(ac.destination);
+    o.start(t); o.stop(t + dur);
+  } catch (e) {}
+}
+const sGood = () => { tone(880, 0, .12); tone(1320, .08, .15); };
+const sBad = () => { tone(220, 0, .3, 'square', .08); };
+const sTick = () => tone(660, 0, .1, 'triangle');
+const sGo = () => tone(1046, 0, .3, 'triangle');
+const sEnd = () => { [523, 659, 784, 1046].forEach((f, i) => tone(f, i * .12, .25, 'triangle')); };
+const sFanfare = () => { [523, 523, 659, 784, 659, 784, 1046].forEach((f, i) => tone(f, .6 + i * .13, .3, 'triangle', .18)); };
+
+function confetti() {
+  const colors = ['#facc15', '#f97316', '#22c55e', '#6366f1', '#ec4899', '#38bdf8'];
+  const box = document.createElement('div'); box.className = 'confetti';
+  for (let i = 0; i < 90; i++) {
+    const p = document.createElement('i');
+    p.style.left = Math.random() * 100 + '%';
+    p.style.background = colors[i % colors.length];
+    p.style.animationDelay = Math.random() * .7 + 's';
+    p.style.animationDuration = (1.8 + Math.random() * 1.5) + 's';
+    box.appendChild(p);
+  }
+  document.body.appendChild(box);
+  setTimeout(() => box.remove(), 4200);
+}
+
+/* =========================================================
+   MOTEUR DE JEU (partie normale, entraînement, examen)
+   ========================================================= */
+let S = null, lastOpts = { mode: 'normal' };
+let pool = [], examQueue = [], current = null, prevKey = '';
+let seen = new Map();
+let score, streak, bestStreak, correct, total, examErrors, misses, endAt, timerId, locked, playing, nextTimeout;
+let gen = 0;
+
+function buildPool() {
+  const p = [];
+  tables.forEach(t => { for (let m = 1; m <= 10; m++) p.push({ a: t, b: m }); });
+  return p;
+}
+const keyOf = q => Math.min(q.a, q.b) + 'x' + Math.max(q.a, q.b);
+
+function pickQuestion() {
+  let candidates = pool.filter(q => keyOf(q) !== prevKey);
+  if (!candidates.length) candidates = pool;
+  const weights = candidates.map(q => 1 + 3 * (misses.get(keyOf(q))?.count || 0));
+  let r = Math.random() * weights.reduce((s, w) => s + w, 0);
+  let q = candidates[0];
+  for (let i = 0; i < candidates.length; i++) { r -= weights[i]; if (r <= 0) { q = candidates[i]; break; } }
+  prevKey = keyOf(q);
+  return Math.random() < .5 ? { a: q.a, b: q.b } : { a: q.b, b: q.a };
+}
+
+function makeChoices(a, b) {
+  const ans = a * b;
+  const near = [a * (b + 1), a * (b - 1), (a + 1) * b, (a - 1) * b];
+  const far = [ans + 1, ans - 1, ans + 10, ans - 10, ans + 2, ans - 2,
+               parseInt(String(ans).split('').reverse().join(''), 10)];
+  const ok = v => v > 0 && v !== ans;
+  const picks = [];
+  [...shuffle(near.filter(ok)), ...shuffle(far.filter(ok))].forEach(v => {
+    if (picks.length < 3 && !picks.includes(v)) picks.push(v);
+  });
+  let extra = ans + 3;
+  while (picks.length < 3) { if (!picks.includes(extra)) picks.push(extra); extra++; }
+  return shuffle([ans, ...picks]);
+}
+
+function startGame(opts) {
+  ensureAudio();
+  closeModal();
+  opts = opts || { mode: 'normal' };
+  S = { mode: opts.mode, table: opts.table };
+  if (opts.mode === 'exam') {
+    S.duration = 60;
+    const q = [];
+    for (let r = 0; r < 2; r++) for (let m = 1; m <= 10; m++) q.push({ a: opts.table, b: m });
+    examQueue = shuffle(q);
+    for (let i = 1; i < examQueue.length; i++) if (examQueue[i].b === examQueue[i - 1].b) { const j = (i + 2) % examQueue.length; [examQueue[i], examQueue[j]] = [examQueue[j], examQueue[i]]; }
+    S.tables = [opts.table];
+  } else {
+    S.duration = duration;
+    pool = opts.mode === 'practice' ? opts.pool.map(p => ({ ...p })) : buildPool();
+    if (!pool.length) return;
+    S.tables = opts.mode === 'normal' ? [...tables].sort((x, y) => x - y) : [];
+  }
+  lastOpts = opts;
+  score = 0; streak = 0; bestStreak = 0; correct = 0; total = 0; examErrors = 0;
+  misses = new Map(); seen = new Map(); prevKey = ''; playing = false;
+  show('game');
+  const tag = $('#examTag');
+  tag.style.display = S.mode === 'exam' ? 'block' : S.mode === 'practice' ? 'block' : 'none';
+  tag.textContent = S.mode === 'exam' ? `🎓 Examen de la table de ${S.table}` : '🔧 Entraînement sur les erreurs';
+  updateHud();
+  $('#timeTxt').textContent = S.duration;
+  $('#barFill').style.width = '100%';
+  $('#barFill').classList.remove('low');
+  $('#qTxt').textContent = '…'; $('#aTxt').innerHTML = '<span class="ph">?</span>'; $('#choices').innerHTML = '';
+  $('#card').className = 'card';
+  countdown(() => {
+    playing = true;
+    endAt = performance.now() + S.duration * 1000;
+    timerId = setInterval(tick, 100);
+    showQuestion();
+  });
+}
+
+function showQuestion() {
+  if (!playing) return;
+  if (S.mode === 'exam') {
+    if (!examQueue.length || examErrors > 2) return finish();
+    const q = examQueue.shift();
+    current = Math.random() < .5 ? { a: q.a, b: q.b } : { a: q.b, b: q.a };
+  } else {
+    current = pickQuestion();
+  }
+  current.ans = current.a * current.b;
+  locked = false;
+  $('#card').className = 'card';
+  $('#qTxt').textContent = `${current.a} × ${current.b}`;
+  $('#aTxt').innerHTML = '<span class="ph">?</span>';
+  const box = $('#choices'); box.innerHTML = '';
+  makeChoices(current.a, current.b).forEach(v => {
+    const btn = document.createElement('button');
+    btn.className = 'choice';
+    btn.textContent = v;
+    btn.addEventListener('pointerdown', e => { e.preventDefault(); answer(v, btn); });
+    box.appendChild(btn);
+  });
+  updateHud();
+}
+
+function answer(val, btn) {
+  if (!playing || locked) return;
+  locked = true;
+  total++;
+  const sk = keyOf(current), sv = seen.get(sk) || [0, 0];
+  val === current.ans ? sv[0]++ : sv[1]++;
+  seen.set(sk, sv);
+  const card = $('#card');
+  if (val === current.ans) {
+    correct++;
+    const pts = 10 + Math.min(streak, 5) * 2;
+    score += pts; streak++; bestStreak = Math.max(bestStreak, streak);
+    card.className = 'card good';
+    btn.classList.add('right');
+    $('#aTxt').textContent = current.ans;
+    const plus = $('#plus'); plus.textContent = '+' + pts; plus.classList.remove('pop'); void plus.offsetWidth; plus.classList.add('pop');
+    sGood();
+    updateHud();
+    nextTimeout = setTimeout(showQuestion, 400);
+  } else {
+    streak = 0;
+    if (S.mode === 'exam') { examErrors++; endAt += 1600; } // le chrono s'arrête pendant la correction
+    const k = keyOf(current);
+    const m = misses.get(k) || { a: Math.min(current.a, current.b), b: Math.max(current.a, current.b), count: 0 };
+    m.count++; misses.set(k, m);
+    card.className = 'card bad';
+    $('#aTxt').innerHTML = `<s>${val}</s>${current.ans}`;
+    document.querySelectorAll('.choice').forEach(x => {
+      if (x === btn) x.classList.add('wrong');
+      else if (Number(x.textContent) === current.ans) x.classList.add('right');
+      else x.classList.add('dim');
+    });
+    sBad();
+    updateHud();
+    nextTimeout = setTimeout(showQuestion, 1600);
+  }
+}
+
+function updateHud() {
+  const st = $('#streakTxt');
+  if (S && S.mode === 'exam') {
+    $('#scoreTxt').textContent = `${Math.min(20 - examQueue.length, 20)}/20`;
+    st.textContent = `❌ ${examErrors}/2`;
+    st.classList.add('show');
+  } else {
+    $('#scoreTxt').textContent = score;
+    st.textContent = '🔥 ' + streak;
+    st.classList.toggle('show', streak >= 3);
+  }
+}
+
+function tick() {
+  const left = Math.max(0, endAt - performance.now());
+  const secs = Math.ceil(left / 1000);
+  $('#timeTxt').textContent = secs;
+  const fill = $('#barFill');
+  fill.style.width = Math.min(100, left / (S.duration * 1000) * 100) + '%';
+  fill.classList.toggle('low', secs <= 10);
+  if (left <= 0) finish();
+}
+
+function countdown(done) {
+  const c = $('#count'); c.classList.add('show');
+  const steps = ['3', '2', '1', 'Go !'];
+  let i = 0;
+  const my = ++gen;
+  const step = () => {
+    if (my !== gen) return;
+    if (i < steps.length) {
+      c.innerHTML = `<span>${steps[i]}</span>`;
+      i === 3 ? sGo() : sTick();
+      i++; setTimeout(step, i === 4 ? 500 : 750);
+    } else { c.classList.remove('show'); done(); }
+  };
+  step();
+}
+
+function stopTimers() { clearInterval(timerId); clearTimeout(nextTimeout); playing = false; }
+
+/* =========================================================
+   FIN DE PARTIE
+   ========================================================= */
+function finish() {
+  if (!playing) return;
+  stopTimers();
+
+  const isExam = S.mode === 'exam';
+  const rate = correct * 60 / S.duration;
+  const stars = isExam ? 0 : rate >= 20 ? 3 : rate >= 12 ? 2 : rate >= 5 ? 1 : 0;
+  const errs = [...misses.values()].sort((x, y) => y.count - x.count);
+  const passed = isExam && total === 20 && examErrors <= 2;
+  const mention = passed ? 3 - examErrors : 0;
+
+  const before = computeStats(history), xpBefore = totalXp(history);
+  const lvBefore = levelInfo(xpBefore), badgesBefore = unlocked(before);
+  const dipBefore = isExam ? before.dips[S.table] : null;
+  const isRecord = S.mode === 'normal' && score > 0 && score > bestFor(S.duration);
+
+  const rec = {
+    ts: Date.now(), mode: S.mode, duration: S.duration, tables: S.tables,
+    score, correct, total, bestStreak, stars,
+    errors: errs.map(e => ({ a: e.a, b: e.b, n: e.count })),
+    seen: Object.fromEntries(seen)
+  };
+  if (isExam) Object.assign(rec, { examTable: S.table, passed, mention });
+  saveGame(rec);
+
+  const after = computeStats(history), xpAfter = totalXp(history), lvAfter = levelInfo(xpAfter);
+  const newBadges = [...unlocked(after)].filter(id => !badgesBefore.has(id)).map(id => BADGE_BY_ID[id])
+    .sort((x, y) => RARITY_ORDER.indexOf(y.r) - RARITY_ORDER.indexOf(x.r));
+  const levelUp = lvAfter.num > lvBefore.num;
+  const newDiploma = passed && (!dipBefore || mention > dipBefore.mention);
+
+  // En-tête
+  const head = $('#endHead');
+  if (isExam) {
+    head.innerHTML = passed
+      ? `<div class="bigemo">🎓</div><p class="msg">Diplôme de la table de ${S.table} !<br>${MENTIONS[mention].medal} Mention ${MENTIONS[mention].name}</p>`
+      : `<div class="bigemo">💪</div><p class="msg">Pas encore cette fois…<br><small style="font-size:18px;opacity:.85">${examErrors > 2 ? 'Plus de 2 erreurs' : 'Le temps est écoulé'}. Tu peux réessayer !</small></p>`;
+  } else {
+    head.innerHTML = `<div class="stars">${[0, 1, 2].map(i => `<span class="${i < stars ? '' : 'off'}">⭐</span>`).join('')}</div>
+      <p class="msg">${['Continue, tu vas y arriver !', 'Bien joué !', 'Super fort !', 'Champion des tables !'][stars]}</p>`;
+  }
+  $('#recordTxt').style.display = isRecord ? 'block' : 'none';
+  const lt = $('#lvlTxt');
+  lt.style.display = levelUp ? 'block' : 'none';
+  lt.textContent = levelUp ? `⬆️ Niveau ${lvAfter.num} : ${lvAfter.cur.emoji} ${lvAfter.cur.name} !` : '';
+
+  // Statistiques
+  $('#endStats').innerHTML = isExam
+    ? statHtml(`${correct}/20`, 'bonnes réponses') + statHtml(examErrors, examErrors > 1 ? 'erreurs' : 'erreur') + statHtml(bestStreak, 'meilleure série')
+    : statHtml(score, 'points') + statHtml(`${correct}/${total}`, 'bonnes réponses') + statHtml(bestStreak, 'meilleure série');
+
+  // XP et niveau (la barre se remplit)
+  $('#xpGain').textContent = `+${xpAfter - xpBefore} XP`;
+  const el = $('#endLevel');
+  el.innerHTML = `<div class="plvl">Niveau ${lvAfter.num} · ${lvAfter.cur.emoji} ${lvAfter.cur.name}</div>
+    <div class="xpbar"><div style="width:${levelUp ? 0 : lvBefore.pct}%"></div></div>
+    <div class="xptxt">${lvAfter.into} / ${lvAfter.need} XP</div>`;
+  requestAnimationFrame(() => requestAnimationFrame(() => { el.querySelector('.xpbar div').style.width = lvAfter.pct + '%'; }));
+
+  // Nouveaux badges
+  const nbPanel = $('#newBadgesPanel');
+  nbPanel.style.display = 'block';
+  if (newBadges.length) {
+    nbPanel.querySelector('h2').textContent = newBadges.length > 1 ? `${newBadges.length} nouveaux badges !` : 'Nouveau badge !';
+    $('#newBadges').innerHTML = newBadges.slice(0, 6).map(nbHtml).join('')
+      + (newBadges.length > 6 ? `<p class="bnum">… et ${newBadges.length - 6} autres !</p>` : '');
+  } else {
+    const nx = nextBadge(after);
+    nbPanel.querySelector('h2').textContent = 'Prochain badge';
+    $('#newBadges').innerHTML = nx ? nbHtml(nx.b, nx) : '<p>Tu as tout gagné ! 🎉</p>';
+  }
+
+  // Erreurs
+  const list = $('#errList'); list.innerHTML = '';
+  if (!errs.length) list.innerHTML = '<span class="noerr">Aucune erreur, bravo ! 🎉</span>';
+  errs.forEach(e => {
+    const d = document.createElement('span');
+    d.className = 'err';
+    d.textContent = `${e.a} × ${e.b} = ${e.a * e.b}`;
+    list.appendChild(d);
+  });
+
+  // Boutons
+  const btns = $('#endBtns'); btns.innerHTML = '';
+  const addBtn = (label, cls, fn) => { const b = document.createElement('button'); b.className = cls; b.textContent = label; b.onclick = fn; btns.appendChild(b); };
+  if (isExam) {
+    if (passed) addBtn('Voir mon diplôme', 'big green', () => showCertificate(S.table));
+    addBtn(passed ? (mention < 3 ? 'Viser la mention Très Bien' : 'Repasser l\'examen') : 'Repasser l\'examen', passed ? 'big alt' : 'big', () => startGame(lastOpts));
+    addBtn('Retour aux diplômes', 'link', () => show('dips'));
+  } else {
+    if (errs.length) addBtn('S\'entraîner sur mes erreurs', 'big alt', () => startGame({ mode: 'practice', pool: errs.map(e => ({ a: e.a, b: e.b })) }));
+    addBtn('Rejouer', 'big', () => startGame(lastOpts));
+    addBtn('Changer les tables', 'link', () => show('home'));
+  }
+
+  show('end');
+  window.scrollTo(0, 0);
+  sEnd();
+  if (levelUp || newDiploma || newBadges.length || stars === 3) { sFanfare(); setTimeout(confetti, 300); }
+  if (newBadges.some(b => b.r === 'legendaire')) setTimeout(confetti, 1200);
+}
+
+/* =========================================================
+   PAGES : badges, diplômes, historique
+   ========================================================= */
+const starsHtml = n => [0, 1, 2].map(i => `<span class="${i < n ? '' : 'off'}">⭐</span>`).join('');
+const statHtml = (v, l) => `<div class="stat"><b>${v}</b><small>${l}</small></div>`;
+
+const iconHtml = b => b.fam && b.fam.table ? `<span class="tnum">${b.fam.table}</span>` : b.e;
+const rarLabel = r => `<span class="rar" style="color:${RARITY[r].c}">${RARITY[r].n}</span>`;
+
+// Progression vers le prochain palier d'une famille
+function famProgress(f, st) {
+  const v = f.v(st);
+  const i = f.goals.findIndex(g => v < g);           // -1 = tous les paliers gagnés
+  if (i < 0) return { done: true, v, tier: f.goals.length - 1 };
+  const prev = i ? f.goals[i - 1] : 0, goal = f.goals[i];
+  return { done: false, v, i, goal, tier: i - 1, pct: Math.max(0, (v - prev) / (goal - prev) * 100) };
+}
+function nextBadge(st) {
+  let best = null;
+  FAMILIES.forEach(f => {
+    const pr = famProgress(f, st);
+    if (pr.done) return;
+    if (!best || pr.pct > best.pct) best = { ...pr, b: BADGE_BY_ID[f.id + ':' + pr.i] };
+  });
+  return best;
+}
+function nbHtml(b, pr) {
+  const bar = pr ? `<div class="bprog"><div style="width:${pr.pct}%"></div></div><span class="bnum">${pr.v} / ${pr.goal}</span>` : '';
+  return `<div class="nb r-${b.r}" style="--rc:${RARITY[b.r].c}"><span class="e ${pr ? 'next' : ''}">${iconHtml(b)}</span>
+    <div style="flex:1"><b>${b.n}</b> ${rarLabel(b.r)}<small>${b.d}</small>${bar}</div></div>`;
+}
+
+function famCard(f, st, got) {
+  const pr = famProgress(f, st);
+  const has = pr.tier >= 0;
+  const r = has ? rarityFor(pr.tier, f.goals.length) : null;
+  const dots = f.goals.map((g, i) => `<i class="dot" style="${got.has(f.id + ':' + i) ? 'background:' + RARITY[rarityFor(i, f.goals.length)].c : ''}"></i>`).join('');
+  const title = has ? `${f.n}${f.table ? ' · ' : ' '}${ROMAN[pr.tier]}` : f.n;
+  const next = pr.done ? '<small class="fnext">Tout gagné ! 🎉</small>'
+    : `<small class="fnext">Prochain : ${f.d(pr.goal)} ${rarLabel(rarityFor(pr.i, f.goals.length))}</small>
+       <div class="bprog"><div style="width:${pr.pct}%"></div></div><span class="bnum">${pr.v} / ${pr.goal}</span>`;
+  const icon = f.table ? `<span class="tnum">${f.table}</span>` : f.e;
+  return `<div class="fcard ${has ? 'r-' + r : 'none'}" style="--rc:${has ? RARITY[r].c : 'transparent'}">
+    <div class="fhead"><span class="fe">${icon}</span><div><b>${title}</b>${has ? rarLabel(r) : '<span class="rar" style="opacity:.6">Pas encore</span>'}</div></div>
+    <div class="dots">${dots}</div>${next}</div>`;
+}
+
+function renderBadges() {
+  const st = computeStats(history), got = unlocked(st);
+  $('#badgeCount').textContent = `${got.size} badge${got.size > 1 ? 's' : ''} sur ${ALL_BADGES.length}`;
+  const legend = RARITY_ORDER.map(r => `<span><i class="dot" style="background:${RARITY[r].c}"></i>${RARITY[r].n} ${ALL_BADGES.filter(b => b.r === r && got.has(b.id)).length}/${ALL_BADGES.filter(b => b.r === r).length}</span>`).join('');
+  const secrets = SECRETS.map(x => got.has(x.id)
+    ? `<div class="fcard r-${x.r}" style="--rc:${RARITY[x.r].c}"><div class="fhead"><span class="fe">${x.e}</span><div><b>${x.n}</b>${rarLabel(x.r)}</div></div><small class="fnext">${x.d}</small></div>`
+    : `<div class="fcard none secret"><div class="fhead"><span class="fe">❓</span><div><b>Badge secret</b>${rarLabel(x.r)}</div></div><small class="fnext">Continue à jouer pour le découvrir…</small></div>`).join('');
+  $('#bGrid').innerHTML = `<div class="legend">${legend}</div>
+    <h3 class="sect">Défis</h3><div class="fgrid">${FAMILIES.filter(f => !f.table).map(f => famCard(f, st, got)).join('')}</div>
+    <h3 class="sect">Tables</h3><div class="fgrid">${FAMILIES.filter(f => f.table).map(f => famCard(f, st, got)).join('')}</div>
+    <h3 class="sect">Badges secrets</h3><div class="fgrid">${secrets}</div>`;
+}
+
+function renderDips() {
+  const s = computeStats(history);
+  const inp = $('#nameInput');
+  if (document.activeElement !== inp) inp.value = profile.name || '';
+  const grid = $('#dipGrid'); grid.innerHTML = '';
+  for (let t = 1; t <= 10; t++) {
+    const d = s.dips[t];
+    const b = document.createElement('button');
+    b.className = 'dip' + (d ? ' m' + d.mention : '');
+    b.innerHTML = `<span class="dt">Table de ${t}</span><span class="dm">${d ? MENTIONS[d.mention].medal + ' ' + MENTIONS[d.mention].name : '🔒 À passer'}</span>`;
+    b.onclick = () => openTableSheet(t, d);
+    grid.appendChild(b);
+  }
+  const g = $('#grandCard');
+  const all = s.dipCount >= 10;
+  g.className = 'grand' + (all ? ' on' : '');
+  g.innerHTML = all
+    ? `<b>👑 Grand diplôme de Maître des Tables</b><small>Touche pour le voir</small>`
+    : `<b>👑 Grand diplôme de Maître des Tables</b><small>Obtiens les 10 diplômes pour le débloquer (${s.dipCount}/10)</small>`;
+  g.onclick = () => { if (all) showCertificate('grand'); };
+}
+const nameInp = $('#nameInput');
+const commitName = () => { const v = nameInp.value.trim().slice(0, 20); if (v !== profile.name) { profile.name = v; saveProfile(); } };
+nameInp.addEventListener('change', commitName);
+nameInp.addEventListener('blur', commitName);
+
+function openModal(html) { $('#sheet').innerHTML = html; $('#modal').classList.add('show'); }
+function closeModal() { $('#modal').classList.remove('show'); }
+$('#modal').addEventListener('click', e => { if (e.target.id === 'modal') closeModal(); });
+
+function openTableSheet(t, d) {
+  openModal(`<h3>Table de ${t}</h3>
+    <p>${d ? `Tu as déjà ce diplôme avec la mention <b>${MENTIONS[d.mention].name}</b> ${MENTIONS[d.mention].medal}` : 'Réussis l\'examen pour gagner ce diplôme !'}</p>
+    <p style="font-size:15px;opacity:.8">20 calculs · 60 secondes · 2 erreurs maximum</p>
+    <div class="btns" id="sheetBtns"></div>`);
+  const box = $('#sheetBtns');
+  const add = (label, cls, fn) => { const b = document.createElement('button'); b.className = cls; b.textContent = label; b.onclick = fn; box.appendChild(b); };
+  if (d) add('Voir mon diplôme', 'big green', () => showCertificate(t));
+  add(d ? (d.mention < 3 ? 'Viser une meilleure mention' : 'Repasser l\'examen') : 'Passer l\'examen', d ? 'big alt' : 'big', () => startGame({ mode: 'exam', table: t }));
+  add('Fermer', 'link', closeModal);
+}
+
+function showCertificate(which) {
+  const s = computeStats(history);
+  const fmt = ts => new Date(ts).toLocaleDateString('fr-FR', { day: 'numeric', month: 'long', year: 'numeric' });
+  let html;
+  if (which === 'grand') {
+    const tb = s.dips.filter(x => x && x.mention === 3).length;
+    const last = Math.max(...s.dips.filter(Boolean).map(x => x.ts));
+    html = `<div class="ct">👑</div><div class="ch">GRAND DIPLÔME</div><div class="cs">de Maître des Tables</div>
+      <div class="cx">décerné à</div><div class="cn" id="certName"></div>
+      <div class="cx">pour avoir réussi les examens des 10 tables de multiplication</div>
+      <div class="cm" style="color:#7c3aed">${tb} mention${tb > 1 ? 's' : ''} Très Bien</div>
+      <div class="cd">le ${fmt(last)}</div><div class="seal">🏅</div>`;
+  } else {
+    const d = s.dips[which]; if (!d) return;
+    const col = { 3: '#ca8a04', 2: '#64748b', 1: '#c2410c' }[d.mention];
+    html = `<div class="ct">🎓</div><div class="ch">DIPLÔME</div><div class="cs">de la table de ${which}</div>
+      <div class="cx">décerné à</div><div class="cn" id="certName"></div>
+      <div class="cx">pour avoir réussi l'examen avec la mention</div>
+      <div class="cm" style="color:${col}">${MENTIONS[d.mention].medal} ${MENTIONS[d.mention].name}</div>
+      <div class="cd">le ${fmt(d.ts)}</div><div class="seal">🏅</div>`;
+  }
+  openModal(`<div class="cert"><div class="cert-in">${html}</div></div>
+    ${profile.name ? '' : '<p style="font-size:14px;margin:12px 0 0">Écris ton prénom dans la page Diplômes pour qu\'il apparaisse ici.</p>'}
+    <div class="btns" style="margin-top:14px"><button class="big alt" id="certClose">Fermer</button></div>`);
+  $('#certName').textContent = profile.name || 'Champion des tables';
+  $('#certClose').onclick = closeModal;
+  sFanfare(); confetti();
+}
+
+function renderHist() {
+  const games = history;
+  const best = games.filter(g => modeOf(g) === 'normal').reduce((m, g) => Math.max(m, g.score), 0);
+  const tc = games.reduce((s, g) => s + g.correct, 0), tt = games.reduce((s, g) => s + g.total, 0);
+  $('#hStats').innerHTML = statHtml(games.length, games.length > 1 ? 'parties' : 'partie')
+    + statHtml(best, 'meilleur score') + statHtml(tt ? Math.round(tc * 100 / tt) + ' %' : '–', 'de réussite');
+
+  const agg = new Map();
+  games.forEach(g => g.errors.forEach(e => {
+    const k = e.a + 'x' + e.b; const o = agg.get(k) || { a: e.a, b: e.b, n: 0 }; o.n += e.n; agg.set(k, o);
+  }));
+  const top = [...agg.values()].sort((x, y) => y.n - x.n).slice(0, 8);
+  $('#hMissPanel').style.display = top.length ? 'block' : 'none';
+  $('#hMiss').innerHTML = top.map(e => `<span class="err">${e.a} × ${e.b} = ${e.a * e.b}<small>${e.n} fois</small></span>`).join('');
+  $('#hMissBtn').onclick = () => startGame({ mode: 'practice', pool: top.map(e => ({ a: e.a, b: e.b })) });
+
+  const list = $('#hList');
+  if (!games.length) { list.innerHTML = '<p class="empty">Aucune partie pour l\'instant.<br>Lance-toi !</p>'; }
+  else list.innerHTML = games.slice(0, 100).map(g => {
+    const d = new Date(g.ts);
+    let date = d.toLocaleDateString('fr-FR', { weekday: 'short', day: 'numeric', month: 'short' })
+      + ' à ' + d.toLocaleTimeString('fr-FR', { hour: '2-digit', minute: '2-digit' });
+    date = date.charAt(0).toUpperCase() + date.slice(1);
+    const m = modeOf(g);
+    if (m === 'exam') {
+      const res = g.passed ? `${MENTIONS[g.mention].medal} ${MENTIONS[g.mention].name}` : 'pas réussi';
+      return `<div class="hrow"><div><div class="d">${date}</div><div class="t">🎓 Examen table de ${g.examTable} · ${res}</div></div>
+        <div class="r"><div class="sc">${g.passed ? '🎓' : '–'}</div><div class="mini">${g.correct}/20</div></div></div>`;
+    }
+    const tabs = g.tables.length >= 10 ? 'toutes les tables' : (g.tables.length > 1 ? 'tables ' : 'table ') + g.tables.join(', ');
+    const sub = m === 'practice' ? '🔧 Entraînement sur les erreurs' : `${tabs} · ${g.duration} s`;
+    return `<div class="hrow"><div><div class="d">${date}</div><div class="t">${sub}</div></div>
+      <div class="r"><div class="sc">${g.score}</div><div class="mini">${g.correct}/${g.total} ${starsHtml(g.stars)}</div></div></div>`;
+  }).join('');
+  $('#hNote').textContent = cloudCol
+    ? 'Progression enregistrée sur ton compte Claude : la même sur tous tes appareils.'
+    : 'Progression enregistrée sur cet appareil.';
+}
+
+/* =========================================================
+   NAVIGATION
+   ========================================================= */
+function show(id) {
+  document.querySelectorAll('.screen').forEach(s => s.classList.toggle('active', s.id === id));
+  if (id === 'home') renderHome();
+  if (id === 'badges') renderBadges();
+  if (id === 'dips') renderDips();
+  if (id === 'hist') renderHist();
+  if (id !== 'end' && id !== 'game') window.scrollTo(0, 0);
+}
+document.querySelectorAll('.back').forEach(b => b.onclick = () => show('home'));
+$('#goBadges').onclick = () => show('badges');
+$('#goDips').onclick = () => show('dips');
+$('#goHist').onclick = () => show('hist');
+$('#startBtn').onclick = () => startGame({ mode: 'normal' });
+$('#quitBtn').onclick = () => { gen++; stopTimers(); $('#count').classList.remove('show'); show(S && S.mode === 'exam' ? 'dips' : 'home'); };
+
+document.addEventListener('keydown', e => {
+  if (!$('#game').classList.contains('active')) return;
+  const i = '1234'.indexOf(e.key);
+  if (i >= 0) { const btn = document.querySelectorAll('.choice')[i]; if (btn) answer(Number(btn.textContent), btn); }
+});
+
+renderHome();
+initCloud();
+</script>
+</body>
+</html>
