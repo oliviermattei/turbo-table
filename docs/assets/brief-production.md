@@ -1223,7 +1223,7 @@ Cells from left to right, top row then bottom row (the names are only for me, do
 8. (Baleine Céleste) a translucent indigo egg, like dark glass, with a tiny soft galaxy of pink and white specks floating inside.
 ```
 
-#### Œufs légendaires 2/2 (Tortue-Monde, Licorne Arc-en-ciel)
+#### Œufs légendaires 2/2 (Tortue-Monde, Licorne Arc-en-ciel, Foudrelin)
 Enregistrer sous `assets-src/planches/oeufs-legendaires-2.png`. Ordre des cases = ordre de la liste.
 
 ```
@@ -1240,6 +1240,7 @@ no tentacle, no face). No text on the image.
 Cells from left to right, top row then bottom row (the names are only for me, do not write them):
 1. (Tortue-Monde) an earthy egg patterned like a tiny old map: soft green and sand-coloured patches separated by thin turquoise lines.
 2. (Licorne Arc-en-ciel) a clear crystal egg cut like a prism, with fine silver filigree; light passing through it splits into a very faint rainbow inside the crystal.
+3. (Foudrelin (créature électrique originale)) a bright golden-yellow topaz egg with fine crackling white-blue lightning veins under the surface and a thin copper band, as if charged with electricity.
 All other cells stay empty.
 ```
 
