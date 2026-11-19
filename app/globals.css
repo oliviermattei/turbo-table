@@ -397,3 +397,6 @@ button.bestc{cursor:pointer}
 @media (min-width:700px){.app{max-width:600px}.hero-art{width:190px}}
 .bonus-line{margin-top:8px;color:var(--yellow);font-weight:600;font-size:15px}
 .hero .crea-fx.bubble{display:none}
+.btnrow{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+.btnrow .big{font-size:22px;padding:14px 8px}
+.btns > a.big.alt{font-size:22px;padding:14px}

@@ -106,7 +106,10 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
             <button className={r.passed ? 'big alt' : 'big'} onClick={() => go(opts)}>
               {r.passed && r.mention < 3 ? 'Viser la mention Très Bien' : "Repasser l'examen"}
             </button>
-            <Link className="link" href="/diplomes">Retour aux diplômes</Link>
+            <div className="btnrow">
+              <Link className="big alt" href="/diplomes">← Retour</Link>
+              <Link className="big alt" href="/">🏠 Accueil</Link>
+            </div>
           </>
         ) : (
           <>
@@ -115,8 +118,11 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
                 {"S'entraîner sur mes erreurs"}
               </button>
             )}
-            <button className="big" onClick={() => go(opts)}>Rejouer</button>
-            <Link className="link" href="/partie">Changer les tables</Link>
+            <div className="btnrow">
+              <button className="big" onClick={() => go(opts)}>🔁 Rejouer</button>
+              <Link className="big alt" href={opts.mode === 'practice' ? '/' : '/partie'}>← Retour</Link>
+            </div>
+            <Link className="big alt" href="/">🏠 Accueil</Link>
           </>
         )}
       </div>
