@@ -6,9 +6,11 @@ import { isReady, stageOf } from '@/lib/pet/rules';
 import { SPECIES } from '@/lib/pet/species';
 
 export default function BestiairePage() {
-  const { pet } = usePet();
+  const { pet, debug } = usePet();
   const best: Record<string, number> = {};
   pet?.creatures.forEach(c => { best[c.species] = Math.max(best[c.species] ?? 0, Math.min(stageOf(c.xp), c.shown)); });
+  // Test mode: every species with its images counts as found, shown at its final stage
+  if (debug) SPECIES.filter(isReady).forEach(s => { best[s.id] = 3; });
   const found = Object.keys(best).length;
 
   return (
