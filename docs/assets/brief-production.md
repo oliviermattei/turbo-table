@@ -91,7 +91,7 @@ Sheet: <NAME> (<QUALITY>). Background #1E1B4B.
 Creature: <ONE-LINE CONCEPT>. Main colours: <COLOURS>.
 Distinctive features kept at every stage: <FEATURES>.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: <DESCRIPTION>. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: <POSE>.
 2. Young: <DESCRIPTION>. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: <POSE>.
 3. Grown: <DESCRIPTION>. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: <POSE>.
@@ -221,7 +221,7 @@ Sheet: Chaton (Common). Background #1E1B4B.
 Creature: a little ginger tabby kitten with a golden bell. Main colours: ginger, cream, gold.
 Distinctive features kept at every stage: ginger tabby stripes, cream muzzle, golden bell on a collar.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tiny ginger kitten standing up on its hind legs, batting at its golden bell, tail pointing straight up like an antenna. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: standing on hind legs.
 2. Young: question-mark tail, small golden bell. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: crouched, ready to pounce, tail curved.
 3. Grown: slender kitten, clear stripes, long whiskers. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: walking, tail in a question mark.
@@ -251,7 +251,7 @@ Sheet: Chiot (Common). Background #1E1B4B.
 Creature: a playful puppy with floppy ears. Main colours: beige, chocolate brown, red.
 Distinctive features kept at every stage: floppy ears, brown patch around one eye, red scarf.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a beige puppy lying flat on its belly with its huge floppy ears spread wide on the floor like a mat, front paws stretched forward: a wide, low shape. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: lying on its belly.
 2. Young: clumsy puppy, brown patch over one eye, red scarf. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: running, ears flying.
 3. Grown: slender young dog, ears flying in the wind. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing, one front paw raised, tail wagging.
@@ -281,7 +281,7 @@ Sheet: Lapin (Common). Background #1E1B4B.
 Creature: a soft white bunny with a pink nose. Main colours: white, pearl grey, pink.
 Distinctive features kept at every stage: pink nose, pompom tail, pearl grey ear tips.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tall, narrow bunny sitting very upright like a little bottle, one ear straight up and the other folded down. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting very upright.
 2. Young: ears standing up, pompom tail. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: mid-hop, both ears straight up.
 3. Grown: very long ears, big hind feet. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing on its hind legs like a meerkat, very long ears.
@@ -311,7 +311,7 @@ Sheet: Cochon (Common). Background #1E1B4B.
 Creature: a little pink piglet who loves mud. Main colours: pink, deep pink, brown.
 Distinctive features kept at every stage: curly tail, round snout, mud spot on the cheek.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a very wide oval pink piglet seen trotting, tiny legs under a big round body, round snout and corkscrew tail. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: trotting.
 2. Young: corkscrew tail. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: rolling happily on its side.
 3. Grown: chubby pig, mud spot on the cheek. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: sitting on its bottom, laughing.
@@ -341,7 +341,7 @@ Sheet: Vache (Common). Background #1E1B4B.
 Creature: a spotted calf with a little bell. Main colours: white, black, pink.
 Distinctive features kept at every stage: black spots on white, pink muzzle, small bell.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a calf on very long, wobbly legs with knees pointing together, body small on top of tall thin legs. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: standing on wobbly legs.
 2. Young: wobbly legs, tiny horns. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: walking.
 3. Grown: clear spots, a small bell. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: lying down, legs folded, bell visible.
@@ -373,7 +373,7 @@ Sheet: Canard (Common). Background #1E1B4B.
 Creature: a duckling splashing around. Main colours: yellow, orange, white.
 Distinctive features kept at every stage: orange bill, webbed orange feet.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a duckling waddling with its tiny wings spread out sideways like an airplane. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: waddling, wings out.
 2. Young: clearly visible webbed feet. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: floating, webbed feet visible.
 3. Grown: white feathers growing in among the yellow fluff. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: flapping its wings.
@@ -404,7 +404,7 @@ Sheet: Poisson rouge (Common). Background #1E1B4B.
 Creature: a bowl goldfish with veil-like fins. Main colours: orange, white, bubble blue.
 Distinctive features kept at every stage: orange body, white fin tips, little bubbles.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tiny droplet-shaped goldfish with a fan tail almost as big as its body. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating upright.
 2. Young: round fish, fan-shaped tail. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: swimming.
 3. Grown: fins as long as ribbons. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: twirling, long ribbon fins.
@@ -435,7 +435,7 @@ Sheet: Âne (Common). Background #1E1B4B.
 Creature: a stubborn donkey foal with very big ears. Main colours: mouse grey, white, blue.
 Distinctive features kept at every stage: very long ears, white muzzle, blue halter.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a donkey foal on four thin legs with two enormous upright ears taller than its head. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: standing.
 2. Young: white muzzle, blue halter. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: trotting.
 3. Grown: brush-like mane. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: sitting, stubborn face.
@@ -465,7 +465,7 @@ Sheet: Tortue (Common). Background #1E1B4B.
 Creature: a garden tortoise who loves lettuce. Main colours: green, brown, yellow.
 Distinctive features kept at every stage: hexagon pattern on the shell, green skin.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a baby tortoise tucked inside a high dome shell, only its eyes and the tips of its feet peeking out. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: tucked in its shell.
 2. Young: hexagon pattern on the shell. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: walking slowly, head out.
 3. Grown: domed shell, longer neck. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing tall, neck stretched up.
@@ -495,7 +495,7 @@ Sheet: Perruche (Common). Background #1E1B4B.
 Creature: a chatty budgie. Main colours: apple green, yellow, blue.
 Distinctive features kept at every stage: yellow face, blue tail, small curved beak.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a round green fluff ball with a big curved beak and one single long tail feather pointing straight up. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: yellow head, little wings. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: hopping, wings half open.
 3. Grown: long blue tail. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: flying, wings spread.
@@ -527,7 +527,7 @@ Sheet: Hérisson (Common). Background #1E1B4B.
 Creature: a hedgehog who rolls into a ball. Main colours: brown, cream, pink.
 Distinctive features kept at every stage: soft brown spines, cream face, pink nose.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a hedgehog rolled into a spiky ball with only its pink nose and eyes peeking out. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: rolled into a ball.
 2. Young: short spines, pink snout. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: trotting, spines bouncing.
 3. Grown: fan-shaped spines. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing on its hind legs, spines fanned out.
@@ -557,7 +557,7 @@ Sheet: Fennec (Uncommon). Background #1E1B4B.
 Creature: a desert fox with giant ears. Main colours: sand, cream, pink.
 Distinctive features kept at every stage: enormous ears with pink insides, sandy fur.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tiny sandy fox whose two ears are each taller than its whole body, forming a big V above it. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: pointy muzzle, bushy tail. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: mid-hop.
 3. Grown: thin legs, huge ears. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing, ears turned like radars.
@@ -587,7 +587,7 @@ Sheet: Panda roux (Uncommon). Background #1E1B4B.
 Creature: a little red panda with a ringed tail. Main colours: russet red, white, dark brown.
 Distinctive features kept at every stage: white face mask, ringed tail, dark brown legs.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a red panda cub sitting under its huge ringed tail curled over its head like an umbrella. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting under its tail.
 2. Young: ringed tail. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: climbing pose, front paws up.
 3. Grown: slender, dark brown legs. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: walking along, tail held high.
@@ -617,7 +617,7 @@ Sheet: Axolotl (Uncommon). Background #1E1B4B.
 Creature: a pink salamander who is always smiling. Main colours: pink, fuchsia, white.
 Distinctive features kept at every stage: permanent smile, feathery gills on each side of the head.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: an axolotl baby shaped like a tadpole with feathery gills spread wide around its head like a lion mane. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating.
 2. Young: feathery gills on the sides. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: swimming.
 3. Grown: longer body, bigger gills. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: twirling.
@@ -648,7 +648,7 @@ Sheet: Loutre (Uncommon). Background #1E1B4B.
 Creature: a sea otter floating on its back. Main colours: chocolate brown, cream, blue grey.
 Distinctive features kept at every stage: cream face, whiskers, flat tail.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: an otter pup floating flat on its back, belly up, holding a pebble on its chest: a long horizontal shape. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating on its back.
 2. Young: whiskers, holding a pebble in its paws. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: swimming upright, whiskers out.
 3. Grown: long flat tail. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing on its hind legs, long flat tail.
@@ -681,7 +681,7 @@ Sheet: Chouette (Uncommon). Background #1E1B4B.
 Creature: a little scops owl of the night. Main colours: blue grey, cream, gold.
 Distinctive features kept at every stage: huge golden eyes, ear tufts.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a round owlet shaped like an egg with two pointed ear tufts and enormous eyes. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: perched upright.
 2. Young: ear tufts on the head. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: hopping, wings half open.
 3. Grown: striped wings. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: flying, striped wings spread.
@@ -711,7 +711,7 @@ Sheet: Koala (Uncommon). Background #1E1B4B.
 Creature: a sleepy koala. Main colours: grey, white, black.
 Distinctive features kept at every stage: big fluffy ears, big black nose.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a koala joey hugging a vertical eucalyptus stick with its arms and legs, big fluffy ears. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: hugging a stick.
 2. Young: big fluffy ears. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: sitting, big ears.
 3. Grown: big black nose, soft claws. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: climbing pose.
@@ -741,7 +741,7 @@ Sheet: Hippocampe (Uncommon). Background #1E1B4B.
 Creature: a little seahorse. Main colours: pale yellow, coral, turquoise.
 Distinctive features kept at every stage: curled tail, coral back crest.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tiny seahorse shaped like a comma, tail curled into a tight spiral. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating upright.
 2. Young: curled tail. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: swimming.
 3. Grown: coral back crest. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: twirling.
@@ -772,7 +772,7 @@ Sheet: Toucan (Uncommon). Background #1E1B4B.
 Creature: a jungle bird with a rainbow beak. Main colours: black, orange, yellow.
 Distinctive features kept at every stage: huge colourful beak, black body.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a small black ball dominated by a huge orange beak, bigger than its head. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: growing orange beak. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: hopping.
 3. Grown: yellow-orange-green beak. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: flying.
@@ -802,7 +802,7 @@ Sheet: Slime (Uncommon). Background #1E1B4B.
 Creature: a magical blue jelly creature that transforms a lot as it grows, from a droplet into a jelly guardian. Main colours: blue, turquoise, white highlights, a touch of gold at the last stage.
 Distinctive features kept at every stage: translucent glossy blue jelly with white highlights, the same big round shiny eyes, a little bubble motif; every detail stays attached to the body (nothing floating free).
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tiny blue jelly droplet with big eyes and a single bubble stuck on top of its head like a hat. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: a round jelly ball that has grown two little nub arms and a curly jelly antenna ending in a glowing bubble. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: wiggling.
 3. Grown: a taller jelly creature standing on two stubby jelly legs, with small pointed jelly ears, a splash-shaped crest on its head and tiny glowing fish and stars suspended inside its translucent belly. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: bouncy pose, leaning to one side.
@@ -834,7 +834,7 @@ Sheet: Champignouf (Rare). Background #1E1B4B.
 Creature: a little mushroom creature from the forest. Main colours: raspberry, cream, moss green.
 Distinctive features kept at every stage: raspberry cap with cream dots, cream stem body.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a mushroom button: a wide domed cap on a tiny stem, two eyes peeking from under the cap. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: standing.
 2. Young: dotted cap, little feet. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: hopping.
 3. Grown: wider cap with a leaf on top. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: dancing, one foot up.
@@ -864,7 +864,7 @@ Sheet: Nuagichat (Rare). Background #1E1B4B.
 Creature: a cat made of cloud. Main colours: white, sky blue, pink.
 Distinctive features kept at every stage: cloud body, pink cheeks, swirl-shaped tail.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a little cloud puff with two cat ears on top and a curly wisp tail. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating.
 2. Young: swirl-shaped tail. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: floating, tilted.
 3. Grown: cloud body, pink cheeks. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: stretching like a cat in the air.
@@ -895,7 +895,7 @@ Sheet: Rainette Fleurie (Rare). Background #1E1B4B.
 Creature: a frog with a water lily on its head. Main colours: green, pink, white.
 Distinctive features kept at every stage: pink water lily on the head, green skin.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tadpole with a long wiggly tail and a closed flower bud on its head. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating.
 2. Young: frog with a closed flower. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: jumping, legs stretched.
 3. Grown: half-open flower. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: sitting, half-open flower.
@@ -925,7 +925,7 @@ Sheet: Cactouille (Rare). Background #1E1B4B.
 Creature: a little living desert cactus. Main colours: sage green, yellow, sand.
 Distinctive features kept at every stage: soft spines, sandy clay pot.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a small round cactus in a clay pot with two tiny stubby arms raised up. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: standing in its pot.
 2. Young: growing arms. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: wiggling.
 3. Grown: taller, soft spines. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: arms wide open.
@@ -955,7 +955,7 @@ Sheet: Méduluce (Rare). Background #1E1B4B.
 Creature: a glowing jellyfish of the night sea. Main colours: lilac, pink, pearly white.
 Distinctive features kept at every stage: lilac bell, glowing tentacles.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a small lilac bell with three short tentacles hanging below, like a little lamp. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating.
 2. Young: three little tentacles. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: swimming upward.
 3. Grown: wavy glowing tentacles. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: twirling, wavy tentacles.
@@ -988,7 +988,7 @@ Sheet: Rocaillou (Rare). Background #1E1B4B.
 Creature: a turtle whose shell is a crystal rock. Main colours: grey, moss green, violet.
 Distinctive features kept at every stage: rock shell with moss, violet crystals.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a flat pebble with only two eyes and four tiny feet peeking out underneath. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: resting.
 2. Young: head and legs poking out. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: walking, head out.
 3. Grown: mossy shell. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing tall, mossy shell.
@@ -1018,7 +1018,7 @@ Sheet: Ours Glacier (Epic). Background #1E1B4B.
 Creature: a polar bear in ice armour. Main colours: white, glacier blue, silver.
 Distinctive features kept at every stage: ice crystal on the forehead, ice armour plates.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a round white bear cub with a pointed ice crystal standing up on its forehead. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: frost plates on the shoulders. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: walking on all fours.
 3. Grown: ice shoulder pads, crystal claws. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing on its hind legs, ice shoulder pads.
@@ -1048,7 +1048,7 @@ Sheet: Cerf de Cristal (Epic). Background #1E1B4B.
 Creature: a deer with faceted crystal antlers. Main colours: pink, crystal blue, white.
 Distinctive features kept at every stage: faceted crystal antlers, white coat.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a fawn on long thin legs with two small crystal points, standing alert, big ears. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: standing.
 2. Young: two-branch crystal antlers. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: leaping.
 3. Grown: faceted antlers reflecting the light. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing, head turned.
@@ -1078,7 +1078,7 @@ Sheet: Licorne Aurore (Legendary). Background #1E1B4B.
 Creature: a unicorn in pearly armour with aurora colours. Main colours: mint green, violet, pink.
 Distinctive features kept at every stage: aurora gradient mane, spiral horn, pearly armour.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a chubby filly floating with its legs tucked under it, a mini spiral horn and a short wavy aurora mane. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating, legs tucked.
 2. Young: wavy gradient mane. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: floating, galloping in the air.
 3. Grown: glowing spiral horn, pearly chest plate. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: rearing up.
@@ -1109,7 +1109,7 @@ Sheet: Phénix Solaire (Legendary). Background #1E1B4B.
 Creature: a fire bird reborn from the sun. Main colours: gold, orange, red.
 Distinctive features kept at every stage: flame feathers, crown of flames.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a golden chick with a big torch-like flame crest on its head and stubby wings. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: flame feathers. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: hopping, wings half open.
 3. Grown: long fire tail. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: flying, fire tail.
@@ -1141,7 +1141,7 @@ Sheet: Renard Céleste (Legendary). Background #1E1B4B.
 Creature: a fox with nine tails of cold flames. Main colours: pearly white, turquoise, gold.
 Distinctive features kept at every stage: turquoise flame tail tips, golden forehead marks.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a white fox cub curled around its single huge fluffy tail with a turquoise tip. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: curled around its tail.
 2. Young: three tails with turquoise tips. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: mid-hop, three tails.
 3. Grown: six tails, golden marks on the forehead. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing, six tails fanned.
@@ -1239,7 +1239,7 @@ Sheet: Manchot (Uncommon). Background #FFFFFF (use the attached white template).
 Creature: an ice-floe penguin in a tuxedo. Main colours: black, white, orange.
 Distinctive features kept at every stage: tuxedo pattern, orange bill, orange patch on the neck.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a grey fluffy penguin chick shaped like a tall bowling pin with tiny flippers held out. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: standing.
 2. Young: orange bill, white belly. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: waddling.
 3. Grown: neat tuxedo, orange patch on the neck. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: sliding on its belly.
@@ -1269,7 +1269,7 @@ Sheet: Lumignon (Rare). Background #FFFFFF (use the attached white template).
 Creature: a round firefly with a lantern tail. Main colours: light yellow, midnight blue.
 Distinctive features kept at every stage: glowing lantern tail, transparent wings.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a tiny round firefly with a glowing bulb tail bigger than its head and two thin curly antennae. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: transparent wings. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: hovering.
 3. Grown: glowing lantern tail. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: flying.
@@ -1299,7 +1299,7 @@ Sheet: Lion de Braise (Epic). Background #FFFFFF (use the attached white templat
 Creature: a lion whose mane is made of embers. Main colours: red, orange, charcoal.
 Distinctive features kept at every stage: ember mane, glowing paw tips, charcoal fur.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a charcoal lion cub with one tall ember flame on top of its head like a candle. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting.
 2. Young: mane of small flames, glowing paw tips. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: walking, small flame mane.
 3. Grown: blazing mane, lava cracks on the legs. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: roaring, blazing mane.
@@ -1329,7 +1329,7 @@ Sheet: Hibou Astral (Epic). Background #FFFFFF (use the attached white template)
 Creature: an owl whose feathers draw constellations. Main colours: violet, gold, navy blue.
 Distinctive features kept at every stage: golden stars linked by thin golden lines.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a violet ball with a crescent-moon shaped tuft on its head and three golden stars on its belly. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: floating.
 2. Young: stars linked by golden lines on the belly. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: floating, tilted.
 3. Grown: constellation wings. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: wings half open.
@@ -1360,7 +1360,7 @@ Sheet: Loup de Lune (Epic). Background #FFFFFF (use the attached white template)
 Creature: a silver wolf carrying the moon on its forehead. Main colours: silver grey, midnight blue, gold.
 Distinctive features kept at every stage: golden crescent moon on the forehead, midnight blue mane.
 
-Top row, left to right, happy expression:
+Top row, left to right, in a good mood (the Baby happy and smiling, the Grown and the Super confident and proud):
 1. Baby: a wolf cub sitting and howling with its head raised to the sky, thin golden crescent on its forehead. Tiny, about 35% of the cell height, chibi proportions (huge head, huge round eyes), adorable. Pose: sitting, howling.
 2. Young: clearer crescent, silver fur. About 55% of the cell height, still cute but bolder and more lively, head a bit smaller compared to the body. Pose: running.
 3. Grown: long fur, midnight blue mane. About 72% of the cell height, a confident young adult: athletic body, longer limbs, smaller head, sharper eyes, serious and determined look. Cool, no longer cute. Pose: standing, long fur.
