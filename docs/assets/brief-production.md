@@ -110,16 +110,21 @@ La taille affichée en jeu est fixée par le code selon le stade. Les tailles de
 ## 6. Autres planches
 
 ### Œufs de base et coffre
+Les œufs ressemblent à des **objets précieux** (pierre, cristal, jade, métal gravé), pas à des jouets ; plus l'œuf est rare, plus il est précieux.
 ```
-Sheet: eggs and chest. Background #1E1B4B. Same egg size in all four top cells (about 55% of the cell height).
+Sheet: eggs and chest. Background #1E1B4B. Use the attached grid template.
+EGG STYLE: precious artifact eggs, never toy-like or childish. Each egg looks heavy and valuable, like a
+carved gemstone, a polished stone or a relic: realistic material (stone, crystal, jade, metal), engraved relief
+patterns, fine gold or silver inlays, subtle inner glow, crisp reflections. No cartoon spots, no cute faces.
+Same egg size in all four top cells (about 55% of the cell height). The rarer the egg, the more precious it looks.
 Top row, left to right:
-1. Common egg: cream beige with soft brown spots.
-2. Uncommon egg: soft green with darker green leaf patterns.
-3. Rare egg: blue with light blue wave stripes.
-4. Epic egg: purple with orange stars, faint purple glow hugging the shell (no loose sparkles).
+1. Common egg: smooth pale sandstone with subtle natural speckles and a thin engraved band.
+2. Uncommon egg: polished moss-green jade with fine leaf patterns carved in relief.
+3. Rare egg: deep sapphire-blue crystal with engraved wave lines and a cool inner glow.
+4. Epic egg: faceted amethyst with gold star-shaped inlays and a purple inner glow hugging the shell (no loose sparkles).
 Bottom row, left to right:
-5. An empty white eggshell broken in two halves lying on the ground, zigzag edges.
-6. A cute rounded wooden treasure chest with golden trims, closed, heart-shaped golden lock.
+5. An empty broken eggshell in two halves lying on the ground, sandstone-coloured, sharp zigzag edges.
+6. A sturdy wooden treasure chest with golden metal fittings, closed, heart-shaped golden lock.
 7. The same chest open, lid raised, inside glowing with soft white light, nothing inside.
 8. Empty cell.
 ```
@@ -1167,15 +1172,19 @@ drawn on the creature itself.
 Enregistrer sous `assets-src/planches/oeufs.png`.
 
 ```
-Sheet: eggs and chest. Background #1E1B4B. Same egg size in all four top cells (about 55% of the cell height).
+Sheet: eggs and chest. Background #1E1B4B. Use the attached grid template.
+EGG STYLE: precious artifact eggs, never toy-like or childish. Each egg looks heavy and valuable, like a
+carved gemstone, a polished stone or a relic: realistic material (stone, crystal, jade, metal), engraved relief
+patterns, fine gold or silver inlays, subtle inner glow, crisp reflections. No cartoon spots, no cute faces.
+Same egg size in all four top cells (about 55% of the cell height). The rarer the egg, the more precious it looks.
 Top row, left to right:
-1. Common egg: cream beige with soft brown spots.
-2. Uncommon egg: soft green with darker green leaf patterns.
-3. Rare egg: blue with light blue wave stripes.
-4. Epic egg: purple with orange stars, faint purple glow hugging the shell (no loose sparkles).
+1. Common egg: smooth pale sandstone with subtle natural speckles and a thin engraved band.
+2. Uncommon egg: polished moss-green jade with fine leaf patterns carved in relief.
+3. Rare egg: deep sapphire-blue crystal with engraved wave lines and a cool inner glow.
+4. Epic egg: faceted amethyst with gold star-shaped inlays and a purple inner glow hugging the shell (no loose sparkles).
 Bottom row, left to right:
-5. An empty white eggshell broken in two halves lying on the ground, zigzag edges.
-6. A cute rounded wooden treasure chest with golden trims, closed, heart-shaped golden lock.
+5. An empty broken eggshell in two halves lying on the ground, sandstone-coloured, sharp zigzag edges.
+6. A sturdy wooden treasure chest with golden metal fittings, closed, heart-shaped golden lock.
 7. The same chest open, lid raised, inside glowing with soft white light, nothing inside.
 8. Empty cell.
 ```
@@ -1195,7 +1204,10 @@ Enregistrer sous `assets-src/planches/oeufs-legendaires-1.png`. Ordre des cases 
 ```
 Sheet: legendary eggs. Background #1E1B4B. Use the attached grid template.
 Every egg has exactly the same size (about 60% of the cell height), standing on the cell's dot, centred.
-These eggs belong to legendary creatures: each one must look precious and special, with a soft orange-gold
+EGG STYLE: precious artifact eggs, never toy-like or childish. Each egg looks heavy and valuable, like a
+carved gemstone, a polished stone or a relic: realistic material (stone, crystal, jade, metal), engraved relief
+patterns, fine gold or silver inlays, subtle inner glow, crisp reflections. No cartoon spots, no cute faces.
+These eggs belong to legendary creatures: the most precious of all, true treasures, with a soft orange-gold
 legendary glow hugging the shell (the glow stays inside the cell, no loose sparkles or particles).
 IMPORTANT: the link with the creature must stay SUBTLE. Suggest it only through colours, material and texture.
 Never draw a body part or an obvious symbol of the creature on the egg (no horn, no wing, no tail, no flame,
@@ -1217,7 +1229,10 @@ Enregistrer sous `assets-src/planches/oeufs-legendaires-2.png`.
 ```
 Sheet: legendary eggs. Background #1E1B4B. Use the attached grid template.
 Every egg has exactly the same size (about 60% of the cell height), standing on the cell's dot, centred.
-These eggs belong to legendary creatures: each one must look precious and special, with a soft orange-gold
+EGG STYLE: precious artifact eggs, never toy-like or childish. Each egg looks heavy and valuable, like a
+carved gemstone, a polished stone or a relic: realistic material (stone, crystal, jade, metal), engraved relief
+patterns, fine gold or silver inlays, subtle inner glow, crisp reflections. No cartoon spots, no cute faces.
+These eggs belong to legendary creatures: the most precious of all, true treasures, with a soft orange-gold
 legendary glow hugging the shell (the glow stays inside the cell, no loose sparkles or particles).
 IMPORTANT: the link with the creature must stay SUBTLE. Suggest it only through colours, material and texture.
 Never draw a body part or an obvious symbol of the creature on the egg (no horn, no wing, no tail, no flame,
