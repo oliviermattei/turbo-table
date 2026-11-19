@@ -710,14 +710,14 @@ Enregistrer sous `assets-src/planches/slime.png`.
 
 ```
 Sheet: Slime (Uncommon). Background #1E1B4B.
-Creature: a blue blob of jelly. Main colours: blue, light blue, white highlights.
-Distinctive features kept at every stage: translucent glossy jelly body, white highlights, little bubbles inside.
+Creature: a magical blue jelly creature that transforms a lot as it grows, from a droplet into a jelly guardian. Main colours: blue, turquoise, white highlights, a touch of gold at the last stage.
+Distinctive features kept at every stage: translucent glossy blue jelly with white highlights, the same big round shiny eyes, a little bubble motif; every detail stays attached to the body (nothing floating free).
 
 Top row, left to right, happy expression:
-1. Baby: a tiny blue jelly droplet. Tiny and round, about 45% of the cell height. Pose: sitting.
-2. Young: round jelly ball with a big shiny highlight. About 60% of the cell height. Pose: wiggling.
-3. Grown: bigger wobbly jelly blob with small bubbles inside. About 72% of the cell height. Pose: bouncy pose, leaning to one side.
-4. Super: big glossy jelly blob, a little splash-shaped crown on top, bubbles floating inside. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, standing tall.
+1. Baby: a tiny blue jelly droplet with big eyes and a single bubble stuck on top of its head like a hat. Tiny and round, about 45% of the cell height. Pose: sitting.
+2. Young: a round jelly ball that has grown two little nub arms and a curly jelly antenna ending in a glowing bubble. About 60% of the cell height. Pose: wiggling.
+3. Grown: a taller jelly creature standing on two stubby jelly legs, with small pointed jelly ears, a splash-shaped crest on its head and tiny glowing fish and stars suspended inside its translucent belly. About 72% of the cell height. Pose: bouncy pose, leaning to one side.
+4. Super: a majestic jelly guardian shaped like a living fountain: layered translucent body, a crown of frozen golden water splashes, a glowing gem core in its chest and a cape of flowing jelly drips behind it. About 82% of the cell height, most impressive form, still cute. Pose: proud pose, standing tall.
 
 Camera: like the style reference, every creature is turned about 30 degrees to the left or to the right
 (a light front three-quarter view): both eyes, the chest and the front legs stay clearly visible.
@@ -730,9 +730,6 @@ No falling tears, no extra props.
 The four stages must clearly be the same creature growing up. Keep the worn details (bell, scarf, hat…)
 drawn on the creature itself.
 ```
-
-### Conversation 5 : fond bleu nuit (joindre `gabarit.png`)
-
 #### Champignouf (Rare, sautille)
 Enregistrer sous `assets-src/planches/champignouf.png`.
 

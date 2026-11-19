@@ -44,7 +44,7 @@ Paliers : **Épique** = super classe (animal en armure ou élémentaire). **Lég
 | | Maki | Lémurien à la queue rayée | Gris, noir, blanc, orange | Boule grise aux yeux orange | Queue rayée noir et blanc | Longue queue dressée | Queue immense en point d'interrogation | sautille |
 | | Paresseux | Paresseux souriant et tout lent | Beige, brun, vert | Boule beige aux longs bras | Masque brun autour des yeux | Bras très longs, griffes douces | Fourrure couverte de mousse et de petites fleurs | se tortille |
 | x | Toucan | Oiseau de la jungle au bec arc-en-ciel | Noir, orange, jaune | Boule noire, bec mini | Bec orange qui grandit | Bec jaune-orange-vert | Bec immense et brillant, plumes de queue rouges | voltige |
-| x | Slime | Slime bleu , boulle de gelatine | Bleu | | | | | |
+| x | Slime | Créature de gelée magique qui se transforme beaucoup en grandissant | Bleu, turquoise, touche dorée | Goutte de gelée avec une bulle collée sur la tête comme un chapeau | Boule de gelée avec deux petits bras et une antenne bouclée terminée par une bulle lumineuse | Debout sur deux petites jambes, oreilles pointues, crête en éclaboussure, petits poissons et étoiles qui brillent dans son ventre | Gardien de gelée en forme de fontaine vivante : couronne d'éclaboussures dorées, gemme lumineuse dans la poitrine, cape de gelée qui coule | se tortille |
 
 ## Rare — petites créatures inventées ou touche magique
 
