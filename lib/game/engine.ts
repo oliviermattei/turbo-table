@@ -28,9 +28,9 @@ export function parseOpts(sp: { get(k: string): string | null }): PlayOpts | nul
   return mode === 'normal' ? { mode } : null;
 }
 
-/** Test mode: a normal game won with a super score, without playing (25 right answers a minute, no mistake). */
+/** Test mode: a normal game won with a super score, without playing (800 right answers, no mistake). */
 export function fakeRun(tables: number[], duration: number): RunResult {
-  const pool = buildPool(tables), correct = Math.round(25 * duration / 60);
+  const pool = buildPool(tables), correct = 800;
   const seen: Record<string, [number, number]> = {};
   let score = 0;
   for (let i = 0; i < correct; i++) {
