@@ -66,8 +66,8 @@ interface DataCtx {
   /** Test mode (sandbox, see isDebug) */
   debug: boolean;
   setDebug(b: boolean): void;
-  /** Sends the family code; on success this device syncs with the server. */
-  unlock(code: string): Promise<boolean>;
+  /** Sends the family code; on success this device syncs with the server. 'blocked' = too many wrong codes, wait 1 hour. */
+  unlock(code: string): Promise<'ok' | 'bad' | 'blocked'>;
 }
 
 const Ctx = createContext<DataCtx | null>(null);
@@ -187,9 +187,10 @@ function Store({ children }: { children: ReactNode }) {
     },
     async unlock(code) {
       const r = await api('login', { code }).catch(() => null);
-      if (!r?.ok) return false;
+      if (r?.status === 429) return 'blocked';
+      if (!r?.ok) return 'bad';
       await syncCloud();
-      return true;
+      return 'ok';
     },
   };
   return <Ctx.Provider value={value}>{children}</Ctx.Provider>;

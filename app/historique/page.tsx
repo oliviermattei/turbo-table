@@ -84,12 +84,12 @@ export default function HistoriquePage() {
 function FamilyCode() {
   const { unlock } = useData();
   const [code, setCode] = useState('');
-  const [error, setError] = useState(false);
+  const [error, setError] = useState<'' | 'bad' | 'blocked'>('');
   return (
-    <form className="panel" style={{ marginTop: 12 }} onSubmit={async e => { e.preventDefault(); setError(!(await unlock(code))); }}>
+    <form className="panel" style={{ marginTop: 12 }} onSubmit={async e => { e.preventDefault(); const r = await unlock(code); setError(r === 'ok' ? '' : r); }}>
       <h2>Synchroniser cet appareil</h2>
       <input className="field" type="password" placeholder="Code famille" autoComplete="current-password" value={code} onChange={e => setCode(e.target.value)} />
-      {error && <p className="note">Code incorrect.</p>}
+      {error && <p className="note">{error === 'blocked' ? 'Trop d’essais. Réessaie dans 1 heure.' : 'Code incorrect.'}</p>}
       <button className="ghost" type="submit">Valider</button>
     </form>
   );
