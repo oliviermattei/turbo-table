@@ -79,14 +79,14 @@ export interface Family {
 }
 export const FAMILIES: Family[] = [
   { id: 'total', e: '✅', n: 'Bonnes réponses', d: g => `${g} bonnes réponses en tout`, v: s => s.totalCorrect, goals: [50, 200, 500, 1000, 2500, 5000, 10000] },
-  { id: 'parties', e: '🎮', n: 'Joueur', d: g => `Joue ${pl(g, 'partie')}`, v: s => s.games, goals: [5, 20, 50, 100, 250, 500, 1000] },
-  { id: 'serie', e: '🔥', n: 'Série', d: g => `${g} bonnes réponses à la suite`, v: s => s.maxStreak, goals: [10, 20, 30, 50, 75, 100, 150] },
-  { id: 'vitesse', e: '⚡', n: 'Vitesse', d: g => `${g} bonnes réponses en 1 minute`, v: s => s.bestRate, goals: [15, 20, 25, 30, 35, 40, 45] },
+  { id: 'parties', e: '🎮', n: 'Joueur', d: g => `Joue ${pl(g, 'partie')}`, v: s => s.games, goals: [5, 15, 40, 80, 150, 300, 500] },
+  { id: 'serie', e: '🔥', n: 'Série', d: g => `${g} bonnes réponses à la suite`, v: s => s.maxStreak, goals: [5, 10, 15, 20, 25, 30, 40] },
+  { id: 'vitesse', e: '⚡', n: 'Vitesse', d: g => `${g} bonnes réponses en 1 minute`, v: s => s.bestRate, goals: [10, 12, 15, 18, 21, 25, 30] },
   { id: 'sansfaute', e: '🎯', n: 'Sans faute', d: g => `${pl(g, 'partie')} sans erreur (10 réponses ou plus)`, v: s => s.perfectCount, goals: [1, 5, 15, 30, 60, 100, 200] },
   { id: 'etoiles', e: '⭐', n: 'Étoiles', d: g => `Gagne ${g} étoiles en tout`, v: s => s.totalStars, goals: [10, 50, 150, 300, 600, 1000, 2000] },
   { id: 'flamme', e: '📅', n: 'Flamme', d: g => `Joue ${g} jours de suite`, v: s => s.days, goals: [2, 3, 5, 7, 14, 21, 30] },
   { id: 'fidele', e: '🗓️', n: 'Fidèle', d: g => `Joue ${g} jours différents`, v: s => s.daysTotal, goals: [3, 7, 15, 30, 60, 100, 200] },
-  { id: 'niveau', e: '🆙', n: 'Niveau', d: g => `Atteins le niveau ${g}`, v: s => s.level, goals: [5, 10, 20, 30, 50, 75, 100] },
+  { id: 'niveau', e: '🆙', n: 'Niveau', d: g => `Atteins le niveau ${g}`, v: s => s.level, goals: [3, 5, 10, 15, 20, 30, 40] },
   { id: 'arcenciel', e: '🌈', n: 'Arc-en-ciel', d: g => `${pl(g, 'partie')} avec toutes les tables et 2 étoiles`, v: s => s.rainbow, goals: [1, 5, 15, 30, 60, 100] },
   { id: 'endurance', e: '🏔️', n: 'Endurance', d: g => `${pl(g, 'partie')} de 3 minutes avec 2 étoiles`, v: s => s.endurance, goals: [1, 5, 15, 30, 60] },
   { id: 'reparateur', e: '🔧', n: 'Réparateur', d: g => `Répare tes erreurs sans faute ${g} fois`, v: s => s.fixedCount, goals: [1, 5, 15, 30, 60] },
