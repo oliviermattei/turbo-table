@@ -5,7 +5,7 @@ import { confetti } from '@/lib/confetti';
 import { useData } from '@/lib/data';
 import { createEngine, fakeRun, type PlayOpts, type RunResult, type View } from '@/lib/game/engine';
 import { BADGE_BY_ID, bestFor, computeStats, levelInfo, nextBadge, RARITY_ORDER, totalXp, unlocked } from '@/lib/game/rules';
-import { active, coinsEarned, decay, dropsEgg, hatchProgress, moodOf, totalCorrect } from '@/lib/pet/rules';
+import { active, coinsEarned, companionBonus, decay, dropsEgg, hatchProgress, moodOf, totalCorrect } from '@/lib/pet/rules';
 import { ensureAudio, sEnd, sFanfare, sGo, sTick } from '@/lib/sound';
 import EndScreen, { type PetInfo, type Result } from './EndScreen';
 
@@ -33,11 +33,14 @@ export default function GameSession({ opts, fake = false }: { opts: PlayOpts; fa
       .sort((x, y) => RARITY_ORDER.indexOf(y.r) - RARITY_ORDER.indexOf(x.r));
     const levelUp = lvAfter.num > lvBefore.num;
     const pet = data.pet, comp = active(pet), now = Date.now();
+    const grew = !!comp && moodOf(decay(comp, now).needs) !== 'triste';
+    const compBonus = comp && grew ? companionBonus(after[0], comp.species) : 0;
     const petInfo: PetInfo = {
-      coins: coinsEarned(after, badgesAfter) - coinsEarned(before, badgesBefore),
+      coins: coinsEarned(after, badgesAfter) - coinsEarned(before, badgesBefore) + compBonus,
+      compBonus,
       chest: !!pet && dropsEgg(after[0]),
       egg: pet ? hatchProgress(pet, totalCorrect(after)) : null,
-      comp: comp ? { name: comp.name, grew: moodOf(decay(comp, now).needs) !== 'triste' } : null,
+      comp: comp ? { name: comp.name, grew } : null,
     };
     const newDiploma = r.passed && (!dipBefore || r.mention > dipBefore.mention);
     setResult({

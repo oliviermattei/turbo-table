@@ -153,3 +153,15 @@ export function DebugCoins() {
   if (!debug || !pet) return null;
   return <button className="ghost debugcoins" onClick={() => updatePet(p => p && { ...p, bonus: p.bonus + 1000 })}>🐞 +1000 🪙 (test)</button>;
 }
+
+/** A legendary companion colours the whole app (see html[data-theme] in globals.css) */
+export function CompanionTheme() {
+  const { pet } = useData();
+  const c = active(pet);
+  const theme = c && SPECIES_BY_ID[c.species]?.q === 'legendaire' ? c.species : '';
+  useEffect(() => {
+    if (theme) document.documentElement.dataset.theme = theme;
+    else delete document.documentElement.dataset.theme;
+  }, [theme]);
+  return null;
+}

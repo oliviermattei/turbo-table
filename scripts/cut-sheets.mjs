@@ -26,8 +26,9 @@ function cellTargets(kind) {
   if (kind === "oeufs")
     return [...EGGS.map((e) => `eggs/${e}.webp`), "items/coffre-ferme.webp", "items/coffre-ouvert.webp", null];
   if (kind === "objets") return [...ITEMS.slice(2).map((i) => `items/${i}.webp`), null];
-  if (kind === "coffres")
-    return ["coffre-epique-ferme", "coffre-epique-ouvert", "coffre-legendaire-ferme", "coffre-legendaire-ouvert"].map((c) => `items/${c}.webp`).concat([null, null, null, null]);
+  const CHESTS = { "coffres-1": ["peu-commun", "rare"], "coffres-2": ["epique", "legendaire"] };
+  if (CHESTS[kind])
+    return CHESTS[kind].flatMap((q) => [`items/coffre-${q}-ferme.webp`, `items/coffre-${q}-ouvert.webp`]).concat([null, null, null, null]);
   if (LEGENDARY_EGGS[kind])
     return Array.from({ length: 8 }, (_, i) => (LEGENDARY_EGGS[kind][i] ? `creatures/${LEGENDARY_EGGS[kind][i]}/oeuf.webp` : null));
   return MOODS.map((m) => `creatures/${kind}/${m}.webp`);

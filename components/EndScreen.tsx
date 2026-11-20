@@ -11,6 +11,8 @@ import { BadgeLine, Stars, Stat } from './ui';
 
 export interface PetInfo {
   coins: number; chest: boolean;
+  /** Part of the coins brought by the companion's quality */
+  compBonus: number;
   egg: ReturnType<typeof hatchProgress>;
   /** The companion, and whether this game made it grow (not when it is sad) */
   comp: { name: string; grew: boolean } | null;
@@ -79,6 +81,7 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
             <Link href="/nid" className="pinfo">{r.pet.egg.ready ? '🥚 Ton œuf va éclore !' : `🥚 Œuf : ${r.pet.egg.done} / ${r.pet.egg.need}`}</Link>
           ) : <Link href="/compagnon" className="pinfo">Dépense tes pièces pour ton compagnon !</Link>}
         </div>
+        {r.pet.compBonus > 0 && r.pet.comp && <p className="bonus-line">✨ +{r.pet.compBonus} 🪙 grâce à {r.pet.comp.name} !</p>}
         {practiceBonus({ ...rec, id: '' }) > 0 && (
           <p className="bonus-line">🔧 Bonus entraînement : +{practiceBonus({ ...rec, id: '' })} 🪙{rec.correct === rec.total ? ' (sans faute !)' : ''}</p>
         )}

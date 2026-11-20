@@ -76,8 +76,8 @@ export function makeEgg(key: string, source: EggSource, at: number, min?: Rarity
   return egg;
 }
 
-/** The chest an egg comes in follows the lowest quality it guarantees */
-const BOX_OF: Partial<Record<Rarity, Box>> = { rare: 'epique', epique: 'legendaire' };
+/** The chest an egg comes in shows the lowest quality it guarantees */
+const BOX_OF: Partial<Record<Rarity, Box>> = { 'peu-commun': 'peu-commun', rare: 'rare', epique: 'epique', legendaire: 'legendaire' };
 
 /** Chance that a normal game drops a chest */
 export const dropChance = (g: GameRecord) => (g.stars >= 3 ? 0.08 : 0.04);
@@ -164,6 +164,10 @@ export function hatch(p: PetState, correct: number, now: number, r: number): { p
 /** Points lost per hour */
 export const DECAY: Needs = { faim: 2, joie: 1.5, energie: 2 };
 export const JOY_PER_GAME = 5;
+/** Extra coins a not-sad active companion brings at the end of a game, by its quality */
+export const QUALITY_BONUS: Record<Rarity, number> = { commun: 0, 'peu-commun': 0.05, rare: 0.1, epique: 0.15, legendaire: 0.25 };
+export const companionBonus = (g: GameRecord, species: string) =>
+  Math.round(coinsOfGame(g) * (QUALITY_BONUS[SPECIES_BY_ID[species]?.q] ?? 0));
 const clamp = (v: number) => Math.max(0, Math.min(100, v));
 export function decay(c: Creature, t: number): Creature {
   if (t <= c.tick) return c;
@@ -195,13 +199,16 @@ export function applyGames(p: PetState, h: GameRecord[]): PetState {
   if (!todo.length) return p;
   const processed = todo[todo.length - 1].ts;
   if (!active(p)) return { ...p, processed };
+  let bonus = p.bonus;
   return {
     ...withActive(p, c => todo.reduce((cur, g) => {
       const d = decay(cur, Math.max(g.ts, cur.tick));
-      const grows = moodOf(d.needs) !== 'triste';
-      return { ...d, xp: d.xp + (grows ? g.correct : 0), needs: { ...d.needs, joie: clamp(d.needs.joie + JOY_PER_GAME) } };
+      const happy = moodOf(d.needs) !== 'triste';
+      if (happy) bonus += companionBonus(g, d.species);
+      return { ...d, xp: d.xp + (happy ? g.correct : 0), needs: { ...d.needs, joie: clamp(d.needs.joie + JOY_PER_GAME) } };
     }, c)),
     processed,
+    bonus,
   };
 }
 
@@ -215,8 +222,10 @@ export const ITEMS: Item[] = [
   { id: 'peluche', e: '🧸', n: 'Peluche', price: 80, kind: 'toy', gain: { joie: 70 } },
   { id: 'console', e: '🎮', n: 'Console', price: 200, kind: 'toy', gain: { joie: 100 } },
   { id: 'coffre', e: '🎁', n: 'Coffre', price: 800, kind: 'chest' },
-  { id: 'coffre-epique', e: '🎁', n: 'Coffre épique', price: 2500, kind: 'chest', min: 'rare', box: 'epique' },
-  { id: 'coffre-legendaire', e: '🎁', n: 'Coffre légendaire', price: 6000, kind: 'chest', min: 'epique', box: 'legendaire' },
+  { id: 'coffre-peu-commun', e: '🎁', n: 'Coffre peu commun', price: 1500, kind: 'chest', min: 'peu-commun', box: 'peu-commun' },
+  { id: 'coffre-rare', e: '🎁', n: 'Coffre rare', price: 3000, kind: 'chest', min: 'rare', box: 'rare' },
+  { id: 'coffre-epique', e: '🎁', n: 'Coffre épique', price: 6000, kind: 'chest', min: 'epique', box: 'epique' },
+  { id: 'coffre-legendaire', e: '🎁', n: 'Coffre légendaire', price: 12000, kind: 'chest', min: 'legendaire', box: 'legendaire' },
 ];
 export const ITEM_BY_ID: Record<string, Item> = Object.fromEntries(ITEMS.map(i => [i.id, i]));
 

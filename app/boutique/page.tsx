@@ -38,7 +38,7 @@ export default function BoutiquePage() {
       <div className="nav shop-tabs">
         {TABS.map(([k, e, l]) => (
           <button key={k} className={'navb' + (tab === k ? ' on' : '')} onClick={() => setTab(k)}>
-            <span className="ic">{e}</span><span className="lb">{l}</span>
+            <span className="ic">{k === 'chest' ? <ChestImg /> : e}</span><span className="lb">{l}</span>
           </button>
         ))}
       </div>

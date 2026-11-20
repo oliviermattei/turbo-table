@@ -412,3 +412,16 @@ button.bestc{cursor:pointer}
 .chestimg.tint-epique{filter:hue-rotate(230deg) saturate(1.4) drop-shadow(0 0 10px #a855f7)}
 .chestimg.tint-legendaire{filter:saturate(1.6) brightness(1.1) drop-shadow(0 0 12px #f59e0b)}
 .shopi .chestimg{height:72px}
+
+/* Legendary companion themes */
+html[data-theme]{transition:background .8s}
+html[data-theme=licorne-aurore]{background:#2a1145}
+html[data-theme=licorne-aurore] body{background:radial-gradient(circle at 20% 0%,#ec4899,#7c3aed 35%,#2a1145 70%) fixed}
+html[data-theme=phenix-solaire]{background:#2a0e06}
+html[data-theme=phenix-solaire] body{background:radial-gradient(circle at 20% 0%,#f97316,#9a3412 40%,#2a0e06 75%) fixed}
+html[data-theme=renard-celeste]{background:#082a2e}
+html[data-theme=renard-celeste] body{background:radial-gradient(circle at 20% 0%,#2dd4bf,#0f766e 40%,#082a2e 75%) fixed}
+.bestc.got{cursor:pointer}
+.navb .ic .chestimg{height:30px;display:block}
+.chestimg.tint-peu-commun{filter:hue-rotate(60deg) drop-shadow(0 0 10px #22c55e)}
+.chestimg.tint-rare{filter:hue-rotate(180deg) drop-shadow(0 0 10px #3b82f6)}

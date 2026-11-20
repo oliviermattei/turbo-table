@@ -160,6 +160,14 @@
     "balle",
     "peluche",
     "console",
-    "lit"
+    "lit",
+    "coffre-epique-ferme",
+    "coffre-epique-ouvert",
+    "coffre-legendaire-ferme",
+    "coffre-legendaire-ouvert",
+    "coffre-peu-commun-ferme",
+    "coffre-peu-commun-ouvert",
+    "coffre-rare-ferme",
+    "coffre-rare-ouvert"
   ]
 }

@@ -4,8 +4,8 @@ export interface Needs { faim: number; joie: number; energie: number }
 export type EggSource = 'start' | 'drop' | 'badge' | 'shop' | 'pity';
 
 /** A closed egg arrives as a chest (opened: false); once opened it waits in the nest. */
-/** Chest kind: none = normal chest, 'epique' = at least Rare inside, 'legendaire' = at least Epic inside */
-export type Box = 'epique' | 'legendaire';
+/** Chest kind = the lowest egg quality it guarantees (none = common chest, anything can come out) */
+export type Box = 'peu-commun' | 'rare' | 'epique' | 'legendaire';
 export interface Egg { id: string; q: Rarity; species?: string; source: EggSource; at: number; opened: boolean; box?: Box }
 
 export interface Creature {

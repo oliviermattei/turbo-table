@@ -1,5 +1,6 @@
 import type { Metadata, Viewport } from 'next';
 import { Fredoka } from 'next/font/google';
+import { CompanionTheme } from '@/components/pet';
 import { DataProvider } from '@/lib/data';
 import './globals.css';
 
@@ -18,7 +19,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="fr" className={fredoka.variable}>
       <body>
-        <div className="app"><DataProvider>{children}</DataProvider></div>
+        <div className="app"><DataProvider><CompanionTheme />{children}</DataProvider></div>
       </body>
     </html>
   );

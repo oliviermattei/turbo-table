@@ -57,6 +57,15 @@ describe('pet', () => {
     expect(r.p.bonus).toBe(25);
   });
 
+  it('gives a coin bonus for a rare companion, not when sad', () => {
+    let p = withCompanion();
+    p = { ...p, creatures: [{ ...p.creatures[0], species: 'phenix-solaire' }] };
+    p = applyGames(p, [game({ ts: T0 + H, correct: 20, stars: 0 })]);
+    expect(p.bonus).toBe(5); // 25 % of 20
+    p = applyGames(p, [game({ ts: T0 + 90 * H, correct: 20, stars: 0 })]);
+    expect(p.bonus).toBe(5); // sad after 89 h: no bonus
+  });
+
   it('decays needs over time and gets sad', () => {
     const c = withCompanion().creatures[0];
     expect(moodOf(decay(c, T0 + 24 * H).needs)).toBe('bof');
@@ -96,9 +105,11 @@ describe('pet', () => {
     p = buy(p, 'coffre', 800, T0);
     expect(p.eggs.at(-1)?.opened).toBe(false);
     expect(p.eggs.at(-1)?.box).toBeUndefined();
-    p = buy(p, 'coffre-legendaire', 6000, T0 + 1);
-    expect(p.eggs.at(-1)?.box).toBe('legendaire');
+    p = buy(p, 'coffre-epique', 6000, T0 + 1);
+    expect(p.eggs.at(-1)?.box).toBe('epique');
     expect(['epique', 'legendaire']).toContain(p.eggs.at(-1)?.q);
+    p = buy(p, 'coffre-legendaire', 12000, T0 + 2);
+    expect(p.eggs.at(-1)?.q).toBe('legendaire');
   });
 
   it('grants chests for lucky games and epic badges once', () => {
@@ -107,7 +118,7 @@ describe('pet', () => {
     for (let i = 0; !lucky; i++) { const g = game({ id: 'g' + i, ts: T0 + H }); if (dropsEgg(g)) lucky = g; }
     let q = grantEggs(p, [lucky], new Set(['total:0', 'total:4']), T0 + H);
     expect(q.eggs).toHaveLength(3); // start + drop + epic badge
-    expect(q.eggs[2].box).toBe('epique');
+    expect(q.eggs[2].box).toBe('rare'); // an epic badge guarantees at least Rare
     expect(['rare', 'epique', 'legendaire']).toContain(q.eggs[2].q);
     q = grantEggs(q, [lucky], new Set(['total:0', 'total:4']), T0 + 2 * H);
     expect(q.eggs).toHaveLength(3);

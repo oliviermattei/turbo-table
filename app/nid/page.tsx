@@ -51,7 +51,7 @@ export default function NidPage() {
         <div className="panel">
           <h2>Coffres à ouvrir</h2>
           <div className="eggrow">
-            {([undefined, 'epique', 'legendaire'] as const).map(box => {
+            {([undefined, 'peu-commun', 'rare', 'epique', 'legendaire'] as const).map(box => {
               const list = chests.filter(e => e.box === box);
               return list.length > 0 && (
                 <button key={box ?? 'base'} className="eggb" onClick={() => setChest(list[0])}>
