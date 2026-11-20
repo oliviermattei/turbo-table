@@ -5,7 +5,7 @@ import { CreatureView, Coins, GrowBar, ItemIcon, NeedBars, type Action } from '@
 import { useEnsurePet } from '@/components/pet-ensure';
 import { EvolutionScene } from '@/components/pet-scenes';
 import { BackHeader, RarLabel } from '@/components/ui';
-import { ITEM_BY_ID, ITEMS, markShown, rename, sleep, stageOf, STAGE_NAMES, useItem as giveItem, hatchProgress } from '@/lib/pet/rules';
+import { appetiteOf, bonusRate, collectionSize, ITEM_BY_ID, ITEMS, markShown, rename, sleep, stageOf, STAGE_NAMES, useItem as giveItem, hatchProgress } from '@/lib/pet/rules';
 import { SPECIES_BY_ID } from '@/lib/pet/species';
 
 export default function CompagnonPage() {
@@ -49,6 +49,7 @@ export default function CompagnonPage() {
           <div className="panel">
             <NeedBars n={c.needs} />
             <GrowBar c={c} />
+            <p className="petstats">🪙 Bonus de pièces +{Math.round(bonusRate(c, collectionSize(pet)) * 100)} % · 🍽️ Appétit ×{appetiteOf(c.species)}</p>
           </div>
           <div className="panel">
             <h2>Sac</h2>

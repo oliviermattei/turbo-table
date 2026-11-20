@@ -1205,6 +1205,20 @@ Bottom row: all four cells stay empty.
 No loose sparkles or particles, nothing crosses into another cell.
 ```
 
+#### Gros objets (Festin, Banquet, Manège, Fête foraine)
+Enregistrer sous `assets-src/planches/objets-2.png`.
+
+```
+Sheet: big items. Background #1E1B4B. Use the attached grid template. Same painterly style as the other items.
+Each item about 45% of the cell height, standing on the cell's dot.
+Top row, left to right:
+1. A big feast platter: roasted drumsticks, bread and fruits on a wooden board.
+2. A royal banquet: a golden tray piled with a cake, roast, fruits and a glass of juice, generous and festive.
+3. A small colourful merry-go-round toy with horses, bright and joyful.
+4. A fairground set: a little Ferris wheel with lights and a striped tent.
+Bottom row: all four cells stay empty.
+```
+
 #### Objets
 Enregistrer sous `assets-src/planches/objets.png`.
 

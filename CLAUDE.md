@@ -104,7 +104,8 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
 - **Besoins** Faim / Joie / Énergie, baisse calculée à l'ouverture. Humeur = moyenne (≥ 60 content, < 30 triste). Triste = image triste et **évolution bloquée**. Jamais perdu.
 - **Bonus de pièces du compagnon** (s'il n'est pas triste) : qualité (Commun +0 %, Peu commun +100 %, Rare +300 %, Épique +700 %, Légendaire +1 100 %) + stade (+0 / 10 / 25 / 50 %) + 2 % par espèce trouvée. Règle d'équilibre : avec une qualité équipée, le coffre de la qualité suivante s'achète en ~5, 6, 7 puis 9,5 jours.
 - **Évolution** : 1 XP par bonne réponse si actif et pas triste. Stades Bébé / Petit / Grand / Super à 0 / 150 / 600 / 1500. Scène d'évolution de 5 s au toucher.
-- **Boutique** : nourriture (10 / 20 / 45), jouets (25 / 60 / 150), coffres Commun → Légendaire (250 / 350 / 1 000 / 2 500 / 7 000). Dormir est gratuit. Calibré pour ~100 🪙 par jour : l'entretien coûte ~30 % des gains.
+- **Boutique** : nourriture (Pomme 10, Sandwich 20, Gâteau 45, Festin 160, Banquet 450), jouets (Balle 25, Peluche 60, Console 150, Manège 300, Fête foraine 800), coffres Commun → Légendaire (250 / 350 / 800 / 1 800 / 5 000).
+- **Appétit** : un compagnon de meilleure qualité mange plus : nourriture et jouets le remplissent ×1 / 2 / 4 / 8 / 12 fois moins (même échelle que le bonus de pièces), donc l'entretien reste ~1/3 des gains. Dormir est gratuit. Calibré pour ~100 🪙 par jour : l'entretien coûte ~30 % des gains.
 
 ### Écrans
 `/compagnon`, `/nid`, `/boutique`, `/bestiaire`, `/refuge`, carte Compagnon sur l'accueil, pièces / coffre / œuf en fin de partie. Composants : `components/pet.tsx` (créature animée en CSS), `components/pet-scenes.tsx` (coffre, éclosion, évolution).

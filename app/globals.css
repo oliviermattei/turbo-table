@@ -425,3 +425,4 @@ html[data-theme=renard-celeste] body{background:radial-gradient(circle at 20% 0%
 .navb .ic .chestimg{height:30px;display:block}
 .chestimg.tint-peu-commun{filter:hue-rotate(60deg) drop-shadow(0 0 10px #22c55e)}
 .chestimg.tint-rare{filter:hue-rotate(180deg) drop-shadow(0 0 10px #3b82f6)}
+.petstats{text-align:center;font-size:14px;opacity:.85;margin-top:8px}

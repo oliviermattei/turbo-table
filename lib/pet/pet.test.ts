@@ -94,6 +94,15 @@ describe('pet', () => {
     expect(p.creatures[0].shown).toBe(3);
   });
 
+  it('feeds a legendary less per item (appetite)', () => {
+    let p = withCompanion();
+    p = { ...p, creatures: [{ ...p.creatures[0], species: 'phenix-solaire', needs: { faim: 0, joie: 0, energie: 0 } }], inventory: { banquet: 1 } };
+    p = useItem(p, 'banquet', T0);
+    expect(p.creatures[0].needs.faim).toBe(100); // 1200 / 12
+    p = sleep({ ...p, creatures: [{ ...p.creatures[0], needs: { faim: 0, joie: 0, energie: 0 } }] }, T0);
+    expect(p.creatures[0].needs.energie).toBe(100); // a nap is not divided
+  });
+
   it('buys and gives items', () => {
     let p = withCompanion();
     expect(buy(p, 'pomme', 5, T0)).toBe(p);
@@ -108,10 +117,10 @@ describe('pet', () => {
     p = buy(p, 'coffre', 250, T0);
     expect(p.eggs.at(-1)?.opened).toBe(false);
     expect(p.eggs.at(-1)?.box).toBeUndefined();
-    p = buy(p, 'coffre-epique', 2500, T0 + 1);
+    p = buy(p, 'coffre-epique', 1800, T0 + 1);
     expect(p.eggs.at(-1)?.box).toBe('epique');
     expect(['epique', 'legendaire']).toContain(p.eggs.at(-1)?.q);
-    p = buy(p, 'coffre-legendaire', 7000, T0 + 2);
+    p = buy(p, 'coffre-legendaire', 5000, T0 + 2);
     expect(p.eggs.at(-1)?.q).toBe('legendaire');
   });
 

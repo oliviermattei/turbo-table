@@ -26,6 +26,7 @@ function cellTargets(kind) {
   if (kind === "oeufs")
     return [...EGGS.map((e) => `eggs/${e}.webp`), "items/coffre-ferme.webp", "items/coffre-ouvert.webp", null];
   if (kind === "objets") return [...ITEMS.slice(2).map((i) => `items/${i}.webp`), null];
+  if (kind === "objets-2") return ["festin", "banquet", "manege", "fete"].map((i) => `items/${i}.webp`).concat([null, null, null, null]);
   const CHESTS = { "coffres-1": ["peu-commun", "rare"], "coffres-2": ["epique", "legendaire"] };
   if (CHESTS[kind])
     return CHESTS[kind].flatMap((q) => [`items/coffre-${q}-ferme.webp`, `items/coffre-${q}-ouvert.webp`]).concat([null, null, null, null]);

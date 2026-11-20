@@ -8,7 +8,7 @@ vi.mock('./assets.json', async () => {
 });
 import { computeStats, starsFor, unlocked } from '../game/rules';
 import type { GameRecord } from '../game/types';
-import { balance, buy, grantEggs, hatch, hatchProgress, incubate, ITEMS, openChest, totalCorrect, applyGames, QUALITY_BONUS, HATCH, STAGE_BONUS, BONUS, setActive, stageOf, markShown, FRESH } from './rules';
+import { balance, buy, grantEggs, hatch, hatchProgress, incubate, ITEMS, openChest, totalCorrect, applyGames, QUALITY_BONUS, HATCH, STAGE_BONUS, BONUS, setActive, stageOf, markShown, FRESH, appetiteOf } from './rules';
 import { SPECIES } from './species';
 import type { PetState } from './types';
 import { newPet } from './rules';
@@ -44,7 +44,7 @@ function run(seed: number) {
       if (bestC && day % 7 === 0 && g === 0) p = setActive(p, bestC.id, now);
       if (pr?.ready) { const r = hatch(p, tc, now, rnd()); if (r) { p = r.p; if (!r.out.dup) { seen.add(r.out.species.id); unlockDays.push(day); } } }
       // upkeep: ~30 coins a day, kept aside
-      if (g === 3) spentUpkeep += 30;
+      if (g === 3) { const a = p.creatures.find(c => c.id === p.activeId); spentUpkeep += 30 * (a ? appetiteOf(a.species) : 1); }
       const coins = balance(h, badges, p) - spentUpkeep;
       // buy the best affordable chest whose guaranteed tier still misses species
       const missing = new Set(SPECIES.filter(sp => !seen.has(sp.id)).map(sp => sp.q));

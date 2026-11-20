@@ -167,6 +167,9 @@ export function hatch(p: PetState, correct: number, now: number, r: number): { p
 /** Points lost per hour */
 export const DECAY: Needs = { faim: 2, joie: 1.5, energie: 2 };
 export const JOY_PER_GAME = 5;
+/** A better companion eats and plays more: food and toys fill its needs this many times less (same scale as its coin bonus) */
+export const APPETITE: Record<Rarity, number> = { commun: 1, 'peu-commun': 2, rare: 4, epique: 8, legendaire: 12 };
+export const appetiteOf = (species: string) => APPETITE[SPECIES_BY_ID[species]?.q] ?? 1;
 /**
  * Extra coins a not-sad active companion brings at the end of a game. It adds up its quality, its stage
  * (each evolution raises it) and the size of the collection, so coins grow as the child progresses.
@@ -232,14 +235,19 @@ export const ITEMS: Item[] = [
   { id: 'pomme', e: '🍎', n: 'Pomme', price: 10, kind: 'food', gain: { faim: 20 } },
   { id: 'sandwich', e: '🥪', n: 'Sandwich', price: 20, kind: 'food', gain: { faim: 50 } },
   { id: 'gateau', e: '🎂', n: 'Gâteau', price: 45, kind: 'food', gain: { faim: 100, joie: 10 } },
+  { id: 'festin', e: '🍗', n: 'Festin', price: 160, kind: 'food', gain: { faim: 400 } },
+  { id: 'banquet', e: '🍱', n: 'Banquet', price: 450, kind: 'food', gain: { faim: 1200, joie: 100 } },
   { id: 'balle', e: '⚽', n: 'Balle', price: 25, kind: 'toy', gain: { joie: 30 } },
   { id: 'peluche', e: '🧸', n: 'Peluche', price: 60, kind: 'toy', gain: { joie: 70 } },
   { id: 'console', e: '🎮', n: 'Console', price: 150, kind: 'toy', gain: { joie: 100 } },
+  { id: 'manege', e: '🎠', n: 'Manège', price: 300, kind: 'toy', gain: { joie: 400 } },
+  { id: 'fete', e: '🎡', n: 'Fête foraine', price: 800, kind: 'toy', gain: { joie: 1200 } },
+  // With a quality equipped, the next chest takes ~5, 6, 7, 9.5 days (income and upkeep both scale with quality)
   { id: 'coffre', e: '🎁', n: 'Coffre', price: 250, kind: 'chest' },
   { id: 'coffre-peu-commun', e: '🎁', n: 'Coffre peu commun', price: 350, kind: 'chest', min: 'peu-commun', box: 'peu-commun' },
-  { id: 'coffre-rare', e: '🎁', n: 'Coffre rare', price: 1000, kind: 'chest', min: 'rare', box: 'rare' },
-  { id: 'coffre-epique', e: '🎁', n: 'Coffre épique', price: 2500, kind: 'chest', min: 'epique', box: 'epique' },
-  { id: 'coffre-legendaire', e: '🎁', n: 'Coffre légendaire', price: 7000, kind: 'chest', min: 'legendaire', box: 'legendaire' },
+  { id: 'coffre-rare', e: '🎁', n: 'Coffre rare', price: 800, kind: 'chest', min: 'rare', box: 'rare' },
+  { id: 'coffre-epique', e: '🎁', n: 'Coffre épique', price: 1800, kind: 'chest', min: 'epique', box: 'epique' },
+  { id: 'coffre-legendaire', e: '🎁', n: 'Coffre légendaire', price: 5000, kind: 'chest', min: 'legendaire', box: 'legendaire' },
 ];
 export const ITEM_BY_ID: Record<string, Item> = Object.fromEntries(ITEMS.map(i => [i.id, i]));
 
@@ -252,10 +260,11 @@ export function buy(p: PetState, itemId: string, coins: number, now: number): Pe
   return { ...paid, inventory: { ...p.inventory, [it.id]: (p.inventory[it.id] ?? 0) + 1 } };
 }
 
-const care = (p: PetState, now: number, gain: Partial<Needs>): PetState => ({
+/** Food and toys are divided by the companion's appetite; a nap is not */
+const care = (p: PetState, now: number, gain: Partial<Needs>, eats = true): PetState => ({
   ...withActive(p, c => {
-    const d = decay(c, now);
-    return { ...d, needs: { faim: clamp(d.needs.faim + (gain.faim ?? 0)), joie: clamp(d.needs.joie + (gain.joie ?? 0)), energie: clamp(d.needs.energie + (gain.energie ?? 0)) } };
+    const d = decay(c, now), k = eats ? appetiteOf(c.species) : 1;
+    return { ...d, needs: { faim: clamp(d.needs.faim + (gain.faim ?? 0) / k), joie: clamp(d.needs.joie + (gain.joie ?? 0) / k), energie: clamp(d.needs.energie + (gain.energie ?? 0)) } };
   }),
   careCount: p.careCount + 1,
 });
@@ -270,7 +279,7 @@ export function useItem(p: PetState, itemId: string, now: number): PetState {
 }
 
 /** Free care: a nap fills the energy */
-export const sleep = (p: PetState, now: number) => (active(p) ? care(p, now, { energie: 100 }) : p);
+export const sleep = (p: PetState, now: number) => (active(p) ? care(p, now, { energie: 100 }, false) : p);
 
 /** Switches companion: the old one freezes (its needs are brought up to now), the new one starts decaying from now. */
 export function setActive(p: PetState, id: string, now: number): PetState {
