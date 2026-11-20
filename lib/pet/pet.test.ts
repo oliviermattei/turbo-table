@@ -61,12 +61,12 @@ describe('pet', () => {
     let p = withCompanion();
     p = { ...p, creatures: [{ ...p.creatures[0], species: 'phenix-solaire' }] };
     p = applyGames(p, [game({ ts: T0 + H, correct: 20, stars: 0 })]);
-    expect(p.bonus).toBe(5); // legendary 25 % + baby 0 % + 1 species 2 % of 20 coins
+    expect(p.bonus).toBe(220); // legendary +1100 % + baby 0 % + 1 species 2 % of 20 coins
     p = applyGames(p, [game({ ts: T0 + 90 * H, correct: 20, stars: 0 })]);
-    expect(p.bonus).toBe(5); // sad after 89 h: no bonus
+    expect(p.bonus).toBe(220); // sad after 89 h: no bonus
     p = { ...p, creatures: [{ ...p.creatures[0], xp: 2000, shown: 3, needs: { faim: 100, joie: 100, energie: 100 }, tick: T0 + 90 * H }] };
     p = applyGames(p, [game({ ts: T0 + 91 * H, correct: 20, stars: 0 })]);
-    expect(p.bonus).toBe(5 + 15); // + 77 % once Super
+    expect(p.bonus).toBe(220 + 230); // + 1152 % once Super
   });
 
   it('decays needs over time and gets sad', () => {
@@ -105,13 +105,13 @@ describe('pet', () => {
     p = sleep(p, T0 + 20 * H);
     expect(p.creatures[0].needs.energie).toBe(100);
     expect(p.careCount).toBe(2);
-    p = buy(p, 'coffre', 800, T0);
+    p = buy(p, 'coffre', 250, T0);
     expect(p.eggs.at(-1)?.opened).toBe(false);
     expect(p.eggs.at(-1)?.box).toBeUndefined();
-    p = buy(p, 'coffre-epique', 6000, T0 + 1);
+    p = buy(p, 'coffre-epique', 2500, T0 + 1);
     expect(p.eggs.at(-1)?.box).toBe('epique');
     expect(['epique', 'legendaire']).toContain(p.eggs.at(-1)?.q);
-    p = buy(p, 'coffre-legendaire', 12000, T0 + 2);
+    p = buy(p, 'coffre-legendaire', 7000, T0 + 2);
     expect(p.eggs.at(-1)?.q).toBe('legendaire');
   });
 
