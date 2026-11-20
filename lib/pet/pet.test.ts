@@ -32,15 +32,15 @@ describe('pet', () => {
     expect(coinsOfGame(game({ mode: 'exam', passed: true, mention: 3 }))).toBe(40);
   });
 
-  it('gives a first chest that hatches after 50 correct answers', () => {
+  it('gives a first chest that hatches after 30 correct answers', () => {
     let p = newPet(T0, new Set(), 0);
     expect(p.eggs).toHaveLength(1);
     expect(p.eggs[0]).toMatchObject({ q: 'commun', opened: false });
     p = openChest(p, p.eggs[0].id, 100);
     expect(p.incubating?.start).toBe(100);
-    expect(hatchProgress(p, 149)?.ready).toBe(false);
-    expect(hatch(p, 149, T0, 0.5)).toBeNull();
-    const r = hatch(p, 150, T0, 0.5)!;
+    expect(hatchProgress(p, 129)?.ready).toBe(false);
+    expect(hatch(p, 129, T0, 0.5)).toBeNull();
+    const r = hatch(p, 130, T0, 0.5)!;
     expect(r.out.dup).toBe(false);
     expect(r.p.activeId).toBe(r.p.creatures[0].id);
     expect(r.p.incubating).toBeNull();

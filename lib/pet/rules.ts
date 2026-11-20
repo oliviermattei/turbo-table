@@ -31,7 +31,8 @@ export const balance = (h: GameRecord[], badges: Set<string>, p: PetState | null
 export const totalCorrect = (h: GameRecord[]) => h.reduce((s, g) => s + g.correct, 0);
 
 /* ---------- Eggs ---------- */
-export const HATCH: Record<Rarity, number> = { commun: 50, 'peu-commun': 100, rare: 150, epique: 250, legendaire: 400 };
+/** Correct answers to hatch. At ~56 a day: common 2-3 games (first companion on day 1), legendary ~1 week */
+export const HATCH: Record<Rarity, number> = { commun: 30, 'peu-commun': 80, rare: 150, epique: 250, legendaire: 400 };
 const DROP_WEIGHTS: Record<Rarity, number> = { commun: 50, 'peu-commun': 28, rare: 14, epique: 6, legendaire: 2 };
 export const DUP_COINS: Record<Rarity, number> = { commun: 25, 'peu-commun': 50, rare: 100, epique: 200, legendaire: 400 };
 export const PITY_DAYS = 10;
@@ -215,17 +216,19 @@ export function applyGames(p: PetState, h: GameRecord[]): PetState {
 /* ---------- Shop and care ---------- */
 export interface Item { id: string; e: string; n: string; price: number; kind: 'food' | 'toy' | 'chest'; gain?: Partial<Needs>; min?: Rarity; box?: Box }
 export const ITEMS: Item[] = [
+// Prices for ~100 coins a day: keeping the companion happy costs ~30 a day (a sandwich + a ball every other day),
+// a common chest is about a week of savings, a legendary one 3-4 months.
   { id: 'pomme', e: '🍎', n: 'Pomme', price: 10, kind: 'food', gain: { faim: 20 } },
-  { id: 'sandwich', e: '🥪', n: 'Sandwich', price: 25, kind: 'food', gain: { faim: 50 } },
-  { id: 'gateau', e: '🎂', n: 'Gâteau', price: 60, kind: 'food', gain: { faim: 100, joie: 10 } },
-  { id: 'balle', e: '⚽', n: 'Balle', price: 30, kind: 'toy', gain: { joie: 30 } },
-  { id: 'peluche', e: '🧸', n: 'Peluche', price: 80, kind: 'toy', gain: { joie: 70 } },
-  { id: 'console', e: '🎮', n: 'Console', price: 200, kind: 'toy', gain: { joie: 100 } },
-  { id: 'coffre', e: '🎁', n: 'Coffre', price: 800, kind: 'chest' },
-  { id: 'coffre-peu-commun', e: '🎁', n: 'Coffre peu commun', price: 1500, kind: 'chest', min: 'peu-commun', box: 'peu-commun' },
-  { id: 'coffre-rare', e: '🎁', n: 'Coffre rare', price: 3000, kind: 'chest', min: 'rare', box: 'rare' },
-  { id: 'coffre-epique', e: '🎁', n: 'Coffre épique', price: 6000, kind: 'chest', min: 'epique', box: 'epique' },
-  { id: 'coffre-legendaire', e: '🎁', n: 'Coffre légendaire', price: 12000, kind: 'chest', min: 'legendaire', box: 'legendaire' },
+  { id: 'sandwich', e: '🥪', n: 'Sandwich', price: 20, kind: 'food', gain: { faim: 50 } },
+  { id: 'gateau', e: '🎂', n: 'Gâteau', price: 45, kind: 'food', gain: { faim: 100, joie: 10 } },
+  { id: 'balle', e: '⚽', n: 'Balle', price: 25, kind: 'toy', gain: { joie: 30 } },
+  { id: 'peluche', e: '🧸', n: 'Peluche', price: 60, kind: 'toy', gain: { joie: 70 } },
+  { id: 'console', e: '🎮', n: 'Console', price: 150, kind: 'toy', gain: { joie: 100 } },
+  { id: 'coffre', e: '🎁', n: 'Coffre', price: 500, kind: 'chest' },
+  { id: 'coffre-peu-commun', e: '🎁', n: 'Coffre peu commun', price: 1000, kind: 'chest', min: 'peu-commun', box: 'peu-commun' },
+  { id: 'coffre-rare', e: '🎁', n: 'Coffre rare', price: 2000, kind: 'chest', min: 'rare', box: 'rare' },
+  { id: 'coffre-epique', e: '🎁', n: 'Coffre épique', price: 4000, kind: 'chest', min: 'epique', box: 'epique' },
+  { id: 'coffre-legendaire', e: '🎁', n: 'Coffre légendaire', price: 8000, kind: 'chest', min: 'legendaire', box: 'legendaire' },
 ];
 export const ITEM_BY_ID: Record<string, Item> = Object.fromEntries(ITEMS.map(i => [i.id, i]));
 
