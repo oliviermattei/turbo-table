@@ -45,6 +45,7 @@ Le père de l'enfant (développeur) pilote le projet. Il valide les choix de con
   - Entraînement : 2 × bonnes réponses.
   - Examen réussi : 20 + 10 × mention.
   - Examen raté : nombre de bonnes réponses, plafonné à 20.
+- **Seuils des badges** calibrés pour qu'un enfant qui joue ~4 parties par jour et connaît ses tables par cœur (~22 bonnes réponses / min) atteigne les Légendaires en ~6 mois. Repère réel : l'enfant fait ~14 / min aujourd'hui, un adulte ~34 / min.
 - **149 badges avec 5 qualités**, les mêmes que les créatures : Commun (gris `#cbd5e1`), Peu commun (vert `#22c55e`), Rare (bleu `#3b82f6`), Épique (violet `#a855f7`) et Légendaire (orange `#f59e0b`). La page Badges montre une vignette par badge, regroupées par qualité, au fond de la couleur de la qualité. Les badges se répartissent ainsi :
   - 14 familles de défis à paliers (`FAMILIES`), numérotés en chiffres romains I à VII ;
   - 10 familles « Table de N », selon les bonnes réponses dans cette table (25, 100, 250, 500, 1000) ;
