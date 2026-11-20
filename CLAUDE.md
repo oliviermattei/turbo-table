@@ -100,8 +100,9 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
 ### Règles (`lib/pet/rules.ts`, fonctions pures testées dans `pet.test.ts`)
 - **Pièces** : recalculées depuis l'historique (partie : bonnes réponses + 5 × étoiles ; examen réussi : 10 + 10 × mention ; badge selon sa qualité ; 20 par niveau) + doublons. Seul le dépensé est stocké.
 - **Coffres** : tout nouvel œuf arrive dans un coffre (premier coffre offert, 4 % des parties normales ou 8 % avec 3 étoiles, tirage déduit de `game.id` ; badge Épique → œuf ≥ Rare ; Légendaire → ≥ Épique ; boutique 800 🪙 ; filet de sécurité après 10 jours de jeu sans œuf).
-- **Œufs** : un œuf par qualité de Commun à Épique, un œuf propre à chaque Légendaire. Éclosion après 30 / 80 / 150 / 250 / 400 bonnes réponses (premier compagnon dès le 1er jour). Une espèce n'éclot que si ses images existent (`lib/pet/assets.json`). Doublon → pièces.
+- **Œufs** : un œuf par qualité de Commun à Épique, un œuf propre à chaque Légendaire. Éclosion après 25 / 60 / 120 / 200 / 300 bonnes réponses ; pas de doublon tant qu'il manque une espèce de cette qualité. Réglé avec la simulation `lib/pet/economy.sim.test.ts` (`SIM=1 pnpm vitest run lib/pet/economy.sim.test.ts --reporter=verbose`) : bestiaire complet en ~5 mois, ~9 espèces le 1er mois, ~19 au bout de 2 mois. Une espèce n'éclot que si ses images existent (`lib/pet/assets.json`). Doublon → pièces.
 - **Besoins** Faim / Joie / Énergie, baisse calculée à l'ouverture. Humeur = moyenne (≥ 60 content, < 30 triste). Triste = image triste et **évolution bloquée**. Jamais perdu.
+- **Bonus de pièces du compagnon** (s'il n'est pas triste) : qualité (+0 à +25 %) + stade (+0 / 10 / 25 / 50 %) + 2 % par espèce trouvée. Les gains grandissent avec la progression.
 - **Évolution** : 1 XP par bonne réponse si actif et pas triste. Stades Bébé / Petit / Grand / Super à 0 / 150 / 600 / 1500. Scène d'évolution de 5 s au toucher.
 - **Boutique** : nourriture (10 / 20 / 45), jouets (25 / 60 / 150), coffres Commun → Légendaire (500 / 1 000 / 2 000 / 4 000 / 8 000). Dormir est gratuit. Calibré pour ~100 🪙 par jour : l'entretien coûte ~30 % des gains.
 

@@ -32,15 +32,15 @@ describe('pet', () => {
     expect(coinsOfGame(game({ mode: 'exam', passed: true, mention: 3 }))).toBe(40);
   });
 
-  it('gives a first chest that hatches after 30 correct answers', () => {
+  it('gives a first chest that hatches after 25 correct answers', () => {
     let p = newPet(T0, new Set(), 0);
     expect(p.eggs).toHaveLength(1);
     expect(p.eggs[0]).toMatchObject({ q: 'commun', opened: false });
     p = openChest(p, p.eggs[0].id, 100);
     expect(p.incubating?.start).toBe(100);
-    expect(hatchProgress(p, 129)?.ready).toBe(false);
-    expect(hatch(p, 129, T0, 0.5)).toBeNull();
-    const r = hatch(p, 130, T0, 0.5)!;
+    expect(hatchProgress(p, 124)?.ready).toBe(false);
+    expect(hatch(p, 124, T0, 0.5)).toBeNull();
+    const r = hatch(p, 125, T0, 0.5)!;
     expect(r.out.dup).toBe(false);
     expect(r.p.activeId).toBe(r.p.creatures[0].id);
     expect(r.p.incubating).toBeNull();
@@ -61,9 +61,12 @@ describe('pet', () => {
     let p = withCompanion();
     p = { ...p, creatures: [{ ...p.creatures[0], species: 'phenix-solaire' }] };
     p = applyGames(p, [game({ ts: T0 + H, correct: 20, stars: 0 })]);
-    expect(p.bonus).toBe(5); // 25 % of 20
+    expect(p.bonus).toBe(5); // legendary 25 % + baby 0 % + 1 species 2 % of 20 coins
     p = applyGames(p, [game({ ts: T0 + 90 * H, correct: 20, stars: 0 })]);
     expect(p.bonus).toBe(5); // sad after 89 h: no bonus
+    p = { ...p, creatures: [{ ...p.creatures[0], xp: 2000, shown: 3, needs: { faim: 100, joie: 100, energie: 100 }, tick: T0 + 90 * H }] };
+    p = applyGames(p, [game({ ts: T0 + 91 * H, correct: 20, stars: 0 })]);
+    expect(p.bonus).toBe(5 + 15); // + 77 % once Super
   });
 
   it('decays needs over time and gets sad', () => {

@@ -31,8 +31,8 @@ export const balance = (h: GameRecord[], badges: Set<string>, p: PetState | null
 export const totalCorrect = (h: GameRecord[]) => h.reduce((s, g) => s + g.correct, 0);
 
 /* ---------- Eggs ---------- */
-/** Correct answers to hatch. At ~56 a day: common 2-3 games (first companion on day 1), legendary ~1 week */
-export const HATCH: Record<Rarity, number> = { commun: 30, 'peu-commun': 80, rare: 150, epique: 250, legendaire: 400 };
+/** Correct answers to hatch. Tuned with economy.sim.test.ts: the bestiary completes in ~5 months with a new species every few days */
+export const HATCH: Record<Rarity, number> = { commun: 25, 'peu-commun': 60, rare: 120, epique: 200, legendaire: 300 };
 const DROP_WEIGHTS: Record<Rarity, number> = { commun: 50, 'peu-commun': 28, rare: 14, epique: 6, legendaire: 2 };
 export const DUP_COINS: Record<Rarity, number> = { commun: 25, 'peu-commun': 50, rare: 100, epique: 200, legendaire: 400 };
 export const PITY_DAYS = 10;
@@ -130,6 +130,8 @@ export const hatchProgress = (p: PetState, correct: number) => {
 };
 
 export const FULL: Needs = { faim: 100, joie: 100, energie: 100 };
+/** Share of hatches that pick a species not owned yet (when one is left in that quality): 1 = no duplicate until the quality is complete */
+export const FRESH = { rate: 1 };
 export type Hatched = { species: Species; dup: false; creature: Creature } | { species: Species; dup: true; coins: number };
 
 /** Hatches the incubated egg. `r` is a random number in [0, 1) (picked at hatch time, then stored). */
@@ -143,8 +145,8 @@ export function hatch(p: PetState, correct: number, now: number, r: number): { p
     const pool = readySpecies(egg.q);
     if (!pool.length) return null;
     const fresh = pool.filter(s => !owned.has(s.id));
-    // 80% of the time a species not owned yet, when there is one
-    const from = fresh.length && r < 0.8 ? fresh : pool;
+    // A species not owned yet, as long as there is one (FRESH.rate of the time)
+    const from = fresh.length && r < FRESH.rate ? fresh : pool;
     sp = from[Math.floor(((r * 997) % 1) * from.length)];
   }
   const base = { ...p, incubating: null };
@@ -165,10 +167,18 @@ export function hatch(p: PetState, correct: number, now: number, r: number): { p
 /** Points lost per hour */
 export const DECAY: Needs = { faim: 2, joie: 1.5, energie: 2 };
 export const JOY_PER_GAME = 5;
-/** Extra coins a not-sad active companion brings at the end of a game, by its quality */
+/**
+ * Extra coins a not-sad active companion brings at the end of a game. It adds up its quality, its stage
+ * (each evolution raises it) and the size of the collection, so coins grow as the child progresses.
+ */
 export const QUALITY_BONUS: Record<Rarity, number> = { commun: 0, 'peu-commun': 0.05, rare: 0.1, epique: 0.15, legendaire: 0.25 };
-export const companionBonus = (g: GameRecord, species: string) =>
-  Math.round(coinsOfGame(g) * (QUALITY_BONUS[SPECIES_BY_ID[species]?.q] ?? 0));
+export const STAGE_BONUS = [0, 0.1, 0.25, 0.5];
+export const BONUS = { perSpecies: 0.02 };
+export const bonusRate = (c: Pick<Creature, 'species' | 'xp' | 'shown'>, collection: number) =>
+  (QUALITY_BONUS[SPECIES_BY_ID[c.species]?.q] ?? 0) + STAGE_BONUS[Math.min(stageOf(c.xp), c.shown)] + BONUS.perSpecies * collection;
+export const companionBonus = (g: GameRecord, c: Pick<Creature, 'species' | 'xp' | 'shown'>, collection: number) =>
+  Math.round(coinsOfGame(g) * bonusRate(c, collection));
+export const collectionSize = (p: PetState) => new Set(p.creatures.map(c => c.species)).size;
 const clamp = (v: number) => Math.max(0, Math.min(100, v));
 export function decay(c: Creature, t: number): Creature {
   if (t <= c.tick) return c;
@@ -205,7 +215,7 @@ export function applyGames(p: PetState, h: GameRecord[]): PetState {
     ...withActive(p, c => todo.reduce((cur, g) => {
       const d = decay(cur, Math.max(g.ts, cur.tick));
       const happy = moodOf(d.needs) !== 'triste';
-      if (happy) bonus += companionBonus(g, d.species);
+      if (happy) bonus += companionBonus(g, d, collectionSize(p));
       return { ...d, xp: d.xp + (happy ? g.correct : 0), needs: { ...d.needs, joie: clamp(d.needs.joie + JOY_PER_GAME) } };
     }, c)),
     processed,
