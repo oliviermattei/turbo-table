@@ -13,7 +13,11 @@ type LocalGame = GameRecord & { synced?: boolean };
 export type SyncState = 'local' | 'cloud' | 'locked';
 
 /** Test mode: a sandbox with its own device storage and no server sync, so fake games never reach the real history. */
-const isDebug = () => { try { return localStorage.getItem('tt_debug') === '1'; } catch { return false; } };
+// Local development only: in production the test mode never shows, whatever is left in localStorage
+const isDebug = () => {
+  if (process.env.NODE_ENV === 'production') return false;
+  try { return localStorage.getItem('tt_debug') === '1'; } catch { return false; }
+};
 const pre = () => (isDebug() ? 'ttdbg_' : 'tt_');
 const store = (k: string, v: unknown) => {
   try { localStorage.setItem(pre() + k, JSON.stringify(v)); } catch { /* storage full or disabled */ }

@@ -134,6 +134,8 @@ Document `pet` (`lib/pet/types.ts`) : table `docs` côté serveur (validé par `
 
 ## 7. Comment lancer et tester
 
+- **Mode test** (développement local seulement, `pnpm dev`) : case en bas de l'Historique ; stockage à part (`ttdbg_…`), aucune synchro ; « Gagner tout de suite » (800 bonnes réponses), « +1000 🪙 », bestiaire complet. Invisible en production.
+
 - `pnpm install`, puis copier `.env.example` en `.env.local` et remplir `FAMILY_CODE`.
 - `pnpm dev` → http://localhost:3000. La base va dans `./data/`.
 - `pnpm test` (Vitest, règles du jeu), `pnpm typecheck`, `pnpm lint`, `pnpm build`.

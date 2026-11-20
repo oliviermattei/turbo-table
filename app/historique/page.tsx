@@ -71,9 +71,11 @@ export default function HistoriquePage() {
         {d.sync === 'cloud' ? 'Progression enregistrée sur le serveur : la même sur tous tes appareils.' : 'Progression enregistrée sur cet appareil.'}
       </p>
       {d.sync === 'locked' && <FamilyCode />}
-      <label className="debugbox">
-        <input type="checkbox" checked={d.debug} onChange={e => d.setDebug(e.target.checked)} /> 🐞 Mode test (parent) : appareil isolé, rien n’est envoyé au serveur
-      </label>
+      {process.env.NODE_ENV !== 'production' && (
+        <label className="debugbox">
+          <input type="checkbox" checked={d.debug} onChange={e => d.setDebug(e.target.checked)} /> 🐞 Mode test (dev) : appareil isolé, rien n’est envoyé au serveur
+        </label>
+      )}
     </section>
   );
 }
