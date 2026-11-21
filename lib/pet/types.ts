@@ -18,6 +18,17 @@ export interface Creature {
   tick: number;
 }
 
+/**
+ * One line of the pet journal, for the parent (never used to compute anything).
+ * k: buy (id = item, n = price, left = coins left) · use / sleep (from / to = needs [faim, joie, énergie])
+ * chest (src, q, box, id = game or badge) · open · hatch / dup (id = species, n = coins) · evolve (n = new stage)
+ */
+export interface LogEntry {
+  t: number; k: 'buy' | 'use' | 'sleep' | 'chest' | 'open' | 'hatch' | 'dup' | 'evolve';
+  id?: string; n?: number; left?: number; q?: Rarity; src?: EggSource; box?: Rarity;
+  from?: [number, number, number]; to?: [number, number, number];
+}
+
 /** The "pet" document. Coins earned are recomputed from history; only what is spent is stored. */
 export interface PetState {
   createdAt: number;
@@ -27,7 +38,8 @@ export interface PetState {
   bonus: number;
   inventory: Record<string, number>;
   eggs: Egg[];
-  incubating: (Egg & { start: number }) | null;
+  /** The egg in the incubator, with the counted points it already got (see applyGames) */
+  incubating: (Egg & { done: number }) | null;
   /** 'drop:<gameId>', 'badge:<badgeId>' already turned into eggs */
   claimed: string[];
   lastEggAt: number;
@@ -36,4 +48,6 @@ export interface PetState {
   creatures: Creature[];
   activeId: string | null;
   careCount: number;
+  /** Last events (see LogEntry), capped at LOG_MAX */
+  log: LogEntry[];
 }

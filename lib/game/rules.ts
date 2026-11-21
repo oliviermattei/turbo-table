@@ -1,4 +1,5 @@
 import type { GameRecord, Rarity } from './types';
+import { dayKey, isSerious, values } from './value';
 
 /* ---------- Diplomas ---------- */
 export const MENTIONS: Record<number, { name: string; medal: string }> = {
@@ -27,12 +28,9 @@ export function levelInfo(xp: number) {
 }
 export type LevelInfo = ReturnType<typeof levelInfo>;
 
-export function xpOf(g: GameRecord) {
-  if (g.mode === 'exam') return g.passed ? 20 + (g.mention ?? 0) * 10 : Math.min(g.correct, 20);
-  if (g.mode === 'practice') return g.correct * 2;
-  return g.correct * 2 + g.stars * 5;
-}
-export const totalXp = (h: GameRecord[]) => h.reduce((s, g) => s + xpOf(g), 0);
+/** XP of a game within its history (counted points, stars of a game that counts, a new diploma): see value.ts */
+export const xpOf = (h: GameRecord[], g: GameRecord) => values(h).get(g.id)?.xp ?? 0;
+export const totalXp = (h: GameRecord[]) => [...values(h).values()].reduce((s, v) => s + v.xp, 0);
 
 /** Stars from correct answers per minute: ≥ 5 → 1, ≥ 12 → 2, ≥ 20 → 3 */
 export function starsFor(correct: number, duration: number) {
@@ -78,8 +76,8 @@ export interface Family {
   d: (goal: number) => string; v: (s: Stats) => number; goals: number[];
 }
 export const FAMILIES: Family[] = [
-  { id: 'total', e: '✅', n: 'Bonnes réponses', d: g => `${g} bonnes réponses en tout`, v: s => s.totalCorrect, goals: [50, 200, 500, 1000, 2500, 5000, 10000] },
-  { id: 'parties', e: '🎮', n: 'Joueur', d: g => `Joue ${pl(g, 'partie')}`, v: s => s.games, goals: [5, 15, 40, 80, 150, 300, 500] },
+  { id: 'total', e: '✅', n: 'Bonnes réponses', d: g => `${g} bonnes réponses en tout (sans les × 1 et × 10)`, v: s => s.totalCorrect, goals: [50, 200, 500, 1000, 2500, 5000, 10000] },
+  { id: 'parties', e: '🎮', n: 'Joueur', d: g => `Joue ${pl(g, 'partie')} qui compte${g > 1 ? 'nt' : ''}`, v: s => s.games, goals: [5, 15, 40, 80, 150, 300, 500] },
   { id: 'serie', e: '🔥', n: 'Série', d: g => `${g} bonnes réponses à la suite`, v: s => s.maxStreak, goals: [5, 8, 12, 16, 20, 25, 30] },
   { id: 'vitesse', e: '⚡', n: 'Vitesse', d: g => `${g} bonnes réponses en 1 minute`, v: s => s.bestRate, goals: [8, 10, 12, 14, 16, 19, 22] },
   { id: 'sansfaute', e: '🎯', n: 'Sans faute', d: g => `${pl(g, 'partie')} sans erreur (10 réponses ou plus)`, v: s => s.perfectCount, goals: [1, 3, 8, 15, 30, 50, 100] },
@@ -154,7 +152,6 @@ export function nextBadge(st: Stats): NextBadge | null {
 }
 
 /* ---------- Stats ---------- */
-const dayKey = (ts: number) => { const d = new Date(ts); return d.getFullYear() + '-' + (d.getMonth() + 1) + '-' + d.getDate(); };
 const dayTime = (k: string) => { const [y, m, d] = k.split('-').map(Number); return new Date(y, m - 1, d).getTime(); };
 
 export function diplomas(h: GameRecord[]): (Diploma | null)[] {
@@ -167,8 +164,41 @@ export function diplomas(h: GameRecord[]): (Diploma | null)[] {
   return d;
 }
 
-export function computeStats(h: GameRecord[]): Stats {
-  const dips = diplomas(h), got = dips.filter((x): x is Diploma => !!x);
+/**
+ * Stats behind the badges. Only games that count (isSerious: hard enough, enough right answers) are used,
+ * except diplomas and levels: a game on the table of 1 alone wins no streak, speed or games-played badge.
+ */
+/**
+ * What one game adds to the table badges. 7 × 1 belongs to the table of 1 only, 7 × 10 to the table of 10 only:
+ * the easy factor does not feed the other table. "Bonnes réponses" leaves out the calculations with 1 or 10.
+ */
+const tablesMemo = new WeakMap<GameRecord, { table: number[]; hard: number; pairs: string[] }>();
+function tablesOf(g: GameRecord) {
+  let m = tablesMemo.get(g);
+  if (m) return m;
+  m = { table: Array(11).fill(0), hard: 0, pairs: [] };
+  for (const [k, v] of Object.entries(g.seen || {})) {
+    const [a, b] = k.split('x').map(Number);
+    if (v[0] > 0 && a >= 1 && b <= 10) m.pairs.push(k);
+    const easy = [a, b].filter(t => t === 1 || t === 10);
+    for (const t of new Set(easy.length ? easy : [a, b])) if (t >= 1 && t <= 10) m.table[t] += v[0];
+    if (!easy.length) m.hard += v[0];
+  }
+  tablesMemo.set(g, m);
+  return m;
+}
+
+const statsCache = new WeakMap<GameRecord[], { n: number; first: string | undefined; st: Stats }>();
+export function computeStats(all: GameRecord[]): Stats {
+  const c = statsCache.get(all);
+  if (c && c.n === all.length && c.first === all[0]?.id) return c.st;
+  const st = stats(all);
+  statsCache.set(all, { n: all.length, first: all[0]?.id, st });
+  return st;
+}
+function stats(all: GameRecord[]): Stats {
+  const dips = diplomas(all), got = dips.filter((x): x is Diploma => !!x);
+  const h = all.filter(isSerious);
   const norm = h.filter(g => g.mode === 'normal');
   const chrono = [...h].sort((a, b) => a.ts - b.ts);
 
@@ -195,19 +225,20 @@ export function computeStats(h: GameRecord[]): Stats {
     if (g.score > b) bests[g.duration] = g.score;
   });
 
-  // Correct answers per table, and calculations already succeeded
+  // Right answers per table, and calculations already succeeded (all games: they are about knowing the tables).
   const tableCorrect: number[] = Array(11).fill(0), pairs = new Set<string>();
-  h.forEach(g => Object.entries(g.seen || {}).forEach(([k, v]) => {
-    const [a, b] = k.split('x').map(Number);
-    if (v[0] > 0 && a >= 1 && b <= 10) pairs.add(k);
-    if (a >= 1 && a <= 10) tableCorrect[a] += v[0];
-    if (b !== a && b >= 1 && b <= 10) tableCorrect[b] += v[0];
-  }));
+  let hardCorrect = 0;
+  for (const g of all) {
+    const t = tablesOf(g);
+    for (let i = 1; i <= 10; i++) tableCorrect[i] += t.table[i];
+    hardCorrect += t.hard;
+    for (const k of t.pairs) pairs.add(k);
+  }
 
   return {
     h, norm, dips,
     games: h.length,
-    totalCorrect: h.reduce((s, g) => s + g.correct, 0),
+    totalCorrect: hardCorrect,
     maxStreak: h.reduce((m, g) => Math.max(m, g.bestStreak), 0),
     bestRate: norm.filter(g => g.duration >= 60).reduce((m, g) => Math.max(m, Math.floor(g.correct * 60 / g.duration)), 0),
     perfectCount: norm.filter(g => g.total >= 10 && g.correct === g.total).length,
@@ -217,7 +248,7 @@ export function computeStats(h: GameRecord[]): Stats {
     endurance: norm.filter(g => g.duration >= 180 && g.stars >= 2).length,
     fixedCount: h.filter(g => g.mode === 'practice' && g.total >= 5 && g.correct === g.total).length,
     dipCount: got.length, tbCount: got.filter(x => x.mention === 3).length,
-    level: levelInfo(totalXp(h)).num,
+    level: levelInfo(totalXp(all)).num,
     tableCorrect, pairsDone: pairs.size,
     early: h.some(g => new Date(g.ts).getHours() < 8),
     weekend, comeback, records,

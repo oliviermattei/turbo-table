@@ -9,14 +9,14 @@ import { appetiteOf, bonusRate, collectionSize, ITEM_BY_ID, ITEMS, markShown, re
 import { SPECIES_BY_ID } from '@/lib/pet/species';
 
 export default function CompagnonPage() {
-  const { pet, updatePet, companion: c, coins, correct } = useEnsurePet();
+  const { pet, updatePet, companion: c, coins } = useEnsurePet();
   const [action, setAction] = useState<Action>(null);
   const [evo, setEvo] = useState(false);
   const seq = useRef(0); // restarts the one-shot animations
   if (!pet) return null;
 
   const chests = pet.eggs.filter(e => !e.opened).length;
-  const inc = hatchProgress(pet, correct);
+  const inc = hatchProgress(pet);
   const play = (a: NonNullable<Action>) => { setAction(a); setTimeout(() => setAction(cur => (cur?.key === a.key ? null : cur)), a.kind === 'sleep' ? 3500 : 2200); };
   const give = (id: string) => {
     updatePet(p => p && giveItem(p, id, Date.now()));
@@ -69,7 +69,7 @@ export default function CompagnonPage() {
         <div className="panel center">
           <h2>{inc ? 'Ton œuf couve…' : 'Ton premier compagnon t’attend !'}</h2>
           <p className="note">
-            {inc ? `Encore ${inc.need - inc.done} bonnes réponses pour qu'il éclose.`
+            {inc ? `Encore ${inc.need - inc.done} points pour qu'il éclose. Les tables difficiles rapportent plus !`
               : chests ? 'Ouvre ton coffre dans le nid.' : 'Va au nid pour choisir un œuf.'}
           </p>
           <Link className="big" href="/nid">🥚 Aller au nid</Link>

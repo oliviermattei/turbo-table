@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useData } from '@/lib/data';
 import { computeStats, RARITY, unlocked } from '@/lib/game/rules';
 import assets from '@/lib/pet/assets.json';
-import { active, balance, decay, hatchProgress, lowestNeed, moodOf, stageOf, STAGES, STAGE_XP, totalCorrect, ITEM_BY_ID } from '@/lib/pet/rules';
+import { active, balance, decay, hatchProgress, lowestNeed, moodOf, stageOf, STAGES, STAGE_XP, ITEM_BY_ID } from '@/lib/pet/rules';
 import { SPECIES_BY_ID } from '@/lib/pet/species';
 import type { Box, Creature, Egg, Needs } from '@/lib/pet/types';
 import { UiIcon } from './ui';
@@ -24,10 +24,9 @@ export function usePet() {
   const now = useNow();
   const badges = useMemo(() => unlocked(computeStats(d.history)), [d.history]);
   const coins = balance(d.history, badges, d.pet);
-  const correct = useMemo(() => totalCorrect(d.history), [d.history]);
   const raw = active(d.pet);
   const companion = raw ? decay(raw, now) : null;
-  return { ...d, now, badges, coins, correct, companion };
+  return { ...d, now, badges, coins, companion };
 }
 
 export const creatureSrc = (species: string, stage: number, sad = false) =>
@@ -134,14 +133,14 @@ function speech(c: Creature) {
 
 /** Home screen hero: the companion (or the egg) big, talking */
 export function CompanionHero() {
-  const { pet, companion: c, correct } = usePet();
-  const inc = pet && hatchProgress(pet, correct);
+  const { pet, companion: c } = usePet();
+  const inc = pet && hatchProgress(pet);
   const chests = pet?.eggs.filter(e => !e.opened).length ?? 0;
   return (
     <Link href={c ? '/compagnon' : '/nid'} className="hero">
       <div className="bubble-say">
         {c ? speech(c)
-          : inc ? (inc.ready ? 'Ton œuf va éclore ! Viens vite !' : `Encore ${inc.need - inc.done} bonnes réponses et ton œuf éclot !`)
+          : inc ? (inc.ready ? 'Ton œuf va éclore ! Viens vite !' : `Encore ${inc.need - inc.done} points et ton œuf éclot !`)
           : chests ? 'Un coffre t’attend ! Touche-le pour l’ouvrir 🎁' : 'Un compagnon t’attend ! 🥚'}
       </div>
       <div className="hero-art">

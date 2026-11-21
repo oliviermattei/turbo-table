@@ -42,6 +42,8 @@ function loadLocal() {
     duration: read('duration', 60),
     sound: read('sound', true),
     pet: cleanPet(read('pet', null)),
+    /** time of the last reset this device applied */
+    reset: Number(read('reset', 0)) || 0,
     debug: isDebug(),
   };
 }
@@ -57,8 +59,8 @@ interface DataCtx {
   setDuration(d: number): void;
   setSound(b: boolean): void;
   setName(n: string): void;
-  /** Saves a finished game and returns the new history (newest first). */
-  saveGame(rec: Omit<GameRecord, 'id'>): GameRecord[];
+  /** Saves a finished game (see settle()) with the pet it brought up to date. */
+  saveGame(g: GameRecord, pet: PetState | null): void;
   /** The companion, eggs and shop state (null until the companion screen is first opened) */
   pet: PetState | null;
   /** Changes the pet; the new state is saved on the device and on the server. */
@@ -68,6 +70,8 @@ interface DataCtx {
   setDebug(b: boolean): void;
   /** Sends the family code; on success this device syncs with the server. 'blocked' = too many wrong codes, wait 1 hour. */
   unlock(code: string): Promise<'ok' | 'bad' | 'blocked'>;
+  /** Parent: starts the progression again on the server (archived) and on every device. Needs the family code. */
+  resetAll(code: string): Promise<'ok' | 'bad' | 'blocked' | 'offline'>;
 }
 
 const Ctx = createContext<DataCtx | null>(null);
@@ -99,6 +103,7 @@ function Store({ children }: { children: ReactNode }) {
   const [pet, setPetS] = useState(init.pet);
   const petRef = useRef(init.pet);
   const petWrites = useRef(Promise.resolve());
+  const resetAt = useRef(init.reset);
 
   const setSync = (s: SyncState) => { syncRef.current = s; setSyncS(s); };
   // One write at a time on the pet doc, always the latest state
@@ -117,6 +122,12 @@ function Store({ children }: { children: ReactNode }) {
     if (next !== p) commitPet({ ...next, updatedAt: Date.now() }, true);
   }, [commitPet]);
   const commit = useCallback((h: LocalGame[]) => { hist.current = h; setHistory(h); saveLocal(h); reconcilePet(h); }, [reconcilePet]);
+  /** A reset happened at `at`: forget the games played before it and the pet (the profile and settings stay) */
+  const applyReset = useCallback((at: number) => {
+    resetAt.current = at; store('reset', at);
+    commitPet(null, false);
+    commit(hist.current.filter(g => g.ts > at));
+  }, [commit, commitPet]);
   // One write at a time on the profile doc
   const pushProfile = (p: Profile) => {
     profileWrites.current = profileWrites.current.then(() => api('docs/profile', p, 'PUT')).then(() => {}, () => {});
@@ -136,7 +147,8 @@ function Store({ children }: { children: ReactNode }) {
       const r = await api('state');
       if (r.status === 401) return setSync('locked');
       if (!r.ok) return;
-      const body = (await r.json()) as { games: unknown[]; profile: unknown; pet: unknown };
+      const body = (await r.json()) as { games: unknown[]; profile: unknown; pet: unknown; reset?: number };
+      if ((body.reset ?? 0) > resetAt.current) applyReset(body.reset!);
       const remote: LocalGame[] = body.games.map(g => ({ ...clean(g), synced: true }));
       const ids = new Set(remote.map(g => g.id));
       commit([...remote, ...hist.current.filter(g => !g.synced && !ids.has(g.id))].sort((a, b) => b.ts - a.ts));
@@ -149,7 +161,7 @@ function Store({ children }: { children: ReactNode }) {
       setSync('cloud');
       if (petRef.current && petRef.current !== rpet) pushPet();
     } catch { /* offline: keep playing on this device, unsynced games are pushed next time */ }
-  }, [commit, commitPet, reconcilePet, init.debug]);
+  }, [commit, commitPet, reconcilePet, applyReset, init.debug]);
 
 
   // Deferred so the first paint never waits on the network (and StrictMode does not sync twice)
@@ -176,14 +188,24 @@ function Store({ children }: { children: ReactNode }) {
       prof.current = p; setProfile(p); store('profile', p);
       if (syncRef.current === 'cloud') pushProfile(p);
     },
-    saveGame(rec) {
-      const g: LocalGame = { ...rec, id: 'g' + Date.now() + Math.random().toString(36).slice(2, 6), synced: false };
-      const next = [g, ...hist.current];
-      commit(next);
+    saveGame(game, settledPet) {
+      const g: LocalGame = { ...game, synced: false };
+      // The settled pet first, so reconciling the new history finds nothing left to do
+      if (settledPet && petRef.current) commitPet({ ...settledPet, updatedAt: Date.now() }, true);
+      commit([g, ...hist.current]);
       if (syncRef.current === 'cloud') {
         api('games', [clean(g)]).then(r => { if (r.ok) { g.synced = true; saveLocal(hist.current); } }, () => {});
       }
-      return next;
+    },
+    async resetAll(code) {
+      const r = await api('reset', { code }).catch(() => null);
+      if (!r) return 'offline';
+      if (r.status === 429) return 'blocked';
+      if (!r.ok) return 'bad';
+      const { at } = (await r.json()) as { at: number };
+      applyReset(at);
+      await syncCloud();
+      return 'ok';
     },
     async unlock(code) {
       const r = await api('login', { code }).catch(() => null);

@@ -4,7 +4,8 @@ import { useRouter } from 'next/navigation';
 import { useEffect, useState } from 'react';
 import { playHref, type PlayOpts, type RunResult } from '@/lib/game/engine';
 import { MENTIONS, type Badge, type LevelInfo, type NextBadge } from '@/lib/game/rules';
-import { practiceBonus, type hatchProgress } from '@/lib/pet/rules';
+import type { GameValue } from '@/lib/game/value';
+import type { hatchProgress } from '@/lib/pet/rules';
 import { ensureAudio } from '@/lib/sound';
 import Certificate from './Certificate';
 import { BadgeLine, Stars, Stat, UiIcon } from './ui';
@@ -20,6 +21,8 @@ export interface PetInfo {
 export interface Result extends RunResult {
   isRecord: boolean; levelUp: boolean; xpGain: number;
   lvBefore: LevelInfo; lvAfter: LevelInfo; newBadges: Badge[]; next: NextBadge | null; pet: PetInfo;
+  /** What the game was worth (counted points, difficulty) */
+  value: GameValue;
 }
 
 const CHEERS = ['Continue, tu vas y arriver !', 'Bien joué !', 'Super fort !', 'Champion des tables !'];
@@ -76,14 +79,21 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
         <div className="petgain">
           <span className="gain">+{r.pet.coins} 🪙</span>
           {r.pet.comp ? (
-            <Link href="/compagnon" className="pinfo">{r.pet.comp.grew ? `${r.pet.comp.name} a grandi de ${rec.correct} !` : `😢 ${r.pet.comp.name} est triste et n'a pas grandi. Occupe-toi de lui !`}</Link>
+            <Link href="/compagnon" className="pinfo">{r.pet.comp.grew ? `${r.pet.comp.name} a grandi de ${Math.round(r.value.points)} !` : `😢 ${r.pet.comp.name} est triste et n'a pas grandi. Occupe-toi de lui !`}</Link>
           ) : r.pet.egg ? (
             <Link href="/nid" className="pinfo">{r.pet.egg.ready ? '🥚 Ton œuf va éclore !' : `🥚 Œuf : ${r.pet.egg.done} / ${r.pet.egg.need}`}</Link>
           ) : <Link href="/compagnon" className="pinfo">Dépense tes pièces pour ton compagnon !</Link>}
         </div>
         {r.pet.compBonus > 0 && r.pet.comp && <p className="bonus-line">✨ +{r.pet.compBonus} 🪙 grâce à {r.pet.comp.name} !</p>}
-        {practiceBonus({ ...rec, id: '' }) > 0 && (
-          <p className="bonus-line">🔧 Bonus entraînement : +{practiceBonus({ ...rec, id: '' })} 🪙{rec.correct === rec.total ? ' (sans faute !)' : ''}</p>
+        {r.value.dailyBonus > 0 && <p className="bonus-line">☀️ Première partie du jour : +{r.value.dailyBonus} 🪙</p>}
+        {r.value.practiceBonus > 0 && (
+          <p className="bonus-line">🔧 Bonus entraînement : +{r.value.practiceBonus} 🪙{rec.correct === rec.total ? ' (sans faute !)' : ''}</p>
+        )}
+        {!r.value.serious && rec.correct > 0 && (
+          <p className="bonus-line">🐢 Ces calculs sont trop faciles : ils rapportent peu. Essaie des tables plus dures !</p>
+        )}
+        {r.value.serious && r.value.raw - r.value.points > 0.5 && (
+          <p className="bonus-line">😴 Tu as beaucoup joué aujourd’hui : les parties rapportent moins jusqu’à demain.</p>
         )}
         {r.pet.comp && r.pet.egg && (
           <Link href="/nid" className="egg-line">

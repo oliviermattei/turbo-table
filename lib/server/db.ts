@@ -15,6 +15,9 @@ export function getDb() {
       PRAGMA journal_mode = WAL;
       CREATE TABLE IF NOT EXISTS games (id TEXT PRIMARY KEY, ts INTEGER NOT NULL, data TEXT NOT NULL);
       CREATE TABLE IF NOT EXISTS docs (name TEXT PRIMARY KEY, data TEXT NOT NULL, updated_at INTEGER NOT NULL);
+      -- what a reset put aside (POST /api/reset): nothing is ever deleted
+      CREATE TABLE IF NOT EXISTS games_archive (id TEXT NOT NULL, ts INTEGER NOT NULL, data TEXT NOT NULL, archived_at INTEGER NOT NULL, PRIMARY KEY (id, archived_at));
+      CREATE TABLE IF NOT EXISTS docs_archive (name TEXT NOT NULL, data TEXT NOT NULL, archived_at INTEGER NOT NULL);
     `);
   }
   return db;

@@ -19,7 +19,7 @@ export const Stars = ({ n }: { n: number }) => <>{[0, 1, 2].map(i => <span key={
 // Illustrated backdrop of each screen (public/bg, "decors" of the brief)
 const DECOR: Record<string, string> = {
   '': 'accueil', partie: 'jeu', jouer: 'jeu', nid: 'nid', boutique: 'boutique', bestiaire: 'bestiaire',
-  compagnon: 'refuge', refuge: 'refuge', badges: 'bestiaire', diplomes: 'bestiaire', historique: 'bestiaire',
+  compagnon: 'refuge', refuge: 'refuge', badges: 'bestiaire', diplomes: 'bestiaire', historique: 'bestiaire', journal: 'bestiaire',
 };
 export function Decor() {
   const name = DECOR[usePathname().split('/')[1]] ?? 'accueil';

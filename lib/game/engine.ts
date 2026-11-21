@@ -69,6 +69,7 @@ export function createEngine(opts: PlayOpts, tables: number[], duration: number,
     queue: exam ? examQueue(opts.table) : [],
     misses: new Map<string, MissCount>(),
     seen: new Map<string, [number, number]>(),
+    ms: [] as number[], shownAt: 0,
     prevKey: '', score: 0, streak: 0, bestStreak: 0, correct: 0, total: 0, examErrors: 0,
     endAt: 0, playing: false, locked: false, plusKey: 0,
     current: null as Current | null, fb: null as Feedback | null,
@@ -98,6 +99,7 @@ export function createEngine(opts: PlayOpts, tables: number[], duration: number,
     s.current = { ...q, ans: q.a * q.b, choices: makeChoices(q.a, q.b) };
     s.locked = false;
     s.fb = null;
+    s.shownAt = performance.now();
     publish();
   }
 
@@ -106,6 +108,7 @@ export function createEngine(opts: PlayOpts, tables: number[], duration: number,
     if (!s.playing || s.locked || !c) return;
     s.locked = true;
     s.total++;
+    s.ms.push(Math.round(performance.now() - s.shownAt));
     const k = keyOf(c), sv = s.seen.get(k) || [0, 0];
     if (val === c.ans) sv[0]++; else sv[1]++;
     s.seen.set(k, sv);
@@ -138,7 +141,7 @@ export function createEngine(opts: PlayOpts, tables: number[], duration: number,
       score: s.score, correct: s.correct, total: s.total, bestStreak: s.bestStreak,
       stars: exam ? 0 : starsFor(s.correct, s.duration),
       errors: errs.map(e => ({ a: e.a, b: e.b, n: e.count })),
-      seen: Object.fromEntries(s.seen),
+      seen: Object.fromEntries(s.seen), ms: s.ms,
     };
     if (exam) Object.assign(rec, { examTable: s.table, passed, mention });
     on.finish({ rec, table: s.table, passed, mention, examErrors: s.examErrors, errs });

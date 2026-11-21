@@ -452,3 +452,14 @@ html[data-theme] .decor{opacity:.5}
 .crea-fx.bubble .uiic{height:.85em}
 .stars .uiic{height:64px}
 .hrow .mini .uiic{height:16px}
+
+/* Journal des gains (parents) */
+.center-link{display:block;text-align:center;text-decoration:none}
+.jday h2{margin-bottom:2px}
+.jsum{font-size:14px;opacity:.8;margin-bottom:8px}
+.jrow{display:flex;gap:10px;padding:8px 0;border-top:1px solid rgba(255,255,255,.08);font-size:14px;line-height:1.35}
+.jrow .jt{flex-shrink:0;width:44px;opacity:.6;font-variant-numeric:tabular-nums}
+.jrow .jb{flex:1;min-width:0;overflow-wrap:anywhere}
+.jrow .jd{opacity:.8;font-size:13px}
+.jrow.ev{opacity:.85}
+.incub .warn{display:block;color:#fca5a5;margin-top:6px}

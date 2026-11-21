@@ -4,8 +4,7 @@ import { useEffect, useEffectEvent, useRef, useState } from 'react';
 import { confetti } from '@/lib/confetti';
 import { useData } from '@/lib/data';
 import { createEngine, fakeRun, type PlayOpts, type RunResult, type View } from '@/lib/game/engine';
-import { BADGE_BY_ID, bestFor, computeStats, levelInfo, nextBadge, RARITY_ORDER, totalXp, unlocked } from '@/lib/game/rules';
-import { active, coinsEarned, collectionSize, companionBonus, decay, dropsEgg, hatchProgress, moodOf, totalCorrect } from '@/lib/pet/rules';
+import { newGameId, settle } from '@/lib/settle';
 import { ensureAudio, sEnd, sFanfare, sGo, sTick } from '@/lib/sound';
 import EndScreen, { type PetInfo, type Result } from './EndScreen';
 import { UiIcon } from './ui';
@@ -23,30 +22,16 @@ export default function GameSession({ opts, fake = false }: { opts: PlayOpts; fa
   const [result, setResult] = useState<Result | null>(null);
 
   const onFinish = useEffectEvent((r: RunResult) => {
-    const before = data.history;
-    const stBefore = computeStats(before), lvBefore = levelInfo(totalXp(before)), badgesBefore = unlocked(stBefore);
-    const dipBefore = r.rec.mode === 'exam' ? stBefore.dips[r.table] : null;
-    const isRecord = r.rec.mode === 'normal' && r.rec.score > 0 && r.rec.score > bestFor(before, r.rec.duration);
-    const after = data.saveGame(r.rec);
-    const stAfter = computeStats(after), lvAfter = levelInfo(totalXp(after));
-    const badgesAfter = unlocked(stAfter);
-    const newBadges = [...badgesAfter].filter(id => !badgesBefore.has(id)).map(id => BADGE_BY_ID[id])
-      .sort((x, y) => RARITY_ORDER.indexOf(y.r) - RARITY_ORDER.indexOf(x.r));
-    const levelUp = lvAfter.num > lvBefore.num;
-    const pet = data.pet, comp = active(pet), now = Date.now();
-    const grew = !!comp && moodOf(decay(comp, now).needs) !== 'triste';
-    const compBonus = comp && pet && grew ? companionBonus(after[0], comp, collectionSize(pet)) : 0;
+    const s = settle(data.history, data.pet, { ...r.rec, id: newGameId() }, Date.now());
+    data.saveGame(s.game, s.pet);
+    const levelUp = s.lvAfter.num > s.lvBefore.num, newBadges = s.newBadges;
     const petInfo: PetInfo = {
-      coins: coinsEarned(after, badgesAfter) - coinsEarned(before, badgesBefore) + compBonus,
-      compBonus,
-      chest: !!pet && dropsEgg(after[0]),
-      egg: pet ? hatchProgress(pet, totalCorrect(after)) : null,
-      comp: comp ? { name: comp.name, grew } : null,
+      coins: s.gains.coins, compBonus: s.gains.compBonus, chest: s.gains.chests.length > 0, egg: s.egg, comp: s.comp,
     };
-    const newDiploma = r.passed && (!dipBefore || r.mention > dipBefore.mention);
+    const newDiploma = s.newDiploma;
     setResult({
-      ...r, isRecord, levelUp, lvBefore, lvAfter, newBadges, pet: petInfo,
-      xpGain: lvAfter.xp - lvBefore.xp, next: newBadges.length ? null : nextBadge(stAfter),
+      ...r, isRecord: s.isRecord, levelUp, lvBefore: s.lvBefore, lvAfter: s.lvAfter, newBadges, pet: petInfo,
+      xpGain: s.gains.xp, next: s.next, value: s.value,
     });
     window.scrollTo(0, 0);
     sEnd();

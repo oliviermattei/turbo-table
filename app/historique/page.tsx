@@ -1,4 +1,5 @@
 'use client';
+import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { BackHeader, Stars, Stat } from '@/components/ui';
@@ -71,12 +72,39 @@ export default function HistoriquePage() {
         {d.sync === 'cloud' ? 'Progression enregistrée sur le serveur : la même sur tous tes appareils.' : 'Progression enregistrée sur cet appareil.'}
       </p>
       {d.sync === 'locked' && <FamilyCode />}
+      <Link className="ghost center-link" href="/journal">📒 Journal des gains (parents)</Link>
+      <ResetProgress />
       {process.env.NODE_ENV !== 'production' && (
         <label className="debugbox">
           <input type="checkbox" checked={d.debug} onChange={e => d.setDebug(e.target.checked)} /> 🐞 Mode test (dev) : appareil isolé, rien n’est envoyé au serveur
         </label>
       )}
     </section>
+  );
+}
+
+/** For the parent: starts again from zero everywhere (games and companion archived on the server). */
+function ResetProgress() {
+  const { resetAll } = useData();
+  const [open, setOpen] = useState(false);
+  const [code, setCode] = useState('');
+  const [msg, setMsg] = useState('');
+  if (!open) return <button className="ghost" onClick={() => setOpen(true)}>♻️ Remettre la progression à zéro (parents)</button>;
+  return (
+    <form className="panel" style={{ marginTop: 12 }} onSubmit={async e => {
+      e.preventDefault();
+      if (!window.confirm('Effacer toute la progression (parties, badges, pièces, compagnon) sur tous les appareils ? Le prénom est gardé.')) return;
+      const r = await resetAll(code);
+      setMsg(r === 'ok' ? 'C’est fait : tout recommence à zéro.' : r === 'blocked' ? 'Trop d’essais. Réessaie dans 1 heure.' : r === 'offline' ? 'Pas de connexion au serveur.' : 'Code incorrect.');
+      if (r === 'ok') { setCode(''); setOpen(false); }
+    }}>
+      <h2>Remettre à zéro</h2>
+      <p className="note">Les parties et le compagnon sont mis de côté sur le serveur, puis effacés de chaque appareil à sa prochaine ouverture.</p>
+      <input className="field" type="password" placeholder="Code famille" autoComplete="current-password" value={code} onChange={e => setCode(e.target.value)} />
+      {msg && <p className="note">{msg}</p>}
+      <button className="ghost" type="submit">Tout remettre à zéro</button>
+      <button className="ghost" type="button" onClick={() => setOpen(false)}>Annuler</button>
+    </form>
   );
 }
 

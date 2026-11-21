@@ -1,5 +1,5 @@
 /* eslint-disable @typescript-eslint/no-explicit-any -- untrusted input, checked field by field */
-import type { GameRecord, Mode, Profile } from './types';
+import type { Gains, GameRecord, Mode, Profile, Rarity } from './types';
 
 const num = (v: unknown) => Number(v) || 0;
 const MODES: Mode[] = ['normal', 'practice', 'exam'];
@@ -22,6 +22,28 @@ export function clean(input: unknown): GameRecord {
     }
   }
   if (mode === 'exam') { o.examTable = num(g.examTable); o.passed = !!g.passed; o.mention = num(g.mention); }
+  if (Array.isArray(g.ms)) o.ms = g.ms.slice(0, 1000).map((x: unknown) => Math.max(0, Math.min(600000, Math.round(num(x)))));
+  const gains = cleanGains(g.gains);
+  if (gains) o.gains = gains;
+  return o;
+}
+
+const RARITIES: Rarity[] = ['commun', 'peu-commun', 'rare', 'epique', 'legendaire'];
+const MOODS = ['content', 'bof', 'triste'] as const;
+function cleanGains(x: any): Gains | undefined {
+  if (!x || typeof x !== 'object') return undefined;
+  const lv = Array.isArray(x.level) ? x.level : [];
+  const o: Gains = {
+    v: num(x.v), points: num(x.points), raw: num(x.raw), difficulty: num(x.difficulty), serious: !!x.serious,
+    xp: num(x.xp), level: [num(lv[0]), num(lv[1])],
+    coins: num(x.coins), badgeCoins: num(x.badgeCoins), levelCoins: num(x.levelCoins), compBonus: num(x.compBonus),
+    badges: Array.isArray(x.badges) ? x.badges.slice(0, 200).map((b: unknown) => String(b).slice(0, 40)) : [],
+    chests: Array.isArray(x.chests) ? x.chests.filter((q: any) => RARITIES.includes(q)).slice(0, 50) : [],
+    balance: num(x.balance),
+  };
+  if (x.comp && typeof x.comp === 'object' && MOODS.includes(x.comp.mood)) {
+    o.comp = { species: String(x.comp.species ?? '').slice(0, 40), mood: x.comp.mood, grew: !!x.comp.grew };
+  }
   return o;
 }
 

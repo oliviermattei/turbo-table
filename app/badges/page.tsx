@@ -14,6 +14,7 @@ export default function BadgesPage() {
     <section className="screen">
       <BackHeader title="Badges" />
       <p className="sub">{got.size} badge{got.size > 1 ? 's' : ''} sur {ALL_BADGES.length}</p>
+      <p className="note">Les parties trop faciles (table de 1, 2, 5 ou 10 toute seule) ne comptent pas pour les badges.</p>
       {RARITY_ORDER.map(r => {
         const list = ALL_BADGES.filter(b => b.r === r);
         return (
