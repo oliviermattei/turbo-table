@@ -1,6 +1,36 @@
 {
   "creatures": {
+    "ane": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "axolotl": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "cactouille": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "canard": [
       "bebe",
       "petit",
       "grand",
@@ -50,6 +80,76 @@
       "grand-triste",
       "super-triste"
     ],
+    "chouette": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "cochon": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "fennec": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "herisson": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "hibou-astral": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "hippocampe": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "koala": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "lapin": [
       "bebe",
       "petit",
@@ -61,6 +161,66 @@
       "super-triste"
     ],
     "licorne-aurore": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "lion-de-braise": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "loup-de-lune": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "loutre": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "lumignon": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "manchot": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "meduluce": [
       "bebe",
       "petit",
       "grand",
@@ -90,7 +250,37 @@
       "grand-triste",
       "super-triste"
     ],
+    "panda-roux": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "perruche": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "phenix-solaire": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "poisson-rouge": [
       "bebe",
       "petit",
       "grand",
@@ -110,6 +300,26 @@
       "grand-triste",
       "super-triste"
     ],
+    "renard-celeste": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "rocaillou": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "slime": [
       "bebe",
       "petit",
@@ -120,7 +330,27 @@
       "grand-triste",
       "super-triste"
     ],
+    "tortue": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
     "toucan": [
+      "bebe",
+      "petit",
+      "grand",
+      "super",
+      "bebe-triste",
+      "petit-triste",
+      "grand-triste",
+      "super-triste"
+    ],
+    "vache": [
       "bebe",
       "petit",
       "grand",
@@ -161,6 +391,7 @@
     "peluche",
     "console",
     "lit",
+    "banquet",
     "coffre-epique-ferme",
     "coffre-epique-ouvert",
     "coffre-legendaire-ferme",
@@ -168,6 +399,9 @@
     "coffre-peu-commun-ferme",
     "coffre-peu-commun-ouvert",
     "coffre-rare-ferme",
-    "coffre-rare-ouvert"
+    "coffre-rare-ouvert",
+    "festin",
+    "fete",
+    "manege"
   ]
 }

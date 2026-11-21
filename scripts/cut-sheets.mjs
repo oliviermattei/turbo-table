@@ -14,6 +14,9 @@ const STAGES = ["bebe", "petit", "grand", "super"];
 const MOODS = [...STAGES, ...STAGES.map((s) => `${s}-triste`)];
 const EGGS = ["commun", "peu-commun", "rare", "epique", "coquille"];
 const ITEMS = ["coffre-ferme", "coffre-ouvert", "pomme", "sandwich", "gateau", "balle", "peluche", "console", "lit"];
+const ICONS = ["nid", "bestiaire", "boutique", "badges", "diplomes", "historique", "refuge", "piece"];
+const ICONS2 = ["faim", "joie", "energie", "etoile", "chrono", "cadenas", "cadeau", "jouer"];
+const DECORS = path.join(ROOT, "assets-src/decors");
 // Cell order of the legendary egg sheets (brief, section 10)
 const LEGENDARY_EGGS = {
   // licorne-aurore now uses the prism egg of sheet 2; the old aurora pearl egg is kept aside, unused
@@ -25,6 +28,8 @@ const LEGENDARY_EGGS = {
 function cellTargets(kind) {
   if (kind === "oeufs")
     return [...EGGS.map((e) => `eggs/${e}.webp`), "items/coffre-ferme.webp", "items/coffre-ouvert.webp", null];
+  if (kind === "icones") return ICONS.map((i) => `ui/${i}.webp`);
+  if (kind === "icones-2") return ICONS2.map((i) => `ui/${i}.webp`);
   if (kind === "objets") return [...ITEMS.slice(2).map((i) => `items/${i}.webp`), null];
   if (kind === "objets-2") return ["festin", "banquet", "manege", "fete"].map((i) => `items/${i}.webp`).concat([null, null, null, null]);
   const CHESTS = { "coffres-1": ["peu-commun", "rare"], "coffres-2": ["epique", "legendaire"] };
@@ -40,6 +45,7 @@ const D_LO = 14; // colour distance to bg below which a pixel is fully backgroun
 const D_HI = 52; // distance above which a pixel is fully subject (and stops the flood fill)
 const GLOW_MAX = 0.5; // a light-over-bg pixel more transparent than this is glow: the flood fill goes through it
 const MIN_PART = 0.02; // components smaller than this share of the largest one are dropped
+const HOLE_MIN = 150; // px: a patch of pure bg colour this big, enclosed by the subject, is background too
 const PAD = 4;
 const MAX_H = 512;
 
@@ -63,7 +69,7 @@ function findLine(px, w, h, axis, guess) {
 }
 
 // Cuts one cell out of the sheet and removes its background. Returns RGBA pixels or null when empty.
-function cutCell(px, sw, x0, y0, w, h, solid = false) {
+function cutCell(px, sw, x0, y0, w, h, solid = false, glowMax = GLOW_MAX) {
   const n = w * h;
   const rgb = new Float32Array(n * 3);
   for (let y = 0; y < h; y++)
@@ -82,6 +88,7 @@ function cutCell(px, sw, x0, y0, w, h, solid = false) {
   const kMin = bg[0] + bg[1] + bg[2] > 384 ? 0.75 : 0;
 
   const dist = new Float32Array(n);
+  const kk = new Float32Array(n);
   // Light over the bg (glow, rays): "colour to alpha", the lowest alpha that un-mixes to a valid colour,
   // so a glow stays a bright glow instead of an opaque or dark halo. 2 = not lighter than bg in every channel.
   const light = new Float32Array(n).fill(2);
@@ -90,6 +97,7 @@ function cutCell(px, sw, x0, y0, w, h, solid = false) {
     if (r >= bg[0] && g >= bg[1] && b >= bg[2])
       light[i] = Math.max((r - bg[0]) / (255 - bg[0]), (g - bg[1]) / (255 - bg[1]), (b - bg[2]) / (255 - bg[2]));
     const k = Math.min(1, Math.max(kMin, (r * bg[0] + g * bg[1] + b * bg[2]) / bb));
+    kk[i] = k;
     // Residual compared at bg brightness, so dark subject colours (brown ears) stay far from a dark shadow.
     dist[i] = Math.hypot(r - k * bg[0], g - k * bg[1], b - k * bg[2]) / Math.max(k, 0.35);
   }
@@ -98,7 +106,7 @@ function cutCell(px, sw, x0, y0, w, h, solid = false) {
   const isBg = new Uint8Array(n);
   const stack = [];
   const push = (i) => {
-    if (!isBg[i] && (dist[i] < D_HI || light[i] < GLOW_MAX)) {
+    if (!isBg[i] && (dist[i] < D_HI || light[i] < glowMax)) {
       isBg[i] = 1;
       stack.push(i);
     }
@@ -110,6 +118,23 @@ function cutCell(px, sw, x0, y0, w, h, solid = false) {
   for (let y = 0; y < h; y++) {
     push(y * w);
     push(y * w + w - 1);
+  }
+  // Bg enclosed by the subject (between fins, under a raised tail) is out of reach of the border fill: seed it too.
+  // Dark bg only: on a light bg a white belly or white fur would vanish.
+  if (kMin === 0) {
+    const hole = (i) => dist[i] < D_LO / 2 && kk[i] > 0.9; // flat bg only: dark shading of a black body stays
+    const seen = new Uint8Array(n);
+    for (let s = 0; s < n; s++) {
+      if (seen[s] || !hole(s)) continue;
+      const comp = [s];
+      seen[s] = 1;
+      for (let c = 0; c < comp.length; c++) {
+        const i = comp[c], x = i % w;
+        for (const j of [x > 0 ? i - 1 : -1, x < w - 1 ? i + 1 : -1, i - w, i + w])
+          if (j >= 0 && j < n && !seen[j] && hole(j)) { seen[j] = 1; comp.push(j); }
+      }
+      if (comp.length >= HOLE_MIN) comp.forEach(push);
+    }
   }
   while (stack.length) {
     const i = stack.pop();
@@ -227,8 +252,11 @@ async function cutSheet(file, kind) {
     if (!target) continue;
     const col = cell % 4, row = cell >> 2;
     const x0 = xs[col] + INSET, y0 = ys[row] + INSET;
-    const solid = /\.webp$/.test(target) && (target.startsWith("eggs/") ? !target.includes("coquille") : target.endsWith("/oeuf.webp"));
-    const res = cutCell(px, sw, x0, y0, xs[col + 1] - INSET - x0, ys[row + 1] - INSET - y0, solid);
+    // Chests too: their blue and violet woods are close to the navy bg and would turn half transparent.
+    const solid = target.startsWith("items/coffre") || (target.startsWith("eggs/") ? !target.includes("coquille") : target.endsWith("/oeuf.webp"));
+    // Chests: a saturated blue or violet wood is "lighter than the navy bg" too, so only a faint glow goes through.
+    const glowMax = target.startsWith("items/coffre") ? GLOW_MAX / 2.5 : GLOW_MAX;
+    const res = cutCell(px, sw, x0, y0, xs[col + 1] - INSET - x0, ys[row + 1] - INSET - y0, solid, glowMax);
     if (!res) {
       console.warn(`  warning: ${kind} cell ${cell + 1} is empty, ${target} not written`);
       continue;
@@ -265,6 +293,15 @@ for (const f of sheets) {
   }
   await cutSheet(file, kind);
   console.log(`cut      ${f}`);
+}
+
+// Screen backdrops: whole portrait images, only resized (public/bg/<name>.webp, see components/ui.tsx Decor).
+for (const f of (await readdir(DECORS).catch(() => [])).filter((f) => f.endsWith(".png"))) {
+  const src = path.join(DECORS, f), dest = path.join(PUBLIC, "bg", f.slice(0, -4) + ".webp");
+  if (!FORCE && (await mtime(dest)) > (await mtime(src))) continue;
+  await mkdir(path.dirname(dest), { recursive: true });
+  await sharp(src).resize({ width: 720 }).webp({ quality: 72 }).toFile(dest);
+  console.log(`decor    ${f}`);
 }
 
 // Manifest of what exists, rebuilt from public/ every time.
