@@ -148,6 +148,14 @@ describe('pet', () => {
     expect(p.eggs.at(-1)?.q).toBe('legendaire');
   });
 
+  it('gives a legendary egg a species not owned yet', () => {
+    const leg = readySpecies('legendaire');
+    if (leg.length < 2) return;
+    let p = withCompanion();
+    p = { ...p, creatures: leg.slice(1).map((s, i) => ({ ...p.creatures[0], id: 'l' + i, species: s.id })) };
+    for (let i = 0; i < 20; i++) expect(buy(p, 'coffre-legendaire', 1e6, T0 + i).eggs.at(-1)?.species).toBe(leg[0].id);
+  });
+
   it('opens a common chest as common 95 % of the time, never better than uncommon', () => {
     const n = 20000, got: Record<string, number> = {};
     for (let i = 0; i < n; i++) { const q = rollQuality((i + 0.5) / n, 'commun'); got[q] = (got[q] ?? 0) + 1; }

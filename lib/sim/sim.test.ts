@@ -13,8 +13,7 @@ const only = process.env.SIM_PLAYERS?.split(',');
 const seeds = Number(process.env.SIM_SEEDS) || 8, days = Number(process.env.SIM_DAYS) || 365;
 const out = process.env.SIM_OUT || path.join(process.cwd(), 'data', 'sim');
 
-// Experiments: SIM_FRESH=legendary,climb
-if (process.env.SIM_FRESH?.includes('legendary')) FRESH.legendaryNew = true;
+// Experiment: SIM_FRESH=climb (an egg whose quality is complete gives a species of the next missing quality)
 if (process.env.SIM_FRESH?.includes('climb')) FRESH.climb = true;
 
 describe.skipIf(!process.env.SIM)('balance simulation', () => {

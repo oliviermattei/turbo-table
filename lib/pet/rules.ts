@@ -69,7 +69,8 @@ export function makeEgg(key: string, source: EggSource, at: number, chest: Rarit
   const box = BOX_OF[chest];
   if (box) egg.box = box;
   if (q === 'legendaire') {
-    const all = readySpecies('legendaire'), free = FRESH.legendaryNew && taken ? all.filter(s => !taken.has(s.id)) : [];
+    // A legendary egg shows its species before it hatches: it takes one not owned nor already waiting, if any is left
+    const all = readySpecies('legendaire'), free = taken ? all.filter(s => !taken.has(s.id)) : [];
     const pool = free.length ? free : all;
     egg.species = pool[Math.floor(hash01(key + ':sp') * pool.length)]?.id;
   }
@@ -108,14 +109,14 @@ export function grantEggs(p: PetState, h: GameRecord[], badges: Set<string>, now
     const box = BADGE_CHEST[BADGE_BY_ID[id]?.r], k = 'badge:' + id;
     if (box && !claimed.has(k)) {
       claimed.add(k);
-      const e = makeEgg(k, 'badge', now, box);
+      const e = makeEgg(k, 'badge', now, box, takenOf(p));
       eggs.push(e); log.push({ t: now, k: 'chest', src: 'badge', q: e.q, box, id });
     }
   }
   let lastEggAt = eggs.length ? now : p.lastEggAt;
   const days = new Set(h.filter(g => g.ts > lastEggAt && isSerious(g)).map(g => dayKey(g.ts)));
   if (days.size >= PITY.days) {
-    const e = makeEgg('pity:' + now, 'pity', now);
+    const e = makeEgg('pity:' + now, 'pity', now, 'commun', takenOf(p));
     eggs.push(e); log.push({ t: now, k: 'chest', src: 'pity', q: e.q });
     lastEggAt = now;
   }
@@ -148,7 +149,7 @@ export const hatchProgress = (p: PetState) => {
 
 export const FULL: Needs = { faim: 100, joie: 100, energie: 100 };
 /** Share of hatches that pick a species not owned yet (when one is left in that quality): 1 = no duplicate until the quality is complete */
-export const FRESH = { rate: 1, legendaryNew: false, climb: false };
+export const FRESH = { rate: 1, climb: false };
 /** Species already owned or waiting in a legendary egg */
 export const takenOf = (p: PetState) => new Set([...p.creatures.map(c => c.species), ...[...p.eggs, ...(p.incubating ? [p.incubating] : [])].flatMap(e => (e.species ? [e.species] : []))]);
 export type Hatched = { species: Species; dup: false; creature: Creature } | { species: Species; dup: true; coins: number };

@@ -16,11 +16,11 @@ Joueurs virtuels (`lib/sim/players.ts`) :
 
 | Joueur | J1 | J7 | J30 | J90 | J180 | J270 | J365 | Bestiaire complet |
 |---|---|---|---|---|---|---|---|---|
-| Enfant (cas visé) | 1 | 5 | 14 | 24 | 33 | 36 | 36 | 238 j (214–333) |
-| Enfant très motivé | 1 | 7 | 18 | 33 | 36 | 36 | 36 | 122 j (113–140) |
+| Enfant (cas visé) | 1 | 5 | 14 | 24 | 33 | 36 | 36 | 215 j (194–230) |
+| Enfant très motivé | 1 | 7 | 18 | 33 | 36 | 36 | 36 | 107 j (104–116) |
 | Fourbe table de 1 | 0 | 1 | 3 | 5 | 6 | 10 | 12 | jamais en 365 j |
-| Fourbe tables faciles | 0 | 2 | 7 | 19 | 31 | 36 | 36 | 254 j pour 7/8 vies |
-| Adulte rapide | 1 | 6 | 21 | 35 | 36 | 36 | 36 | 93 j (83–107) |
+| Fourbe tables faciles | 0 | 2 | 7 | 19 | 31 | 36 | 36 | 241 j (227–245) |
+| Adulte rapide | 1 | 6 | 21 | 36 | 36 | 36 | 36 | 85 j (80–90) |
 | Joue peu | 0 | 1 | 2 | 6 | 12 | 12 | 13 | jamais en 365 j |
 | Ne nourrit jamais | 1 | 3 | 3 | 3 | 3 | 3 | 3 | jamais en 365 j |
 
@@ -42,11 +42,11 @@ Pièces d’une partie normale qui compte (J15-60, sans badges ni niveaux), puis
 
 | Joueur | 🪙 / partie | Parties / jour | 🪙 / jour J1-7 | 🪙 / jour J8-30 | 🪙 / jour J31-90 | 🪙 / jour J91-180 | 🪙 / jour J181-365 | Entretien J8-30 | Entretien J91-180 | Triste |
 |---|---|---|---|---|---|---|---|---|---|---|
-| Enfant (cas visé) | 16 | 5.7 | 151 | 79 | 66 | 95 | 143 | 14 % | 20 % | 2 % |
-| Enfant très motivé | 16 | 7.8 | 262 | 109 | 158 | 237 | 278 | 9 % | 7 % | 0 % |
+| Enfant (cas visé) | 16 | 5.7 | 151 | 79 | 66 | 95 | 133 | 14 % | 20 % | 3 % |
+| Enfant très motivé | 16 | 7.8 | 262 | 109 | 158 | 235 | 278 | 9 % | 7 % | 0 % |
 | Fourbe table de 1 | 0 | 13.1 | 32 | 14 | 11 | 12 | 12 | 63 % | 74 % | 0 % |
-| Fourbe tables faciles | 0 | 10.0 | 43 | 46 | 58 | 81 | 125 | 20 % | 15 % | 0 % |
-| Adulte rapide | 49 | 4.0 | 165 | 175 | 227 | 265 | 262 | 8 % | 8 % | 0 % |
+| Fourbe tables faciles | 0 | 10.0 | 43 | 46 | 58 | 81 | 123 | 20 % | 15 % | 0 % |
+| Adulte rapide | 49 | 4.0 | 165 | 175 | 225 | 265 | 262 | 8 % | 8 % | 0 % |
 | Joue peu | 12 | 1.7 | 19 | 17 | 14 | 17 | 17 | 97 % | 95 % | 19 % |
 | Ne nourrit jamais | 13 | 5.8 | 147 | 71 | 48 | 54 | 67 | 0 % | 0 % | 97 % |
 
@@ -54,11 +54,11 @@ Solde (pièces non dépensées) :
 
 | Joueur | J1 | J7 | J30 | J90 | J180 | J270 | J365 |
 |---|---|---|---|---|---|---|---|
-| Enfant (cas visé) | 169 | 139 | 227 | 432 | 759 | 5210 | 17048 |
-| Enfant très motivé | 117 | 604 | 271 | 992 | 14983 | 38415 | 63769 |
+| Enfant (cas visé) | 169 | 139 | 227 | 432 | 759 | 7331 | 17922 |
+| Enfant très motivé | 117 | 604 | 271 | 992 | 17806 | 41095 | 66258 |
 | Fourbe table de 1 | 72 | 190 | 132 | 98 | 182 | 117 | 107 |
-| Fourbe tables faciles | 45 | 87 | 128 | 196 | 351 | 2450 | 13213 |
-| Adulte rapide | 61 | 115 | 175 | 1160 | 21935 | 44136 | 66783 |
+| Fourbe tables faciles | 45 | 87 | 128 | 196 | 351 | 4336 | 14988 |
+| Adulte rapide | 61 | 115 | 175 | 2311 | 24155 | 45554 | 68226 |
 | Joue peu | 25 | 128 | 125 | 23 | 76 | 115 | 118 |
 | Ne nourrit jamais | 157 | 405 | 1962 | 4804 | 9627 | 15658 | 21833 |
 
@@ -66,8 +66,8 @@ Solde (pièces non dépensées) :
 
 | Joueur | Niveau J7 | J30 | J180 | J365 | Badges J7 (C/PC/R/É/L) | Badges J30 | Badges J180 |
 |---|---|---|---|---|---|---|---|
-| Enfant (cas visé) | 11 | 18 | 39 | 60 | 22/28/11/5/2 | 24/31/22/18/2 | 24/33/26/34/19 |
-| Enfant très motivé | 15 | 23 | 57 | 87 | 22/30/21/14/2 | 24/31/24/26/10 | 24/33/25/35/22 |
+| Enfant (cas visé) | 11 | 18 | 39 | 59 | 22/28/11/5/2 | 24/31/22/18/2 | 24/33/26/34/19 |
+| Enfant très motivé | 15 | 23 | 56 | 87 | 22/30/21/14/2 | 24/31/24/26/10 | 24/33/26/35/22 |
 | Fourbe table de 1 | 4 | 7 | 17 | 25 | 5/2/1/1/1 | 5/3/2/2/1 | 5/4/3/2/2 |
 | Fourbe tables faciles | 5 | 12 | 35 | 54 | 12/7/4/0/0 | 12/14/11/4/4 | 12/14/12/14/11 |
 | Adulte rapide | 11 | 24 | 61 | 87 | 21/27/17/6/3 | 21/30/23/25/16 | 21/30/23/33/22 |
@@ -78,11 +78,11 @@ Solde (pièces non dépensées) :
 
 | Joueur | Parties | Boutique | Badges | Parties (chance) | Filet de sécurité |
 |---|---|---|---|---|---|
-| Enfant (cas visé) | 1422 | 8/10/7/5/5 | 0/0/0/0/0 | 23/1/0/0/0 | 12/1/0/0/0 |
-| Enfant très motivé | 3063 | 10/10/7/5/5 | 0/0/0/0/0 | 52/3/0/0/0 | 10/0/0/0/0 |
+| Enfant (cas visé) | 1394 | 8/10/7/5/3 | 0/0/0/0/0 | 25/2/0/0/0 | 12/1/0/0/0 |
+| Enfant très motivé | 3052 | 10/10/7/5/3 | 0/0/0/0/0 | 51/3/0/0/0 | 12/1/0/0/0 |
 | Fourbe table de 1 | 3795 | 5/1/0/0/0 | 0/0/0/0/0 | 5/0/0/0/0 | 0/0/0/0/0 |
-| Fourbe tables faciles | 3650 | 8/10/7/5/5 | 0/0/0/0/0 | 20/1/0/0/0 | 0/0/0/0/0 |
-| Adulte rapide | 1460 | 9/10/7/5/5 | 0/0/0/0/0 | 53/3/0/0/0 | 12/0/0/0/0 |
+| Fourbe tables faciles | 3650 | 8/10/7/5/3 | 0/0/0/0/0 | 20/1/0/0/0 | 0/0/0/0/0 |
+| Adulte rapide | 1460 | 9/10/7/5/3 | 0/0/0/0/0 | 53/3/0/0/0 | 13/1/0/0/0 |
 | Joue peu | 594 | 0/0/0/0/0 | 0/0/0/0/0 | 4/0/0/0/0 | 22/1/0/0/0 |
 | Ne nourrit jamais | 1410 | 3/0/0/0/0 | 0/0/0/0/0 | 24/1/0/0/0 | 22/2/0/0/0 |
 
