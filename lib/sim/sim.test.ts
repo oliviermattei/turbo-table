@@ -2,7 +2,7 @@ import { mkdirSync, writeFileSync } from 'node:fs';
 import path from 'node:path';
 import { describe, it } from 'vitest';
 import * as BALANCE from '../balance';
-import { readySpecies } from '../pet/rules';
+import { FRESH, readySpecies } from '../pet/rules';
 import { PLAYERS } from './players';
 import { run } from './run';
 import { summarize } from './summary';
@@ -12,6 +12,10 @@ import { summarize } from './summary';
 const only = process.env.SIM_PLAYERS?.split(',');
 const seeds = Number(process.env.SIM_SEEDS) || 8, days = Number(process.env.SIM_DAYS) || 365;
 const out = process.env.SIM_OUT || path.join(process.cwd(), 'data', 'sim');
+
+// Experiments: SIM_FRESH=legendary,climb
+if (process.env.SIM_FRESH?.includes('legendary')) FRESH.legendaryNew = true;
+if (process.env.SIM_FRESH?.includes('climb')) FRESH.climb = true;
 
 describe.skipIf(!process.env.SIM)('balance simulation', () => {
   for (const pl of PLAYERS.filter(p => !only || only.includes(p.id))) it(pl.id, () => {

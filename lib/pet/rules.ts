@@ -63,13 +63,14 @@ export function rollQuality(r: number, chest: Rarity = 'commun'): Rarity {
   return odds[odds.length - 1][0];
 }
 
-export function makeEgg(key: string, source: EggSource, at: number, chest: Rarity = 'commun'): Egg {
+export function makeEgg(key: string, source: EggSource, at: number, chest: Rarity = 'commun', taken?: Set<string>): Egg {
   const q = rollQuality(hash01(key + ':q'), chest);
   const egg: Egg = { id: 'e' + Math.floor(hash01(key + ':id') * 1e9).toString(36) + at.toString(36), q, source, at, opened: false };
   const box = BOX_OF[chest];
   if (box) egg.box = box;
   if (q === 'legendaire') {
-    const pool = readySpecies('legendaire');
+    const all = readySpecies('legendaire'), free = FRESH.legendaryNew && taken ? all.filter(s => !taken.has(s.id)) : [];
+    const pool = free.length ? free : all;
     egg.species = pool[Math.floor(hash01(key + ':sp') * pool.length)]?.id;
   }
   return egg;
@@ -99,7 +100,7 @@ export function grantEggs(p: PetState, h: GameRecord[], badges: Set<string>, now
     const k = 'drop:' + g.id;
     if (g.ts > p.createdAt && !claimed.has(k) && dropsEgg(h, g)) {
       claimed.add(k);
-      const e = makeEgg(k, 'drop', now);
+      const e = makeEgg(k, 'drop', now, 'commun', takenOf(p));
       eggs.push(e); log.push({ t: now, k: 'chest', src: 'drop', q: e.q, id: g.id });
     }
   }
@@ -147,7 +148,9 @@ export const hatchProgress = (p: PetState) => {
 
 export const FULL: Needs = { faim: 100, joie: 100, energie: 100 };
 /** Share of hatches that pick a species not owned yet (when one is left in that quality): 1 = no duplicate until the quality is complete */
-export const FRESH = { rate: 1 };
+export const FRESH = { rate: 1, legendaryNew: false, climb: false };
+/** Species already owned or waiting in a legendary egg */
+export const takenOf = (p: PetState) => new Set([...p.creatures.map(c => c.species), ...[...p.eggs, ...(p.incubating ? [p.incubating] : [])].flatMap(e => (e.species ? [e.species] : []))]);
 export type Hatched = { species: Species; dup: false; creature: Creature } | { species: Species; dup: true; coins: number };
 
 /** Hatches the incubated egg. `r` is a random number in [0, 1) (picked at hatch time, then stored). */
@@ -158,9 +161,13 @@ export function hatch(p: PetState, now: number, r: number): { p: PetState; out: 
   const owned = new Set(p.creatures.map(c => c.species));
   let sp: Species | undefined = egg.species ? SPECIES_BY_ID[egg.species] : undefined;
   if (!sp) {
-    const pool = readySpecies(egg.q);
+    let pool = readySpecies(egg.q);
     if (!pool.length) return null;
-    const fresh = pool.filter(s => !owned.has(s.id));
+    let fresh = pool.filter(s => !owned.has(s.id));
+    if (!fresh.length && FRESH.climb) {
+      const up = RARITY_ORDER.slice(RARITY_ORDER.indexOf(egg.q) + 1).find(q => readySpecies(q).some(s => !owned.has(s.id)));
+      if (up) { pool = readySpecies(up); fresh = pool.filter(s => !owned.has(s.id)); }
+    }
     // A species not owned yet, as long as there is one (FRESH.rate of the time)
     const from = fresh.length && r < FRESH.rate ? fresh : pool;
     sp = from[Math.floor(((r * 997) % 1) * from.length)];
@@ -270,7 +277,7 @@ export function buy(p: PetState, itemId: string, coins: number, now: number): Pe
   if (!it || coins < it.price) return p;
   const paid = logged({ ...p, spent: p.spent + it.price, updatedAt: now }, { t: now, k: 'buy', id: it.id, n: it.price, left: coins - it.price });
   if (it.kind === 'chest') {
-    const e = makeEgg('shop:' + now + ':' + p.spent, 'shop', now, it.min);
+    const e = makeEgg('shop:' + now + ':' + p.spent, 'shop', now, it.min, takenOf(p));
     return logged({ ...paid, eggs: [...p.eggs, e], lastEggAt: now }, { t: now, k: 'chest', src: 'shop', q: e.q, box: it.min });
   }
   return { ...paid, inventory: { ...p.inventory, [it.id]: (p.inventory[it.id] ?? 0) + 1 } };
