@@ -66,5 +66,5 @@ export const MOOD = { sadMin: 15, sadAvg: 30, happyAvg: 60, happyMin: 35 };
 export const PRICES = {
   pomme: 6, sandwich: 13, gateau: 28, festin: 65, banquet: 150,
   balle: 8, peluche: 19, console: 40, manege: 85, fete: 210,
-  coffre: 200, 'coffre-peu-commun': 350, 'coffre-rare': 500, 'coffre-epique': 900, 'coffre-legendaire': 1800,
+  coffre: 180, 'coffre-peu-commun': 300, 'coffre-rare': 430, 'coffre-epique': 750, 'coffre-legendaire': 1500,
 };

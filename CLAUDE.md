@@ -147,11 +147,11 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
 - **Boutique** :
   - nourriture : Pomme 6, Sandwich 13, Gâteau 28, Festin 65, Banquet 150 ;
   - jouets : Balle 8, Peluche 19, Console 40, Manège 85, Fête foraine 210 ;
-  - coffres Commun → Légendaire : 200 / 350 / 500 / 900 / 1 800.
+  - coffres Commun → Légendaire : 180 / 300 / 430 / 750 / 1 500.
 - **Appétit** : nourriture et jouets remplissent ×1 / 1,15 / 1,3 / 1,5 / 1,8 fois moins selon la qualité du compagnon. Dormir est gratuit.
 - **Résultat de la simulation** (`docs/equilibrage.md`). L'enfant visé joue 10 à 15 parties par jour la 1re semaine, puis ~4. Il trouve :
-  - ~5 espèces en une semaine, ~13 en un mois, ~21 en trois mois ;
-  - le 1er Rare vers 2 mois, le 1er Légendaire vers 7,5 mois, le bestiaire complet vers 10 mois.
+  - ~5 espèces en une semaine, ~14 en un mois, ~24 en trois mois ;
+  - le 1er Rare vers 1,5 mois, le 1er Légendaire vers 6 mois, le bestiaire complet vers 8 mois (238 jours en médiane).
   L'entretien lui coûte ~15 à 20 % de ses gains (~0,7 partie par jour) : plus cher, celui qui ne joue que 2 parties par jour ne pourrait plus nourrir son compagnon. Jouer uniquement la table de 1 donne ~11 espèces en un an ; ne jamais nourrir bloque à 3.
 
 ### Journal des gains
