@@ -8,6 +8,7 @@ import { BADGE_BY_ID, bestFor, computeStats, levelInfo, nextBadge, RARITY_ORDER,
 import { active, coinsEarned, collectionSize, companionBonus, decay, dropsEgg, hatchProgress, moodOf, totalCorrect } from '@/lib/pet/rules';
 import { ensureAudio, sEnd, sFanfare, sGo, sTick } from '@/lib/sound';
 import EndScreen, { type PetInfo, type Result } from './EndScreen';
+import { UiIcon } from './ui';
 
 type Engine = ReturnType<typeof createEngine>;
 const COUNT = ['3', '2', '1', 'Go !'];
@@ -104,14 +105,15 @@ export default function GameSession({ opts, fake = false }: { opts: PlayOpts; fa
   };
 
   return (
-    <section className="screen">
+    <section className="screen game">
       {opts.mode !== 'normal' && (
         <div className="exam-tag">{exam ? `🎓 Examen de la table de ${opts.table}` : '🔧 Entraînement sur les erreurs'}</div>
       )}
       <div className="hud">
-        <span className="pill">{exam ? `${Math.min(view.examShown, 20)}/20` : view.score}</span>
+        <button className="icon-btn small" aria-label="Arrêter la partie" onClick={() => router.push(exam ? '/diplomes' : '/')}>✕</button>
+        <span className="pill">{exam ? `📝 ${Math.min(view.examShown, 20)}/20` : <><UiIcon n="etoile" /> {view.score}</>}</span>
         <span className={'streak' + (exam || view.streak >= 3 ? ' show' : '')}>{exam ? `❌ ${view.examErrors}/2` : '🔥 ' + view.streak}</span>
-        <span className="pill">{secs}</span>
+        <span className="pill"><UiIcon n="chrono" /> {secs}</span>
       </div>
       <div className="bar"><div className={secs <= 10 ? 'low' : ''} style={{ width: Math.min(100, view.left / (view.duration * 10)) + '%' }} /></div>
       <div className={'card' + (fb ? (fb.good ? ' good' : ' bad') : '')}>
@@ -126,7 +128,6 @@ export default function GameSession({ opts, fake = false }: { opts: PlayOpts; fa
           <button key={i} className={choiceClass(c)} onPointerDown={ev => { ev.preventDefault(); engine.current?.answer(c); }}>{c}</button>
         ))}
       </div>
-      <button className="link" onClick={() => router.push(exam ? '/diplomes' : '/')}>Arrêter la partie</button>
       {count && <div className="count"><span key={count}>{count}</span></div>}
     </section>
   );

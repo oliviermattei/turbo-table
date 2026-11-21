@@ -7,7 +7,7 @@ import { MENTIONS, type Badge, type LevelInfo, type NextBadge } from '@/lib/game
 import { practiceBonus, type hatchProgress } from '@/lib/pet/rules';
 import { ensureAudio } from '@/lib/sound';
 import Certificate from './Certificate';
-import { BadgeLine, Stars, Stat } from './ui';
+import { BadgeLine, Stars, Stat, UiIcon } from './ui';
 
 export interface PetInfo {
   coins: number; chest: boolean;
@@ -53,7 +53,7 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
       )}
       {r.isRecord && <div className="banner">🏆 Nouveau record !</div>}
       {r.levelUp && <div className="banner lvl">⬆️ Niveau {lv.num} : {lv.cur.emoji} {lv.cur.name} !</div>}
-      {r.pet.chest && <Link href="/nid" className="banner chest">🎁 Tu as trouvé un coffre ! Va l’ouvrir au nid.</Link>}
+      {r.pet.chest && <Link href="/nid" className="banner chest"><UiIcon n="cadeau" /> Tu as trouvé un coffre ! Va l’ouvrir au nid.</Link>}
 
       <div className="stats">
         {isExam ? (
@@ -122,7 +122,7 @@ export default function EndScreen({ r, opts }: { r: Result; opts: PlayOpts }) {
               </button>
             )}
             <div className="btnrow">
-              <Link className="big alt" href={opts.mode === 'practice' ? '/' : '/partie'}>← Retour</Link>
+              {opts.mode !== 'practice' && <Link className="big alt" href="/partie">⚙️ Changer</Link>}
               <button className="big" onClick={() => go(opts)}>🔁 Rejouer</button>
             </div>
             <Link className="big alt" href="/">🏠 Accueil</Link>

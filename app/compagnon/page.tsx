@@ -1,7 +1,7 @@
 'use client';
 import Link from 'next/link';
 import { useRef, useState } from 'react';
-import { CreatureView, Coins, GrowBar, ItemIcon, NeedBars, type Action } from '@/components/pet';
+import { CreatureView, Coins, GrowBar, ItemIcon, NeedBars, type Action, UiIcon } from '@/components/pet';
 import { useEnsurePet } from '@/components/pet-ensure';
 import { EvolutionScene } from '@/components/pet-scenes';
 import { BackHeader, RarLabel } from '@/components/ui';
@@ -78,10 +78,10 @@ export default function CompagnonPage() {
 
       <div className="spacer" />
       <div className="nav four">
-        <Link className="navb" href="/boutique"><span className="ic">🛒</span><span className="lb">Boutique</span></Link>
-        <Link className="navb" href="/nid"><span className="ic">🥚</span><span className="lb">Nid</span><span className="ct">{chests ? `${chests} 🎁` : inc?.ready ? 'Prêt !' : ''}</span></Link>
-        <Link className="navb" href="/refuge"><span className="ic">🏡</span><span className="lb">Refuge</span><span className="ct">{pet.creatures.length || ''}</span></Link>
-        <Link className="navb" href="/bestiaire"><span className="ic">📖</span><span className="lb">Bestiaire</span></Link>
+        <Link className="navb" href="/boutique"><span className="ic"><UiIcon n="boutique" /></span><span className="lb">Boutique</span></Link>
+        <Link className="navb" href="/nid"><span className="ic"><UiIcon n="nid" /></span><span className="lb">Nid</span><span className="ct">{chests ? <>{chests} <UiIcon n="cadeau" /></> : inc?.ready ? 'Prêt !' : ''}</span></Link>
+        <Link className="navb" href="/refuge"><span className="ic"><UiIcon n="refuge" /></span><span className="lb">Refuge</span><span className="ct">{pet.creatures.length || ''}</span></Link>
+        <Link className="navb" href="/bestiaire"><span className="ic"><UiIcon n="bestiaire" /></span><span className="lb">Bestiaire</span></Link>
       </div>
       {evo && c && <EvolutionScene c={c} onDone={() => { updatePet(p => p && markShown(p, c.id)); setEvo(false); }} />}
     </section>

@@ -50,6 +50,7 @@ export default function NidPage() {
       {chests.length > 0 && (
         <div className="panel">
           <h2>Coffres à ouvrir</h2>
+          <p className="note">Touche un coffre pour l’ouvrir !</p>
           <div className="eggrow">
             {([undefined, 'peu-commun', 'rare', 'epique', 'legendaire'] as const).map(box => {
               const list = chests.filter(e => e.box === box);
@@ -57,7 +58,7 @@ export default function NidPage() {
                 <button key={box ?? 'base'} className="eggb" onClick={() => setChest(list[0])}>
                   <ChestImg box={box} />
                   {list.length > 1 && <span className="stackct">×{list.length}</span>}
-                  {box && <RarLabel r={box} />}
+                  <RarLabel r={box ?? 'commun'} />
                 </button>
               );
             })}

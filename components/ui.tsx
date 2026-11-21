@@ -1,5 +1,6 @@
 'use client';
 import Link from 'next/link';
+import { usePathname } from 'next/navigation';
 import type { CSSProperties, ReactNode } from 'react';
 import { levelInfo, RARITY, type Badge } from '@/lib/game/rules';
 import type { Rarity } from '@/lib/game/types';
@@ -9,7 +10,21 @@ export const rc = (c: string) => ({ '--rc': c }) as CSSProperties;
 
 export const Stat = ({ v, l }: { v: ReactNode; l: string }) => <div className="stat"><b>{v}</b><small>{l}</small></div>;
 
-export const Stars = ({ n }: { n: number }) => <>{[0, 1, 2].map(i => <span key={i} className={i < n ? '' : 'off'}>⭐</span>)}</>;
+/** A small icon from public/ui ("icones" sheets of the brief) */
+// eslint-disable-next-line @next/next/no-img-element -- static sprites
+export const UiIcon = ({ n }: { n: string }) => <img className="uiic" src={`/ui/${n}.webp`} alt="" draggable={false} />;
+
+export const Stars = ({ n }: { n: number }) => <>{[0, 1, 2].map(i => <span key={i} className={i < n ? '' : 'off'}><UiIcon n="etoile" /></span>)}</>;
+
+// Illustrated backdrop of each screen (public/bg, "decors" of the brief)
+const DECOR: Record<string, string> = {
+  '': 'accueil', partie: 'jeu', jouer: 'jeu', nid: 'nid', boutique: 'boutique', bestiaire: 'bestiaire',
+  compagnon: 'refuge', refuge: 'refuge', badges: 'bestiaire', diplomes: 'bestiaire', historique: 'bestiaire',
+};
+export function Decor() {
+  const name = DECOR[usePathname().split('/')[1]] ?? 'accueil';
+  return <div className="decor" style={{ backgroundImage: `url(/bg/${name}.webp)` }} />;
+}
 
 export const RarLabel = ({ r }: { r: Rarity }) => <span className="rar" style={{ color: RARITY[r].c }}>{RARITY[r].n}</span>;
 

@@ -7,6 +7,9 @@ import assets from '@/lib/pet/assets.json';
 import { active, balance, decay, hatchProgress, lowestNeed, moodOf, stageOf, STAGES, STAGE_XP, totalCorrect, ITEM_BY_ID } from '@/lib/pet/rules';
 import { SPECIES_BY_ID } from '@/lib/pet/species';
 import type { Box, Creature, Egg, Needs } from '@/lib/pet/types';
+import { UiIcon } from './ui';
+
+export { UiIcon };
 
 /** Re-renders every `ms` so needs keep decaying on screen */
 export function useNow(ms = 30000) {
@@ -31,8 +34,11 @@ export const creatureSrc = (species: string, stage: number, sad = false) =>
   `/creatures/${species}/${STAGES[Math.min(stage, 3)]}${sad ? '-triste' : ''}.webp`;
 export const eggSrc = (e: Pick<Egg, 'q' | 'species'>) => (e.species ? `/creatures/${e.species}/oeuf.webp` : `/eggs/${e.q}.webp`);
 
-const NEED_ICON: Record<keyof Needs, string> = { faim: '🍖', joie: '🎾', energie: '💤' };
+const NEED_ICON: Record<keyof Needs, string> = { faim: 'faim', joie: 'joie', energie: 'energie' }; // public/ui icons
 const NEED_LABEL: Record<keyof Needs, string> = { faim: 'Faim', joie: 'Joie', energie: 'Énergie' };
+
+/** On-screen size of each stage: the creature visibly grows */
+const STAGE_SCALE = [0.62, 0.76, 0.9, 1];
 
 export type Action = { kind: 'eat' | 'play' | 'sleep'; item?: string; key: number } | null;
 
@@ -47,7 +53,7 @@ export function CreatureView({ c, size = 200, action, onClick }: { c: Creature; 
   const sleeping = action?.kind === 'sleep';
   return (
     <div className={`crea mv-${sp?.move ?? 'sautille'} mood-${mood}${sleeping ? ' sleeping' : ''}${action && !sleeping ? ' act-' + action.kind : ''}`}
-      style={{ '--sz': size + 'px', '--d': phase } as CSSProperties} onClick={onClick}>
+      style={{ '--sz': size + 'px', '--d': phase, '--st': STAGE_SCALE[stage] } as CSSProperties} onClick={onClick}>
       <div className="crea-shadow" />
       <div className="crea-mover"><div className="crea-breath">
         {/* eslint-disable-next-line @next/next/no-img-element -- static sprites, already sized WebP */}
@@ -57,7 +63,7 @@ export function CreatureView({ c, size = 200, action, onClick }: { c: Creature; 
       {/* eslint-disable-next-line @next/next/no-img-element -- static sprites */}
       {sleeping && ITEM_FILES.includes('lit') && <img className="crea-bed" src="/items/lit.webp" alt="" />}
       {sleeping && <span key={action.key} className="crea-fx zzz">Z</span>}
-      {!action && need && mood !== 'triste' && <span className="crea-fx bubble">{NEED_ICON[need]}</span>}
+      {!action && need && mood !== 'triste' && <span className="crea-fx bubble"><UiIcon n={NEED_ICON[need]} /></span>}
       {action?.item && <span key={action.key} className={'crea-item ' + action.kind}><ItemIcon id={action.item} /></span>}
       {action && !sleeping && <span key={'h' + action.key} className="crea-fx hearts">❤️</span>}
     </div>
@@ -69,7 +75,7 @@ export function NeedBars({ n }: { n: Needs }) {
     <div className="needs">
       {(Object.keys(NEED_ICON) as (keyof Needs)[]).map(k => (
         <div key={k} className="need">
-          <span>{NEED_ICON[k]}</span>
+          <span><UiIcon n={NEED_ICON[k]} /></span>
           <div className="needbar"><div className={n[k] < 30 ? 'low' : ''} style={{ width: n[k] + '%' }} /></div>
           <small>{NEED_LABEL[k]}</small>
         </div>
@@ -113,7 +119,7 @@ export function ChestImg({ open = false, box }: { open?: boolean; box?: Box }) {
   return <img className={'chestimg' + (box && !own ? ' tint-' + box : '')} src={`/items/coffre-${own ? box + '-' : ''}${state}.webp`} alt="Coffre" />;
 }
 
-export const Coins = ({ n }: { n: number }) => <span className="coins">🪙 {n}</span>;
+export const Coins = ({ n }: { n: number }) => <span className="coins"><UiIcon n="piece" /> {n}</span>;
 
 /** What the companion says on the home screen */
 function speech(c: Creature) {

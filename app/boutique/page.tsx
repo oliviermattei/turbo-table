@@ -1,6 +1,6 @@
 'use client';
 import { useState } from 'react';
-import { ChestImg, Coins, DebugCoins, ItemIcon } from '@/components/pet';
+import { ChestImg, Coins, DebugCoins, ItemIcon, UiIcon } from '@/components/pet';
 import { useEnsurePet } from '@/components/pet-ensure';
 import { BackHeader } from '@/components/ui';
 import { active, appetiteOf, buy, ITEMS, type Item } from '@/lib/pet/rules';
@@ -31,7 +31,7 @@ export default function BoutiquePage() {
             <b>{it.n}</b>
             <small>{it.gain ? Object.entries(it.gain).map(([n, v]) => `${n === 'faim' ? 'Faim' : n === 'joie' ? 'Joie' : 'Énergie'} +${Math.round((v as number) / k)}`).join(', ') + (k > 1 && comp ? ` pour ${comp.name}` : '') : (it.min === 'epique' ? 'Un œuf Épique ou Légendaire !' : it.min === 'rare' ? 'Un œuf Rare ou mieux !' : 'Un œuf surprise !')}</small>
             {it.kind !== 'chest' && pet.inventory[it.id] ? <small className="own">Dans ton sac : {pet.inventory[it.id]}</small> : null}
-            <button className="chip on" disabled={coins < it.price} onClick={() => doBuy(it)}>🪙 {it.price}</button>
+            <button className="chip on" disabled={coins < it.price} onClick={() => doBuy(it)}><UiIcon n="piece" /> {it.price}</button>
           </div>
         ))}
       </div>

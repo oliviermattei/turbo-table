@@ -27,7 +27,7 @@ h1 span{color:var(--yellow)}
 .panel{background:rgba(255,255,255,.08);border-radius:20px;padding:14px;margin-bottom:12px}
 .panel h2{font-size:17px;font-weight:600;margin-bottom:10px;opacity:.9;display:flex;justify-content:space-between;align-items:center}
 .panel h2 .links{display:flex;gap:12px}
-.panel h2 .links button{background:none;border:none;color:#c7d2fe;font-size:15px;font-weight:500;text-decoration:underline;cursor:pointer}
+.panel h2 .links button{background:rgba(255,255,255,.14);border:none;color:#fff;font-size:15px;font-weight:600;border-radius:999px;padding:8px 14px;min-height:40px;cursor:pointer}
 .chips{display:grid;grid-template-columns:repeat(5,1fr);gap:8px}
 .chip{border:none;font-size:24px;font-weight:600;padding:11px 0;border-radius:14px;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;transition:transform .08s,background .15s;position:relative}
 .chip.on{background:var(--yellow);color:var(--ink)}
@@ -48,6 +48,16 @@ h1 span{color:var(--yellow)}
 .navb{text-decoration:none;border:none;background:rgba(255,255,255,.12);color:#fff;border-radius:16px;padding:10px 4px;cursor:pointer;display:flex;flex-direction:column;align-items:center;gap:2px}
 .navb:active{background:rgba(255,255,255,.22)}
 .navb .ic{font-size:28px;line-height:1}
+.uiic{height:1.15em;width:auto;vertical-align:-.22em;display:inline-block}
+.navb .ic .uiic{height:40px;vertical-align:0}
+.coins-shop .uiic{height:26px}
+.navb.disabled .ct{font-size:11px}
+/* Game: the question in the middle, the answers in the thumb zone */
+.game .hud{gap:8px}
+.game .hud .pill{min-width:0;flex:0 0 auto}
+.game .card{margin:auto 0}
+.game .choices{margin-top:16px;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+.game .choice{padding:30px 0}
 .navb .lb{font-size:15px;font-weight:600}
 .navb .ct{font-size:12px;opacity:.75}
 .ghost{border:none;font-size:18px;font-weight:600;padding:12px;border-radius:16px;background:rgba(255,255,255,.12);color:#fff;cursor:pointer;width:100%;margin-top:10px}
@@ -240,7 +250,7 @@ a.big{display:block;text-align:center;text-decoration:none}
 
 /* A creature: static image + CSS life (breathing, movement profile, shadow) */
 .crea{--sz:200px;position:relative;width:var(--sz);height:calc(var(--sz)*1.05);display:flex;align-items:flex-end;justify-content:center;flex-shrink:0;cursor:pointer;-webkit-tap-highlight-color:transparent}
-.crea img{display:block;max-width:var(--sz);height:calc(var(--sz)*.86);object-fit:contain;object-position:bottom;user-select:none;transition:filter .6s}
+.crea img{display:block;max-width:var(--sz);height:calc(var(--sz)*.86*var(--st,1));object-fit:contain;object-position:bottom;user-select:none;transition:filter .6s}
 .crea-shadow{position:absolute;bottom:2%;left:50%;width:55%;height:8%;transform:translateX(-50%);border-radius:50%;background:radial-gradient(rgba(0,0,0,.45),transparent 70%)}
 .crea-mover,.crea-breath{transform-origin:50% 100%}
 .crea-breath{animation:pet-breathe 2.8s ease-in-out infinite var(--d)}
@@ -308,7 +318,7 @@ a.big{display:block;text-align:center;text-decoration:none}
 .cracks{position:absolute;inset:0;width:100%;height:100%;fill:none;stroke:#3b2f2f;stroke-width:2.2;stroke-linejoin:round;filter:drop-shadow(0 0 1px #fff)}
 .hatch-stage.flash::after,.evo-stage.flash::after{content:"";position:fixed;inset:0;background:#fff;animation:pet-flash 1s ease-out forwards;pointer-events:none}
 @keyframes pet-flash{0%{opacity:0}25%{opacity:1}100%{opacity:0}}
-.born-img{height:230px;object-fit:contain;animation:pet-born .7s cubic-bezier(.3,1.6,.6,1) both}
+.born-img{height:150px;object-fit:contain;animation:pet-born .7s cubic-bezier(.3,1.6,.6,1) both}
 @keyframes pet-born{from{transform:scale(0)}}
 .evo-stage img{height:230px;object-fit:contain}
 .evo-breath{transform-origin:50% 100%;animation:pet-breathe 2.8s ease-in-out infinite}
@@ -407,7 +417,7 @@ button.bestc{cursor:pointer}
 .stackct{position:absolute;top:6px;right:6px;background:var(--yellow);color:var(--ink);font-weight:700;font-size:14px;border-radius:999px;padding:2px 8px}
 .crea-bed{position:absolute;bottom:0;left:50%;width:85%;transform:translateX(-50%);z-index:-1;animation:pet-drop .4s ease-out both}
 .crea{isolation:isolate}
-.shop-tabs{position:sticky;bottom:8px}
+.shop-tabs{position:sticky;bottom:8px;background:var(--bg2,#1e1b4b);padding:8px;margin:12px -8px 0;border-radius:22px;box-shadow:0 -6px 20px rgba(0,0,0,.35)}
 .navb.on{background:var(--yellow);color:var(--ink)}
 .chestimg.tint-epique{filter:hue-rotate(230deg) saturate(1.4) drop-shadow(0 0 10px #a855f7)}
 .chestimg.tint-legendaire{filter:saturate(1.6) brightness(1.1) drop-shadow(0 0 12px #f59e0b)}
@@ -426,3 +436,19 @@ html[data-theme=renard-celeste] body{background:radial-gradient(circle at 20% 0%
 .chestimg.tint-peu-commun{filter:hue-rotate(60deg) drop-shadow(0 0 10px #22c55e)}
 .chestimg.tint-rare{filter:hue-rotate(180deg) drop-shadow(0 0 10px #3b82f6)}
 .petstats{text-align:center;font-size:14px;opacity:.85;margin-top:8px}
+
+/* Skin: illustrated backdrop per screen (public/bg) under glass panels that stay readable on it */
+.app{position:relative;z-index:0}
+.decor{position:fixed;inset:0;z-index:-1;background:#1e1b4b center bottom/cover no-repeat;transition:background-image .3s}
+.decor::after{content:"";position:absolute;inset:0;background:linear-gradient(rgba(20,17,60,.45),rgba(20,17,60,.1) 35%,rgba(20,17,60,.15) 65%,rgba(20,17,60,.55))}
+html[data-theme] .decor{opacity:.5}
+.player,.panel,.stat,.badge,.badge2,.dip,.grand,.hrow,.fcard,.pcard,.eggb,.shopi,.bestc,.navb,.coins-link,.hud .pill,.icon-btn,.coins{background:rgba(24,20,72,.74);backdrop-filter:blur(6px);-webkit-backdrop-filter:blur(6px);box-shadow:inset 0 1px 0 rgba(255,255,255,.16),0 4px 14px rgba(0,0,0,.28)}
+.coins-link .coins{backdrop-filter:none;box-shadow:none}
+.navb.on{background:var(--yellow)}
+.htitle,h1,.hero-name{text-shadow:0 3px 0 rgba(0,0,0,.4)}
+.hud .pill{display:flex;align-items:center;justify-content:center;gap:6px}
+.big .uiic{height:1.1em;vertical-align:-.2em}
+.need > span .uiic{height:22px}
+.crea-fx.bubble .uiic{height:.85em}
+.stars .uiic{height:64px}
+.hrow .mini .uiic{height:16px}
