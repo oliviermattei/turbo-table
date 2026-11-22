@@ -28,6 +28,7 @@ Le père de l'enfant (développeur) pilote le projet. Il valide les choix de con
   - les badges ne donnent plus de coffres ;
   - un compagnon triste ne couve plus l'œuf.
   Tous les chiffres sont dans `lib/balance.ts`. On les règle avec le simulateur (`pnpm sim`), jamais à l'intuition.
+  Guide complet (gains, coûts, prix, historique des réglages, temps pour finir le jeu, leviers) : `docs/economie.md`.
 
 ## 2. Ce qui existe aujourd'hui
 

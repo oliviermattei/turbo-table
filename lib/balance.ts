@@ -7,7 +7,7 @@ import type { Rarity } from './game/types';
  */
 
 /* ---------- What a right answer is worth ---------- */
-/** Value of each factor: a calculation is worth the value of its easier factor (7×1 = 0.1, 7×8 = 1) */
+/** Value of each factor: a calculation is worth the value of its easier factor (7×1 = 0.05, 7×8 = 1) */
 export const TABLE_VALUE = [0, 0.05, 0.3, 0.8, 0.8, 0.35, 1, 1, 1, 1, 0.1];
 /** A game "counts" (badges, stars, games and days played) when its average calculation is at least this hard and it has enough right answers */
 export const SERIOUS = { difficulty: 0.4, correct: 5 };
