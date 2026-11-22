@@ -4,7 +4,7 @@ import { useEffect, useMemo, useState, type CSSProperties } from 'react';
 import { useData } from '@/lib/data';
 import { computeStats, RARITY, unlocked } from '@/lib/game/rules';
 import assets from '@/lib/pet/assets.json';
-import { active, balance, decay, hatchProgress, lowestNeed, moodOf, stageOf, STAGES, STAGE_XP, ITEM_BY_ID } from '@/lib/pet/rules';
+import { active, balance, decay, hatchProgress, lowestNeed, moodOf, stageOf, stageXp, STAGES, ITEM_BY_ID } from '@/lib/pet/rules';
 import { SPECIES_BY_ID } from '@/lib/pet/species';
 import type { Box, Creature, Egg, Needs } from '@/lib/pet/types';
 import { UiIcon } from './ui';
@@ -46,7 +46,7 @@ export function CreatureView({ c, size = 200, action, onClick }: { c: Creature; 
   const sp = SPECIES_BY_ID[c.species];
   const mood = moodOf(c.needs);
   const need = lowestNeed(c.needs);
-  const stage = Math.min(stageOf(c.xp), c.shown); // the new stage only shows after the evolution scene
+  const stage = Math.min(stageOf(c), c.shown); // the new stage only shows after the evolution scene
   // Random phase so two creatures never move in sync
   const [phase] = useState(() => -Math.random() * 3 + 's');
   const sleeping = action?.kind === 'sleep';
@@ -85,9 +85,9 @@ export function NeedBars({ n }: { n: Needs }) {
 
 /** Growth towards the next stage */
 export function GrowBar({ c }: { c: Creature }) {
-  const s = stageOf(c.xp);
+  const s = stageOf(c), xps = stageXp(c.species);
   if (s >= 3) return <p className="grow">⭐ Forme finale atteinte !</p>;
-  const from = STAGE_XP[s], to = STAGE_XP[s + 1];
+  const from = xps[s], to = xps[s + 1];
   const sad = moodOf(c.needs) === 'triste';
   return (
     <div className="grow">

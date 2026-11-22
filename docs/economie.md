@@ -119,7 +119,18 @@ Le bonus s'ajoute aux pièces de la partie (pas aux badges ni aux niveaux), seul
 | Stade | Bébé | Petit | Grand | Super |
 |---|---|---|---|---|
 | Bonus | +0 % | +5 % | +10 % | +15 % |
-| Points pour y arriver | 0 | 150 | 600 | 1 500 |
+
+**Points pour y arriver** (totaux depuis l'éclosion, selon la qualité). Petit est fixé à la main ; Grand = Petit × 2,66 et Super = Petit × 5,33, arrondis à la dizaine supérieure :
+
+| Qualité | Petit | Grand | Super | Temps pour Super à ~45 pts/jour |
+|---|---|---|---|---|
+| Commun | 75 | 200 | 400 | ~9 jours |
+| Peu commun | 90 | 240 | 480 | ~11 jours |
+| Rare | 110 | 300 | 590 | ~13 jours |
+| Épique | 130 | 350 | 700 | ~16 jours |
+| Légendaire | 150 | 400 | 800 | ~18 jours |
+
+Avant : 150 / 600 / 1 500 pour toutes les qualités (Super en 1 à 1,5 mois). L'enfant trouvait l'évolution trop longue pour le peu qu'elle rapporte.
 
 **Historique du bonus de qualité :**
 
@@ -282,7 +293,7 @@ Hypothèses : une partie d'une minute à 10 🪙 sans compagnon, ~10 espèces tr
 | Épique | 11 | 18 | 26 | 45 | 89 |
 | Légendaire | 9 | 15 | 22 | 38 | 75 |
 
-Le stade Super fait gagner 5 à 15 % de parties en moins. Il demande 1 500 points avec le même compagnon actif et pas triste, soit environ 1 à 1,5 mois de jeu pour ton fils.
+Le stade Super fait gagner 5 à 15 % de parties en moins. Il demande 400 (Commun) à 800 (Légendaire) points avec le même compagnon actif et pas triste, soit environ 9 à 18 jours de jeu pour ton fils.
 
 **Pour passer aux jours** : à ~4 parties par jour, l'entretien prend ~0,7 partie et le bonus du jour en rend ~0,5. Il reste donc ~3,8 parties utiles par jour : divise les tableaux par ~3,8.
 - Compagnon Commun, coffre Peu commun : 28 parties, ~1 semaine.
@@ -346,7 +357,7 @@ B est écartée parce qu'en fin de jeu, un coffre Commun gratuit finirait par do
 
 | Joueur | J1 | J7 | J30 | J90 | J180 | J270 | J365 | Bestiaire complet |
 |---|---|---|---|---|---|---|---|---|
-| Ton fils | 1 | 5 | 14 | 23 | 33 | 36 | 36 | **223 j (194–232)**, ~7 mois |
+| Ton fils | 1 | 6 | 13 | 23 | 33 | 36 | 36 | **221 j (193–240)**, ~7 mois |
 | Enfant très motivé | 1 | 7 | 18 | 33 | 36 | 36 | 36 | 112 j |
 | Fourbe table de 1 | 0 | 1 | 3 | 5 | 6 | 10 | 12 | jamais |
 | Fourbe tables faciles | 0 | 2 | 7 | 19 | 31 | 36 | 36 | 242 j |

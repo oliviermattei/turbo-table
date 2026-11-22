@@ -12,7 +12,7 @@ export default function RefugePage() {
       <p className="sub">Choisis le compagnon dont tu t’occupes. Les autres se reposent ici.</p>
       <div className="bestgrid">
         {pet.creatures.map(c => {
-          const s = Math.min(stageOf(c.xp), c.shown), on = c.id === pet.activeId;
+          const s = Math.min(stageOf(c), c.shown), on = c.id === pet.activeId;
           return (
             <button key={c.id} className={'bestc got' + (on ? ' on' : '')} onClick={() => updatePet(p => p && setActive(p, c.id, Date.now()))}>
               {/* eslint-disable-next-line @next/next/no-img-element -- static sprites */}

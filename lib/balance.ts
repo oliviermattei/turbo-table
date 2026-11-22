@@ -49,8 +49,17 @@ export const DUP_COINS: Record<Rarity, number> = { commun: 5, 'peu-commun': 10, 
 export const PITY = { days: 10 };
 
 /* ---------- Companion ---------- */
-/** Counted points needed for each stage: Bébé, Petit, Grand, Super */
-export const STAGE_XP = [0, 150, 600, 1500];
+/**
+ * Points since hatching for each stage (Bébé, Petit, Grand, Super), by quality: totals, not steps.
+ * Petit is set by hand; Grand = Petit × 2.66 and Super = Petit × 5.33, rounded up to the ten.
+ */
+export const STAGE_XP: Record<Rarity, number[]> = {
+  commun: [0, 75, 200, 400],
+  'peu-commun': [0, 90, 240, 480],
+  rare: [0, 110, 300, 590],
+  epique: [0, 130, 350, 700],
+  legendaire: [0, 150, 400, 800],
+};
 /** Coin bonus of a happy active companion: quality + stage + per species found */
 export const QUALITY_BONUS: Record<Rarity, number> = { commun: 0, 'peu-commun': 0.15, rare: 0.3, epique: 0.5, legendaire: 0.8 };
 export const STAGE_BONUS = [0, 0.05, 0.1, 0.15];

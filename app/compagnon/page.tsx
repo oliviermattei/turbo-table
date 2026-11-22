@@ -25,7 +25,7 @@ export default function CompagnonPage() {
   const nap = () => { updatePet(p => p && sleep(p, Date.now())); play({ kind: 'sleep', key: ++seq.current }); };
   const inv = ITEMS.filter(i => pet.inventory[i.id]);
   const sp = c && SPECIES_BY_ID[c.species];
-  const canEvolve = c && stageOf(c.xp) > c.shown;
+  const canEvolve = c && stageOf(c) > c.shown;
 
   return (
     <section className="screen">
@@ -45,7 +45,7 @@ export default function CompagnonPage() {
               if (n) updatePet(p => p && rename(p, c.id, n));
             }}>✏️</button>
           </div>
-          <p className="sub">{sp.name} · {STAGE_NAMES[Math.min(stageOf(c.xp), c.shown)]} · <RarLabel r={sp.q} /></p>
+          <p className="sub">{sp.name} · {STAGE_NAMES[Math.min(stageOf(c), c.shown)]} · <RarLabel r={sp.q} /></p>
           <div className="panel">
             <NeedBars n={c.needs} />
             <GrowBar c={c} />

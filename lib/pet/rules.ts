@@ -15,7 +15,9 @@ export { APPETITE, DUP_COINS, HATCH, QUALITY_BONUS, STAGE_BONUS, STAGE_XP, BONUS
 export const STAGES = ['bebe', 'petit', 'grand', 'super'] as const;
 export const STAGE_NAMES = ['Bébé', 'Petit', 'Grand', 'Super'];
 /** Creature XP (counted points, see balance.ts) needed for each stage */
-export const stageOf = (xp: number) => STAGE_XP.reduce((s, need, i) => (xp >= need ? i : s), 0);
+/** Stage thresholds of a species (they depend on its quality) */
+export const stageXp = (species: string) => STAGE_XP[SPECIES_BY_ID[species]?.q] ?? STAGE_XP.commun;
+export const stageOf = (c: Pick<Creature, 'species' | 'xp'>) => stageXp(c.species).reduce((s, need, i) => (c.xp >= need ? i : s), 0);
 
 /* ---------- Coins ---------- */
 /** Coins of one game within its history (counted points, stars, new diploma, training bonus): see game/value.ts */
@@ -195,7 +197,7 @@ export const appetiteOf = (species: string) => APPETITE[SPECIES_BY_ID[species]?.
  * (each evolution raises it) and the size of the collection, so coins grow as the child progresses.
  */
 export const bonusRate = (c: Pick<Creature, 'species' | 'xp' | 'shown'>, collection: number) =>
-  (QUALITY_BONUS[SPECIES_BY_ID[c.species]?.q] ?? 0) + STAGE_BONUS[Math.min(stageOf(c.xp), c.shown)] + collectionBonus(collection);
+  (QUALITY_BONUS[SPECIES_BY_ID[c.species]?.q] ?? 0) + STAGE_BONUS[Math.min(stageOf(c), c.shown)] + collectionBonus(collection);
 /** +1 % for 1 or 2 species, +2 % for 3 or 4… whole percents only */
 export const collectionBonus = (collection: number) => Math.ceil(collection / BONUS.speciesPerStep) * BONUS.perStep;
 export const companionBonus = (h: GameRecord[], g: GameRecord, c: Pick<Creature, 'species' | 'xp' | 'shown'>, collection: number) =>
@@ -325,7 +327,7 @@ export const rename = (p: PetState, id: string, name: string): PetState =>
 /** One evolution scene = one stage: a creature that grew several stages at once evolves several times in a row */
 export const markShown = (p: PetState, id: string, now = Date.now()): PetState => {
   const c = p.creatures.find(x => x.id === id);
-  if (!c || c.shown >= stageOf(c.xp)) return p;
+  if (!c || c.shown >= stageOf(c)) return p;
   return logged({ ...p, creatures: p.creatures.map(x => (x.id === id ? { ...x, shown: x.shown + 1 } : x)) }, { t: now, k: 'evolve', id: c.species, n: c.shown + 1 });
 };
 

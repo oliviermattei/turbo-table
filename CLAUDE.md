@@ -148,7 +148,17 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
   - Content : une moyenne ≥ 60 et aucun besoin sous 35.
   - Triste = image triste, **évolution bloquée**, pas de bonus de pièces et **l'œuf ne grandit plus**. On ne perd jamais une créature.
 - **Bonus de pièces du compagnon** (s'il n'est pas triste) : qualité (+0 / 15 / 30 / 50 / 80 %) + stade (+0 / 5 / 10 / 15 %) + collection en marches de 1 % (+1 % pour 1 ou 2 espèces trouvées, +2 % pour 3 ou 4… +18 % avec les 36). Que des pourcents entiers.
-- **Évolution** : le compagnon gagne les points des parties s'il est actif et pas triste. Stades Bébé / Petit / Grand / Super à 0 / 150 / 600 / 1500. Scène d'évolution de 5 s au toucher.
+- **Évolution** : le compagnon gagne les points des parties s'il est actif et pas triste. Les seuils dépendent de la qualité ; ce sont des totaux depuis l'éclosion (la jauge montre l'étape en cours). Petit est fixé à la main, Grand = Petit × 2,66 et Super = Petit × 5,33, arrondis à la dizaine supérieure :
+
+  | Qualité | Petit | Grand | Super |
+  |---|---|---|---|
+  | Commun | 75 | 200 | 400 |
+  | Peu commun | 90 | 240 | 480 |
+  | Rare | 110 | 300 | 590 |
+  | Épique | 130 | 350 | 700 |
+  | Légendaire | 150 | 400 | 800 |
+
+  Avant : 150 / 600 / 1 500 pour toutes les qualités, jugé trop long par l'enfant. Scène d'évolution de 5 s au toucher.
 - **Boutique** :
   - nourriture : Pomme 6, Sandwich 13, Gâteau 28, Festin 65, Banquet 150 ;
   - jouets : Balle 8, Peluche 19, Console 40, Manège 85, Fête foraine 210 ;
@@ -156,7 +166,7 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
 - **Appétit** : nourriture et jouets remplissent ×1 / 1,15 / 1,3 / 1,5 / 1,8 fois moins selon la qualité du compagnon. Dormir est gratuit.
 - **Résultat de la simulation** (`docs/equilibrage.md`). L'enfant visé joue 10 à 15 parties par jour la 1re semaine, puis ~4. Il trouve :
   - ~5 espèces en une semaine, ~14 en un mois, ~24 en trois mois ;
-  - le 1er Rare vers 2,5 mois, le 1er Légendaire vers 6,5 mois, le bestiaire complet en ~7 mois (223 jours en médiane, 194 à 232).
+  - le 1er Rare vers 2,5 mois, le 1er Légendaire vers 6,5 mois, le bestiaire complet en ~7 mois (221 jours en médiane, 193 à 240).
   L'entretien lui coûte ~15 à 20 % de ses gains (~0,7 partie par jour) : plus cher, celui qui ne joue que 2 parties par jour ne pourrait plus nourrir son compagnon. Jouer uniquement la table de 1 donne ~11 espèces en un an ; ne jamais nourrir bloque à 3.
 
 ### Journal des gains

@@ -14,7 +14,7 @@ export default function BestiairePage() {
     if (mine) updatePet(p => p && setActive(p, mine.id, Date.now()));
   };
   const best: Record<string, number> = {};
-  pet?.creatures.forEach(c => { best[c.species] = Math.max(best[c.species] ?? 0, Math.min(stageOf(c.xp), c.shown)); });
+  pet?.creatures.forEach(c => { best[c.species] = Math.max(best[c.species] ?? 0, Math.min(stageOf(c), c.shown)); });
   // Test mode: every species with its images counts as found, shown at its final stage
   if (debug) SPECIES.filter(isReady).forEach(s => { best[s.id] = 3; });
   const found = Object.keys(best).length;

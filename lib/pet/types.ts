@@ -11,7 +11,7 @@ export interface Egg { id: string; q: Rarity; species?: string; source: EggSourc
 export interface Creature {
   id: string; species: string; name: string; bornAt: number;
   xp: number;
-  /** Stage index already celebrated: a higher stageOf(xp) means an evolution is waiting to be shown */
+  /** Stage index already celebrated: a higher stageOf(creature) means an evolution is waiting to be shown */
   shown: number;
   needs: Needs;
   /** Time the needs were last brought up to date (only the active creature decays) */

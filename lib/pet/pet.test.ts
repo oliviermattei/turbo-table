@@ -103,8 +103,9 @@ describe('pet', () => {
     expect(p.creatures[0].xp).toBe(30);
     p = applyGames(p, [game({ id: 'b', ts: T0 + 200 * H, correct: 30, total: 30, seen: { '6x7': [30, 0] } }), a]);
     expect(p.creatures[0].xp).toBe(30); // already processed + sad after 199 h
-    expect(stageOf(150)).toBe(1);
-    expect(stageOf(1499)).toBe(2);
+    // Thresholds are totals since hatching, by quality
+    expect([74, 75, 199, 200, 399, 400].map(xp => stageOf({ species: 'chaton', xp }))).toEqual([0, 1, 1, 2, 2, 3]);
+    expect([149, 150, 400, 799, 800].map(xp => stageOf({ species: 'phenix-solaire', xp }))).toEqual([0, 1, 2, 2, 3]);
   });
 
   it('gives the collection bonus in whole steps: 1 %, 1 %, 2 %, 2 %…', () => {

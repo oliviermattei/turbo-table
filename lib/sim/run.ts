@@ -69,7 +69,7 @@ function live(pl: Player, seed: number, nDays: number, rnd: Rnd): Run {
       const best = [...p.eggs].sort((a, b) => ORDER(b.q) - ORDER(a.q))[0];
       p = incubate(p, best.id);
     }
-    for (const c of p.creatures) while (stageOf(c.xp) > (p.creatures.find(x => x.id === c.id)!.shown)) p = markShown(p, c.id, now);
+    for (const c of p.creatures) while (stageOf(p.creatures.find(x => x.id === c.id)!) > (p.creatures.find(x => x.id === c.id)!.shown)) p = markShown(p, c.id, now);
     const best = [...p.creatures].sort((a, b) => ORDER(SPECIES_BY_ID[b.species].q) - ORDER(SPECIES_BY_ID[a.species].q) || b.xp - a.xp)[0];
     if (best && best.id !== p.activeId) p = setActive(p, best.id, now);
     const c = active(p);
