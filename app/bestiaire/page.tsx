@@ -32,8 +32,8 @@ export default function BestiairePage() {
               const got = s.id in best, ready = isReady(s);
               return (
                 <div key={s.id} className={'bestc' + (got ? ' got' : '') + (s.id === activeSpecies ? ' on' : '')} onClick={() => choose(s.id)}>
-                  {/* eslint-disable-next-line @next/next/no-img-element -- static sprites */}
                   {/* Not found yet: its shadow image only, never the creature itself (a long press would show it in full) */}
+                  {/* eslint-disable-next-line @next/next/no-img-element -- static sprites */}
                   {ready ? <img className={got ? '' : 'silhouette'} src={got ? creatureSrc(s.id, best[s.id]) : `/creatures/${s.id}/ombre.webp`} alt={got ? s.name : 'Créature inconnue'} draggable={false} />
                     : <span className="unknown">❓</span>}
                   <small>{s.id === activeSpecies ? '⭐ ' : ''}{got ? s.name : ready ? '???' : 'Bientôt'}</small>
