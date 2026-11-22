@@ -5,7 +5,7 @@ import { APPETITE, BADGE_CHEST, BONUS, DUP_COINS, GAME, HATCH, NEEDS, PRICES, QU
 import { computeStats, unlocked, BADGE_BY_ID } from '../game/rules';
 import {
   applyGames, buy, coinsOfGame, decay, dropsEgg, grantEggs, hatch, hatchProgress, moodOf, newPet, openChest,
-  markShown, readySpecies, rollQuality, sleep, stageOf, useItem,
+  markShown, readySpecies, rollQuality, sleep, stageOf, useItem, collectionBonus,
 } from './rules';
 
 const H = 36e5;
@@ -78,7 +78,7 @@ describe('pet', () => {
     const g = (ts: number) => game({ id: 'b' + ts, ts, correct: 100, total: 100, seen: { '6x7': [100, 0] } });
     const h1 = [g(T0 + H)];
     p = applyGames(p, h1);
-    const b1 = Math.round((100 + GAME.dailyBonus) * (QUALITY_BONUS.legendaire + BONUS.perSpecies));
+    const b1 = Math.round((100 + GAME.dailyBonus) * (QUALITY_BONUS.legendaire + BONUS.perStep)); // 1 species: +1 %
     expect(p.bonus).toBe(b1); // legendary + 1 species, baby stage
     p = { ...p, incubating: { id: 'x', q: 'rare', source: 'shop', at: T0, opened: true, done: 0 } };
     p = applyGames(p, [g(T0 + 200 * H), ...h1]);
@@ -105,6 +105,10 @@ describe('pet', () => {
     expect(p.creatures[0].xp).toBe(30); // already processed + sad after 199 h
     expect(stageOf(150)).toBe(1);
     expect(stageOf(1499)).toBe(2);
+  });
+
+  it('gives the collection bonus in whole steps: 1 %, 1 %, 2 %, 2 %…', () => {
+    expect([0, 1, 2, 3, 4, 5, 36].map(n => Math.round(collectionBonus(n) * 100))).toEqual([0, 1, 1, 2, 2, 3, 18]);
   });
 
   it('keeps points to the hundredth (no 24.999999999 on screen)', () => {

@@ -110,7 +110,7 @@ Ce qui compte quelle que soit la partie : les diplômes, les niveaux et les badg
 
 Le bonus s'ajoute aux pièces de la partie (pas aux badges ni aux niveaux), seulement si le compagnon actif n'est pas triste.
 
-**Bonus = qualité + stade + 0,5 % par espèce trouvée.**
+**Bonus = qualité + stade + collection.** La collection compte en marches de 1 % : +1 % pour 1 ou 2 espèces trouvées, +2 % pour 3 ou 4, +3 % pour 5 ou 6… jusqu'à +18 % avec les 36. Il n'y a que des pourcents entiers (avant : +0,5 % par espèce, peu lisible).
 
 | | Commun | Peu commun | Rare | Épique | Légendaire |
 |---|---|---|---|---|---|
@@ -123,11 +123,12 @@ Le bonus s'ajoute aux pièces de la partie (pas aux badges ni aux niveaux), seul
 
 **Historique du bonus de qualité :**
 
-| Étape | Commun | Peu commun | Rare | Épique | Légendaire | Stade | Par espèce |
+| Étape | Commun | Peu commun | Rare | Épique | Légendaire | Stade | Collection |
 |---|---|---|---|---|---|---|---|
 | Avant (en ligne) | +0 % | +100 % | +300 % | +700 % | +1 100 % | 0 / 10 / 25 / 50 % | +2 % |
 | 1er réglage (jamais commité) | +0 % | +20 % | +40 % | +70 % | +100 % | 0 / 5 / 10 / 20 % | +1 % |
-| **Actuel** | **+0 %** | **+15 %** | **+30 %** | **+50 %** | **+80 %** | **0 / 5 / 10 / 15 %** | **+0,5 %** |
+| Après le rééquilibrage | +0 % | +15 % | +30 % | +50 % | +80 % | 0 / 5 / 10 / 15 % | +0,5 % |
+| **Actuel** | **+0 %** | **+15 %** | **+30 %** | **+50 %** | **+80 %** | **0 / 5 / 10 / 15 %** | **+1 % par 2 espèces** |
 
 **Exemple : une partie qui rapporte 10 🪙 sans compagnon.**
 
@@ -251,7 +252,8 @@ Effet mesuré sur ton fils : bestiaire en 213 jours au lieu de 215 (pire cas 230
 | Essai écarté (trop rapide) | 160 | 260 | 380 | 650 | 1 300 | 209 j |
 | 6. Commit `2a313d4` | 180 | 300 | 430 | 750 | 1 500 | 238 j (214 à 333) |
 | 7. Commit `9c35fea` : mêmes prix + Légendaires sans doublon | 180 | 300 | 430 | 750 | 1 500 | 215 j (194 à 230) |
-| **8. Actuel** : mêmes prix + 5 % de qualité supérieure dans tous les coffres | **180** | **300** | **430** | **750** | **1 500** | **213 j (209 à 230)** |
+| 8. Mêmes prix + 5 % de qualité supérieure dans tous les coffres | 180 | 300 | 430 | 750 | 1 500 | 213 j (209 à 230) |
+| **9. Actuel** : mêmes prix + bonus de collection en marches de 1 % | **180** | **300** | **430** | **750** | **1 500** | **223 j (194 à 232)** |
 | Hausse proposée puis refusée | 180 | 300 | 480 | 850 | 1 800 | — |
 
 Aux étapes 1 à 4, d'autres réglages changeaient en même temps : les durées ne dépendent pas que des prix.
@@ -344,7 +346,7 @@ B est écartée parce qu'en fin de jeu, un coffre Commun gratuit finirait par do
 
 | Joueur | J1 | J7 | J30 | J90 | J180 | J270 | J365 | Bestiaire complet |
 |---|---|---|---|---|---|---|---|---|
-| Ton fils | 1 | 5 | 14 | 24 | 34 | 36 | 36 | **213 j (209–230)**, ~7 mois |
+| Ton fils | 1 | 5 | 14 | 23 | 33 | 36 | 36 | **223 j (194–232)**, ~7 mois |
 | Enfant très motivé | 1 | 7 | 18 | 33 | 36 | 36 | 36 | 112 j |
 | Fourbe table de 1 | 0 | 1 | 3 | 5 | 6 | 10 | 12 | jamais |
 | Fourbe tables faciles | 0 | 2 | 7 | 19 | 31 | 36 | 36 | 242 j |
@@ -352,7 +354,7 @@ B est écartée parce qu'en fin de jeu, un coffre Commun gratuit finirait par do
 | Joue peu | 0 | 1 | 2 | 6 | 12 | 12 | 13 | jamais |
 | Ne nourrit jamais | 1 | 3 | 3 | 3 | 3 | 3 | 3 | jamais |
 
-**Première espèce de chaque qualité pour ton fils** : Peu commun au 14ᵉ jour, Rare au 43ᵉ, Épique au 132ᵉ, Légendaire au 183ᵉ (~6 mois).
+**Première espèce de chaque qualité pour ton fils** : Peu commun au 14ᵉ jour, Rare au 74ᵉ, Épique au 141ᵉ, Légendaire au 200ᵉ (~6,5 mois). Le 1er Rare dépend beaucoup de la chance (5 % dans un coffre Peu commun) : selon les réglages, la médiane a varié entre le 43ᵉ et le 74ᵉ jour.
 
 **Pièces gagnées par jour (ton fils)** : 151 🪙 la 1re semaine (beaucoup de parties), 79 🪙 jusqu'au 30ᵉ jour, 66 🪙 jusqu'au 90ᵉ, 95 🪙 jusqu'au 180ᵉ, puis 133 🪙 (il est plus rapide et son compagnon meilleur).
 

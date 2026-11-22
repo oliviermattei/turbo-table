@@ -195,7 +195,9 @@ export const appetiteOf = (species: string) => APPETITE[SPECIES_BY_ID[species]?.
  * (each evolution raises it) and the size of the collection, so coins grow as the child progresses.
  */
 export const bonusRate = (c: Pick<Creature, 'species' | 'xp' | 'shown'>, collection: number) =>
-  (QUALITY_BONUS[SPECIES_BY_ID[c.species]?.q] ?? 0) + STAGE_BONUS[Math.min(stageOf(c.xp), c.shown)] + BONUS.perSpecies * collection;
+  (QUALITY_BONUS[SPECIES_BY_ID[c.species]?.q] ?? 0) + STAGE_BONUS[Math.min(stageOf(c.xp), c.shown)] + collectionBonus(collection);
+/** +1 % for 1 or 2 species, +2 % for 3 or 4… whole percents only */
+export const collectionBonus = (collection: number) => Math.ceil(collection / BONUS.speciesPerStep) * BONUS.perStep;
 export const companionBonus = (h: GameRecord[], g: GameRecord, c: Pick<Creature, 'species' | 'xp' | 'shown'>, collection: number) =>
   Math.round(coinsOfGame(h, g) * bonusRate(c, collection));
 export const collectionSize = (p: PetState) => new Set(p.creatures.map(c => c.species)).size;

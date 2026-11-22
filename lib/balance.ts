@@ -54,7 +54,8 @@ export const STAGE_XP = [0, 150, 600, 1500];
 /** Coin bonus of a happy active companion: quality + stage + per species found */
 export const QUALITY_BONUS: Record<Rarity, number> = { commun: 0, 'peu-commun': 0.15, rare: 0.3, epique: 0.5, legendaire: 0.8 };
 export const STAGE_BONUS = [0, 0.05, 0.1, 0.15];
-export const BONUS = { perSpecies: 0.005 };
+/** Collection bonus in whole steps: +1 % for 1 or 2 species found, +2 % for 3 or 4… (+18 % with all 36) */
+export const BONUS = { speciesPerStep: 2, perStep: 0.01 };
 /** A better companion eats more: food and toys fill its needs this many times less */
 export const APPETITE: Record<Rarity, number> = { commun: 1, 'peu-commun': 1.15, rare: 1.3, epique: 1.5, legendaire: 1.8 };
 /** Points lost per hour, and joy given by each game */

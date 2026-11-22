@@ -147,7 +147,7 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
   - Triste : un besoin sous 15, ou une moyenne sous 30. Une sieste gratuite ne suffit donc pas.
   - Content : une moyenne ≥ 60 et aucun besoin sous 35.
   - Triste = image triste, **évolution bloquée**, pas de bonus de pièces et **l'œuf ne grandit plus**. On ne perd jamais une créature.
-- **Bonus de pièces du compagnon** (s'il n'est pas triste) : qualité (+0 / 15 / 30 / 50 / 80 %) + stade (+0 / 5 / 10 / 15 %) + 0,5 % par espèce trouvée.
+- **Bonus de pièces du compagnon** (s'il n'est pas triste) : qualité (+0 / 15 / 30 / 50 / 80 %) + stade (+0 / 5 / 10 / 15 %) + collection en marches de 1 % (+1 % pour 1 ou 2 espèces trouvées, +2 % pour 3 ou 4… +18 % avec les 36). Que des pourcents entiers.
 - **Évolution** : le compagnon gagne les points des parties s'il est actif et pas triste. Stades Bébé / Petit / Grand / Super à 0 / 150 / 600 / 1500. Scène d'évolution de 5 s au toucher.
 - **Boutique** :
   - nourriture : Pomme 6, Sandwich 13, Gâteau 28, Festin 65, Banquet 150 ;
@@ -156,7 +156,7 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
 - **Appétit** : nourriture et jouets remplissent ×1 / 1,15 / 1,3 / 1,5 / 1,8 fois moins selon la qualité du compagnon. Dormir est gratuit.
 - **Résultat de la simulation** (`docs/equilibrage.md`). L'enfant visé joue 10 à 15 parties par jour la 1re semaine, puis ~4. Il trouve :
   - ~5 espèces en une semaine, ~14 en un mois, ~24 en trois mois ;
-  - le 1er Rare vers 1,5 mois, le 1er Légendaire vers 6 mois, le bestiaire complet en ~7 mois (213 jours en médiane, 209 à 230).
+  - le 1er Rare vers 2,5 mois, le 1er Légendaire vers 6,5 mois, le bestiaire complet en ~7 mois (223 jours en médiane, 194 à 232).
   L'entretien lui coûte ~15 à 20 % de ses gains (~0,7 partie par jour) : plus cher, celui qui ne joue que 2 parties par jour ne pourrait plus nourrir son compagnon. Jouer uniquement la table de 1 donne ~11 espèces en un an ; ne jamais nourrir bloque à 3.
 
 ### Journal des gains
