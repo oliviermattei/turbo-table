@@ -88,7 +88,8 @@ Une partie ressemble à ceci :
   - Table `docs` : documents uniques (`profile`, `pet`, `reset`). Chaque document envoyé par un appareil a son validateur dans `app/api/docs/[name]/route.ts`.
   - Tables `games_archive` et `docs_archive` : ce qu'une remise à zéro a mis de côté (rien n'est supprimé).
 - **Sur l'appareil** : cache `localStorage` (`tt_history`, `tt_profile`, `tt_tables`, `tt_duration`, `tt_sound`). Le jeu marche sans réseau : les parties non envoyées (`synced: false`) partent à la prochaine ouverture.
-- **Accès** : un seul « code famille » (variable `FAMILY_CODE`). Le parent le tape une fois par appareil dans la page Historique, un cookie le garde environ un an. Sans le code, le jeu reste local à l'appareil.
+- **Accès** : un seul « code famille » (variable `FAMILY_CODE`). C'est une clé d'accès, pas une donnée : le parent le tape une fois par appareil dans la page Historique, un cookie (empreinte du code) le garde environ un an. Sans le code, le jeu reste local à l'appareil.
+- **Relier un appareil** : le code est vérifié, puis la progression du serveur **remplace** celle de l'appareil. Si l'appareil a des parties ou un compagnon que le serveur n'a pas, le parent est prévenu avant l'effacement. S'il annule, rien ne change et l'appareil reste local (`DELETE /api/login` retire le cookie).
 - **API** : `GET /api/state` (toutes les parties + profil + compagnon + date de la dernière remise à zéro), `POST /api/games` (lot de parties), `PUT /api/docs/:name`, `POST /api/login`, `POST /api/reset` (code famille redemandé).
 - **Remise à zéro** (Historique, bouton parent) : le serveur archive les parties et le compagnon, puis chaque appareil efface les siens à sa prochaine synchro (document `reset`). Le prénom est gardé.
 - Toute donnée qui arrive (localStorage, API) passe par `clean()` (`lib/game/clean.ts`).

@@ -13,3 +13,9 @@ export async function POST(req: Request) {
   });
   return Response.json({ ok: true });
 }
+
+/** Unlinks this device (the parent cancelled linking it: it keeps its local progression) */
+export async function DELETE() {
+  (await cookies()).delete(COOKIE);
+  return new Response(null, { status: 204 });
+}

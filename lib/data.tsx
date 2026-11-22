@@ -9,6 +9,8 @@ import type { PetState } from './pet/types';
 import { setSoundOn } from './sound';
 
 type LocalGame = GameRecord & { synced?: boolean };
+/** What linking this device to the server would erase: its games the server lacks, a companion newer than the server's */
+export interface LocalOnly { games: number; pet: boolean; remoteGames: number }
 /** local: server unreachable · cloud: synced with the server · locked: server needs the family code */
 export type SyncState = 'local' | 'cloud' | 'locked';
 
@@ -68,8 +70,12 @@ interface DataCtx {
   /** Test mode (sandbox, see isDebug) */
   debug: boolean;
   setDebug(b: boolean): void;
-  /** Sends the family code; on success this device syncs with the server. 'blocked' = too many wrong codes, wait 1 hour. */
-  unlock(code: string): Promise<'ok' | 'bad' | 'blocked'>;
+  /**
+   * Sends the family code. If it is right, the server's progression replaces this device's: when the device has games
+   * or a companion the server does not have, `confirmWipe` is asked first (false = nothing changes, the device stays local).
+   * 'blocked' = too many wrong codes, wait 1 hour.
+   */
+  unlock(code: string, confirmWipe: (lost: LocalOnly) => boolean): Promise<'ok' | 'bad' | 'blocked' | 'cancelled' | 'offline'>;
   /** Parent: starts the progression again on the server (archived) and on every device. Needs the family code. */
   resetAll(code: string): Promise<'ok' | 'bad' | 'blocked' | 'offline'>;
 }
@@ -207,10 +213,27 @@ function Store({ children }: { children: ReactNode }) {
       await syncCloud();
       return 'ok';
     },
-    async unlock(code) {
+    async unlock(code, confirmWipe) {
       const r = await api('login', { code }).catch(() => null);
-      if (r?.status === 429) return 'blocked';
-      if (!r?.ok) return 'bad';
+      if (!r) return 'offline';
+      if (r.status === 429) return 'blocked';
+      if (!r.ok) return 'bad';
+      // The code is right: the server's progression wins. Look first at what this device would lose.
+      const st = await api('state').then(x => (x.ok ? x.json() : null)).catch(() => null) as { games: { id: string }[]; pet: unknown } | null;
+      if (!st) { await api('login', undefined, 'DELETE').catch(() => null); return 'offline'; }
+      const ids = new Set(st.games.map(g => String(g.id)));
+      const rpet = cleanPet(st.pet);
+      const lost: LocalOnly = {
+        games: hist.current.filter(g => !ids.has(g.id)).length,
+        pet: !!petRef.current && (!rpet || petRef.current.updatedAt > rpet.updatedAt),
+        remoteGames: st.games.length,
+      };
+      if ((lost.games || lost.pet) && !confirmWipe(lost)) {
+        await api('login', undefined, 'DELETE').catch(() => null); // stays a local device
+        return 'cancelled';
+      }
+      commitPet(null, false);
+      commit([]);
       await syncCloud();
       return 'ok';
     },

@@ -3,7 +3,7 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { useState } from 'react';
 import { BackHeader, Stars, Stat } from '@/components/ui';
-import { useData } from '@/lib/data';
+import { useData, type LocalOnly } from '@/lib/data';
 import { playHref } from '@/lib/game/engine';
 import { MENTIONS } from '@/lib/game/rules';
 import type { GameRecord } from '@/lib/game/types';
@@ -108,16 +108,22 @@ function ResetProgress() {
   );
 }
 
-/** For the parent: links this device to the server once (cookie kept ~1 year). */
+const UNLOCK_MSG = { ok: '', bad: 'Code incorrect.', blocked: 'Trop d’essais. Réessaie dans 1 heure.', offline: 'Pas de connexion au serveur.', cancelled: 'Rien n’a changé : cet appareil garde sa progression, sans synchro.' };
+
+/** For the parent: links this device to the server (cookie kept ~1 year). The server's progression replaces the local one. */
 function FamilyCode() {
   const { unlock } = useData();
   const [code, setCode] = useState('');
-  const [error, setError] = useState<'' | 'bad' | 'blocked'>('');
+  const [msg, setMsg] = useState('');
+  const confirmWipe = (l: LocalOnly) => window.confirm(
+    `Cet appareil a des données qui ne sont pas sur le serveur : ${[l.games && `${l.games} partie${l.games > 1 ? 's' : ''}`, l.pet && 'un compagnon'].filter(Boolean).join(' et ')}.\n\n`
+    + `Elles vont être effacées de cet appareil et remplacées par la progression du serveur (${l.remoteGames} partie${l.remoteGames > 1 ? 's' : ''}). Continuer ?`);
   return (
-    <form className="panel" style={{ marginTop: 12 }} onSubmit={async e => { e.preventDefault(); const r = await unlock(code); setError(r === 'ok' ? '' : r); }}>
+    <form className="panel" style={{ marginTop: 12 }} onSubmit={async e => { e.preventDefault(); setMsg(UNLOCK_MSG[await unlock(code, confirmWipe)]); }}>
       <h2>Synchroniser cet appareil</h2>
+      <p className="note">La progression enregistrée sur le serveur remplacera celle de cet appareil.</p>
       <input className="field" type="password" placeholder="Code famille" autoComplete="current-password" value={code} onChange={e => setCode(e.target.value)} />
-      {error && <p className="note">{error === 'blocked' ? 'Trop d’essais. Réessaie dans 1 heure.' : 'Code incorrect.'}</p>}
+      {msg && <p className="note">{msg}</p>}
       <button className="ghost" type="submit">Valider</button>
     </form>
   );

@@ -121,10 +121,24 @@ const bots = {
   /** A synced device: the game reaches the server with its gains, then the parent resets everything */
   async parent() {
     const page = await newPlayer({ tables: [6, 7], duration: 30 });
-    await page.goto(BASE + '/historique');
-    await page.locator(`${vis} input[type=password]`).fill(CODE);
-    await page.locator(`${vis} form button[type=submit]`).click();
-    await page.locator(`${vis} .note`, { hasText: 'serveur' }).waitFor();
+    // A device that played before being linked: the code is checked, then the parent is warned before its data goes
+    await play(page, '/jouer?mode=normal&n=0', { think: 700 });
+    const link = async accept => {
+      await page.goto(BASE + '/historique');
+      await page.locator(`${vis} form input[type=password]`).first().fill(CODE);
+      let asked = '';
+      page.once('dialog', d => { asked = d.message(); return accept ? d.accept() : d.dismiss(); });
+      await page.locator(`${vis} form button[type=submit]`).first().click();
+      await sleep(2500);
+      return asked;
+    };
+    const asked = await link(false);
+    check('parent', 'prévient avant d’effacer les parties locales', asked.includes('1 partie'), asked.split('\n')[0]);
+    check('parent', 'annuler garde les données locales', (await local(page, 'history')).length === 1);
+    check('parent', 'annuler ne relie pas l’appareil', (await page.evaluate(() => fetch('/api/state').then(r => r.status))) === 401);
+    await link(true);
+    check('parent', 'accepter remplace par la progression du serveur', (await local(page, 'history')).length === 0);
+    await page.locator(`${vis} .note`, { hasText: 'serveur' }).first().waitFor();
     await play(page, '/jouer?mode=normal&n=1', { think: 700 });
     await sleep(1500);
     const st = await page.evaluate(() => fetch('/api/state').then(r => r.json()));
