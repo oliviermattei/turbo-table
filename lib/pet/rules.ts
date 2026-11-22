@@ -228,6 +228,8 @@ const withActive = (p: PetState, f: (c: Creature) => Creature): PetState =>
  * cheers it up. A not-sad companion grows by the game's counted points, brings its coin bonus and keeps the
  * incubated egg warm: a sad companion stops all three (with no companion yet, the egg always grows).
  */
+// Points have decimals (×1 is worth 0.05): rounded to the hundredth as they add up, so 0.05 × 3 is 0.15 and not 0.15000000000000002
+const r2 = (x: number) => Math.round(x * 100) / 100;
 export function applyGames(p: PetState, h: GameRecord[]): PetState {
   const todo = h.filter(g => g.ts > p.processed).sort((a, b) => a.ts - b.ts);
   if (!todo.length) return p;
@@ -237,15 +239,15 @@ export function applyGames(p: PetState, h: GameRecord[]): PetState {
   const c0 = active(p);
   if (!c0) {
     warm = todo.reduce((s, g) => s + pts(g), 0);
-    return { ...p, processed, incubating: p.incubating && { ...p.incubating, done: p.incubating.done + warm } };
+    return { ...p, processed, incubating: p.incubating && { ...p.incubating, done: r2(p.incubating.done + warm) } };
   }
   const next = withActive(p, c => todo.reduce((cur, g) => {
     const d = decay(cur, Math.max(g.ts, cur.tick));
     const happy = moodOf(d.needs) !== 'triste';
     if (happy) { bonus += companionBonus(h, g, d, collectionSize(p)); warm += pts(g); }
-    return { ...d, xp: d.xp + (happy ? pts(g) : 0), needs: { ...d.needs, joie: clamp(d.needs.joie + NEEDS.joyPerGame) } };
+    return { ...d, xp: r2(d.xp + (happy ? pts(g) : 0)), needs: { ...d.needs, joie: clamp(d.needs.joie + NEEDS.joyPerGame) } };
   }, c));
-  return { ...next, processed, bonus, incubating: p.incubating && { ...p.incubating, done: p.incubating.done + warm } };
+  return { ...next, processed, bonus, incubating: p.incubating && { ...p.incubating, done: r2(p.incubating.done + warm) } };
 }
 
 /* ---------- Shop and care ---------- */

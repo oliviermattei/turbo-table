@@ -92,7 +92,7 @@ export function GrowBar({ c }: { c: Creature }) {
   return (
     <div className="grow">
       <div className="xpbar"><div style={{ width: ((c.xp - from) / (to - from)) * 100 + '%' }} /></div>
-      <small>{sad ? '🔒 Il est triste, occupe-toi de lui !' : `${c.xp - from} / ${to - from} pour grandir`}</small>
+      <small>{sad ? '🔒 Il est triste, occupe-toi de lui !' : `${Math.floor(c.xp - from + 1e-9)} / ${to - from} pour grandir`}</small>
     </div>
   );
 }

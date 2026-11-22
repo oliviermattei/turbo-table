@@ -107,6 +107,14 @@ describe('pet', () => {
     expect(stageOf(1499)).toBe(2);
   });
 
+  it('keeps points to the hundredth (no 24.999999999 on screen)', () => {
+    let p = withCompanion();
+    const g = (i: number) => game({ id: 'f' + i, ts: T0 + i * H, correct: 7, total: 7, tables: [1], seen: { '1x3': [7, 0] } });
+    const h = [g(3), g(2), g(1)];
+    p = applyGames(p, h);
+    expect(p.creatures[0].xp).toBe(1.05); // 3 × 7 × 0.05, exactly
+  });
+
   it('evolves one stage per scene', () => {
     let p = withCompanion();
     p = { ...p, creatures: [{ ...p.creatures[0], xp: 2000 }] };
