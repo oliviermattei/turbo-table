@@ -83,7 +83,10 @@ export function NeedBars({ n }: { n: Needs }) {
   );
 }
 
-/** Growth towards the next stage (the stage shown, not the one reached: an evolution may wait for its scene) */
+/**
+ * Growth towards the next stage (the stage shown, not the one reached: an evolution may wait for its scene).
+ * The bar starts again at each stage; the counter shows the points since hatching and the next total (77 / 200).
+ */
 export function GrowBar({ c }: { c: Creature }) {
   const reached = stageOf(c), s = Math.min(reached, c.shown), xps = stageXp(c.species);
   if (reached > s) return (
@@ -98,7 +101,7 @@ export function GrowBar({ c }: { c: Creature }) {
   return (
     <div className="grow">
       <div className="xpbar"><div style={{ width: ((c.xp - from) / (to - from)) * 100 + '%' }} /></div>
-      <small>{sad ? '🔒 Il est triste, occupe-toi de lui !' : `${Math.floor(c.xp - from + 1e-9)} / ${to - from} pour grandir`}</small>
+      <small>{sad ? '🔒 Il est triste, occupe-toi de lui !' : `${Math.floor(c.xp + 1e-9)} / ${to} pour grandir`}</small>
     </div>
   );
 }

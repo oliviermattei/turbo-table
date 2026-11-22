@@ -159,6 +159,7 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
   | Légendaire | 150 | 400 | 800 |
 
   Avant : 150 / 600 / 1 500 pour toutes les qualités, jugé trop long par l'enfant. Scène d'évolution de 5 s au toucher.
+  Sous la jauge, le compteur montre les points depuis l'éclosion et le prochain total (« 77 / 200 », puis « 202 / 400 ») ; seule la barre repart de zéro à chaque stade. Tant qu'une évolution attend sa scène, la jauge est pleine : « ✨ Prêt à évoluer ! Touche-le. »
 - **Boutique** :
   - nourriture : Pomme 6, Sandwich 13, Gâteau 28, Festin 65, Banquet 150 ;
   - jouets : Balle 8, Peluche 19, Console 40, Manège 85, Fête foraine 210 ;
