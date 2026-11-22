@@ -177,7 +177,9 @@ Document `pet` (`lib/pet/types.ts`) : table `docs` côté serveur (validé par `
 ### Ajouter une espèce
 1. Générer sa planche avec le prompt de `docs/assets/brief-production.md` (section 10).
 2. La déposer en `assets-src/planches/<slug>.png` (slug = id dans `lib/pet/species.ts`).
-3. `pnpm assets` : découpe en `public/creatures/<slug>/` et met à jour `lib/pet/assets.json`. L'espèce peut alors éclore.
+3. `pnpm assets` : découpe en `public/creatures/<slug>/`, fabrique son ombre (`ombre.webp`) et met à jour `lib/pet/assets.json`. L'espèce peut alors éclore.
+
+Le bestiaire montre l'**ombre** d'une espèce pas encore trouvée, jamais son image : un appui long sur téléphone affichait l'image en grand, sans le filtre noir. Les images ne s'ouvrent pas non plus à l'appui long (`-webkit-touch-callout: none`).
 
 ## 5. Autres idées pour le garder motivé sur la durée
 

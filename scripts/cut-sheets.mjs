@@ -304,13 +304,25 @@ for (const f of (await readdir(DECORS).catch(() => [])).filter((f) => f.endsWith
   console.log(`decor    ${f}`);
 }
 
+// Shadow of each species (creatures/<slug>/ombre.webp): a black shape cut from the baby image. The bestiary shows it
+// for a species not found yet, so the real image never reaches the device (a long press would show it in full).
+async function shadow(slug) {
+  const dir = path.join(PUBLIC, "creatures", slug), src = path.join(dir, "bebe.webp"), dest = path.join(dir, "ombre.webp");
+  if (!(await mtime(src)) || (!FORCE && (await mtime(dest)) > (await mtime(src)))) return;
+  const { data, info } = await sharp(src).ensureAlpha().raw().toBuffer({ resolveWithObject: true });
+  for (let i = 0; i < data.length; i += 4) data[i] = data[i + 1] = data[i + 2] = 0;
+  await sharp(data, { raw: info }).webp({ quality: 80, alphaQuality: 100 }).toFile(dest);
+  console.log(`shadow   ${slug}`);
+}
+
 // Manifest of what exists, rebuilt from public/ every time.
 const manifest = { creatures: {}, legendaryEggs: [], eggs: [], items: [] };
 const slugs = (await readdir(path.join(PUBLIC, "creatures"), { withFileTypes: true }).catch(() => []))
   .filter((d) => d.isDirectory()).map((d) => d.name).sort();
 for (const slug of slugs) {
+  await shadow(slug);
   const names = await webps(path.join(PUBLIC, "creatures", slug));
-  const moods = ordered(names.filter((n) => n !== "oeuf"), MOODS);
+  const moods = ordered(names.filter((n) => n !== "oeuf" && n !== "ombre"), MOODS);
   if (moods.length) manifest.creatures[slug] = moods;
   if (names.includes("oeuf")) manifest.legendaryEggs.push(slug);
 }

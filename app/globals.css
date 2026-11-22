@@ -355,7 +355,10 @@ a.big{display:block;text-align:center;text-decoration:none}
 .bestgrid{display:grid;grid-template-columns:repeat(auto-fill,minmax(96px,1fr));gap:8px}
 .bestc{background:rgba(255,255,255,.08);border:2px solid transparent;border-radius:16px;padding:8px 4px;display:flex;flex-direction:column;align-items:center;gap:4px;color:inherit;font:inherit;text-align:center}
 .bestc img{height:72px;width:100%;object-fit:contain}
-.bestc .silhouette{filter:brightness(0);opacity:.55}
+.bestc .silhouette{opacity:.55}
+/* No image preview or save menu on a long press (phones and tablets) */
+img{-webkit-touch-callout:none;-webkit-user-select:none;user-select:none}
+.bestc img{pointer-events:none}
 .bestc .unknown{height:72px;display:flex;align-items:center;font-size:36px;opacity:.4}
 .bestc small{font-size:12px;opacity:.85}
 button.bestc{cursor:pointer}
