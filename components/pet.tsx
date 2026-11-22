@@ -83,9 +83,15 @@ export function NeedBars({ n }: { n: Needs }) {
   );
 }
 
-/** Growth towards the next stage */
+/** Growth towards the next stage (the stage shown, not the one reached: an evolution may wait for its scene) */
 export function GrowBar({ c }: { c: Creature }) {
-  const s = stageOf(c), xps = stageXp(c.species);
+  const reached = stageOf(c), s = Math.min(reached, c.shown), xps = stageXp(c.species);
+  if (reached > s) return (
+    <div className="grow">
+      <div className="xpbar"><div style={{ width: '100%' }} /></div>
+      <small>✨ Prêt à évoluer ! Touche-le.</small>
+    </div>
+  );
   if (s >= 3) return <p className="grow">⭐ Forme finale atteinte !</p>;
   const from = xps[s], to = xps[s + 1];
   const sad = moodOf(c.needs) === 'triste';
