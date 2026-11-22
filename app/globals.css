@@ -55,8 +55,9 @@ h1 span{color:var(--yellow)}
 /* Game: the question in the middle, the answers in the thumb zone */
 .game .hud{gap:8px}
 .game .hud .pill{min-width:0;flex:0 0 auto}
-.game .card{margin:auto 0}
-.game .choices{margin-top:16px;padding-bottom:max(12px,env(safe-area-inset-bottom))}
+/* The answers sit right under the question, and the block is centred: the eyes never travel far between them */
+.game .card{margin:auto 0 0}
+.game .choices{margin-top:16px;margin-bottom:auto;padding-bottom:max(12px,env(safe-area-inset-bottom))}
 .game .choice{padding:30px 0}
 .navb .lb{font-size:15px;font-weight:600}
 .navb .ct{font-size:12px;opacity:.75}

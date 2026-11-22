@@ -11,6 +11,7 @@ Le père de l'enfant (développeur) pilote le projet. Il valide les choix de con
 ## 1. Décisions déjà prises (ne pas revenir dessus sans demander)
 
 - **Réponses au choix, pas de clavier.** L'enfant avait du mal à taper les chiffres. Il y a 4 réponses en **grille 2 × 2**. Une version avec les 4 réponses sur une seule ligne a été essayée puis abandonnée.
+- **Réponses collées à la question.** La grille est juste sous la carte de la question, et le bloc est centré verticalement. Avant, les réponses étaient en bas de l'écran : sur tablette, les yeux faisaient ~250 px d'aller-retour à chaque calcul.
 - **Pièges crédibles.** Les mauvaises réponses sont surtout des résultats voisins dans la table (`a×(b±1)`, `(a±1)×b`), puis des écarts de ±1, ±2, ±10 ou des chiffres inversés (`makeChoices`).
 - **Correction affichée.** En cas d'erreur, la réponse choisie devient rouge et la bonne devient verte pendant 1,6 s.
 - **Ordre des facteurs.** Les calculs sont posés dans les deux sens (7 × 8 ou 8 × 7).
