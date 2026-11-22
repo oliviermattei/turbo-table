@@ -221,12 +221,22 @@ Pour un Légendaire, c'est ×1,8, soit ~22 🪙/jour, compensés par son bonus.
 | Coffre | Ce qui peut sortir |
 |---|---|
 | Commun | 95 % Commun, 5 % Peu commun |
-| Peu commun | 88 % Peu commun, 12 % Rare |
-| Rare | 90 % Rare, 10 % Épique |
-| Épique | 92 % Épique, 8 % Légendaire |
+| Peu commun | 95 % Peu commun, 5 % Rare |
+| Rare | 95 % Rare, 5 % Épique |
+| Épique | 95 % Épique, 5 % Légendaire |
 | Légendaire | 100 % Légendaire |
 
-Avant, un coffre Commun pouvait tout donner (50 / 28 / 14 / 6 / 2 %).
+Règle : la qualité au-dessus reste une petite surprise, **la même dans tous les coffres (5 %)**. Un coffre plus cher ne doit pas donner plus souvent la qualité supérieure qu'un coffre Commun.
+
+Historique :
+
+| Étape | Commun | Peu commun | Rare | Épique |
+|---|---|---|---|---|
+| Avant (en ligne au départ) | pouvait tout donner : 50 / 28 / 14 / 6 / 2 % | au moins Peu commun, mêmes poids | au moins Rare | au moins Épique (25 % Légendaire) |
+| Commits `4d7b4c7` à `c3d95ea` | 95 / 5 | 88 / 12 | 90 / 10 | 92 / 8 |
+| **Actuel** | **95 / 5** | **95 / 5** | **95 / 5** | **95 / 5** |
+
+Effet mesuré sur ton fils : bestiaire en 213 jours au lieu de 215 (pire cas 230, inchangé). Le 1er Épique et le 1er Légendaire arrivent une semaine plus tard (132ᵉ et 183ᵉ jours au lieu de 123ᵉ et 177ᵉ).
 
 ### 5.3 Prix des coffres et leur historique
 
@@ -240,7 +250,8 @@ Avant, un coffre Commun pouvait tout donner (50 / 28 / 14 / 6 / 2 %).
 | 5. Commit `4d7b4c7` | 200 | 350 | 500 | 900 | 1 800 | 304 j (243 à 363) |
 | Essai écarté (trop rapide) | 160 | 260 | 380 | 650 | 1 300 | 209 j |
 | 6. Commit `2a313d4` | 180 | 300 | 430 | 750 | 1 500 | 238 j (214 à 333) |
-| **7. Commit `9c35fea` (actuel)** : mêmes prix + Légendaires sans doublon | **180** | **300** | **430** | **750** | **1 500** | **215 j (194 à 230)** |
+| 7. Commit `9c35fea` : mêmes prix + Légendaires sans doublon | 180 | 300 | 430 | 750 | 1 500 | 215 j (194 à 230) |
+| **8. Actuel** : mêmes prix + 5 % de qualité supérieure dans tous les coffres | **180** | **300** | **430** | **750** | **1 500** | **213 j (209 à 230)** |
 | Hausse proposée puis refusée | 180 | 300 | 480 | 850 | 1 800 | — |
 
 Aux étapes 1 à 4, d'autres réglages changeaient en même temps : les durées ne dépendent pas que des prix.
@@ -333,15 +344,15 @@ B est écartée parce qu'en fin de jeu, un coffre Commun gratuit finirait par do
 
 | Joueur | J1 | J7 | J30 | J90 | J180 | J270 | J365 | Bestiaire complet |
 |---|---|---|---|---|---|---|---|---|
-| Ton fils | 1 | 5 | 14 | 24 | 33 | 36 | 36 | **215 j (194–230)**, ~7 mois |
-| Enfant très motivé | 1 | 7 | 18 | 33 | 36 | 36 | 36 | 107 j |
+| Ton fils | 1 | 5 | 14 | 24 | 34 | 36 | 36 | **213 j (209–230)**, ~7 mois |
+| Enfant très motivé | 1 | 7 | 18 | 33 | 36 | 36 | 36 | 112 j |
 | Fourbe table de 1 | 0 | 1 | 3 | 5 | 6 | 10 | 12 | jamais |
-| Fourbe tables faciles | 0 | 2 | 7 | 19 | 31 | 36 | 36 | 241 j |
-| Adulte rapide | 1 | 6 | 21 | 36 | 36 | 36 | 36 | 85 j |
+| Fourbe tables faciles | 0 | 2 | 7 | 19 | 31 | 36 | 36 | 242 j |
+| Adulte rapide | 1 | 6 | 21 | 36 | 36 | 36 | 36 | 88 j |
 | Joue peu | 0 | 1 | 2 | 6 | 12 | 12 | 13 | jamais |
 | Ne nourrit jamais | 1 | 3 | 3 | 3 | 3 | 3 | 3 | jamais |
 
-**Première espèce de chaque qualité pour ton fils** : Peu commun au 14ᵉ jour, Rare au 43ᵉ, Épique au 123ᵉ, Légendaire au 177ᵉ (~6 mois).
+**Première espèce de chaque qualité pour ton fils** : Peu commun au 14ᵉ jour, Rare au 43ᵉ, Épique au 132ᵉ, Légendaire au 183ᵉ (~6 mois).
 
 **Pièces gagnées par jour (ton fils)** : 151 🪙 la 1re semaine (beaucoup de parties), 79 🪙 jusqu'au 30ᵉ jour, 66 🪙 jusqu'au 90ᵉ, 95 🪙 jusqu'au 180ᵉ, puis 133 🪙 (il est plus rapide et son compagnon meilleur).
 

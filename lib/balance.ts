@@ -32,12 +32,12 @@ export const LEVEL_COINS = { perLevel: 5 };
 /* ---------- Chests and eggs ---------- */
 /** Chance that a game drops a chest, per counted point (×2 with 3 stars in a game that counts), capped */
 export const DROP = { perPoint: 0.001, threeStars: 2, max: 0.05 };
-/** What comes out of each chest (weights) */
+/** What comes out of each chest (weights). The better egg stays a small surprise, the same 5 % in every chest */
 export const CHEST_ODDS: Record<Rarity, Partial<Record<Rarity, number>>> = {
   commun: { commun: 95, 'peu-commun': 5 },
-  'peu-commun': { 'peu-commun': 88, rare: 12 },
-  rare: { rare: 90, epique: 10 },
-  epique: { epique: 92, legendaire: 8 },
+  'peu-commun': { 'peu-commun': 95, rare: 5 },
+  rare: { rare: 95, epique: 5 },
+  epique: { epique: 95, legendaire: 5 },
   legendaire: { legendaire: 100 },
 };
 /** Chest given by a badge of that quality. None: the simulator showed badges filled the nest (20+ epic badges the first month) */

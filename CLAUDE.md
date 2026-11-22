@@ -136,10 +136,12 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
   | Coffre | Ce qui peut sortir |
   |---|---|
   | Commun | 95 % Commun, 5 % Peu commun |
-  | Peu commun | 88 % Peu commun, 12 % Rare |
-  | Rare | 90 % Rare, 10 % Épique |
-  | Épique | 92 % Épique, 8 % Légendaire |
+  | Peu commun | 95 % Peu commun, 5 % Rare |
+  | Rare | 95 % Rare, 5 % Épique |
+  | Épique | 95 % Épique, 5 % Légendaire |
   | Légendaire | 100 % Légendaire |
+
+  La qualité au-dessus reste une petite surprise, la même dans tous les coffres (5 %).
 - **Œufs** : un œuf par qualité de Commun à Épique, un œuf propre à chaque Légendaire. Ils éclosent après 40 / 80 / 140 / 220 / 320 points gagnés pendant que l'œuf couve (`incubating.done`). Un compagnon triste ne couve pas. Pas de doublon tant qu'il manque une espèce de cette qualité (un œuf Légendaire, dont l'espèce est choisie dès l'arrivée du coffre, prend une espèce ni possédée ni déjà dans un autre œuf) ; un doublon rapporte des pièces. Une espèce n'éclot que si ses images existent (`lib/pet/assets.json`).
 - **Besoins** Faim / Joie / Énergie. Ils baissent avec le temps (1,25 / 1 / 2 par heure), et chaque partie donne +4 de joie.
   - Triste : un besoin sous 15, ou une moyenne sous 30. Une sieste gratuite ne suffit donc pas.
@@ -154,7 +156,7 @@ Décisions détaillées : `docs/assets/inventaire.md`. Vocabulaire : `GLOSSARY.m
 - **Appétit** : nourriture et jouets remplissent ×1 / 1,15 / 1,3 / 1,5 / 1,8 fois moins selon la qualité du compagnon. Dormir est gratuit.
 - **Résultat de la simulation** (`docs/equilibrage.md`). L'enfant visé joue 10 à 15 parties par jour la 1re semaine, puis ~4. Il trouve :
   - ~5 espèces en une semaine, ~14 en un mois, ~24 en trois mois ;
-  - le 1er Rare vers 1,5 mois, le 1er Légendaire vers 6 mois, le bestiaire complet en 7 à 8 mois (215 jours en médiane, 194 à 230).
+  - le 1er Rare vers 1,5 mois, le 1er Légendaire vers 6 mois, le bestiaire complet en ~7 mois (213 jours en médiane, 209 à 230).
   L'entretien lui coûte ~15 à 20 % de ses gains (~0,7 partie par jour) : plus cher, celui qui ne joue que 2 parties par jour ne pourrait plus nourrir son compagnon. Jouer uniquement la table de 1 donne ~11 espèces en un an ; ne jamais nourrir bloque à 3.
 
 ### Journal des gains
