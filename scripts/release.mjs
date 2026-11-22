@@ -7,7 +7,7 @@ import { readFileSync, writeFileSync } from 'node:fs';
 const SITE = 'https://turbotable.olm.re';
 const part = process.argv[2] || 'patch';
 if (!['patch', 'minor', 'major'].includes(part)) throw new Error('usage: pnpm release [patch|minor|major]');
-const sh = (cmd, opts = {}) => execSync(cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'], ...opts }).trim();
+const sh = (cmd, opts = {}) => (execSync(cmd, { encoding: 'utf8', stdio: ['ignore', 'pipe', 'inherit'], ...opts }) ?? '').trim();
 const step = (msg) => console.log(`\n▶ ${msg}`);
 
 if (sh('git status --porcelain')) throw new Error('uncommitted changes: commit them first');
