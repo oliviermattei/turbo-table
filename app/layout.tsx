@@ -2,6 +2,7 @@ import type { Metadata, Viewport } from 'next';
 import { Fredoka } from 'next/font/google';
 import { CompanionTheme } from '@/components/pet';
 import { Decor } from '@/components/ui';
+import VersionBanner from '@/components/VersionBanner';
 import { DataProvider } from '@/lib/data';
 import './globals.css';
 
@@ -20,7 +21,7 @@ export default function RootLayout({ children }: LayoutProps<'/'>) {
   return (
     <html lang="fr" className={fredoka.variable}>
       <body>
-        <div className="app"><Decor /><DataProvider><CompanionTheme />{children}</DataProvider></div>
+        <div className="app"><Decor /><VersionBanner /><DataProvider><CompanionTheme />{children}</DataProvider></div>
       </body>
     </html>
   );

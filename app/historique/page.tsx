@@ -8,6 +8,7 @@ import { playHref } from '@/lib/game/engine';
 import { MENTIONS } from '@/lib/game/rules';
 import type { GameRecord } from '@/lib/game/types';
 import { ensureAudio } from '@/lib/sound';
+import { VERSION, versionLabel } from '@/lib/version';
 
 function dateOf(ts: number) {
   const d = new Date(ts);
@@ -74,6 +75,7 @@ export default function HistoriquePage() {
       {d.sync === 'locked' && <FamilyCode />}
       <Link className="ghost center-link" href="/journal">📒 Journal des gains (parents)</Link>
       <ResetProgress />
+      <p className="note version">Version {versionLabel(VERSION)}</p>
       {process.env.NODE_ENV !== 'production' && (
         <label className="debugbox">
           <input type="checkbox" checked={d.debug} onChange={e => d.setDebug(e.target.checked)} /> 🐞 Mode test (dev) : appareil isolé, rien n’est envoyé au serveur

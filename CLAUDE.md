@@ -216,3 +216,6 @@ Le bestiaire montre l'**ombre** d'une espèce pas encore trouvée, jamais son im
   - charger un faux historique avec `localStorage.setItem('tt_history', …)` ;
   - viser les éléments visibles (`.screen:visible`), à cause de `<Activity>`.
 - **Déploiement Coolify :** https://turbotable.olm.re (projet « Turbo Tables », dépôt `oliviermattei/turbo-table`, branche `main`). Build pack Dockerfile, port 3000, volume persistant monté sur `/app/data`, variable `FAMILY_CODE`.
+- **Version** : chaque build porte son commit (`SOURCE_COMMIT` donné par Coolify, sinon `git`) et sa date (`next.config.ts`, `lib/version.ts`).
+  - Pour vérifier un déploiement : https://turbotable.olm.re/api/version (jamais en cache), ou en bas de l'Historique.
+  - Si la page ouverte sur un appareil n'est pas la version du serveur (cache, onglet resté ouvert), un bandeau propose de recharger. Il est caché pendant une partie.

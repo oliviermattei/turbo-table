@@ -5,6 +5,8 @@ RUN corepack enable
 COPY package.json pnpm-lock.yaml pnpm-workspace.yaml ./
 RUN pnpm install --frozen-lockfile
 COPY . .
+# Commit of this build, passed by Coolify: shown as the game's version (next.config.ts)
+ARG SOURCE_COMMIT
 RUN pnpm build
 
 FROM node:22-alpine

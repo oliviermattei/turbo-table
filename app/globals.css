@@ -467,3 +467,7 @@ html[data-theme] .decor{opacity:.5}
 .jrow .jd{opacity:.8;font-size:13px}
 .jrow.ev{opacity:.85}
 .incub .warn{display:block;color:#fca5a5;margin-top:6px}
+
+/* Version (bottom of Historique) and the "new version" banner */
+.note.version{font-size:12px;opacity:.5}
+.version-banner{position:fixed;top:max(8px,env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:50;width:calc(100% - 32px);max-width:480px;border:none;border-radius:14px;padding:12px 14px;font:inherit;font-size:16px;font-weight:600;color:var(--ink);background:var(--yellow);box-shadow:0 6px 20px rgba(0,0,0,.35);cursor:pointer}
