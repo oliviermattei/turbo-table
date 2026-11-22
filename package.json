@@ -11,7 +11,8 @@
     "test": "vitest run",
     "assets": "node scripts/cut-sheets.mjs",
     "sim": "node scripts/sim.mjs",
-    "bot": "node scripts/bot.mjs"
+    "bot": "node scripts/bot.mjs",
+    "release": "node scripts/release.mjs"
   },
   "dependencies": {
     "next": "16.4.6",

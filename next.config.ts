@@ -1,4 +1,5 @@
 import { execSync } from "node:child_process";
+import { readFileSync } from "node:fs";
 import type { NextConfig } from "next";
 
 // Version of this build, shown in the game and served by /api/version (to check a deploy and spot a stale cache).
@@ -9,12 +10,14 @@ const gitCommit = () => {
 };
 process.env.TT_BUILD_COMMIT ??= (process.env.SOURCE_COMMIT || gitCommit()).slice(0, 7);
 process.env.TT_BUILD_TIME ??= new Date().toISOString();
+// Version number from package.json, bumped by `pnpm release` at each deploy
+process.env.TT_VERSION ??= JSON.parse(readFileSync("package.json", "utf8")).version;
 
 const nextConfig: NextConfig = {
   output: "standalone", // self-contained server for the Docker image (Coolify)
   cacheComponents: true,
   partialPrefetching: true,
-  env: { TT_BUILD_COMMIT: process.env.TT_BUILD_COMMIT, TT_BUILD_TIME: process.env.TT_BUILD_TIME },
+  env: { TT_VERSION: process.env.TT_VERSION, TT_BUILD_COMMIT: process.env.TT_BUILD_COMMIT, TT_BUILD_TIME: process.env.TT_BUILD_TIME },
 };
 
 export default nextConfig;
